@@ -1,0 +1,34 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Alamofire",
+        "repositoryURL": "https://github.com/Alamofire/Alamofire",
+        "state": {
+          "branch": null,
+          "revision": "d120af1e8638c7da36c8481fd61a66c0c08dc4fc",
+          "version": "5.4.4"
+        }
+      },
+      {
+        "package": "SnapKit",
+        "repositoryURL": "https://github.com/teanet/SnapKit",
+        "state": {
+          "branch": "develop",
+          "revision": "122a81b8b717e4fed25187749b8f340165e60170",
+          "version": null
+        }
+      },
+      {
+        "package": "VNBase",
+        "repositoryURL": "https://github.com/teanet/VNBase.git",
+        "state": {
+          "branch": "master",
+          "revision": "06146c60f1fe30e2e72416896f1f93aacffc6f79",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

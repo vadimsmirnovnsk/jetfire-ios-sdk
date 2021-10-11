@@ -1,0 +1,18 @@
+import UIKit
+
+public extension UIColor {
+
+	/// F8F8F8
+	static let storiesAlmostWhite = #colorLiteral(red: 0.9725490196, green: 0.9725490196, blue: 0.9725490196, alpha: 1)
+	/// FFFD37
+	static let gradientYellow = #colorLiteral(red: 1, green: 0.9921568627, blue: 0.2156862745, alpha: 1)
+	/// FFFD37
+	static let gradientOrange = #colorLiteral(red: 1, green: 0.3019607843, blue: 0.01568627451, alpha: 1)
+	/// 333333
+	static let graffitBlack = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
+
+	/// Firebase Stories
+	/// FDEC42
+	static let tinkoffAnimationYellow = #colorLiteral(red: 0.9921568627, green: 0.9254901961, blue: 0.2588235294, alpha: 1)
+
+}
