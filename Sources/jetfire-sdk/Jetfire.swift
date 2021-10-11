@@ -1,4 +1,5 @@
 import Foundation
+import UserNotifications
 
 public class Jetfire {
 
@@ -48,6 +49,13 @@ public class Jetfire {
 
 	public func updatePushStatus(granted: Bool) {
 		self.featuringConfig.featuring.updatePushStatus(granted: granted)
+	}
+
+	public func userNotificationCenter(
+		_ center: UNUserNotificationCenter,
+		didReceive response: UNNotificationResponse
+	) {
+		self.featuringConfig.featuring.userNotificationCenter(center, didReceive: response)
 	}
 
 }
