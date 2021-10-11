@@ -29,7 +29,7 @@ internal class Anl {
 
 	internal init(analytics: [IAnalytics]) {
 		self.analytics = analytics
-		self.queue = DispatchQueue(label: "xyz.steelhoss.firetest.analytics")
+		self.queue = DispatchQueue(label: "xyz.steelhoss.jetfire.analytics")
 	}
 
 	public func configure() { }

@@ -29,33 +29,8 @@ public final class StoriesConfig {
 	]
 	/// ] Base Stories
 
-	/// [ Featuring
-//	let featuring: FeaturingService
-//	private let featuringManager: FeaturingManager
-//	private let featuringStorage: FeaturingStorage
-//	private let featuringPushService: FeaturingPushService
-	/// ] Featuring
-
-	init() {
-//		Anl.set(service: Anl(analytics: [ FirebaseAnalytics() ]))
-//
-//		self.processTargetService = ProcessTargetService(application: UIApplication.shared)
-//		self.storage = StoriesStorage(processTargetService: self.processTargetService, router: self.router)
-//		self.storiesService = StoriesService(router: self.router, api: self.apiService, storage: self.storage, processTargetService: self.processTargetService, ud: self.ud)
-
-		/// Featuring
-//		self.featuringStorage = FeaturingStorage(
-//			storiesService: self.storiesService,
-//			api: self.apiService,
-//			userId: UUID().uuidString
-//		)
-//		self.featuringManager = FeaturingManager(ud: self.ud, storage: self.featuringStorage)
-//		self.featuringPushService = FeaturingPushService(ud: self.ud)
-//		self.featuring = FeaturingService(
-//			manager: self.featuringManager,
-//			storiesService: self.storiesService,
-//			pushService: self.featuringPushService
-//		)
+	init(analytics: [IAnalytics]) {
+		Anl.set(service: Anl(analytics: analytics))
 	}
 
 }
@@ -76,9 +51,9 @@ internal class StoriesAnalytics: IStoriesAnalytics {
 	// Firebase Story and Featuring
 	func trackStorySnapDidShow(storyId: String, index: Int) {
 //		Anl.track {
-//			$0.name(.firetest_story_snap_show)
-//				.param(.firetest_featuring_id, value: storyId)
-//				.param(.firetest_snap_index, value: index)
+//			$0.name(.jetfire_story_snap_show)
+//				.param(.jetfire_featuring_id, value: storyId)
+//				.param(.jetfire_snap_index, value: index)
 //		}
 
 		self.externalAnalytics?.trackStorySnapDidShow(storyId: storyId, index: index)
@@ -86,8 +61,8 @@ internal class StoriesAnalytics: IStoriesAnalytics {
 
 	func trackStoryDidStartShow(storyId: String) {
 //		Anl.track {
-//			$0.name(.firetest_story_start_show)
-//				.param(.firetest_featuring_id, value: storyId)
+//			$0.name(.jetfire_story_start_show)
+//				.param(.jetfire_featuring_id, value: storyId)
 //		}
 
 		self.externalAnalytics?.trackStoryDidStartShow(storyId: storyId)
@@ -95,8 +70,8 @@ internal class StoriesAnalytics: IStoriesAnalytics {
 
 	func trackStoryDidFinishShow(storyId: String) {
 //		Anl.track {
-//			$0.name(.firetest_story_finish_show)
-//				.param(.firetest_featuring_id, value: storyId)
+//			$0.name(.jetfire_story_finish_show)
+//				.param(.jetfire_featuring_id, value: storyId)
 //		}
 
 		self.externalAnalytics?.trackStoryDidFinishShow(storyId: storyId)
@@ -104,8 +79,8 @@ internal class StoriesAnalytics: IStoriesAnalytics {
 
 	func trackStoryDidTapButton(buttonOrSnapId: String, buttonTitle: String) {
 //		Anl.track {
-//			$0.name(.firetest_story_cta_tap)
-//				.param(.firetest_featuring_id, value: buttonOrSnapId)
+//			$0.name(.jetfire_story_cta_tap)
+//				.param(.jetfire_featuring_id, value: buttonOrSnapId)
 //		}
 
 		self.externalAnalytics?.trackStoryDidTapButton(buttonOrSnapId: buttonOrSnapId, buttonTitle: buttonTitle)

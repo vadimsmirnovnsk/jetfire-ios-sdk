@@ -35,7 +35,7 @@ final class FeaturingPushService {
 	func update(granted: Bool) {
 		self.isGranted = granted
 		Anl.trackUserProperties { track in
-			track.param(.firetest_push_notifications, value: granted)
+			track.param(.jetfire_push_notifications, value: granted)
 		}
 	}
 

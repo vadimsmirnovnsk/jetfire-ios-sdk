@@ -22,23 +22,23 @@ final public class FeaturingService {
 			self?.reschedulePushFeaturing()
 		}
 
-		Anl.track { $0.name(.firetest_application_start) }
+		Anl.track { $0.name(.jetfire_application_start) }
 	}
 
 	public func applicationDidBecomeActive() {
-		Anl.track { $0.name(.firetest_become_active) }
+		Anl.track { $0.name(.jetfire_become_active) }
 	}
 
 	public func applicationWillResignActive() {
-		Anl.track { $0.name(.firetest_resign_active) }
+		Anl.track { $0.name(.jetfire_resign_active) }
 
 		self.pushService.scheduleActiveFeaturing { campaign in
 			self.manager.trackShow(campaign: campaign, featuringType: .push)
 
 			Anl.track { track in
-				track.name(.firetest_featuring_trigger_show)
-					.param(.firetest_featuring_id, value: campaign.id)
-					.param(.firetest_trigger_type, value: String.kPush)
+				track.name(.jetfire_featuring_trigger_show)
+					.param(.jetfire_featuring_id, value: campaign.id)
+					.param(.jetfire_trigger_type, value: String.kPush)
 			}
 		}
 	}
@@ -48,8 +48,8 @@ final public class FeaturingService {
 		self.reschedulePushFeaturing()
 
 		Anl.track { track in
-			track.name(.firetest_feature_start)
-				.param(.firetest_featuring_id, value: feature)
+			track.name(.jetfire_feature_start)
+				.param(.jetfire_featuring_id, value: feature)
 		}
 	}
 
@@ -58,8 +58,8 @@ final public class FeaturingService {
 		self.reschedulePushFeaturing()
 
 		Anl.track { track in
-			track.name(.firetest_feature_finish)
-				.param(.firetest_featuring_id, value: feature)
+			track.name(.jetfire_feature_finish)
+				.param(.jetfire_featuring_id, value: feature)
 		}
 	}
 
@@ -88,9 +88,9 @@ final public class FeaturingService {
 	private func show(campaign: FeaturingCampaignAndStory, featuringType: FeaturingCampaign.FeaturingType) {
 		self.manager.trackShow(campaign: campaign.campaign, featuringType: featuringType)
 		Anl.track { track in
-			track.name(.firetest_featuring_campaign_show)
-				.param(.firetest_featuring_type, value: featuringType.rawValue)
-				.param(.firetest_featuring_id, value: campaign.campaign.id)
+			track.name(.jetfire_featuring_campaign_show)
+				.param(.jetfire_featuring_type, value: featuringType.rawValue)
+				.param(.jetfire_featuring_id, value: campaign.campaign.id)
 		}
 		self.storiesService.show(story: campaign.story, in: [campaign.story])
 	}

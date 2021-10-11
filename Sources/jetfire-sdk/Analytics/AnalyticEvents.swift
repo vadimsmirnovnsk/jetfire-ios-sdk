@@ -20,38 +20,38 @@ internal extension String {
 internal enum EventId: String {
 
 	// System
-	case firetest_application_start
-	case firetest_become_active
-	case firetest_resign_active
+	case jetfire_application_start
+	case jetfire_become_active
+	case jetfire_resign_active
 
 	// Stories
-	case firetest_story_snap_show
-	case firetest_story_start_show
-	case firetest_story_finish_show
-	case firetest_story_close_tap
-	case firetest_story_cta_tap
+	case jetfire_story_snap_show
+	case jetfire_story_start_show
+	case jetfire_story_finish_show
+	case jetfire_story_close_tap
+	case jetfire_story_cta_tap
 
 	// Featuring Campaign
-	case firetest_featuring_campaign_show
-	case firetest_featuring_trigger_show
+	case jetfire_featuring_campaign_show
+	case jetfire_featuring_trigger_show
 
 	// Feature tracking
-	case firetest_feature_start
-	case firetest_feature_finish
+	case jetfire_feature_start
+	case jetfire_feature_finish
 
 }
 
 internal enum ParameterId: String {
 
 	// Featuring
-	case firetest_featuring_id
-	case firetest_snap_index
-	case firetest_trigger_type
-	case firetest_featuring_type
-	case firetest_push_notifications
+	case jetfire_featuring_id
+	case jetfire_snap_index
+	case jetfire_trigger_type
+	case jetfire_featuring_type
+	case jetfire_push_notifications
 
 	// Track Features
-	case firetest_features_start
-	case firetest_features_finish
+	case jetfire_features_start
+	case jetfire_features_finish
 
 }
