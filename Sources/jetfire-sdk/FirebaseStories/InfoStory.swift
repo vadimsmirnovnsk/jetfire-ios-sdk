@@ -1,4 +1,4 @@
-//import UIColor_Hex_Swift
+import UIColorHexSwift
 import UIKit
 
 struct InfoStoryModel: Codable, IStory {
@@ -25,8 +25,7 @@ struct InfoStoryModel: Codable, IStory {
 
 	var bgColor: UIColor {
 		guard let colorString = self.bgColorString else { return .gray }
-		#warning("123")
-		return .white // UIColor("#" + colorString, defaultColor: .gray)
+		return UIColor("#" + colorString, defaultColor: .gray)
 	}
 
 	enum CodingKeys: String, CodingKey {
@@ -75,8 +74,7 @@ struct InfoSnap: Codable, ISnap {
 
 	var bgColor: UIColor {
 		guard let colorString = self.bgColorString else { return .gray }
-		#warning("123")
-		return .white // UIColor("#" + colorString, defaultColor: .gray)
+		return UIColor("#" + colorString, defaultColor: .gray)
 	}
 
 	var bgImageURL: URL? {
@@ -86,8 +84,7 @@ struct InfoSnap: Codable, ISnap {
 
 	var textColor: UIColor {
 		guard let colorString = self.textColorString else { return .white }
-		#warning("123")
-		return .white // UIColor("#" + colorString, defaultColor: .white)
+		return UIColor("#" + colorString, defaultColor: .white)
 	}
 
 	enum CodingKeys: String, CodingKey {

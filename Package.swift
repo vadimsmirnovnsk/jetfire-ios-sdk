@@ -29,7 +29,7 @@ let package = Package(
 				.product(name: "VNBase", package: "VNBase"),
 				.product(name: "Alamofire", package: "Alamofire"),
 				.product(name: "SDWebImage", package: "SDWebImage"),
-//				.product(name: "UIColorHexSwift", package: "UIColorHexSwift"),
+				.product(name: "UIColorHexSwift", package: "UIColor-Hex-Swift"),
 			]),
         .testTarget(
             name: "jetfire-sdkTests",
