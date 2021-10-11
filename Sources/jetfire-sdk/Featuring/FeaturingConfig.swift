@@ -1,7 +1,7 @@
 import UIKit
 import VNEssential
 
-public class FeaturingConfig {
+internal class FeaturingConfig {
 
 	/// [ Featuring
 	let featuring: FeaturingService

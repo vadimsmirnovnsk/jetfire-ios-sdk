@@ -8,7 +8,7 @@ public class Jetfire {
 
 	public let storiesConfig: StoriesConfig
 	public let firebaseConfig: FirebaseConfig
-	public let featuringConfig: FeaturingConfig
+	private let featuringConfig: FeaturingConfig
 
 	private let api = APIService()
 	private let ud = UserDefaults.standard
@@ -25,5 +25,29 @@ public class Jetfire {
 			userUUID: UUID().uuidString
 		)
     }
+
+	public func applicationStart() {
+		self.featuringConfig.featuring.applicationStart()
+	}
+
+	public func applicationDidBecomeActive() {
+		self.featuringConfig.featuring.applicationDidBecomeActive()
+	}
+
+	public func applicationWillResignActive() {
+		self.featuringConfig.featuring.applicationWillResignActive()
+	}
+
+	public func trackStart(feature: String) {
+		self.featuringConfig.featuring.trackStart(feature: feature)
+	}
+
+	public func trackFinish(feature: String) {
+		self.featuringConfig.featuring.trackFinish(feature: feature)
+	}
+
+	public func updatePushStatus(granted: Bool) {
+		self.featuringConfig.featuring.updatePushStatus(granted: granted)
+	}
 
 }
