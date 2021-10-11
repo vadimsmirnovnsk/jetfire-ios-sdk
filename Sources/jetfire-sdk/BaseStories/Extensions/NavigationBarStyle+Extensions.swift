@@ -7,7 +7,7 @@ extension NavigationBarStyle {
 		tintColor: .white,
 		barTintColor: .white,
 		translucent: true,
-		titleTextAttributes: StoriesConfig.standard.navigationBarTextAttribbutes,
+		titleTextAttributes: Jetfire.standard.storiesConfig.navigationBarTextAttribbutes,
 		backgroundImage: UIImage(),
 		shadowImage: UIImage()
 	)

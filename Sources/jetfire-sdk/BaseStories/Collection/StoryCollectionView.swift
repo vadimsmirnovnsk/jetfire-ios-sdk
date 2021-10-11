@@ -15,7 +15,7 @@ open class StoryCollectionView<TViewModel: StoryCollectionVM>: BaseCollectionVie
 		self.isScrollEnabled = true
 		self.showsHorizontalScrollIndicator = false
 		self.showsVerticalScrollIndicator = false
-		self.backgroundColor = StoriesConfig.standard.storyCircleBackgroundColor
+		self.backgroundColor = Jetfire.standard.storiesConfig.storyCircleBackgroundColor
 		self.backgroundView = UIView()
 		self.isUserInteractionEnabled = true
 		self.isUpdateAnimated = true

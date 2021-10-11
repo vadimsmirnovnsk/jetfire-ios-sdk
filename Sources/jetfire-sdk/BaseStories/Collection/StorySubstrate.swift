@@ -20,8 +20,8 @@ final class StorySubstrate: UIView {
 		self.gradient.startPoint = CGPoint(x: 0, y: 0)
 		self.gradient.endPoint = CGPoint(x: 1, y: 1)
 		self.gradient.colors = [
-			StoriesConfig.standard.storyCircleRingRightGradientColor.cgColor,
-			StoriesConfig.standard.storyCircleRingLeftGradientColor.cgColor
+			Jetfire.standard.storiesConfig.storyCircleRingRightGradientColor.cgColor,
+			Jetfire.standard.storiesConfig.storyCircleRingLeftGradientColor.cgColor
 		]
 
 		self.gradient.mask = shape

@@ -61,7 +61,7 @@ open class StoryCollectionBaseCell<TViewModel: StoryCollectionBaseCellVM>: BaseC
 
 		guard let vm = self.viewModel else { return }
 
-		self.title.apply(StoriesConfig.standard.storyCircleTextStyle, text: vm.title, textAlignment: .center)
+		self.title.apply(Jetfire.standard.storiesConfig.storyCircleTextStyle, text: vm.title, textAlignment: .center)
 		self.substrate.isHidden = vm.isRead
 	}
 

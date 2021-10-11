@@ -6,6 +6,6 @@ final class jetfire_sdkTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(jetfire_sdk().text, "Hello, World!")
+//        XCTAssertEqual(Jetfire().text, "Hello, World!")
     }
 }

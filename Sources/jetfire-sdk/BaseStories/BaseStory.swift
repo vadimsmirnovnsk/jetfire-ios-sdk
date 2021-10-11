@@ -57,12 +57,12 @@ open class BaseStory: Equatable {
 		self.snaps.safeObject(at: index)?.snapVM.appear()
 		self.snaps.safeObject(at: index - 1)?.snapVM.isRead = true
 
-		StoriesConfig.standard.analytics.trackStorySnapDidShow(storyId: self.content.story.id, index: index)
+		Jetfire.analytics.trackStorySnapDidShow(storyId: self.content.story.id, index: index)
 
 		if index == 0 {
-			StoriesConfig.standard.analytics.trackStoryDidStartShow(storyId: self.content.story.id)
+			Jetfire.analytics.trackStoryDidStartShow(storyId: self.content.story.id)
 		} else if index == self.snaps.count - 1 {
-			StoriesConfig.standard.analytics.trackStoryDidFinishShow(storyId: self.content.story.id)
+			Jetfire.analytics.trackStoryDidFinishShow(storyId: self.content.story.id)
 		}
 	}
 

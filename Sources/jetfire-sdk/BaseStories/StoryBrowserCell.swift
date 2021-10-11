@@ -65,8 +65,8 @@ final class StoryBrowserCell: BaseCollectionViewCell<StoryBrowserCellVM>, Segmen
 		let progress = SegmentedProgressBar(numberOfSegments: vm.story.snaps.count,
 											duration: vm.story.content.story.duration)
 		self.progressBar = progress
-		progress.topColor = StoriesConfig.standard.progressBarTopColor
-		progress.bottomColor = StoriesConfig.standard.progressBarBottomColor
+		progress.topColor = Jetfire.standard.storiesConfig.progressBarTopColor
+		progress.bottomColor = Jetfire.standard.storiesConfig.progressBarBottomColor
 		progress.delegate = self
 		self.topGradient.addSubview(progress) { make in
 			make.left.top.right.equalToSuperview().inset(8)

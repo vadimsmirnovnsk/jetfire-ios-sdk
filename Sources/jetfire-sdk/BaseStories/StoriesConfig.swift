@@ -5,8 +5,6 @@ import UIKit
 
 public final class StoriesConfig {
 
-	static var standard = StoriesConfig()
-
 	/// [ Base Stories
 	internal let analytics = StoriesAnalytics()
 	public var externalAnalytics: IStoriesAnalytics? {
@@ -14,7 +12,6 @@ public final class StoriesConfig {
 			self.analytics.externalAnalytics = self.externalAnalytics
 		}
 	}
-//	var apiService: IAPIService&IFeaturingAPI = APIService()
 
 	/// Story Circle
 	var storyCircleBackgroundColor: UIColor = .storiesAlmostWhite
@@ -31,24 +28,6 @@ public final class StoriesConfig {
 		.font : UIFont.systemFont(ofSize: 14),
 	]
 	/// ] Base Stories
-
-	/// [ Firebase Stories
-//	var firebaseStorySnapButtonForegroundColor = UIColor.tinkoffAnimationYellow
-//	var firebaseStoryTitleTextStyle = TextStyle.storyTitleBlack()
-//	var firebaseStorySubitleTextStyle = TextStyle.system17White
-//	var firebaseStoryButtonTextStyle = TextStyle.systemSemiBold19Black
-//
-//	var openURLHandler: IOpenURLHandler? = nil {
-//		didSet {
-//			self.processTargetService.deeplinkService = self.openURLHandler
-//		}
-//	}
-//	internal let storiesService: StoriesService
-//	private let ud: IUserDefaults = UserDefaults.standard
-//	private let storage: StoriesStorage
-//	private let processTargetService: ProcessTargetService
-//	private let router: IRouter = StoryRouter()
-	/// ] Firebase Stories
 
 	/// [ Featuring
 //	let featuring: FeaturingService

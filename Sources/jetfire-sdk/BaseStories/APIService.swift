@@ -7,12 +7,6 @@ public protocol IAPIService: AnyObject {
 
 }
 
-//internal typealias FeaturingDataBlock = (FeaturingData) -> Void
-//internal protocol IFeaturingAPI: AnyObject {
-//	/// Featuring
-//	func featchFeaturingRules(for user: String, completion: @escaping FeaturingDataBlock)
-//}
-
 class APIService: IAPIService {
 
 	public let downloadManager: Session
@@ -32,11 +26,3 @@ class APIService: IAPIService {
 	}
 
 }
-
-//extension APIService: IFeaturingAPI {
-
-//	func featchFeaturingRules(for user: String, completion: @escaping FeaturingDataBlock) {
-//		completion(.demo)
-//	}
-
-//}
