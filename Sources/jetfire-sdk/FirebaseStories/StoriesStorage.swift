@@ -1,4 +1,5 @@
 //import Firebase
+import VNBase
 
 typealias StoriesBlock = ([BaseStory]) -> Void
 
@@ -10,9 +11,9 @@ final class StoriesStorage {
 	unowned var service: IStoryService!
 
 	private let processTargetService: ProcessTargetService
-	private let router: IRouter
+	private let router: BaseRouter
 
-	init(processTargetService: ProcessTargetService, router: IRouter) {
+	init(processTargetService: ProcessTargetService, router: BaseRouter) {
 		self.processTargetService = processTargetService
 		self.router = router
 	}

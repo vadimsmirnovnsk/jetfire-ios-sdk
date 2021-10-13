@@ -94,9 +94,9 @@ final class InfoSnapVM: BaseSnapVM {
 
 	let snap: InfoSnap
 	private let processTargetService: ProcessTargetService
-	private let router: IRouter
+	private let router: BaseRouter
 
-	init(snap: InfoSnap, processTargetService: ProcessTargetService, router: IRouter) {
+	init(snap: InfoSnap, processTargetService: ProcessTargetService, router: BaseRouter) {
 		self.snap = snap
 		self.processTargetService = processTargetService
 		self.router = router

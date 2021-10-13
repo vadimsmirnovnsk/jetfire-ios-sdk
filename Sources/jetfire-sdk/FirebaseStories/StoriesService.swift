@@ -1,5 +1,6 @@
 import VNBase
 import VNEssential
+import VNHandlers
 import UIKit
 
 final public class StoriesService {
@@ -16,7 +17,7 @@ final public class StoriesService {
 	var allStories: [BaseStory] { self.storage.stories }
 
 	private let api: IAPIService
-	private let router: IRouter
+	private let router: BaseRouter
 	private let storage: StoriesStorage
 	private let ud: IUserDefaults
 	private let processTargetService: ProcessTargetService
@@ -24,7 +25,7 @@ final public class StoriesService {
 	private var storageUpdated: Bool = false
 	private var isReadyForReconstruct: Bool { self.storageUpdated }
 
-	init(router: IRouter, api: IAPIService, storage: StoriesStorage, processTargetService: ProcessTargetService, ud: IUserDefaults) {
+	init(router: BaseRouter, api: IAPIService, storage: StoriesStorage, processTargetService: ProcessTargetService, ud: IUserDefaults) {
 		self.router = router
 		self.api = api
 		self.storage = storage
@@ -80,12 +81,14 @@ extension StoriesService: IStoryService {
 	}
 
 	public func show(story: BaseStory, in stories: [BaseStory]) {
-		self.router.show(story: story, in: stories.filter { !$0.snaps.isEmpty })
+		let vc = self.storiesVC(story: story, in: stories)
+		vc.modalPresentationStyle = .fullScreen
+		self.router.present(vc)
 	}
 
 	public func show(story: BaseStory) {
 		guard self.avatarStories.contains(story) else { return }
-		self.router.show(story: story, in: self.avatarStories.filter { !$0.snaps.isEmpty })
+		self.show(story: story, in: self.avatarStories.filter { !$0.snaps.isEmpty })
 	}
 
 	public func resortStories() {
@@ -96,6 +99,12 @@ extension StoriesService: IStoryService {
 			.sorted { $0.content.story.priority > $1.content.story.priority }
 		self.avatarStories = unread + read
 		self.onChangeStories.raise(())
+	}
+
+	private func storiesVC(story: BaseStory, in stories: [BaseStory]) -> UIViewController {
+		let vm = StoryBrowserVM(storiesService: self, stories: stories, since: story)
+		let vc = StoryBrowserVC(viewModel: vm)
+		return vc
 	}
 
 }

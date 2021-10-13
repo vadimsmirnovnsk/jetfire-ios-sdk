@@ -1,5 +1,7 @@
 import Foundation
 import UserNotifications
+import UIKit
+import VNBase
 
 public class Jetfire {
 
@@ -8,23 +10,43 @@ public class Jetfire {
 	internal static var analytics: StoriesAnalytics { Jetfire.standard.storiesConfig.analytics }
 
 	public let storiesConfig: StoriesConfig
-	public let firebaseConfig: FirebaseConfig
-	private let featuringConfig: FeaturingConfig
 
 	private let api = APIService()
+	private let router = BaseRouter()
 	private let ud = UserDefaults.standard
+	private let application = UIApplication.shared
 
-    public init() {
-		let analytics: [IAnalytics] = [] // [ FirebaseAnalytics() ]
+	private let contentPresenter = ContentPresenter()
+	private let serviceInfo = ServiceInfo()
 
-		self.storiesConfig = StoriesConfig(analytics: analytics)
-		self.firebaseConfig = FirebaseConfig(api: self.api, ud: self.ud)
-		self.featuringConfig = FeaturingConfig(
+	private(set) lazy var deeplinkService: DeeplinkService = { [unowned self] in
+		return DeeplinkService(serviceInfo: self.serviceInfo)
+	}()
+
+	private(set) lazy var firebaseConfig: FirebaseConfig = { [unowned self] in
+		return FirebaseConfig(
+			api: self.api,
+			ud: self.ud ,
+			deeplinkService: self.deeplinkService,
+			application: self.application,
+			router: self.router
+		)
+	}()
+
+	private(set) lazy var featuringConfig: FeaturingConfig = { [unowned self] in
+		return FeaturingConfig(
 			api: self.api,
 			ud: self.ud,
 			storiesService: self.firebaseConfig.storiesService,
 			userUUID: UUID().uuidString
 		)
+	}()
+
+    public init() {
+		let analytics: [IAnalytics] = [] // [ FirebaseAnalytics(), BackendAnalytics() ]
+		self.storiesConfig = StoriesConfig(analytics: analytics)
+
+		self.deeplinkService.delegate = self.contentPresenter
     }
 
 	public func applicationStart() {
