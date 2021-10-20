@@ -30,20 +30,7 @@ class ServiceInfo {
 	}
 
 	private func plist(withName name: String) -> InfoPlist? {
-		let fm = FileManager.default
-		let path = Bundle.main.resourcePath!
-
-		do {
-			let items = try fm.contentsOfDirectory(atPath: path)
-
-			for item in items {
-				print("Found \(item)")
-			}
-		} catch {
-			print("Error \(error)")
-		}
-
-		guard  let path = Bundle.main.path(forResource: name, ofType: "plist"),
+		guard  let path = Bundle.main.path(forResource: name + ".plist", ofType: ""),
 			let xml = FileManager.default.contents(atPath: path),
 			let preferences = try? PropertyListDecoder().decode(InfoPlist.self, from: xml) else
 		{
