@@ -1,6 +1,7 @@
 import UIKit
 import VNHandlers
 
+// Класс для обработки всех диплинков, поддерживаемых Jetfire
 protocol ICanShowContent: AnyObject {
 
 	func showStory(with id: String)

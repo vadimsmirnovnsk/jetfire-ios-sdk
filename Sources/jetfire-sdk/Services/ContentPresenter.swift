@@ -1,3 +1,4 @@
+// Класс, в который мы передаём id контента, он его скачивает и отображает.
 class ContentPresenter: ICanShowContent {
 
 	func showStory(with id: String) {
