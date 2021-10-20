@@ -6,16 +6,27 @@ struct InfoPlist: Codable {
 
 	var deeplinkScheme: String
 
+	enum CodingKeys: String, CodingKey {
+		case deeplinkScheme = "DEEPLINK_SCHEME"
+	}
+
 }
 
 class ServiceInfo {
 
-	var deeplinkScheme: String { "jetfiredemomock" }
+	var deeplinkScheme: String {
+		guard let scheme = self.deeplinkScheme else {
+			print("❌ Jetfire didn't load deeplink scheme in JetfireService-Info.plist")
+			return "unknown"
+		}
+		return scheme
+	}
 
 	private var plist: InfoPlist?
 
 	init() {
 		self.plist = self.plist(withName: "JetfireServices-Info")
+		print("Jetfire loaded deeplink scheme: \(self.deeplinkScheme)")
 	}
 
 	private func plist(withName name: String) -> InfoPlist? {
@@ -27,6 +38,7 @@ class ServiceInfo {
 			return nil
 		}
 
+		"✅ Jetfire didn't load JetfireService-Info.plist"
 		print(preferences)
 		return preferences
 	}
