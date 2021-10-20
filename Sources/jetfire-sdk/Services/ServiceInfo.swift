@@ -15,7 +15,7 @@ struct InfoPlist: Codable {
 class ServiceInfo {
 
 	var deeplinkScheme: String {
-		guard let scheme = self.deeplinkScheme else {
+		guard let scheme = self.plist?.deeplinkScheme else {
 			print("❌ Jetfire didn't load deeplink scheme in JetfireService-Info.plist")
 			return "unknown"
 		}
