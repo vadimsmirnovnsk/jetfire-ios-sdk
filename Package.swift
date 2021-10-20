@@ -29,10 +29,12 @@ let package = Package(
 				.product(name: "Alamofire", package: "Alamofire"),
 				.product(name: "SDWebImage", package: "SDWebImage"),
 				.product(name: "UIColorHexSwift", package: "UIColor-Hex-Swift"),
-			],
-			exclude: ["JetfireService-Info.plist"]),
+			]),
         .testTarget(
             name: "jetfire-sdkTests",
             dependencies: ["jetfire-sdk"]),
+//			resources: [
+//				.copy("Resources")
+//		]),
     ]
 )

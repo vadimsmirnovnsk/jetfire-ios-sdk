@@ -17,7 +17,7 @@ public class Jetfire {
 	private let application = UIApplication.shared
 
 	private let contentPresenter = ContentPresenter()
-	private let serviceInfo = ServiceInfo()
+	internal let serviceInfo = ServiceInfo()
 
 	private(set) lazy var deeplinkService: DeeplinkService = { [unowned self] in
 		return DeeplinkService(serviceInfo: self.serviceInfo)
