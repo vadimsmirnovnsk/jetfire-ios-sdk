@@ -23,12 +23,20 @@ public class Jetfire {
 		return DeeplinkService(serviceInfo: self.serviceInfo)
 	}()
 
-	private(set) lazy var firebaseConfig: FirebaseConfig = { [unowned self] in
-		return FirebaseConfig(
+	private(set) lazy var processTargetService: ProcessTargetService = { [unowned self] in
+		return ProcessTargetService(application: self.application, deeplinkService: self.deeplinkService)
+	}()
+
+	private(set) lazy var firebaseStorage: FirebaseStoriesStorage = { [unowned self] in
+		return FirebaseStoriesStorage(processTargetService: self.processTargetService, router: self.router)
+	}()
+
+	private(set) lazy var snapsConfig: StoryTypesConfig = { [unowned self] in
+		return StoryTypesConfig(
 			api: self.api,
-			ud: self.ud ,
-			deeplinkService: self.deeplinkService,
-			application: self.application,
+			ud: self.ud,
+			storage: self.firebaseStorage,
+			processTargetService: self.processTargetService,
 			router: self.router
 		)
 	}()
@@ -37,7 +45,7 @@ public class Jetfire {
 		return FeaturingConfig(
 			api: self.api,
 			ud: self.ud,
-			storiesService: self.firebaseConfig.storiesService,
+			storiesService: self.snapsConfig.storiesService,
 			userUUID: UUID().uuidString
 		)
 	}()

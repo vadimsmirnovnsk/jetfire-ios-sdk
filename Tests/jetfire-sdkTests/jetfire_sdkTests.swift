@@ -1,4 +1,6 @@
 import XCTest
+import UIKit
+
 @testable import jetfire_sdk
 
 final class jetfire_sdkTests: XCTestCase {
@@ -10,7 +12,7 @@ final class jetfire_sdkTests: XCTestCase {
     }
 
 	func testDeeplinkScheme() throws {
-		XCTAssertEqual(Jetfire.standard.serviceInfo.deeplinkScheme, "jetfiredemo")
+		XCTAssertEqual(Jetfire.standard.serviceInfo.deeplinkScheme, "test")
 	}
 
 }

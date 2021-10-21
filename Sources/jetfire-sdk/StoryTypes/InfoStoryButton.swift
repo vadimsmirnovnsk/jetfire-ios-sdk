@@ -8,7 +8,7 @@ final class InfoStoryButton: BlockButton {
 
 	let title = UILabel()
 	let titleAndImage = ImageAndLabelView(textInsets: UIEdgeInsets(top: 3, left: 6, bottom: 0, right: 0))
-	let bgView = UIView.colored(Jetfire.standard.firebaseConfig.firebaseStorySnapButtonForegroundColor)
+	let bgView = UIView.colored(Jetfire.standard.snapsConfig.snapButtonForegroundColor)
 	
 	private let shadow = UIView()
 

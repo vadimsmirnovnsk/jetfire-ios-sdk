@@ -1,9 +1,7 @@
 //import Firebase
 import VNBase
 
-typealias StoriesBlock = ([BaseStory]) -> Void
-
-final class StoriesStorage {
+final class FirebaseStoriesStorage: IStoriesStorage {
 
 	private(set) var stories: [BaseStory] = []
 	

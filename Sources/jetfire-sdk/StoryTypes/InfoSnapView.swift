@@ -62,15 +62,15 @@ final class InfoSnapView: BaseSnapView<InfoSnapVM> {
 		self.button.isHidden = !vm.shouldShowButton
 		self.buttonSpacing.isHidden = !vm.shouldShowButton
 
-		self.title.apply(Jetfire.standard.firebaseConfig.firebaseStoryTitleTextStyle.with { $0.color = vm.snap.textColor },
+		self.title.apply(Jetfire.standard.snapsConfig.snapTitleTextStyle.with { $0.color = vm.snap.textColor },
 						 text: vm.title)
 		self.subtitle.apply(
-			Jetfire.standard.firebaseConfig.firebaseStorySubitleTextStyle.with { $0.color = vm.snap.textColor.withAlphaComponent(0.5) },
+			Jetfire.standard.snapsConfig.snapSubitleTextStyle.with { $0.color = vm.snap.textColor.withAlphaComponent(0.5) },
 			text: vm.subtitle
 		)
-		self.message.apply(Jetfire.standard.firebaseConfig.firebaseStorySubitleTextStyle.with { $0.color = vm.snap.textColor },
+		self.message.apply(Jetfire.standard.snapsConfig.snapSubitleTextStyle.with { $0.color = vm.snap.textColor },
 						   text: vm.message)
-		self.button.title.apply(Jetfire.standard.firebaseConfig.firebaseStoryButtonTextStyle, text: vm.buttonTitle,
+		self.button.title.apply(Jetfire.standard.snapsConfig.snapButtonTextStyle, text: vm.buttonTitle,
 								textAlignment: .center)
 	}
 

@@ -3,6 +3,7 @@ import VNEssential
 import VNHandlers
 import UIKit
 
+/// Сервис, управляющий показом кругляшей, их загрузкой и сортировкой. 
 final public class StoriesService {
 
 	#if DEBUG
@@ -18,14 +19,14 @@ final public class StoriesService {
 
 	private let api: IAPIService
 	private let router: BaseRouter
-	private let storage: StoriesStorage
+	private let storage: IStoriesStorage
 	private let ud: IUserDefaults
 	private let processTargetService: ProcessTargetService
 
 	private var storageUpdated: Bool = false
 	private var isReadyForReconstruct: Bool { self.storageUpdated }
 
-	init(router: BaseRouter, api: IAPIService, storage: StoriesStorage, processTargetService: ProcessTargetService, ud: IUserDefaults) {
+	init(router: BaseRouter, api: IAPIService, storage: IStoriesStorage, processTargetService: ProcessTargetService, ud: IUserDefaults) {
 		self.router = router
 		self.api = api
 		self.storage = storage
