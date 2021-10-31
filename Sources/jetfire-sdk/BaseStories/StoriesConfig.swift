@@ -3,6 +3,9 @@ import VNEssential
 import VNHandlers
 import UIKit
 
+/// Здесь базовая логика сториз — карусель кругляшей и открывающиеся по тапу в них сториз с пустыми снапами.
+/// Трекинг показа историй в аналитику, прокручивания снапов и т.д.
+/// Типы историй и снапов в отдельной папочку — StoryTypes
 public final class StoriesConfig {
 
 	/// [ Base Stories

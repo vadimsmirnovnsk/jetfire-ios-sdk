@@ -90,8 +90,6 @@ class DeeplinkService: IOpenURLHandler {
 			isHandled = true
 		}
 		return isHandled
-
-		return false
 	}
 	
 }

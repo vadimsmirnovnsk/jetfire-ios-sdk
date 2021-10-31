@@ -18,6 +18,7 @@ let package = Package(
 		.package(name: "Alamofire", url: "https://github.com/Alamofire/Alamofire", from: "5.4.3"),
 		.package(url: "https://github.com/SDWebImage/SDWebImage.git", from: "5.10.0"),
 		.package(url: "https://github.com/yeahdongcn/UIColor-Hex-Swift", from: "5.1.7"),
+		.package(name: "SwiftProtobuf", url: "https://github.com/apple/swift-protobuf.git", from: "1.17.0"),
 	],
     targets: [
         .target(
@@ -29,12 +30,15 @@ let package = Package(
 				.product(name: "Alamofire", package: "Alamofire"),
 				.product(name: "SDWebImage", package: "SDWebImage"),
 				.product(name: "UIColorHexSwift", package: "UIColor-Hex-Swift"),
-			]),
+				.product(name: "SwiftProtobuf", package: "SwiftProtobuf"),
+			],
+			exclude: ["Model/protocol.proto"]
+		),
         .testTarget(
             name: "jetfire-sdkTests",
-            dependencies: ["jetfire-sdk"]),
-//			resources: [
-//				.copy("Resources")
-//		]),
+            dependencies: ["jetfire-sdk"],
+			resources: [
+				.copy("JetfireService-Info.plist")
+		]),
     ]
 )

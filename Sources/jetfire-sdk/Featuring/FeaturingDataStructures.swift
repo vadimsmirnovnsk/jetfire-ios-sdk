@@ -33,6 +33,7 @@ struct FeaturingCampaign: Codable {
 		case applicationStart
 		case push
 		case toaster
+		case deeplink
 	}
 
 	/// Айдишник кампании
@@ -75,17 +76,6 @@ struct FeaturingCampaign: Codable {
 			push: .demoCommon
 		)
 	}
-
-//	- 0 : "tutorial: receipt analytics 2"
-//	- 1 : "tutorial: who pays"
-//	- 2 : "Demo Story 1"
-//	- 3 : "Demo Story 02"
-//	- 4 : "discounts_nsk_20"
-//	- 5 : "discounts_ekaterinburg_10"
-//	- 6 : "discounts_spb_10"
-//	- 7 : "discounts_msk_09"
-//	- 8 : "discounts_kras_09"
-//	- 9 : "Demo Story 1"
 
 }
 

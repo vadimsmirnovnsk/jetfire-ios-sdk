@@ -81,6 +81,7 @@ final class FeaturingManager {
 			case .applicationStart: self.ud.lastApplicationStartShowDate = Date()
 			case .push: self.ud.lastPushShowDate = Date()
 			case .toaster:  self.ud.lastToasterShowDate = Date()
+			case .deeplink: break
 		}
 	}
 
