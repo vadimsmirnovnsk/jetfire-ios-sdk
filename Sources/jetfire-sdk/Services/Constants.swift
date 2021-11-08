@@ -13,7 +13,7 @@ enum Constants {
 	#endif
 
 	static let verboseVersion = String(format: "Version %@ (%@)", Constants.currentVersion, Constants.currentBuild)
-	static let appVersion = String(format: "%@(%@)", Constants.currentVersion, Constants.currentBuild)
+	static let appVersion = String(format: "%@.%@", Constants.currentVersion, Constants.currentBuild)
 	// swiftlint:disable:next force_cast
 	static let currentBuild = Bundle.main.infoDictionary?[String(kCFBundleVersionKey)]! as! String
 	// swiftlint:disable:next force_cast
@@ -25,7 +25,7 @@ enum Constants {
 	static let mobileOSName = "ios"
 	static let mobileVendorName = "Apple"
 	static let platformOSVersion = UIDevice.current.systemVersion
-	static let currentLanguage = Locale.preferredLanguages.first ?? "ru-RU"
+	static let currentLanguage = Locale.preferredLanguages.first ?? "ru"
 	static let currentLocale = Locale.current.identifier
 	static let currentTimeZone = TimeZone.current.identifier
 

@@ -22,7 +22,11 @@ final class UserSessionService {
 			$0.os = Constants.mobileOSName
 			$0.osVersion = Constants.platformOSVersion
 			$0.language = Constants.currentLanguage
+			#if DEBUG
+			$0.locale = "en_TR" // Constants.currentLocale
+			#else
 			$0.locale = Constants.currentLocale
+			#endif
 			$0.timeZone = Constants.currentTimeZone
 			$0.carrier = self.carriers
 			$0.screen = self.screen
@@ -56,7 +60,7 @@ final class UserSessionService {
 	func session() -> JetFireSession {
 		return JetFireSession.with {
 			$0.uuid = self.sessionId.rawValue
-			$0.timestamp = JetFireTimestamp.with { $0.value = Int64(Date().timeIntervalSince1970) }
+			$0.timestamp = Date().timeIntervalSince1970.timestamp
 			$0.app = self.app
 			$0.device = self.device
 			$0.properties = []
