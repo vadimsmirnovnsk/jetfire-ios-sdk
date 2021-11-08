@@ -8,7 +8,7 @@ option swift_prefix = "JetFire";
 ////////////////////////////////////////////////////////////////////////////////////////
 
 message Timestamp {
-    // Unix timestamp
+    // Unix timestamp (milliseconds)
     required int64 value = 1;
 }
 
@@ -29,6 +29,7 @@ message EventType {
     // 13 - toaster_show
     // 14 - toaster_tap
     // 15 - toaster_close
+    // 16 - feature_accepted
     required int64 value = 1;
 }
 
@@ -65,11 +66,16 @@ message Property {
 
 message Image {
     optional string preview_url = 1;
-    required string url = 2;
+    required string url = 2; // base url, url for other screens will be down there
 }
 
 message Action {
     required string deeplink = 1;
+}
+
+message Schedule {
+    optional Timestamp at_time = 1;
+    optional int64 after = 2; // seconds
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -144,21 +150,22 @@ message RequestSession {
 message Session {
     reserved 1;
     required string uuid = 2;
-    required Timestamp timestamp = 3;
+    required Timestamp timestamp = 3; // milliseconds
     required App app = 4;
     required Device device = 5;
     optional Location location = 6;
     repeated Property properties = 7;
 }
 
-message FeaturesTrigger {
+message FeaturesSql {
     reserved 1;
-    required string sql = 2;
+    required string available = 2;
+    required string trigger = 3;
 }
 
 message FeatureButton {
     reserved 1;
-    required string title = 2;
+    optional string title = 2;
     optional Action action = 3;
 }
 
@@ -169,6 +176,7 @@ message FeaturePush {
     optional string message = 4;
     optional Image image = 5;
     optional FeatureButton action_button = 6;
+    optional Schedule schedule = 7;
 }
 
 message FeatureToaster {
@@ -179,21 +187,34 @@ message FeatureToaster {
     optional Image image = 5;
     optional FeatureButton action_button = 6;
     optional FeatureButton hide_button = 7;
+    optional Schedule schedule = 8;
+}
+
+message FeatureStoryFrameBackground {
+    optional string color = 1;
+}
+
+message FeatureStoryFrameFont {
+    optional string color = 1;
 }
 
 message FeatureStoryFrame {
-    reserved 1;
+    required int64 id = 1;
     optional string title = 2;
     optional string subtitle = 3;
     optional string message = 4;
-    required Image image = 5;
-    optional FeatureButton action_button = 6;
-    optional FeatureButton hide_button = 7;
+    optional Image image = 5;
+    optional FeatureStoryFrameBackground background = 6;
+    optional FeatureStoryFrameFont font = 7;
+    optional FeatureButton action_button = 8;
+    optional FeatureButton hide_button = 9;
+    required int32 duration = 10;
 }
 
-message FeatureStories {
-    reserved 1;
+message FeatureStory {
+    required int64 id = 1;
     repeated FeatureStoryFrame frames = 2;
+    optional Schedule schedule = 3;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -203,29 +224,28 @@ message FeatureStories {
 message Event {
     reserved 1;
     required string uuid = 2;
-    required Timestamp timestamp = 3;
+    required Timestamp timestamp = 3; // milliseconds
     required EventType event_type = 4;
     optional string custom_event = 5;
-    optional int64 feature_id = 6;
+    optional string feature = 6;
     optional int64 campaign_id = 7;
     optional int64 entity_id = 8; // story_id, ...
     repeated Property properties = 9;
 }
 
-message Feature {
-    reserved 1;
-    required string uuid = 2;
-    optional FeaturePush push = 3;
-    optional FeatureToaster toaster = 4;
-    repeated FeatureStories stories = 5;
-    required int32 priority = 6;
+message Campaign {
+    required int64 id = 1;
+    optional FeaturePush push = 2;
+    optional FeatureToaster toaster = 3;
+    repeated FeatureStory stories = 4;
+    required int32 priority = 5;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////// Requests
 ////////////////////////////////////////////////////////////////////////////////////////
 
-message ListFeaturesRequest {
+message ListCampaignsRequest {
     reserved 1;
     required User user = 3;
     required Session session = 4;
@@ -256,11 +276,11 @@ message RegisterEventsRequest {
 ////////// Responses
 ////////////////////////////////////////////////////////////////////////////////////////
 
-message ListFeaturesResponse {
+message ListCampaignsResponse {
     reserved 1;
     required int32 total = 2;
-    repeated Feature features = 3;
-    required FeaturesTrigger trigger = 4;
+    repeated Campaign campaigns = 3;
+    required FeaturesSql sql = 4;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////

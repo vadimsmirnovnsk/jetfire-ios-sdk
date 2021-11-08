@@ -24,7 +24,7 @@ public struct JetFireTimestamp {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  /// Unix timestamp
+  /// Unix timestamp (milliseconds)
   public var value: Int64 {
     get {return _value ?? 0}
     set {_value = newValue}
@@ -62,6 +62,7 @@ public struct JetFireEventType {
   /// 13 - toaster_show
   /// 14 - toaster_tap
   /// 15 - toaster_close
+  /// 16 - feature_accepted
   public var value: Int64 {
     get {return _value ?? 0}
     set {_value = newValue}
@@ -275,6 +276,7 @@ public struct JetFireImage {
   /// Clears the value of `previewURL`. Subsequent reads from it will return its default value.
   public mutating func clearPreviewURL() {self._previewURL = nil}
 
+  /// base url, url for other screens will be down there
   public var url: String {
     get {return _url ?? String()}
     set {_url = newValue}
@@ -311,6 +313,37 @@ public struct JetFireAction {
   public init() {}
 
   fileprivate var _deeplink: String? = nil
+}
+
+public struct JetFireSchedule {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var atTime: JetFireTimestamp {
+    get {return _storage._atTime ?? JetFireTimestamp()}
+    set {_uniqueStorage()._atTime = newValue}
+  }
+  /// Returns true if `atTime` has been explicitly set.
+  public var hasAtTime: Bool {return _storage._atTime != nil}
+  /// Clears the value of `atTime`. Subsequent reads from it will return its default value.
+  public mutating func clearAtTime() {_uniqueStorage()._atTime = nil}
+
+  /// seconds
+  public var after: Int64 {
+    get {return _storage._after ?? 0}
+    set {_uniqueStorage()._after = newValue}
+  }
+  /// Returns true if `after` has been explicitly set.
+  public var hasAfter: Bool {return _storage._after != nil}
+  /// Clears the value of `after`. Subsequent reads from it will return its default value.
+  public mutating func clearAfter() {_uniqueStorage()._after = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 public struct JetFirePropertySet {
@@ -710,6 +743,7 @@ public struct JetFireSession {
   /// Clears the value of `uuid`. Subsequent reads from it will return its default value.
   public mutating func clearUuid() {_uniqueStorage()._uuid = nil}
 
+  /// milliseconds
   public var timestamp: JetFireTimestamp {
     get {return _storage._timestamp ?? JetFireTimestamp()}
     set {_uniqueStorage()._timestamp = newValue}
@@ -758,25 +792,35 @@ public struct JetFireSession {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-public struct JetFireFeaturesTrigger {
+public struct JetFireFeaturesSql {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var sql: String {
-    get {return _sql ?? String()}
-    set {_sql = newValue}
+  public var available: String {
+    get {return _available ?? String()}
+    set {_available = newValue}
   }
-  /// Returns true if `sql` has been explicitly set.
-  public var hasSql: Bool {return self._sql != nil}
-  /// Clears the value of `sql`. Subsequent reads from it will return its default value.
-  public mutating func clearSql() {self._sql = nil}
+  /// Returns true if `available` has been explicitly set.
+  public var hasAvailable: Bool {return self._available != nil}
+  /// Clears the value of `available`. Subsequent reads from it will return its default value.
+  public mutating func clearAvailable() {self._available = nil}
+
+  public var trigger: String {
+    get {return _trigger ?? String()}
+    set {_trigger = newValue}
+  }
+  /// Returns true if `trigger` has been explicitly set.
+  public var hasTrigger: Bool {return self._trigger != nil}
+  /// Clears the value of `trigger`. Subsequent reads from it will return its default value.
+  public mutating func clearTrigger() {self._trigger = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
-  fileprivate var _sql: String? = nil
+  fileprivate var _available: String? = nil
+  fileprivate var _trigger: String? = nil
 }
 
 public struct JetFireFeatureButton {
@@ -859,6 +903,15 @@ public struct JetFireFeaturePush {
   /// Clears the value of `actionButton`. Subsequent reads from it will return its default value.
   public mutating func clearActionButton() {_uniqueStorage()._actionButton = nil}
 
+  public var schedule: JetFireSchedule {
+    get {return _storage._schedule ?? JetFireSchedule()}
+    set {_uniqueStorage()._schedule = newValue}
+  }
+  /// Returns true if `schedule` has been explicitly set.
+  public var hasSchedule: Bool {return _storage._schedule != nil}
+  /// Clears the value of `schedule`. Subsequent reads from it will return its default value.
+  public mutating func clearSchedule() {_uniqueStorage()._schedule = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -925,6 +978,15 @@ public struct JetFireFeatureToaster {
   /// Clears the value of `hideButton`. Subsequent reads from it will return its default value.
   public mutating func clearHideButton() {_uniqueStorage()._hideButton = nil}
 
+  public var schedule: JetFireSchedule {
+    get {return _storage._schedule ?? JetFireSchedule()}
+    set {_uniqueStorage()._schedule = newValue}
+  }
+  /// Returns true if `schedule` has been explicitly set.
+  public var hasSchedule: Bool {return _storage._schedule != nil}
+  /// Clears the value of `schedule`. Subsequent reads from it will return its default value.
+  public mutating func clearSchedule() {_uniqueStorage()._schedule = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -932,10 +994,61 @@ public struct JetFireFeatureToaster {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
+public struct JetFireFeatureStoryFrameBackground {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var color: String {
+    get {return _color ?? String()}
+    set {_color = newValue}
+  }
+  /// Returns true if `color` has been explicitly set.
+  public var hasColor: Bool {return self._color != nil}
+  /// Clears the value of `color`. Subsequent reads from it will return its default value.
+  public mutating func clearColor() {self._color = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _color: String? = nil
+}
+
+public struct JetFireFeatureStoryFrameFont {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var color: String {
+    get {return _color ?? String()}
+    set {_color = newValue}
+  }
+  /// Returns true if `color` has been explicitly set.
+  public var hasColor: Bool {return self._color != nil}
+  /// Clears the value of `color`. Subsequent reads from it will return its default value.
+  public mutating func clearColor() {self._color = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _color: String? = nil
+}
+
 public struct JetFireFeatureStoryFrame {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
+
+  public var id: Int64 {
+    get {return _storage._id ?? 0}
+    set {_uniqueStorage()._id = newValue}
+  }
+  /// Returns true if `id` has been explicitly set.
+  public var hasID: Bool {return _storage._id != nil}
+  /// Clears the value of `id`. Subsequent reads from it will return its default value.
+  public mutating func clearID() {_uniqueStorage()._id = nil}
 
   public var title: String {
     get {return _storage._title ?? String()}
@@ -973,6 +1086,24 @@ public struct JetFireFeatureStoryFrame {
   /// Clears the value of `image`. Subsequent reads from it will return its default value.
   public mutating func clearImage() {_uniqueStorage()._image = nil}
 
+  public var background: JetFireFeatureStoryFrameBackground {
+    get {return _storage._background ?? JetFireFeatureStoryFrameBackground()}
+    set {_uniqueStorage()._background = newValue}
+  }
+  /// Returns true if `background` has been explicitly set.
+  public var hasBackground: Bool {return _storage._background != nil}
+  /// Clears the value of `background`. Subsequent reads from it will return its default value.
+  public mutating func clearBackground() {_uniqueStorage()._background = nil}
+
+  public var font: JetFireFeatureStoryFrameFont {
+    get {return _storage._font ?? JetFireFeatureStoryFrameFont()}
+    set {_uniqueStorage()._font = newValue}
+  }
+  /// Returns true if `font` has been explicitly set.
+  public var hasFont: Bool {return _storage._font != nil}
+  /// Clears the value of `font`. Subsequent reads from it will return its default value.
+  public mutating func clearFont() {_uniqueStorage()._font = nil}
+
   public var actionButton: JetFireFeatureButton {
     get {return _storage._actionButton ?? JetFireFeatureButton()}
     set {_uniqueStorage()._actionButton = newValue}
@@ -991,6 +1122,15 @@ public struct JetFireFeatureStoryFrame {
   /// Clears the value of `hideButton`. Subsequent reads from it will return its default value.
   public mutating func clearHideButton() {_uniqueStorage()._hideButton = nil}
 
+  public var duration: Int32 {
+    get {return _storage._duration ?? 0}
+    set {_uniqueStorage()._duration = newValue}
+  }
+  /// Returns true if `duration` has been explicitly set.
+  public var hasDuration: Bool {return _storage._duration != nil}
+  /// Clears the value of `duration`. Subsequent reads from it will return its default value.
+  public mutating func clearDuration() {_uniqueStorage()._duration = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -998,16 +1138,39 @@ public struct JetFireFeatureStoryFrame {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-public struct JetFireFeatureStories {
+public struct JetFireFeatureStory {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var frames: [JetFireFeatureStoryFrame] = []
+  public var id: Int64 {
+    get {return _storage._id ?? 0}
+    set {_uniqueStorage()._id = newValue}
+  }
+  /// Returns true if `id` has been explicitly set.
+  public var hasID: Bool {return _storage._id != nil}
+  /// Clears the value of `id`. Subsequent reads from it will return its default value.
+  public mutating func clearID() {_uniqueStorage()._id = nil}
+
+  public var frames: [JetFireFeatureStoryFrame] {
+    get {return _storage._frames}
+    set {_uniqueStorage()._frames = newValue}
+  }
+
+  public var schedule: JetFireSchedule {
+    get {return _storage._schedule ?? JetFireSchedule()}
+    set {_uniqueStorage()._schedule = newValue}
+  }
+  /// Returns true if `schedule` has been explicitly set.
+  public var hasSchedule: Bool {return _storage._schedule != nil}
+  /// Clears the value of `schedule`. Subsequent reads from it will return its default value.
+  public mutating func clearSchedule() {_uniqueStorage()._schedule = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
+
+  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 public struct JetFireEvent {
@@ -1024,6 +1187,7 @@ public struct JetFireEvent {
   /// Clears the value of `uuid`. Subsequent reads from it will return its default value.
   public mutating func clearUuid() {_uniqueStorage()._uuid = nil}
 
+  /// milliseconds
   public var timestamp: JetFireTimestamp {
     get {return _storage._timestamp ?? JetFireTimestamp()}
     set {_uniqueStorage()._timestamp = newValue}
@@ -1051,14 +1215,14 @@ public struct JetFireEvent {
   /// Clears the value of `customEvent`. Subsequent reads from it will return its default value.
   public mutating func clearCustomEvent() {_uniqueStorage()._customEvent = nil}
 
-  public var featureID: Int64 {
-    get {return _storage._featureID ?? 0}
-    set {_uniqueStorage()._featureID = newValue}
+  public var feature: String {
+    get {return _storage._feature ?? String()}
+    set {_uniqueStorage()._feature = newValue}
   }
-  /// Returns true if `featureID` has been explicitly set.
-  public var hasFeatureID: Bool {return _storage._featureID != nil}
-  /// Clears the value of `featureID`. Subsequent reads from it will return its default value.
-  public mutating func clearFeatureID() {_uniqueStorage()._featureID = nil}
+  /// Returns true if `feature` has been explicitly set.
+  public var hasFeature: Bool {return _storage._feature != nil}
+  /// Clears the value of `feature`. Subsequent reads from it will return its default value.
+  public mutating func clearFeature() {_uniqueStorage()._feature = nil}
 
   public var campaignID: Int64 {
     get {return _storage._campaignID ?? 0}
@@ -1091,19 +1255,19 @@ public struct JetFireEvent {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-public struct JetFireFeature {
+public struct JetFireCampaign {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var uuid: String {
-    get {return _storage._uuid ?? String()}
-    set {_uniqueStorage()._uuid = newValue}
+  public var id: Int64 {
+    get {return _storage._id ?? 0}
+    set {_uniqueStorage()._id = newValue}
   }
-  /// Returns true if `uuid` has been explicitly set.
-  public var hasUuid: Bool {return _storage._uuid != nil}
-  /// Clears the value of `uuid`. Subsequent reads from it will return its default value.
-  public mutating func clearUuid() {_uniqueStorage()._uuid = nil}
+  /// Returns true if `id` has been explicitly set.
+  public var hasID: Bool {return _storage._id != nil}
+  /// Clears the value of `id`. Subsequent reads from it will return its default value.
+  public mutating func clearID() {_uniqueStorage()._id = nil}
 
   public var push: JetFireFeaturePush {
     get {return _storage._push ?? JetFireFeaturePush()}
@@ -1123,7 +1287,7 @@ public struct JetFireFeature {
   /// Clears the value of `toaster`. Subsequent reads from it will return its default value.
   public mutating func clearToaster() {_uniqueStorage()._toaster = nil}
 
-  public var stories: [JetFireFeatureStories] {
+  public var stories: [JetFireFeatureStory] {
     get {return _storage._stories}
     set {_uniqueStorage()._stories = newValue}
   }
@@ -1144,7 +1308,7 @@ public struct JetFireFeature {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-public struct JetFireListFeaturesRequest {
+public struct JetFireListCampaignsRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1279,7 +1443,7 @@ public struct JetFireRegisterEventsRequest {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-public struct JetFireListFeaturesResponse {
+public struct JetFireListCampaignsResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -1293,19 +1457,19 @@ public struct JetFireListFeaturesResponse {
   /// Clears the value of `total`. Subsequent reads from it will return its default value.
   public mutating func clearTotal() {_uniqueStorage()._total = nil}
 
-  public var features: [JetFireFeature] {
-    get {return _storage._features}
-    set {_uniqueStorage()._features = newValue}
+  public var campaigns: [JetFireCampaign] {
+    get {return _storage._campaigns}
+    set {_uniqueStorage()._campaigns = newValue}
   }
 
-  public var trigger: JetFireFeaturesTrigger {
-    get {return _storage._trigger ?? JetFireFeaturesTrigger()}
-    set {_uniqueStorage()._trigger = newValue}
+  public var sql: JetFireFeaturesSql {
+    get {return _storage._sql ?? JetFireFeaturesSql()}
+    set {_uniqueStorage()._sql = newValue}
   }
-  /// Returns true if `trigger` has been explicitly set.
-  public var hasTrigger: Bool {return _storage._trigger != nil}
-  /// Clears the value of `trigger`. Subsequent reads from it will return its default value.
-  public mutating func clearTrigger() {_uniqueStorage()._trigger = nil}
+  /// Returns true if `sql` has been explicitly set.
+  public var hasSql: Bool {return _storage._sql != nil}
+  /// Clears the value of `sql`. Subsequent reads from it will return its default value.
+  public mutating func clearSql() {_uniqueStorage()._sql = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -2050,6 +2214,82 @@ extension JetFireAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
   }
 }
 
+extension JetFireSchedule: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = "Schedule"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "at_time"),
+    2: .same(proto: "after"),
+  ]
+
+  fileprivate class _StorageClass {
+    var _atTime: JetFireTimestamp? = nil
+    var _after: Int64? = nil
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _atTime = source._atTime
+      _after = source._after
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
+  public var isInitialized: Bool {
+    return withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if let v = _storage._atTime, !v.isInitialized {return false}
+      return true
+    }
+  }
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularMessageField(value: &_storage._atTime)
+        case 2: try decoder.decodeSingularInt64Field(value: &_storage._after)
+        default: break
+        }
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if let v = _storage._atTime {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+      }
+      if let v = _storage._after {
+        try visitor.visitSingularInt64Field(value: v, fieldNumber: 2)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: JetFireSchedule, rhs: JetFireSchedule) -> Bool {
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._atTime != rhs_storage._atTime {return false}
+        if _storage._after != rhs_storage._after {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension JetFirePropertySet: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "PropertySet"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
@@ -2775,35 +3015,42 @@ extension JetFireSession: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
   }
 }
 
-extension JetFireFeaturesTrigger: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "FeaturesTrigger"
+extension JetFireFeaturesSql: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = "FeaturesSql"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    2: .same(proto: "sql"),
+    2: .same(proto: "available"),
+    3: .same(proto: "trigger"),
   ]
 
   public var isInitialized: Bool {
-    if self._sql == nil {return false}
+    if self._available == nil {return false}
+    if self._trigger == nil {return false}
     return true
   }
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
-      case 2: try decoder.decodeSingularStringField(value: &self._sql)
+      case 2: try decoder.decodeSingularStringField(value: &self._available)
+      case 3: try decoder.decodeSingularStringField(value: &self._trigger)
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if let v = self._sql {
+    if let v = self._available {
       try visitor.visitSingularStringField(value: v, fieldNumber: 2)
+    }
+    if let v = self._trigger {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 3)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireFeaturesTrigger, rhs: JetFireFeaturesTrigger) -> Bool {
-    if lhs._sql != rhs._sql {return false}
+  public static func ==(lhs: JetFireFeaturesSql, rhs: JetFireFeaturesSql) -> Bool {
+    if lhs._available != rhs._available {return false}
+    if lhs._trigger != rhs._trigger {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -2839,7 +3086,6 @@ extension JetFireFeatureButton: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
 
   public var isInitialized: Bool {
     return withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      if _storage._title == nil {return false}
       if let v = _storage._action, !v.isInitialized {return false}
       return true
     }
@@ -2894,6 +3140,7 @@ extension JetFireFeaturePush: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     4: .same(proto: "message"),
     5: .same(proto: "image"),
     6: .standard(proto: "action_button"),
+    7: .same(proto: "schedule"),
   ]
 
   fileprivate class _StorageClass {
@@ -2902,6 +3149,7 @@ extension JetFireFeaturePush: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     var _message: String? = nil
     var _image: JetFireImage? = nil
     var _actionButton: JetFireFeatureButton? = nil
+    var _schedule: JetFireSchedule? = nil
 
     static let defaultInstance = _StorageClass()
 
@@ -2913,6 +3161,7 @@ extension JetFireFeaturePush: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
       _message = source._message
       _image = source._image
       _actionButton = source._actionButton
+      _schedule = source._schedule
     }
   }
 
@@ -2927,6 +3176,7 @@ extension JetFireFeaturePush: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     return withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       if let v = _storage._image, !v.isInitialized {return false}
       if let v = _storage._actionButton, !v.isInitialized {return false}
+      if let v = _storage._schedule, !v.isInitialized {return false}
       return true
     }
   }
@@ -2941,6 +3191,7 @@ extension JetFireFeaturePush: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
         case 4: try decoder.decodeSingularStringField(value: &_storage._message)
         case 5: try decoder.decodeSingularMessageField(value: &_storage._image)
         case 6: try decoder.decodeSingularMessageField(value: &_storage._actionButton)
+        case 7: try decoder.decodeSingularMessageField(value: &_storage._schedule)
         default: break
         }
       }
@@ -2964,6 +3215,9 @@ extension JetFireFeaturePush: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
       if let v = _storage._actionButton {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
       }
+      if let v = _storage._schedule {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -2978,6 +3232,7 @@ extension JetFireFeaturePush: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
         if _storage._message != rhs_storage._message {return false}
         if _storage._image != rhs_storage._image {return false}
         if _storage._actionButton != rhs_storage._actionButton {return false}
+        if _storage._schedule != rhs_storage._schedule {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -2996,6 +3251,7 @@ extension JetFireFeatureToaster: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     5: .same(proto: "image"),
     6: .standard(proto: "action_button"),
     7: .standard(proto: "hide_button"),
+    8: .same(proto: "schedule"),
   ]
 
   fileprivate class _StorageClass {
@@ -3005,6 +3261,7 @@ extension JetFireFeatureToaster: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     var _image: JetFireImage? = nil
     var _actionButton: JetFireFeatureButton? = nil
     var _hideButton: JetFireFeatureButton? = nil
+    var _schedule: JetFireSchedule? = nil
 
     static let defaultInstance = _StorageClass()
 
@@ -3017,6 +3274,7 @@ extension JetFireFeatureToaster: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
       _image = source._image
       _actionButton = source._actionButton
       _hideButton = source._hideButton
+      _schedule = source._schedule
     }
   }
 
@@ -3032,6 +3290,7 @@ extension JetFireFeatureToaster: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
       if let v = _storage._image, !v.isInitialized {return false}
       if let v = _storage._actionButton, !v.isInitialized {return false}
       if let v = _storage._hideButton, !v.isInitialized {return false}
+      if let v = _storage._schedule, !v.isInitialized {return false}
       return true
     }
   }
@@ -3047,6 +3306,7 @@ extension JetFireFeatureToaster: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
         case 5: try decoder.decodeSingularMessageField(value: &_storage._image)
         case 6: try decoder.decodeSingularMessageField(value: &_storage._actionButton)
         case 7: try decoder.decodeSingularMessageField(value: &_storage._hideButton)
+        case 8: try decoder.decodeSingularMessageField(value: &_storage._schedule)
         default: break
         }
       }
@@ -3072,6 +3332,9 @@ extension JetFireFeatureToaster: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
       }
       if let v = _storage._hideButton {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
+      }
+      if let v = _storage._schedule {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
       }
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -3088,6 +3351,7 @@ extension JetFireFeatureToaster: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
         if _storage._image != rhs_storage._image {return false}
         if _storage._actionButton != rhs_storage._actionButton {return false}
         if _storage._hideButton != rhs_storage._hideButton {return false}
+        if _storage._schedule != rhs_storage._schedule {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -3097,36 +3361,106 @@ extension JetFireFeatureToaster: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
   }
 }
 
+extension JetFireFeatureStoryFrameBackground: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = "FeatureStoryFrameBackground"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "color"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self._color)
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if let v = self._color {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: JetFireFeatureStoryFrameBackground, rhs: JetFireFeatureStoryFrameBackground) -> Bool {
+    if lhs._color != rhs._color {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension JetFireFeatureStoryFrameFont: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = "FeatureStoryFrameFont"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "color"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self._color)
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if let v = self._color {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: JetFireFeatureStoryFrameFont, rhs: JetFireFeatureStoryFrameFont) -> Bool {
+    if lhs._color != rhs._color {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension JetFireFeatureStoryFrame: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "FeatureStoryFrame"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "id"),
     2: .same(proto: "title"),
     3: .same(proto: "subtitle"),
     4: .same(proto: "message"),
     5: .same(proto: "image"),
-    6: .standard(proto: "action_button"),
-    7: .standard(proto: "hide_button"),
+    6: .same(proto: "background"),
+    7: .same(proto: "font"),
+    8: .standard(proto: "action_button"),
+    9: .standard(proto: "hide_button"),
+    10: .same(proto: "duration"),
   ]
 
   fileprivate class _StorageClass {
+    var _id: Int64? = nil
     var _title: String? = nil
     var _subtitle: String? = nil
     var _message: String? = nil
     var _image: JetFireImage? = nil
+    var _background: JetFireFeatureStoryFrameBackground? = nil
+    var _font: JetFireFeatureStoryFrameFont? = nil
     var _actionButton: JetFireFeatureButton? = nil
     var _hideButton: JetFireFeatureButton? = nil
+    var _duration: Int32? = nil
 
     static let defaultInstance = _StorageClass()
 
     private init() {}
 
     init(copying source: _StorageClass) {
+      _id = source._id
       _title = source._title
       _subtitle = source._subtitle
       _message = source._message
       _image = source._image
+      _background = source._background
+      _font = source._font
       _actionButton = source._actionButton
       _hideButton = source._hideButton
+      _duration = source._duration
     }
   }
 
@@ -3139,7 +3473,8 @@ extension JetFireFeatureStoryFrame: SwiftProtobuf.Message, SwiftProtobuf._Messag
 
   public var isInitialized: Bool {
     return withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      if _storage._image == nil {return false}
+      if _storage._id == nil {return false}
+      if _storage._duration == nil {return false}
       if let v = _storage._image, !v.isInitialized {return false}
       if let v = _storage._actionButton, !v.isInitialized {return false}
       if let v = _storage._hideButton, !v.isInitialized {return false}
@@ -3152,12 +3487,16 @@ extension JetFireFeatureStoryFrame: SwiftProtobuf.Message, SwiftProtobuf._Messag
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       while let fieldNumber = try decoder.nextFieldNumber() {
         switch fieldNumber {
+        case 1: try decoder.decodeSingularInt64Field(value: &_storage._id)
         case 2: try decoder.decodeSingularStringField(value: &_storage._title)
         case 3: try decoder.decodeSingularStringField(value: &_storage._subtitle)
         case 4: try decoder.decodeSingularStringField(value: &_storage._message)
         case 5: try decoder.decodeSingularMessageField(value: &_storage._image)
-        case 6: try decoder.decodeSingularMessageField(value: &_storage._actionButton)
-        case 7: try decoder.decodeSingularMessageField(value: &_storage._hideButton)
+        case 6: try decoder.decodeSingularMessageField(value: &_storage._background)
+        case 7: try decoder.decodeSingularMessageField(value: &_storage._font)
+        case 8: try decoder.decodeSingularMessageField(value: &_storage._actionButton)
+        case 9: try decoder.decodeSingularMessageField(value: &_storage._hideButton)
+        case 10: try decoder.decodeSingularInt32Field(value: &_storage._duration)
         default: break
         }
       }
@@ -3166,6 +3505,9 @@ extension JetFireFeatureStoryFrame: SwiftProtobuf.Message, SwiftProtobuf._Messag
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if let v = _storage._id {
+        try visitor.visitSingularInt64Field(value: v, fieldNumber: 1)
+      }
       if let v = _storage._title {
         try visitor.visitSingularStringField(value: v, fieldNumber: 2)
       }
@@ -3178,11 +3520,20 @@ extension JetFireFeatureStoryFrame: SwiftProtobuf.Message, SwiftProtobuf._Messag
       if let v = _storage._image {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
       }
-      if let v = _storage._actionButton {
+      if let v = _storage._background {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
       }
-      if let v = _storage._hideButton {
+      if let v = _storage._font {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
+      }
+      if let v = _storage._actionButton {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
+      }
+      if let v = _storage._hideButton {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
+      }
+      if let v = _storage._duration {
+        try visitor.visitSingularInt32Field(value: v, fieldNumber: 10)
       }
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -3193,12 +3544,16 @@ extension JetFireFeatureStoryFrame: SwiftProtobuf.Message, SwiftProtobuf._Messag
       let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
         let _storage = _args.0
         let rhs_storage = _args.1
+        if _storage._id != rhs_storage._id {return false}
         if _storage._title != rhs_storage._title {return false}
         if _storage._subtitle != rhs_storage._subtitle {return false}
         if _storage._message != rhs_storage._message {return false}
         if _storage._image != rhs_storage._image {return false}
+        if _storage._background != rhs_storage._background {return false}
+        if _storage._font != rhs_storage._font {return false}
         if _storage._actionButton != rhs_storage._actionButton {return false}
         if _storage._hideButton != rhs_storage._hideButton {return false}
+        if _storage._duration != rhs_storage._duration {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -3208,35 +3563,87 @@ extension JetFireFeatureStoryFrame: SwiftProtobuf.Message, SwiftProtobuf._Messag
   }
 }
 
-extension JetFireFeatureStories: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "FeatureStories"
+extension JetFireFeatureStory: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = "FeatureStory"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "id"),
     2: .same(proto: "frames"),
+    3: .same(proto: "schedule"),
   ]
 
+  fileprivate class _StorageClass {
+    var _id: Int64? = nil
+    var _frames: [JetFireFeatureStoryFrame] = []
+    var _schedule: JetFireSchedule? = nil
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _id = source._id
+      _frames = source._frames
+      _schedule = source._schedule
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
   public var isInitialized: Bool {
-    if !SwiftProtobuf.Internal.areAllInitialized(self.frames) {return false}
-    return true
+    return withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if _storage._id == nil {return false}
+      if !SwiftProtobuf.Internal.areAllInitialized(_storage._frames) {return false}
+      if let v = _storage._schedule, !v.isInitialized {return false}
+      return true
+    }
   }
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 2: try decoder.decodeRepeatedMessageField(value: &self.frames)
-      default: break
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularInt64Field(value: &_storage._id)
+        case 2: try decoder.decodeRepeatedMessageField(value: &_storage._frames)
+        case 3: try decoder.decodeSingularMessageField(value: &_storage._schedule)
+        default: break
+        }
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.frames.isEmpty {
-      try visitor.visitRepeatedMessageField(value: self.frames, fieldNumber: 2)
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if let v = _storage._id {
+        try visitor.visitSingularInt64Field(value: v, fieldNumber: 1)
+      }
+      if !_storage._frames.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._frames, fieldNumber: 2)
+      }
+      if let v = _storage._schedule {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireFeatureStories, rhs: JetFireFeatureStories) -> Bool {
-    if lhs.frames != rhs.frames {return false}
+  public static func ==(lhs: JetFireFeatureStory, rhs: JetFireFeatureStory) -> Bool {
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._id != rhs_storage._id {return false}
+        if _storage._frames != rhs_storage._frames {return false}
+        if _storage._schedule != rhs_storage._schedule {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -3249,7 +3656,7 @@ extension JetFireEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
     3: .same(proto: "timestamp"),
     4: .standard(proto: "event_type"),
     5: .standard(proto: "custom_event"),
-    6: .standard(proto: "feature_id"),
+    6: .same(proto: "feature"),
     7: .standard(proto: "campaign_id"),
     8: .standard(proto: "entity_id"),
     9: .same(proto: "properties"),
@@ -3260,7 +3667,7 @@ extension JetFireEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
     var _timestamp: JetFireTimestamp? = nil
     var _eventType: JetFireEventType? = nil
     var _customEvent: String? = nil
-    var _featureID: Int64? = nil
+    var _feature: String? = nil
     var _campaignID: Int64? = nil
     var _entityID: Int64? = nil
     var _properties: [JetFireProperty] = []
@@ -3274,7 +3681,7 @@ extension JetFireEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
       _timestamp = source._timestamp
       _eventType = source._eventType
       _customEvent = source._customEvent
-      _featureID = source._featureID
+      _feature = source._feature
       _campaignID = source._campaignID
       _entityID = source._entityID
       _properties = source._properties
@@ -3309,7 +3716,7 @@ extension JetFireEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
         case 3: try decoder.decodeSingularMessageField(value: &_storage._timestamp)
         case 4: try decoder.decodeSingularMessageField(value: &_storage._eventType)
         case 5: try decoder.decodeSingularStringField(value: &_storage._customEvent)
-        case 6: try decoder.decodeSingularInt64Field(value: &_storage._featureID)
+        case 6: try decoder.decodeSingularStringField(value: &_storage._feature)
         case 7: try decoder.decodeSingularInt64Field(value: &_storage._campaignID)
         case 8: try decoder.decodeSingularInt64Field(value: &_storage._entityID)
         case 9: try decoder.decodeRepeatedMessageField(value: &_storage._properties)
@@ -3333,8 +3740,8 @@ extension JetFireEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
       if let v = _storage._customEvent {
         try visitor.visitSingularStringField(value: v, fieldNumber: 5)
       }
-      if let v = _storage._featureID {
-        try visitor.visitSingularInt64Field(value: v, fieldNumber: 6)
+      if let v = _storage._feature {
+        try visitor.visitSingularStringField(value: v, fieldNumber: 6)
       }
       if let v = _storage._campaignID {
         try visitor.visitSingularInt64Field(value: v, fieldNumber: 7)
@@ -3358,7 +3765,7 @@ extension JetFireEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
         if _storage._timestamp != rhs_storage._timestamp {return false}
         if _storage._eventType != rhs_storage._eventType {return false}
         if _storage._customEvent != rhs_storage._customEvent {return false}
-        if _storage._featureID != rhs_storage._featureID {return false}
+        if _storage._feature != rhs_storage._feature {return false}
         if _storage._campaignID != rhs_storage._campaignID {return false}
         if _storage._entityID != rhs_storage._entityID {return false}
         if _storage._properties != rhs_storage._properties {return false}
@@ -3371,21 +3778,21 @@ extension JetFireEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
   }
 }
 
-extension JetFireFeature: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "Feature"
+extension JetFireCampaign: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = "Campaign"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    2: .same(proto: "uuid"),
-    3: .same(proto: "push"),
-    4: .same(proto: "toaster"),
-    5: .same(proto: "stories"),
-    6: .same(proto: "priority"),
+    1: .same(proto: "id"),
+    2: .same(proto: "push"),
+    3: .same(proto: "toaster"),
+    4: .same(proto: "stories"),
+    5: .same(proto: "priority"),
   ]
 
   fileprivate class _StorageClass {
-    var _uuid: String? = nil
+    var _id: Int64? = nil
     var _push: JetFireFeaturePush? = nil
     var _toaster: JetFireFeatureToaster? = nil
-    var _stories: [JetFireFeatureStories] = []
+    var _stories: [JetFireFeatureStory] = []
     var _priority: Int32? = nil
 
     static let defaultInstance = _StorageClass()
@@ -3393,7 +3800,7 @@ extension JetFireFeature: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     private init() {}
 
     init(copying source: _StorageClass) {
-      _uuid = source._uuid
+      _id = source._id
       _push = source._push
       _toaster = source._toaster
       _stories = source._stories
@@ -3410,7 +3817,7 @@ extension JetFireFeature: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
 
   public var isInitialized: Bool {
     return withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      if _storage._uuid == nil {return false}
+      if _storage._id == nil {return false}
       if _storage._priority == nil {return false}
       if let v = _storage._push, !v.isInitialized {return false}
       if let v = _storage._toaster, !v.isInitialized {return false}
@@ -3424,11 +3831,11 @@ extension JetFireFeature: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       while let fieldNumber = try decoder.nextFieldNumber() {
         switch fieldNumber {
-        case 2: try decoder.decodeSingularStringField(value: &_storage._uuid)
-        case 3: try decoder.decodeSingularMessageField(value: &_storage._push)
-        case 4: try decoder.decodeSingularMessageField(value: &_storage._toaster)
-        case 5: try decoder.decodeRepeatedMessageField(value: &_storage._stories)
-        case 6: try decoder.decodeSingularInt32Field(value: &_storage._priority)
+        case 1: try decoder.decodeSingularInt64Field(value: &_storage._id)
+        case 2: try decoder.decodeSingularMessageField(value: &_storage._push)
+        case 3: try decoder.decodeSingularMessageField(value: &_storage._toaster)
+        case 4: try decoder.decodeRepeatedMessageField(value: &_storage._stories)
+        case 5: try decoder.decodeSingularInt32Field(value: &_storage._priority)
         default: break
         }
       }
@@ -3437,31 +3844,31 @@ extension JetFireFeature: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      if let v = _storage._uuid {
-        try visitor.visitSingularStringField(value: v, fieldNumber: 2)
+      if let v = _storage._id {
+        try visitor.visitSingularInt64Field(value: v, fieldNumber: 1)
       }
       if let v = _storage._push {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
       }
       if let v = _storage._toaster {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
       }
       if !_storage._stories.isEmpty {
-        try visitor.visitRepeatedMessageField(value: _storage._stories, fieldNumber: 5)
+        try visitor.visitRepeatedMessageField(value: _storage._stories, fieldNumber: 4)
       }
       if let v = _storage._priority {
-        try visitor.visitSingularInt32Field(value: v, fieldNumber: 6)
+        try visitor.visitSingularInt32Field(value: v, fieldNumber: 5)
       }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireFeature, rhs: JetFireFeature) -> Bool {
+  public static func ==(lhs: JetFireCampaign, rhs: JetFireCampaign) -> Bool {
     if lhs._storage !== rhs._storage {
       let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
         let _storage = _args.0
         let rhs_storage = _args.1
-        if _storage._uuid != rhs_storage._uuid {return false}
+        if _storage._id != rhs_storage._id {return false}
         if _storage._push != rhs_storage._push {return false}
         if _storage._toaster != rhs_storage._toaster {return false}
         if _storage._stories != rhs_storage._stories {return false}
@@ -3475,8 +3882,8 @@ extension JetFireFeature: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
   }
 }
 
-extension JetFireListFeaturesRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "ListFeaturesRequest"
+extension JetFireListCampaignsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = "ListCampaignsRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     3: .same(proto: "user"),
     4: .same(proto: "session"),
@@ -3538,7 +3945,7 @@ extension JetFireListFeaturesRequest: SwiftProtobuf.Message, SwiftProtobuf._Mess
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireListFeaturesRequest, rhs: JetFireListFeaturesRequest) -> Bool {
+  public static func ==(lhs: JetFireListCampaignsRequest, rhs: JetFireListCampaignsRequest) -> Bool {
     if lhs._storage !== rhs._storage {
       let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
         let _storage = _args.0
@@ -3818,18 +4225,18 @@ extension JetFireRegisterEventsRequest: SwiftProtobuf.Message, SwiftProtobuf._Me
   }
 }
 
-extension JetFireListFeaturesResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "ListFeaturesResponse"
+extension JetFireListCampaignsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = "ListCampaignsResponse"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "total"),
-    3: .same(proto: "features"),
-    4: .same(proto: "trigger"),
+    3: .same(proto: "campaigns"),
+    4: .same(proto: "sql"),
   ]
 
   fileprivate class _StorageClass {
     var _total: Int32? = nil
-    var _features: [JetFireFeature] = []
-    var _trigger: JetFireFeaturesTrigger? = nil
+    var _campaigns: [JetFireCampaign] = []
+    var _sql: JetFireFeaturesSql? = nil
 
     static let defaultInstance = _StorageClass()
 
@@ -3837,8 +4244,8 @@ extension JetFireListFeaturesResponse: SwiftProtobuf.Message, SwiftProtobuf._Mes
 
     init(copying source: _StorageClass) {
       _total = source._total
-      _features = source._features
-      _trigger = source._trigger
+      _campaigns = source._campaigns
+      _sql = source._sql
     }
   }
 
@@ -3852,9 +4259,9 @@ extension JetFireListFeaturesResponse: SwiftProtobuf.Message, SwiftProtobuf._Mes
   public var isInitialized: Bool {
     return withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       if _storage._total == nil {return false}
-      if _storage._trigger == nil {return false}
-      if !SwiftProtobuf.Internal.areAllInitialized(_storage._features) {return false}
-      if let v = _storage._trigger, !v.isInitialized {return false}
+      if _storage._sql == nil {return false}
+      if !SwiftProtobuf.Internal.areAllInitialized(_storage._campaigns) {return false}
+      if let v = _storage._sql, !v.isInitialized {return false}
       return true
     }
   }
@@ -3865,8 +4272,8 @@ extension JetFireListFeaturesResponse: SwiftProtobuf.Message, SwiftProtobuf._Mes
       while let fieldNumber = try decoder.nextFieldNumber() {
         switch fieldNumber {
         case 2: try decoder.decodeSingularInt32Field(value: &_storage._total)
-        case 3: try decoder.decodeRepeatedMessageField(value: &_storage._features)
-        case 4: try decoder.decodeSingularMessageField(value: &_storage._trigger)
+        case 3: try decoder.decodeRepeatedMessageField(value: &_storage._campaigns)
+        case 4: try decoder.decodeSingularMessageField(value: &_storage._sql)
         default: break
         }
       }
@@ -3878,24 +4285,24 @@ extension JetFireListFeaturesResponse: SwiftProtobuf.Message, SwiftProtobuf._Mes
       if let v = _storage._total {
         try visitor.visitSingularInt32Field(value: v, fieldNumber: 2)
       }
-      if !_storage._features.isEmpty {
-        try visitor.visitRepeatedMessageField(value: _storage._features, fieldNumber: 3)
+      if !_storage._campaigns.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._campaigns, fieldNumber: 3)
       }
-      if let v = _storage._trigger {
+      if let v = _storage._sql {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
       }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireListFeaturesResponse, rhs: JetFireListFeaturesResponse) -> Bool {
+  public static func ==(lhs: JetFireListCampaignsResponse, rhs: JetFireListCampaignsResponse) -> Bool {
     if lhs._storage !== rhs._storage {
       let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
         let _storage = _args.0
         let rhs_storage = _args.1
         if _storage._total != rhs_storage._total {return false}
-        if _storage._features != rhs_storage._features {return false}
-        if _storage._trigger != rhs_storage._trigger {return false}
+        if _storage._campaigns != rhs_storage._campaigns {return false}
+        if _storage._sql != rhs_storage._sql {return false}
         return true
       }
       if !storagesAreEqual {return false}

@@ -4,5 +4,7 @@
 <dict>
 	<key>DEEPLINK_SCHEME</key>
 	<string>jetfiredemo</string>
+	<key>API_KEY</key>
+	<string>1-Qt+J38tJoZviGbd35l8+bZOLVxssfrDO+uSpK5EhmUGY0Dl3LFf6NFKcJTocpoZIAlqZZbP2YbvTX1LAG4NCiorGi9Q65xmy7FlKEiMzz7hC7TnOR8qYPvthRFNpI7KVWiWacXPR9joBLKmW/6VGCkB+nuUfhODxtR1oY+iZ6Ah1Cn/ewCJ6pSgtZbvI6u0m</string>
 </dict>
 </plist>

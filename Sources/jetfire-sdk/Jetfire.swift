@@ -11,7 +11,7 @@ public class Jetfire {
 
 	public let storiesConfig: StoriesConfig
 
-	private let api = APIService()
+	private let api: APIService
 	private let router = BaseRouter()
 	private let ud = UserDefaults.standard
 	private let application = UIApplication.shared
@@ -50,15 +50,31 @@ public class Jetfire {
 		)
 	}()
 
+	private let preferences = PreferencesService()
+	private let userSessionService: UserSessionService
+
     public init() {
 		let analytics: [IAnalytics] = [] // [ FirebaseAnalytics(), BackendAnalytics() ]
 		self.storiesConfig = StoriesConfig(analytics: analytics)
-
+		self.userSessionService = UserSessionService(
+			userId: self.preferences.userId,
+			sessionId: self.preferences.sessionId
+		)
+		self.api = APIService(
+			bearer: self.serviceInfo.apiKey,
+			userSessionService: self.userSessionService
+		)
+		self.api.configure(forBaseUrlString: Constants.baseURL, overrideHeaders: [:])
+		
 		self.deeplinkService.delegate = self.contentPresenter
     }
 
 	public func applicationStart() {
 		self.featuringConfig.featuring.applicationStart()
+
+		self.api.fetchCampaigns { campaigns in
+			print(campaigns)
+		}
 	}
 
 	public func applicationDidBecomeActive() {
