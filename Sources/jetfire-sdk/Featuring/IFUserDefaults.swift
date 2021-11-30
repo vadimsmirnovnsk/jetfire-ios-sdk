@@ -2,6 +2,7 @@ import Foundation
 
 public protocol IFUserDefaults: AnyObject {
 
+	var didStartEarly: Bool { get set }
 	var showCampaign: [String : Date] { get set }
 	var finishedFeatures: [String] { get set }
 	var lastApplicationStartShowDate: Date? { get set }
@@ -13,6 +14,12 @@ public protocol IFUserDefaults: AnyObject {
 }
 
 extension UserDefaults: IFUserDefaults {
+
+	/// Jetfire Service
+	public var didStartEarly: Bool {
+		get { self.bool(forKey: "didStartEarly") }
+		set { self.set(newValue, forKey: "didStartEarly"); self.synchronize() }
+	}
 
 	/// Featuring
 	public var showCampaign: [String : Date] {

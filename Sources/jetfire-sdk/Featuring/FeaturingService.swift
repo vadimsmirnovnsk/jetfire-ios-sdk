@@ -7,11 +7,21 @@ final public class FeaturingService {
 	private let manager: FeaturingManager
 	private let storiesService: IStoryService
 	private let pushService: FeaturingPushService
+	private let dbAnalytics: DBAnalytics
+	private let ud: IFUserDefaults
 
-	internal init(manager: FeaturingManager, storiesService: IStoryService, pushService: FeaturingPushService) {
+	init(
+		manager: FeaturingManager,
+		storiesService: IStoryService,
+		pushService: FeaturingPushService,
+		dbAnalytics: DBAnalytics,
+		ud: IFUserDefaults
+	) {
 		self.manager = manager
 		self.storiesService = storiesService
 		self.pushService = pushService
+		self.dbAnalytics = dbAnalytics
+		self.ud = ud
 	}
 
 	/// На старте загружаем данные, по готовности показываем фичеринг и шедулим пуш активной кампании
@@ -22,14 +32,22 @@ final public class FeaturingService {
 			self?.reschedulePushFeaturing()
 		}
 
+		let isFirstStart = !self.ud.didStartEarly
+		if isFirstStart {
+			self.ud.didStartEarly = true
+			self.dbAnalytics.trackFirstLaunch()
+		}
+
 		Anl.track { $0.name(.jetfire_application_start) }
 	}
 
 	public func applicationDidBecomeActive() {
+		self.dbAnalytics.trackApplicationStart()
 		Anl.track { $0.name(.jetfire_become_active) }
 	}
 
 	public func applicationWillResignActive() {
+		self.dbAnalytics.trackApplicationStop()
 		Anl.track { $0.name(.jetfire_resign_active) }
 
 		self.pushService.scheduleActiveFeaturing { campaign in

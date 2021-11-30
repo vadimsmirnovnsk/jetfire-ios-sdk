@@ -4,6 +4,18 @@ import VNBase
 
 extension DB {
 
+	public func track(event: DBEvent) {
+		if let eventId = try? self.insertEvent(event) {
+			#if DEBUG
+			print("Inserted event with id: \(eventId)")
+			#endif
+		} else {
+			#if DEBUG
+			print("Error db inserting event: \(event)")
+			#endif
+		}
+	}
+
 //	public func addWater(volumeL: Double, date: Date) throws {
 //		let id = try dayId(for: date)
 //		let dayWater = water.filter(dayId == id)
@@ -123,71 +135,22 @@ extension DB {
 //	}
 }
 
-extension Date {
-	var morning: Date {
-		var components = Calendar.current.dateComponents([ .year, .month, .day, .hour, .minute, .second ], from: self)
-		components.calendar = Calendar.current
-		components.hour = 0
-		components.minute = 0
-		components.second = 1
-		return components.date!
-	}
-
-	/// + 24 часа
-	var nextDay: Date {
-		self.appendingDays(1)
-	}
-	func appendingDays(_ count: Int) -> Date {
-		Calendar.current.date(byAdding: .day, value: count, to: self)!
-	}
-}
-
 public class DB {
-
-	struct Events: Codable {
-		let id: Int
-		let event_type: Int
-		let custom_event: String?
-		let event_uuid: String
-//		let date: Date
-//		let data: Data?
-		enum CodingKeys: String, CodingKey {
-			case id
-			case event_type
-			case custom_event
-			case event_uuid
-		}
-	}
-//	CREATE TABLE "events"
-//	(
-//		"id"           INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-//		"event_type"   INTEGER                           NOT NULL,
-//		"custom_event" VARCHAR(255)                      NULL,
-//		"event_uuid"   VARCHAR(20)                       NOT NULL,
-//		"campaign_id"  INTEGER                           NULL,
-//		"feature"      VARCHAR(255)                      NULL,
-//		"feature_id"   INTEGER                           NULL,
-//		"entity_id"    INTEGER                           NULL,
-//		"date"         DATE                                       DEFAULT CURRENT_TIMESTAMP NOT NULL,
-//		"timestamp"    DATETIME                                   DEFAULT CURRENT_TIMESTAMP NOT NULL,
-//		"data"         TEXT                              NULL
-//	);
-//
-//	event_type – интовый id события из протобафовского EventType
-//	custom_event – если тип события кастомный, то тут имя этого кастомного события
-//	event_uuid – рандомно сгенерированный UUID
-//	feature – текстовое имя фичи
-//	campaign_id, feature_id, entity_id – данные из фичеринга, если есть
-//	date, timestamp – отдельно поле с датой без времени для удобства и поле с полным таймстемпом события
-//	data – поле текстовое, чтобы хранить например, json с дополнительными параметрами
 
 	private let db: Connection
 //	private let log: ILogger
 
-	private let id = Expression<Int64>(Events.CodingKeys.id.rawValue)
-	private let event_type = Expression<Double>(Events.CodingKeys.event_type.rawValue)
-	private let custom_event = Expression<Double>(Events.CodingKeys.custom_event.rawValue)
-	private let event_uuid = Expression<Double>(Events.CodingKeys.event_uuid.rawValue)
+	private let id = Expression<Int64>(DBEvent.CodingKeys.id.rawValue)
+	private let event_type = Expression<Int64>(DBEvent.CodingKeys.event_type.rawValue)
+	private let custom_event = Expression<String?>(DBEvent.CodingKeys.custom_event.rawValue)
+	private let event_uuid = Expression<String>(DBEvent.CodingKeys.event_uuid.rawValue)
+	private let campaign_id = Expression<Int64?>(DBEvent.CodingKeys.campaign_id.rawValue)
+	private let feature = Expression<String?>(DBEvent.CodingKeys.feature.rawValue)
+	private let feature_id = Expression<Int64?>(DBEvent.CodingKeys.feature_id.rawValue)
+	private let entity_id = Expression<Int64?>(DBEvent.CodingKeys.entity_id.rawValue)
+	private let date = Expression<String>(DBEvent.CodingKeys.date.rawValue)
+	private let timestamp = Expression<Date>(DBEvent.CodingKeys.timestamp.rawValue)
+	private let data = Expression<Data?>(DBEvent.CodingKeys.data.rawValue)
 	private let events = Table("events")
 
 	public init(path: URL) throws {
@@ -202,32 +165,30 @@ public class DB {
 			t.column(event_type)
 			t.column(custom_event)
 			t.column(event_uuid)
+			t.column(campaign_id)
+			t.column(feature)
+			t.column(feature_id)
+			t.column(entity_id)
+			t.column(date)
+			t.column(timestamp)
+			t.column(data)
 		})
 	}
 
 	func remakeTables() throws {
 		#if DEBUG
 		// от греха подальше
-//		_ = try? db.run(water.drop())
-//		_ = try? db.run(workouts.drop())
-//		_ = try? db.run(days.drop())
-//		_ = try? db.run(goals.drop())
-//		try self.makeTables()
+		_ = try? db.run(events.drop())
+		try self.makeTables()
 		#endif
 	}
 
-	private func insertEvent(_ event: Events) throws -> Int64 {
+	private func insertEvent(_ event: DBEvent) throws -> Int64 {
 		let insert = try events.insert(event, userInfo: [:])
 		let eventId = try db.run(insert)
 		return eventId
 	}
 
-}
-
-extension Date {
-	func todayKey() -> Int {
-		Int(self.morning.timeIntervalSince1970)
-	}
 }
 
 extension Connection {

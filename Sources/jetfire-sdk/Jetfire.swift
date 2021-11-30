@@ -46,11 +46,13 @@ public class Jetfire {
 			api: self.api,
 			ud: self.ud,
 			storiesService: self.snapsConfig.storiesService,
-			userUUID: UUID().uuidString
+			userUUID: UUID().uuidString,
+			dbAnalytics: self.dbAnalytics
 		)
 	}()
 
 	private let preferences = PreferencesService()
+	private let dbAnalytics = DBAnalytics()
 	private let userSessionService: UserSessionService
 
     public init() {

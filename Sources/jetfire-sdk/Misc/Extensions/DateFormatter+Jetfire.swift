@@ -14,6 +14,12 @@ extension DateFormatter {
 		df.dateFormat = "YYYYMMdd"
 		return df
 	}()
+	static let db_yyyy_mm_dd: DateFormatter = {
+		let df = DateFormatter()
+		df.formatterBehavior = .behavior10_4
+		df.dateFormat = "YYYY-MM-dd"
+		return df
+	}()
 
 }
 

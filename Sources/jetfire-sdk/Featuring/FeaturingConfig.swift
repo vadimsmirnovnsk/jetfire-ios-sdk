@@ -15,7 +15,13 @@ internal class FeaturingConfig {
 	private let storiesService: StoriesService
 	private let userUUID: String
 
-	init(api: IAPIService&IFeaturingAPI, ud: IFUserDefaults, storiesService: StoriesService, userUUID: String) {
+	init(
+		api: IAPIService&IFeaturingAPI,
+		ud: IFUserDefaults,
+		storiesService: StoriesService,
+		userUUID: String,
+		dbAnalytics: DBAnalytics
+	) {
 		self.api = api
 		self.ud = ud
 		self.storiesService = storiesService
@@ -31,7 +37,9 @@ internal class FeaturingConfig {
 		self.featuring = FeaturingService(
 			manager: self.featuringManager,
 			storiesService: self.storiesService,
-			pushService: self.featuringPushService
+			pushService: self.featuringPushService,
+			dbAnalytics: dbAnalytics,
+			ud: ud
 		)
 	}
 
