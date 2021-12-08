@@ -13,6 +13,21 @@ public protocol IFUserDefaults: AnyObject {
 
 }
 
+extension IFUserDefaults {
+
+	func reset() {
+		#if DEBUG
+		self.didStartEarly = false
+		self.showCampaign = [:]
+		self.lastApplicationStartShowDate = nil
+		self.lastPushShowDate = nil
+		self.lastToasterShowDate = nil
+		self.pendingNotificationIds = []
+		#endif
+	}
+
+}
+
 extension UserDefaults: IFUserDefaults {
 
 	/// Jetfire Service

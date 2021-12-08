@@ -38,9 +38,11 @@ final class DBAnalytics {
 		let url = FileManager.libraryPath(forFileName: "db-v1.sqlite3")!
 		self.db = try! DB(path: url)
 		print("Opened DB by path: \(url)")
+	}
 
+	func reset() {
 		#if DEBUG
-//		try? self.db.remakeTables()
+		try? self.db.remakeTables()
 		#endif
 	}
 

@@ -7,13 +7,13 @@ class FeatureAVC: UIViewController {
 
 	private let reviewService = PositiveReviewCommentGenerator()
 	private let label = MultilineLabel()
-	private let featureId = "feature_a"
+	private let featureId = "toaster_demo"
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
 		self.view.backgroundColor = .storiesAlmostWhite
-		self.title = "Feature A"
+		self.title = "Toaster Demo"
 
 		self.view.addSubview(self.label)
 		self.label.snp.makeConstraints { make in

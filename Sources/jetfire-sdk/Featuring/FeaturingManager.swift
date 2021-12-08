@@ -37,7 +37,7 @@ final class FeaturingManager {
 	}
 
 	/// Дёргаем после триггера, чтобы показать нужный triggerCampaign
-	func triggeredCampaign() {
+	func prepareTriggeredCampaigns() {
 		if let triggerSql = self.storage.sql?.trigger {
 			let triggeredCampaignIds = self.db.execute(sql: triggerSql)
 			self.triggeredCampaigns = self.storage.campaigns.filter { triggeredCampaignIds.contains($0.id) }
@@ -47,6 +47,13 @@ final class FeaturingManager {
 	func campaignForApplicationStart() -> FeaturingCampaignAndStory? {
 		guard self.canAlreadyShowApplicationStartFeaturing() else { return nil }
 		return self.campaign(for: .applicationStart)
+	}
+
+	func campaignForToaster() -> FeaturingCampaignAndStory? {
+		#warning("123 Добавить чек на правило показа повторного тостера")
+		guard let campaign = self.campaign(for: .toaster) else { return nil }
+		guard self.canAlreadyShow(campaign: campaign.campaign) else { return nil }
+		return campaign
 	}
 
 	func campaignForPush() -> FeaturingCampaignAndStory? {
@@ -87,7 +94,10 @@ final class FeaturingManager {
 
 			case .deeplink: return nil
 			case .push: return nil
-			case .toaster: return nil
+			case .toaster:
+				guard let campaign = self.triggeredCampaigns.first(where: { $0.hasToaster } ) else { return nil }
+				guard let story = self.storage.story(for: campaign) else { return nil }
+				return FeaturingCampaignAndStory(campaign: campaign, story: story)
 		}
 
 
@@ -124,14 +134,10 @@ final class FeaturingManager {
 //	}
 
 	/// Можем ли показать фичеринг конкретной фичи повторно
-//	private func canAlreadyShow(campaign: FeaturingCampaign) -> Bool {
-//		guard let data = self.storage.data else {
-//			assertionFailure("Should not be nil. Call after fetching the data")
-//			return false
-//		}
-//		guard let date = self.ud.showCampaign[campaign.id] else { return true }
-//		return Date().timeIntervalSince(date) > data.rules.retryFeatureShowTimeout
-//	}
+	private func canAlreadyShow(campaign: JetFireCampaign) -> Bool {
+		guard let date = self.ud.showCampaign[campaign.id.string] else { return true }
+		return Date().timeIntervalSince(date) > self.storage.rules.retryFeatureShowTimeout
+	}
 
 	/// Отвратительный метод, переписать. Он нужен для открытия кампании с пуша
 	func retreiveCampaign(with identifier: String, completion: @escaping (FeaturingCampaignAndStory?) -> Void) {

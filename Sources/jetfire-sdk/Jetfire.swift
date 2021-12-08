@@ -17,16 +17,16 @@ public class Jetfire {
 	public let snapsConfig = StoryTypesConfig()
 
 	private let api: APIService
-	private let router = BaseRouter()
 	private let ud = UserDefaults.standard
 	private let application = UIApplication.shared
-
 	private let contentPresenter = ContentPresenter()
 	private let serviceInfo = ServiceInfo()
 	private let preferences = PreferencesService()
 	private let dbAnalytics = DBAnalytics()
 	private let userSessionService: UserSessionService
 	private var userUuid = UUID().uuidString
+
+	private(set) lazy var router = FeaturingRouter(container: self)
 
 	private lazy var deeplinkService: DeeplinkService = { [unowned self] in
 		return DeeplinkService(serviceInfo: self.serviceInfo)
@@ -62,7 +62,8 @@ public class Jetfire {
 			storiesService: self.storiesService,
 			pushService: self.featuringPushService,
 			dbAnalytics: self.dbAnalytics,
-			ud: self.ud
+			ud: self.ud,
+			router: self.router
 		)
 	}()
 
@@ -105,6 +106,11 @@ public class Jetfire {
 		didReceive response: UNNotificationResponse
 	) {
 		self.featuring.userNotificationCenter(center, didReceive: response)
+	}
+
+	/// Container
+	func toaster(style: ToasterView.Style, visualStyle: ToasterView.VisualStyle) -> ToasterView {
+		return ToasterView(style: style, visualStyle: visualStyle)
 	}
 
 }
