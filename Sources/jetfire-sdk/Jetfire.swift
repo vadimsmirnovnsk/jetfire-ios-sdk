@@ -5,11 +5,16 @@ import VNBase
 
 public class Jetfire {
 
+//	private(set) lazy var firebaseStorage: FirebaseStoriesStorage = { [unowned self] in
+//		return FirebaseStoriesStorage(processTargetService: self.processTargetService, router: self.router)
+//	}()
+
 	public static let standard = Jetfire()
 
 	internal static var analytics: StoriesAnalytics { Jetfire.standard.storiesConfig.analytics }
 
 	public let storiesConfig: StoriesConfig
+	public let snapsConfig = StoryTypesConfig()
 
 	private let api: APIService
 	private let router = BaseRouter()
@@ -17,43 +22,49 @@ public class Jetfire {
 	private let application = UIApplication.shared
 
 	private let contentPresenter = ContentPresenter()
-	internal let serviceInfo = ServiceInfo()
+	private let serviceInfo = ServiceInfo()
+	private let preferences = PreferencesService()
+	private let dbAnalytics = DBAnalytics()
+	private let userSessionService: UserSessionService
+	private var userUuid = UUID().uuidString
 
-	private(set) lazy var deeplinkService: DeeplinkService = { [unowned self] in
+	private lazy var deeplinkService: DeeplinkService = { [unowned self] in
 		return DeeplinkService(serviceInfo: self.serviceInfo)
 	}()
 
-	private(set) lazy var processTargetService: ProcessTargetService = { [unowned self] in
+	private lazy var processTargetService: ProcessTargetService = { [unowned self] in
 		return ProcessTargetService(application: self.application, deeplinkService: self.deeplinkService)
 	}()
 
-	private(set) lazy var firebaseStorage: FirebaseStoriesStorage = { [unowned self] in
-		return FirebaseStoriesStorage(processTargetService: self.processTargetService, router: self.router)
-	}()
-
-	private(set) lazy var snapsConfig: StoryTypesConfig = { [unowned self] in
-		return StoryTypesConfig(
+	private lazy var featuringStorage: FeaturingStorage = { [unowned self] in
+		return FeaturingStorage(
 			api: self.api,
-			ud: self.ud,
-			storage: self.firebaseStorage,
 			processTargetService: self.processTargetService,
 			router: self.router
 		)
 	}()
 
-	private(set) lazy var featuringConfig: FeaturingConfig = { [unowned self] in
-		return FeaturingConfig(
-			api: self.api,
-			ud: self.ud,
-			storiesService: self.snapsConfig.storiesService,
-			userUUID: UUID().uuidString,
-			dbAnalytics: self.dbAnalytics
-		)
+	private lazy var featuringManager: FeaturingManager = { [unowned self] in
+		return FeaturingManager(ud: self.ud, storage: self.featuringStorage, db: self.dbAnalytics)
 	}()
 
-	private let preferences = PreferencesService()
-	private let dbAnalytics = DBAnalytics()
-	private let userSessionService: UserSessionService
+	private lazy var featuringPushService: FeaturingPushService = { [unowned self] in
+		return FeaturingPushService(ud: self.ud)
+	}()
+
+	private lazy var storiesService: StoriesService = { [unowned self] in
+		return StoriesService(router: self.router, storage: self.featuringStorage, ud: self.ud)
+	}()
+
+	private(set) lazy var featuring: FeaturingService = { [unowned self] in
+		return FeaturingService(
+			manager: self.featuringManager,
+			storiesService: self.storiesService,
+			pushService: self.featuringPushService,
+			dbAnalytics: self.dbAnalytics,
+			ud: self.ud
+		)
+	}()
 
     public init() {
 		let analytics: [IAnalytics] = [] // [ FirebaseAnalytics(), BackendAnalytics() ]
@@ -67,43 +78,33 @@ public class Jetfire {
 			userSessionService: self.userSessionService
 		)
 		self.api.configure(forBaseUrlString: Constants.baseURL, overrideHeaders: [:])
-		
+
+		self.storiesConfig.analytics.externalAnalytics.append(self.dbAnalytics)
 		self.deeplinkService.delegate = self.contentPresenter
     }
 
-	public func applicationStart() {
-		self.featuringConfig.featuring.applicationStart()
-
-		self.api.fetchCampaigns { campaigns in
-			print(campaigns)
-		}
-	}
-
-	public func applicationDidBecomeActive() {
-		self.featuringConfig.featuring.applicationDidBecomeActive()
-	}
-
-	public func applicationWillResignActive() {
-		self.featuringConfig.featuring.applicationWillResignActive()
+	public func start(with userUuid: String) {
+		self.userUuid = userUuid
+		self.featuring.applicationStart()
 	}
 
 	public func trackStart(feature: String) {
-		self.featuringConfig.featuring.trackStart(feature: feature)
+		self.featuring.trackStart(feature: feature)
 	}
 
 	public func trackFinish(feature: String) {
-		self.featuringConfig.featuring.trackFinish(feature: feature)
+		self.featuring.trackFinish(feature: feature)
 	}
 
 	public func updatePushStatus(granted: Bool) {
-		self.featuringConfig.featuring.updatePushStatus(granted: granted)
+		self.featuring.updatePushStatus(granted: granted)
 	}
 
 	public func userNotificationCenter(
 		_ center: UNUserNotificationCenter,
 		didReceive response: UNNotificationResponse
 	) {
-		self.featuringConfig.featuring.userNotificationCenter(center, didReceive: response)
+		self.featuring.userNotificationCenter(center, didReceive: response)
 	}
 
 }

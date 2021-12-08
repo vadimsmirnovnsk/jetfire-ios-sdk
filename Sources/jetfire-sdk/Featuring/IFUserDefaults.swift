@@ -4,7 +4,7 @@ public protocol IFUserDefaults: AnyObject {
 
 	var didStartEarly: Bool { get set }
 	var showCampaign: [String : Date] { get set }
-	var finishedFeatures: [String] { get set }
+//	var finishedFeatures: [String] { get set }
 	var lastApplicationStartShowDate: Date? { get set }
 	var lastPushShowDate: Date? { get set }
 	var lastToasterShowDate: Date? { get set }

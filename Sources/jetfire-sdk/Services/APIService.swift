@@ -313,7 +313,7 @@ class APIService: IAPIService {
 
 }
 
-extension APIService { // + Jetfire API
+extension APIService: IFeaturingAPI { // + Jetfire API
 
 	func fetchCampaigns(completion: @escaping (Result<JetFireListCampaignsResponse, Error>) -> Void) {
 		let req = JetFireListCampaignsRequest.with {

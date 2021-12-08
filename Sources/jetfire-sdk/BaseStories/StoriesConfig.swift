@@ -5,22 +5,28 @@ import UIKit
 
 /// Здесь базовая логика сториз — карусель кругляшей и открывающиеся по тапу в них сториз с пустыми снапами.
 /// Трекинг показа историй в аналитику, прокручивания снапов и т.д.
-/// Типы историй и снапов в отдельной папочку — StoryTypes
+/// Типы историй и снапов в отдельной папочке — StoryTypes
 public final class StoriesConfig {
 
 	/// [ Base Stories
 	internal let analytics = StoriesAnalytics()
-	public var externalAnalytics: IStoriesAnalytics? {
-		didSet {
-			self.analytics.externalAnalytics = self.externalAnalytics
-		}
-	}
+//	public var externalAnalytics: IStoriesAnalytics? {
+//		didSet {
+//			self.analytics.externalAnalytics = self.externalAnalytics
+//		}
+//	}
 
 	/// Story Circle
 	var storyCircleBackgroundColor: UIColor = .storiesAlmostWhite
 	var storyCircleTextStyle: TextStyle = .system13GraffitBlack
 	var storyCircleRingLeftGradientColor: UIColor = .gradientOrange
 	var storyCircleRingRightGradientColor: UIColor = .gradientYellow
+	var storyCircleCellWidth: CGFloat = 80
+	var storyCircleCellHeight: CGFloat = 100
+	var storyCircleCellInset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
+	var storyCircleImageDiameter: CGFloat = 60
+	var storyCircleSubstrateDiameter: CGFloat = 68
+	var storyCircleSubstrateWidth: CGFloat = 1
 
 	/// Story Browser
 	var progressBarTopColor: UIColor = .storiesAlmostWhite
@@ -49,7 +55,7 @@ public protocol IStoriesAnalytics: AnyObject {
 
 internal class StoriesAnalytics: IStoriesAnalytics {
 
-	var externalAnalytics: IStoriesAnalytics?
+	var externalAnalytics: [IStoriesAnalytics] = []
 
 	// Firebase Story and Featuring
 	func trackStorySnapDidShow(storyId: String, index: Int) {
@@ -59,7 +65,7 @@ internal class StoriesAnalytics: IStoriesAnalytics {
 				.param(.jetfire_snap_index, value: index)
 		}
 
-		self.externalAnalytics?.trackStorySnapDidShow(storyId: storyId, index: index)
+		self.externalAnalytics.forEach { $0.trackStorySnapDidShow(storyId: storyId, index: index) }
 	}
 
 	func trackStoryDidStartShow(storyId: String) {
@@ -68,7 +74,7 @@ internal class StoriesAnalytics: IStoriesAnalytics {
 				.param(.jetfire_featuring_id, value: storyId)
 		}
 
-		self.externalAnalytics?.trackStoryDidStartShow(storyId: storyId)
+		self.externalAnalytics.forEach { $0.trackStoryDidStartShow(storyId: storyId) }
 	}
 
 	func trackStoryDidFinishShow(storyId: String) {
@@ -77,7 +83,7 @@ internal class StoriesAnalytics: IStoriesAnalytics {
 				.param(.jetfire_featuring_id, value: storyId)
 		}
 
-		self.externalAnalytics?.trackStoryDidFinishShow(storyId: storyId)
+		self.externalAnalytics.forEach { $0.trackStoryDidFinishShow(storyId: storyId) }
 	}
 
 	func trackStoryDidTapButton(buttonOrSnapId: String, buttonTitle: String) {
@@ -86,7 +92,7 @@ internal class StoriesAnalytics: IStoriesAnalytics {
 				.param(.jetfire_featuring_id, value: buttonOrSnapId)
 		}
 
-		self.externalAnalytics?.trackStoryDidTapButton(buttonOrSnapId: buttonOrSnapId, buttonTitle: buttonTitle)
+		self.externalAnalytics.forEach { $0.trackStoryDidTapButton(buttonOrSnapId: buttonOrSnapId, buttonTitle: buttonTitle) }
 	}
 }
 

@@ -1,10 +1,7 @@
 import VNBase
 import UIKit
 
-extension CGFloat {
-	static var kStoryWidth: CGFloat = 80
-}
-
+// Базовый класс коллекшен вьюхи с кругляшами
 open class StoryCollectionView<TViewModel: StoryCollectionVM>: BaseCollectionView<TViewModel> {
 
 	init(viewModel: TViewModel, layout: UICollectionViewFlowLayout = StoriesLayout()) {
@@ -30,8 +27,11 @@ final class StoriesLayout: UICollectionViewFlowLayout {
 
 		self.scrollDirection = .horizontal
 		self.minimumInteritemSpacing = 0
-		self.sectionInset = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
-		self.itemSize = CGSize(width: .kStoryWidth, height: 100)
+		self.sectionInset = Jetfire.standard.storiesConfig.storyCircleCellInset
+		self.itemSize = CGSize(
+			width: Jetfire.standard.storiesConfig.storyCircleCellWidth,
+			height: Jetfire.standard.storiesConfig.storyCircleCellHeight
+		)
 	}
 	
 	required init?(coder: NSCoder) {

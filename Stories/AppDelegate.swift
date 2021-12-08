@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		self.window?.rootViewController = nc
 		self.window?.makeKeyAndVisible()
 
-		Jetfire.standard.applicationStart()
+		Jetfire.standard.start(with: UUID().uuidString)
 
 //		let text = NegativeReviewCommentGenerator().generate(for: "John")
 //		print("Generated text:\n\(text)")
@@ -33,14 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		}
 
 		UNUserNotificationCenter.current().delegate = self
-	}
-
-	func applicationDidBecomeActive(_ application: UIApplication) {
-		Jetfire.standard.applicationDidBecomeActive()
-	}
-
-	func applicationWillResignActive(_ application: UIApplication) {
-		Jetfire.standard.applicationWillResignActive()
 	}
 
 }

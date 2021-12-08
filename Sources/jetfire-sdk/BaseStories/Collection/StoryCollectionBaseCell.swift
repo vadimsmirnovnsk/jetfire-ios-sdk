@@ -1,23 +1,25 @@
 import VNBase
 import UIKit
 
+// Базовый класс кругляша
 open class StoryCollectionBaseCell<TViewModel: StoryCollectionBaseCellVM>: BaseCollectionViewCell<TViewModel> {
 
 	public override class func size(with viewModel: TViewModel, size: CGSize) -> CGSize {
-		return CGSize(width: .kStoryWidth, height: 100)
+		return CGSize(
+			width: Jetfire.standard.storiesConfig.storyCircleCellWidth,
+			height: Jetfire.standard.storiesConfig.storyCircleCellHeight
+		)
 	}
 
-	public var contentSize: CGFloat { 60 }
+	public var contentSize: CGFloat { Jetfire.standard.storiesConfig.storyCircleImageDiameter }
+	open var substrate: UIView = StorySubstrate(diameter: Jetfire.standard.storiesConfig.storyCircleSubstrateDiameter)
 
-	open var readSubstrate: UIView = UIImageView(image:
-		UIImage.circle(diameter: 68, color: .lightGray) // >>> 123
-			.withOverdraw(image: UIImage.circle(diameter: 67, color: .white))
+	open var readSubstrate: UIView = UIImageView(image: UIImage.circle(diameter: Jetfire.standard.storiesConfig.storyCircleSubstrateDiameter, color: .lightGray)
+			.withOverdraw(image: UIImage.circle(diameter: Jetfire.standard.storiesConfig.storyCircleSubstrateDiameter - Jetfire.standard.storiesConfig.storyCircleSubstrateWidth, color: .white))
 	)
 
-	open var substrate: UIView = StorySubstrate(diameter: 68)
-
-	let content = UIView()
-	let title = UILabel()
+	public let content = UIView()
+	public let title = UILabel()
 
 	open override var isHighlighted: Bool {
 		didSet {

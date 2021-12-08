@@ -183,6 +183,20 @@ public class DB {
 		#endif
 	}
 
+	func fetch(sql: String) -> [Int64] {
+		if let stmt = try? self.db.prepare(sql) {
+			#if DEBUG
+			print("Fetched from db: \(stmt)")
+			#endif
+			return stmt.flatMap { $0 }.compactMap { $0 as? Int64 }
+		} else {
+			#if DEBUG
+			print("Error db fetching")
+			#endif
+			return []
+		}
+	}
+
 	private func insertEvent(_ event: DBEvent) throws -> Int64 {
 		let insert = try events.insert(event, userInfo: [:])
 		let eventId = try db.run(insert)

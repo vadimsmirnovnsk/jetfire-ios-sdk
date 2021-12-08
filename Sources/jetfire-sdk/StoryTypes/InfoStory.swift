@@ -13,8 +13,6 @@ struct InfoStoryModel: Codable, IStory {
 	let afterReadTime: TimeInterval?
 	let isTest: Bool?
 	let alwaysRewind: Bool?
-	let cityId: [Int64]?
-	var startVersion: Int?
 
 	var lifetime: TimeInterval { self.afterReadTime ?? 7 }
 
@@ -39,8 +37,6 @@ struct InfoStoryModel: Codable, IStory {
 		case afterReadTime = "after_read_time"
 		case isTest = "is_test"
 		case alwaysRewind = "always_rewind"
-		case cityId = "city_id"
-		case startVersion = "start_version"
     }
 
 }

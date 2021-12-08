@@ -1,5 +1,6 @@
 import UIKit
 
+// Градиентная подложка непрочитанной сториз
 final class StorySubstrate: UIView {
 
 	private let gradient = CAGradientLayer()

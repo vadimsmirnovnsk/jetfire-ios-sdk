@@ -46,7 +46,11 @@ final class DBAnalytics {
 
 	// 0 - custom
 	func trackCustomEvent(params: [ String : String ]) {
-		#warning("123")
+		assertionFailure("123")
+	}
+
+	func execute(sql: String) -> [Int64] {
+		self.db.fetch(sql: sql)
 	}
 
 	// 1 - first_launch
@@ -65,58 +69,43 @@ final class DBAnalytics {
 	}
 
 	// 4 - feature_open
-	func trackFeatureOpen(
-		campaignId: Int?,
-		feature: String,
-		featureId: Int,
-		entityId: Int?
-	) {
+	func trackFeatureOpen(feature: String) {
 		self.privateTrack(
 			eventType: .feature_open,
-			campaignId: campaignId,
+			campaignId: nil,
 			feature: feature,
-			featureId: featureId,
-			entityId: entityId
+			featureId: nil,
+			entityId: nil
 		)
 	}
 
 	// 5 - feature_close
-	func trackFeatureClose(
-		campaignId: Int?,
-		feature: String,
-		featureId: Int,
-		entityId: Int?
-	) {
+	func trackFeatureClose(feature: String) {
 		self.privateTrack(
 			eventType: .feature_close,
-			campaignId: campaignId,
+			campaignId: nil,
 			feature: feature,
-			featureId: featureId,
-			entityId: entityId
+			featureId: nil,
+			entityId: nil
 		)
 	}
 
 	// 6 - feature_use
-	func trackFeatureUse(
-		campaignId: Int?,
-		feature: String,
-		featureId: Int,
-		entityId: Int?
-	) {
+	func trackFeatureUse(feature: String) {
 		self.privateTrack(
 			eventType: .feature_use,
-			campaignId: campaignId,
+			campaignId: nil,
 			feature: feature,
-			featureId: featureId,
-			entityId: entityId
+			featureId: nil,
+			entityId: nil
 		)
 	}
 
 	// 7 - story_open
 	func trackStoryOpen(
 		campaignId: Int?,
-		feature: String,
-		featureId: Int,
+		feature: String?,
+		featureId: Int?,
 		entityId: Int?
 	) {
 		self.privateTrack(
@@ -131,8 +120,8 @@ final class DBAnalytics {
 	// 8 - story_tap
 	func trackStoryTap(
 		campaignId: Int?,
-		feature: String,
-		featureId: Int,
+		feature: String?,
+		featureId: Int?,
 		entityId: Int?
 	) {
 		self.privateTrack(
@@ -147,8 +136,8 @@ final class DBAnalytics {
 	// 9 - story_close
 	func trackStoryClose(
 		campaignId: Int?,
-		feature: String,
-		featureId: Int,
+		feature: String?,
+		featureId: Int?,
 		entityId: Int?
 	) {
 		self.privateTrack(
@@ -297,5 +286,30 @@ final class DBAnalytics {
 		)
 		self.db.track(event: event)
 	}
+
+}
+
+extension DBAnalytics: IStoriesAnalytics {
+
+	func trackStoryDidStartShow(storyId: String) {
+		if let int = Int(storyId) {
+			self.trackStoryOpen(campaignId: int, feature: nil, featureId: nil, entityId: nil)
+		}
+	}
+
+	func trackStoryDidFinishShow(storyId: String) {
+		if let int = Int(storyId) {
+			self.trackStoryOpen(campaignId: int, feature: nil, featureId: nil, entityId: nil)
+		}
+	}
+
+	func trackStorySnapDidShow(storyId: String, index: Int) {
+		print(">>> ❌ Should add code")
+	}
+
+	func trackStoryDidTapButton(buttonOrSnapId: String, buttonTitle: String) {
+		print(">>> ❌ Should add code")
+	}
+
 
 }
