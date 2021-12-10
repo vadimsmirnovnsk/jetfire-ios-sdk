@@ -10,6 +10,7 @@ public protocol IFUserDefaults: AnyObject {
 	var lastToasterShowDate: Date? { get set }
 	var userId: String { get set }
 	var pendingNotificationIds: [String] { get set }
+	var lastFlushDate: Date? { get set }
 
 }
 
@@ -37,6 +38,19 @@ extension UserDefaults: IFUserDefaults {
 	}
 
 	/// Featuring
+	public var lastFlushDate: Date? {
+		get {
+			guard let dateString = self.string(forKey: "lastFlushDate") else { return nil }
+			return DateFormatter.featuringDateFormatter.date(from: dateString)
+		}
+		set {
+			guard let newValue = newValue else { return }
+			let dateString = DateFormatter.featuringDateFormatter.string(from: newValue)
+			self.set(dateString, forKey: "lastFlushDate")
+			self.synchronize()
+		}
+	}
+	
 	public var showCampaign: [String : Date] {
 		get { return self.dictionary(forKey: "showCampaign") as? [String : Date]  ?? [String : Date]() }
 		set { self.set(newValue, forKey: "showCampaign"); self.synchronize() }

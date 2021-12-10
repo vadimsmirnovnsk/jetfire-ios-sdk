@@ -67,4 +67,16 @@ final class UserSessionService {
 		}
 	}
 
+	func requestUser() -> JetFireRequestUser {
+		return JetFireRequestUser.with {
+			$0.uuid = self.userId.rawValue
+		}
+	}
+
+	func requestSession() -> JetFireRequestSession {
+		return JetFireRequestSession.with {
+			$0.uuid = self.sessionId.rawValue
+		}
+	}
+
 }

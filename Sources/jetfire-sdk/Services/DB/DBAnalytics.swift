@@ -1,6 +1,8 @@
 // Класс для трекинга событий аналитики в базу данных и синхронизации этих данных с бэком
 
 import Foundation
+import VNEssential
+import UIKit
 
 //	event_type – интовый id события из протобафовского EventType
 //	custom_event – если тип события кастомный, то тут имя этого кастомного события
@@ -33,8 +35,12 @@ private enum DBEventType: Int {
 final class DBAnalytics {
 
 	private let db: DB!
+	private let ud: IFUserDefaults
+	private let api: IFeaturingAPI
 
-	init() {
+	init(ud: IFUserDefaults, api: IFeaturingAPI) {
+		self.ud = ud
+		self.api = api
 		let url = FileManager.libraryPath(forFileName: "db-v1.sqlite3")!
 		self.db = try! DB(path: url)
 		print("Opened DB by path: \(url)")
@@ -49,6 +55,37 @@ final class DBAnalytics {
 	// 0 - custom
 	func trackCustomEvent(params: [ String : String ]) {
 		assertionFailure("123")
+	}
+
+	func flush(completion: @escaping BoolBlock) {
+		let since = self.ud.lastFlushDate ?? Date.distantPast
+		let till = Date()
+		let events = self.db.fetchEvents(since: since, till: till)
+
+		let app = UIApplication.shared
+		var taskId: UIBackgroundTaskIdentifier = .invalid
+		let internalCompletion: VoidBlock = {
+			if taskId != .invalid {
+				app.endBackgroundTask(taskId)
+				taskId = .invalid
+			}
+		}
+		taskId = app.beginBackgroundTask {
+			internalCompletion()
+		}
+		self.api.sync(events: events) { [weak self] res in
+			switch res {
+				case .failure(let error):
+					print("💥 Jetfire sync data error: \(error)")
+					completion(false)
+					internalCompletion()
+				case .success:
+					print("Jetfire synced data ad: \(till)")
+					self?.ud.lastFlushDate = till
+					completion(true)
+					internalCompletion()
+			}
+		}
 	}
 
 	func execute(sql: String) -> [Int64] {
@@ -312,6 +349,5 @@ extension DBAnalytics: IStoriesAnalytics {
 	func trackStoryDidTapButton(buttonOrSnapId: String, buttonTitle: String) {
 		print(">>> ❌ Should add code")
 	}
-
 
 }

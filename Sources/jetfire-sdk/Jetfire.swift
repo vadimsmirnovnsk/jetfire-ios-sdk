@@ -22,7 +22,6 @@ public class Jetfire {
 	private let contentPresenter = ContentPresenter()
 	private let serviceInfo = ServiceInfo()
 	private let preferences = PreferencesService()
-	private let dbAnalytics = DBAnalytics()
 	private let userSessionService: UserSessionService
 	private var userUuid = UUID().uuidString
 
@@ -30,6 +29,10 @@ public class Jetfire {
 
 	private lazy var deeplinkService: DeeplinkService = { [unowned self] in
 		return DeeplinkService(serviceInfo: self.serviceInfo)
+	}()
+
+	private lazy var dbAnalytics: DBAnalytics = { [unowned self] in
+		return DBAnalytics(ud: self.ud, api: self.api)
 	}()
 
 	private lazy var processTargetService: ProcessTargetService = { [unowned self] in

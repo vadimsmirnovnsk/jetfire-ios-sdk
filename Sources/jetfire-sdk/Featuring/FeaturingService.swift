@@ -81,6 +81,7 @@ final public class FeaturingService {
 		self.dbAnalytics.trackApplicationStop()
 		Anl.track { $0.name(.jetfire_resign_active) }
 
+		self.dbAnalytics.flush(completion: { _ in })
 //		self.pushService.scheduleActiveFeaturing { campaign in
 //			self.manager.trackShow(campaign: campaign, featuringType: .push)
 //

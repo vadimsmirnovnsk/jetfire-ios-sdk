@@ -159,6 +159,44 @@ public class DB {
 		try self.makeTables()
 	}
 
+	func fetchEvents(since: Date, till: Date) -> [JetFireEvent] {
+		let query = self.events.select(*)
+			.where(timestamp >= since)
+			.where(timestamp <= till)
+
+		if let events = try? self.db.prepare(query) {
+			#if DEBUG
+			print("Fetched eventsJ from db: \(events)")
+			#endif
+			let es = events.map { e in
+				JetFireEvent.with {
+					$0.uuid = e[event_uuid]
+					$0.timestamp = e[timestamp].timeIntervalSince1970.timestamp
+					$0.eventType = e[event_type].eventType
+					if let ce = e[custom_event] {
+						$0.customEvent = ce
+					}
+					if let f = e[feature] {
+						$0.feature = f
+					}
+					if let cid = e[campaign_id] {
+						$0.campaignID = cid
+					}
+					if let eid = e[entity_id] {
+						$0.entityID = eid
+					}
+					#warning("Add properties")
+				}
+			}
+			return es
+		} else {
+			#if DEBUG
+			print("Error db fetching events")
+			#endif
+			return []
+		}
+	}
+
 	func makeTables() throws {
 		try db.run(events.create(ifNotExists: true) { t in
 			t.column(id, primaryKey: true)
