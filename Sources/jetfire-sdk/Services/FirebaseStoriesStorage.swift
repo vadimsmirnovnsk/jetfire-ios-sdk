@@ -1,9 +1,11 @@
 //import Firebase
 import VNBase
+import VNEssential
 
 final class FirebaseStoriesStorage: IStoriesStorage {
 
 	private(set) var stories: [BaseStory] = []
+	let onUpdateData = Event<Bool>()
 	
 //	private let ref = Database.database().reference()
 	unowned var service: IStoryService!
@@ -16,13 +18,13 @@ final class FirebaseStoriesStorage: IStoriesStorage {
 		self.router = router
 	}
 
-	func fetchStories(completion: @escaping StoriesBlock) {
+	func refetchStories(completion: @escaping BoolBlock) {
 //		self.ref.child("stories").observeSingleEvent(of: .value) { [weak self] firebaseData in
 //			let stories = self?.process(firebase: firebaseData) ?? []
 //			self?.stories = stories
 //			completion(stories)
 //		}
-		completion([])
+		completion(true)
 	}
 
 //	private func process(firebase data: DataSnapshot) -> [BaseStory] {

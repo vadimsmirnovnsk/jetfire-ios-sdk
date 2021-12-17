@@ -111,6 +111,13 @@ public class Jetfire {
 		self.featuring.userNotificationCenter(center, didReceive: response)
 	}
 
+	public func storiesView() -> UIView {
+		let vm = ContentStoriesVM(storiesService: self.storiesService)
+		let view = ContentStoriesView()
+		view.viewModel = vm
+		return view
+	}
+
 	/// Container
 	func toaster(style: ToasterView.Style, visualStyle: ToasterView.VisualStyle) -> ToasterView {
 		return ToasterView(style: style, visualStyle: visualStyle)

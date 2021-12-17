@@ -14,7 +14,7 @@ final public class StoriesService {
 
 	let onChangeStories = Event<Void>()
 	/// Все истории в основной ленте — сверху экрана, данные для кругляшей
-	private (set) var avatarStories: [BaseStory] = []
+	private (set) var stories: [BaseStory] = []
 	var allStories: [BaseStory] { self.storage.stories }
 
 	private let router: BaseRouter
@@ -30,28 +30,31 @@ final public class StoriesService {
 		self.ud = ud
 
 		self.storage.service = self
-	}
 
-	public func refetchStories(completion: @escaping VoidBlock) {
-		self.storageUpdated = false
-		self.storage.fetchStories { [weak self] _ in
-			DispatchQueue.main.async {
-				self?.storageUpdated = true
-				self?.reconstructStories()
-				completion()
+		self.storage.onUpdateData.add(self) { [weak self] updated in
+			if updated {
+				DispatchQueue.main.async {
+					self?.storageUpdated = true
+					self?.reconstructStories()
+				}
 			}
 		}
+	}
+
+	public func refetchStories(completion: @escaping BoolBlock) {
+		self.storageUpdated = false
+		self.storage.refetchStories(completion: completion)
 	}
 
 	private func reconstructStories() {
 		guard self.isReadyForReconstruct else { return }
 		var stories: [BaseStory] = []
 
-		/// С файербейза
+		/// Получаем истории из сторейджа
 		let approvedStories = self.storage.stories
 			.filter { !($0.content.story.isTest ?? false) || self.showAll }
 		stories.append(contentsOf: approvedStories)
-		self.avatarStories = stories
+		self.stories = stories
 
 		self.resortStories()
 	}
@@ -84,17 +87,17 @@ extension StoriesService: IStoryService {
 	}
 
 	public func show(story: BaseStory) {
-		guard self.avatarStories.contains(story) else { return }
-		self.show(story: story, in: self.avatarStories.filter { !$0.snaps.isEmpty })
+		guard self.stories.contains(story) else { return }
+		self.show(story: story, in: self.stories.filter { !$0.snaps.isEmpty })
 	}
 
 	public func resortStories() {
-		let unread = self.avatarStories.filter { !$0.isRead }
+		let unread = self.stories.filter { !$0.isRead }
 			.sorted { $0.content.story.priority > $1.content.story.priority }
-		let read = self.avatarStories.filter { $0.isRead }
+		let read = self.stories.filter { $0.isRead }
 			.filter { self.shouldShowRead(story: $0.content.story) }
 			.sorted { $0.content.story.priority > $1.content.story.priority }
-		self.avatarStories = unread + read
+		self.stories = unread + read
 		self.onChangeStories.raise(())
 	}
 

@@ -9,7 +9,7 @@ final class FeaturingStorage: IStoriesStorage {
 	unowned var service: IStoryService!
 	private(set) var stories: [BaseStory] = []
 
-	let onUpdateFeaturingData = Event<Void>()
+	var onUpdateData = Event<Bool>()
 
 	let rules: FeaturingRules = .demo
 	var campaigns: [JetFireCampaign] { self.response?.campaigns ?? [] }
@@ -17,7 +17,7 @@ final class FeaturingStorage: IStoriesStorage {
 
 	private(set) var response: JetFireListCampaignsResponse? {
 		didSet {
-			self.onUpdateFeaturingData.raise(())
+			self.onUpdateData.raise(true)
 		}
 	}
 
@@ -31,21 +31,25 @@ final class FeaturingStorage: IStoriesStorage {
 		self.router = router
 	}
 
-	func fetchStories(completion: @escaping StoriesBlock) {
-
+	/// IStoriesStorage
+	func refetchStories(completion: @escaping BoolBlock) {
+		self.refetchFeaturingData(completion: completion)
 	}
 
 	func refetchFeaturingData(completion: @escaping BoolBlock) {
 		self.api.fetchCampaigns { [weak self] res in
+			guard let self = self else { return }
 			switch res {
 				case .failure(let error):
 					print("Fetched campaigns error: \(error)")
+					self.onUpdateData.raise(false)
 					completion(false)
 
 				case .success(let response):
 					print("Fetched campaigns data: \(response)")
-					self?.response = response
-					self?.onUpdateFeaturingData.raise(())
+					self.response = response
+					self.stories = response.campaigns.compactMap { self.story(for: $0) }
+					self.onUpdateData.raise(true)
 					completion(true)
 			}
 		}
@@ -63,7 +67,7 @@ final class FeaturingStorage: IStoriesStorage {
 		let infoStory = InfoStoryModel(
 			id: campaign.id.string,
 			type: .firebaseInfo,
-			title: "No title",
+			title: campaign.toaster.title,
 			duration: 15,
 			priority: 100,
 			image: nil,

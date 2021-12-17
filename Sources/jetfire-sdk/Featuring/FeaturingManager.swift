@@ -9,7 +9,7 @@ struct FeaturingCampaignAndStory {
 
 final class FeaturingManager {
 
-	var onFeaturingUpdated: Event<Void> { self.storage.onUpdateFeaturingData }
+	var onFeaturingUpdated: Event<Bool> { self.storage.onUpdateData }
 
 	private let storage: FeaturingStorage
 	private let ud: IFUserDefaults
