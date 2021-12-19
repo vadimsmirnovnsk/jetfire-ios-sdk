@@ -9,12 +9,6 @@ import UIKit
 public final class StoriesConfig {
 
 	/// [ Base Stories
-	internal let analytics = StoriesAnalytics()
-//	public var externalAnalytics: IStoriesAnalytics? {
-//		didSet {
-//			self.analytics.externalAnalytics = self.externalAnalytics
-//		}
-//	}
 
 	/// Story Circle
 	var storyCircleBackgroundColor: UIColor = .storiesAlmostWhite
@@ -38,61 +32,14 @@ public final class StoriesConfig {
 	]
 	/// ] Base Stories
 
-	init(analytics: [IAnalytics]) {
-		Anl.set(service: Anl(analytics: analytics))
-	}
-
 }
 
-public protocol IStoriesAnalytics: AnyObject {
+internal protocol IStoriesAnalytics: AnyObject {
 
 	// Firebase Story
-	func trackStoryDidStartShow(storyId: String)
-	func trackStoryDidFinishShow(storyId: String)
-	func trackStorySnapDidShow(storyId: String, index: Int)
-	func trackStoryDidTapButton(buttonOrSnapId: String, buttonTitle: String)
+	func trackStoryDidStartShow(storyId: String, campaignId: Int64)
+	func trackStoryDidFinishShow(storyId: String, campaignId: Int64)
+	func trackStorySnapDidShow(storyId: String, index: Int, campaignId: Int64)
+	func trackStoryDidTapButton(storyId: String, index: Int, buttonTitle: String, campaignId: Int64)
+
 }
-
-internal class StoriesAnalytics: IStoriesAnalytics {
-
-	var externalAnalytics: [IStoriesAnalytics] = []
-
-	// Firebase Story and Featuring
-	func trackStorySnapDidShow(storyId: String, index: Int) {
-		Anl.track {
-			$0.name(.jetfire_story_snap_show)
-				.param(.jetfire_featuring_id, value: storyId)
-				.param(.jetfire_snap_index, value: index)
-		}
-
-		self.externalAnalytics.forEach { $0.trackStorySnapDidShow(storyId: storyId, index: index) }
-	}
-
-	func trackStoryDidStartShow(storyId: String) {
-		Anl.track {
-			$0.name(.jetfire_story_start_show)
-				.param(.jetfire_featuring_id, value: storyId)
-		}
-
-		self.externalAnalytics.forEach { $0.trackStoryDidStartShow(storyId: storyId) }
-	}
-
-	func trackStoryDidFinishShow(storyId: String) {
-		Anl.track {
-			$0.name(.jetfire_story_finish_show)
-				.param(.jetfire_featuring_id, value: storyId)
-		}
-
-		self.externalAnalytics.forEach { $0.trackStoryDidFinishShow(storyId: storyId) }
-	}
-
-	func trackStoryDidTapButton(buttonOrSnapId: String, buttonTitle: String) {
-		Anl.track {
-			$0.name(.jetfire_story_cta_tap)
-				.param(.jetfire_featuring_id, value: buttonOrSnapId)
-		}
-
-		self.externalAnalytics.forEach { $0.trackStoryDidTapButton(buttonOrSnapId: buttonOrSnapId, buttonTitle: buttonTitle) }
-	}
-}
-

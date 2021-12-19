@@ -16,8 +16,8 @@ final class FeaturingLocalNotificationService {
 		self.localNotificationsCenter = localNotificationsCenter
 	}
 
-	func schedulePush(for campaign: FeaturingCampaign) {
-		guard let push = campaign.push else { return }
+	func schedulePush(for campaign: JetFireCampaign, afterInterval: TimeInterval) {
+		guard campaign.hasPush else { return }
 
 		let userInfo: [AnyHashable : Any] = [
 			Self.kIsFeaturingKey: true,
@@ -25,11 +25,11 @@ final class FeaturingLocalNotificationService {
 		]
 
 		self.schedulePush(
-			title: push.title,
-			subtitle: push.subtitle,
-			message: push.body,
-			date: Date(timeIntervalSinceNow: Self.kPushInteravl),
-			id: campaign.id,
+			title: campaign.push.title,
+			subtitle: campaign.push.subtitle,
+			message: campaign.push.message,
+			date: Date(timeIntervalSinceNow: afterInterval),
+			id: campaign.id.string,
 			threadIdentifier: Self.kFeaturingThreadIdentifier,
 			userInfo: userInfo
 		)

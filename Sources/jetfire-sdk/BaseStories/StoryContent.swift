@@ -13,8 +13,10 @@ public class StoryContent {
 
 public protocol IStory {
 
-	/// Уникальный айдишник для идентификации
+	/// Уникальный айдишник для идентификации — JetFireFeatureStory.id
 	var id: String { get }
+	/// Уникальный айдишник для идентификации — JetFireCampaign.id
+	var campaignId: Int64 { get }
 	/// Подстрочник под стори в коллекшен вьюхе
 	var title: String { get }
 	/// Сколько секунд продолжается каждый снап в стори

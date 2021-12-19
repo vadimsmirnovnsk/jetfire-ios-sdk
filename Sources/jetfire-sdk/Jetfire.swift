@@ -5,15 +5,13 @@ import VNBase
 
 public class Jetfire {
 
-//	private(set) lazy var firebaseStorage: FirebaseStoriesStorage = { [unowned self] in
-//		return FirebaseStoriesStorage(processTargetService: self.processTargetService, router: self.router)
-//	}()
-
 	public static let standard = Jetfire()
 
-	internal static var analytics: StoriesAnalytics { Jetfire.standard.storiesConfig.analytics }
+	public private(set) lazy var analytics: JetfireAnalytics = { [unowned self] in
+		return JetfireAnalytics(db: self.dbAnalytics)
+	}()
 
-	public let storiesConfig: StoriesConfig
+	public let storiesConfig = StoriesConfig()
 	public let snapsConfig = StoryTypesConfig()
 
 	private let api: APIService
@@ -43,7 +41,8 @@ public class Jetfire {
 		return FeaturingStorage(
 			api: self.api,
 			processTargetService: self.processTargetService,
-			router: self.router
+			router: self.router,
+			analytics: self.analytics
 		)
 	}()
 
@@ -52,27 +51,34 @@ public class Jetfire {
 	}()
 
 	private lazy var featuringPushService: FeaturingPushService = { [unowned self] in
-		return FeaturingPushService(ud: self.ud)
+		return FeaturingPushService(ud: self.ud, analytics: self.analytics)
 	}()
 
 	private lazy var storiesService: StoriesService = { [unowned self] in
 		return StoriesService(router: self.router, storage: self.featuringStorage, ud: self.ud)
 	}()
 
+	private lazy var scheduler: StoryScheduler = { [unowned self] in
+		return StoryScheduler(
+			router: self.router,
+			storiesService: self.storiesService,
+			pushService: self.featuringPushService,
+			ud: self.ud
+		)
+	}()
+
 	private(set) lazy var featuring: FeaturingService = { [unowned self] in
 		return FeaturingService(
 			manager: self.featuringManager,
-			storiesService: self.storiesService,
 			pushService: self.featuringPushService,
-			dbAnalytics: self.dbAnalytics,
+			db: self.dbAnalytics,
 			ud: self.ud,
-			router: self.router
+			scheduler: self.scheduler,
+			analytics: self.analytics
 		)
 	}()
 
     public init() {
-		let analytics: [IAnalytics] = [] // [ FirebaseAnalytics(), BackendAnalytics() ]
-		self.storiesConfig = StoriesConfig(analytics: analytics)
 		self.userSessionService = UserSessionService(
 			userId: self.preferences.userId,
 			sessionId: self.preferences.sessionId
@@ -82,8 +88,6 @@ public class Jetfire {
 			userSessionService: self.userSessionService
 		)
 		self.api.configure(forBaseUrlString: Constants.baseURL, overrideHeaders: [:])
-
-		self.storiesConfig.analytics.externalAnalytics.append(self.dbAnalytics)
 		self.deeplinkService.delegate = self.contentPresenter
     }
 

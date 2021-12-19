@@ -57,9 +57,5 @@ final class StoryInfoCellVM: StoryCollectionBaseCellVM {
 		self.init(bgColor: infoStory.bgColor, imageURL: infoStory.imageURL)
 	}
 
-//	convenience init(userStory: IUserStoryModel) {
-//		self.init(bgColor: .clear, imageURL: userStory.imageURL)
-//	}
-
 }
 

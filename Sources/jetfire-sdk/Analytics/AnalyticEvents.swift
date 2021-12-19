@@ -17,7 +17,7 @@ internal extension String {
 	
 }
 
-internal enum EventId: String {
+public enum EventId: String {
 
 	// System
 	case jetfire_application_start
@@ -25,11 +25,11 @@ internal enum EventId: String {
 	case jetfire_resign_active
 
 	// Stories
-	case jetfire_story_snap_show
-	case jetfire_story_start_show
-	case jetfire_story_finish_show
+	case jetfire_story_snap_show // ok
+	case jetfire_story_start_show // ok
+	case jetfire_story_finish_show // ok
 	case jetfire_story_close_tap
-	case jetfire_story_cta_tap
+	case jetfire_story_cta_tap // ok
 
 	// Featuring Campaign
 	case jetfire_featuring_campaign_show
@@ -41,11 +41,13 @@ internal enum EventId: String {
 
 }
 
-internal enum ParameterId: String {
+public enum ParameterId: String {
 
 	// Featuring
-	case jetfire_featuring_id
+	case jetfire_story_id
+	case jetfire_campaign_id
 	case jetfire_snap_index
+	case jetfire_button_title
 	case jetfire_trigger_type
 	case jetfire_featuring_type
 	case jetfire_push_notifications

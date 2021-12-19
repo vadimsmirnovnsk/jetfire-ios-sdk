@@ -32,7 +32,7 @@ public struct DBEvent: Codable {
 	let campaign_id: Int?
 	let feature: String?
 	let feature_id: Int?
-	let entity_id: Int?
+	let entity_id: String?
 	let date: String
 	let timestamp: Date
 	let data: Data?

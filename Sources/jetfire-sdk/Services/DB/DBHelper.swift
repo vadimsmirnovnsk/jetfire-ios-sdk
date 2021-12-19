@@ -147,7 +147,7 @@ public class DB {
 	private let campaign_id = Expression<Int64?>(DBEvent.CodingKeys.campaign_id.rawValue)
 	private let feature = Expression<String?>(DBEvent.CodingKeys.feature.rawValue)
 	private let feature_id = Expression<Int64?>(DBEvent.CodingKeys.feature_id.rawValue)
-	private let entity_id = Expression<Int64?>(DBEvent.CodingKeys.entity_id.rawValue)
+	private let entity_id = Expression<String?>(DBEvent.CodingKeys.entity_id.rawValue)
 	private let date = Expression<String>(DBEvent.CodingKeys.date.rawValue)
 	private let timestamp = Expression<Date>(DBEvent.CodingKeys.timestamp.rawValue)
 	private let data = Expression<Data?>(DBEvent.CodingKeys.data.rawValue)
@@ -166,7 +166,7 @@ public class DB {
 
 		if let events = try? self.db.prepare(query) {
 			#if DEBUG
-			print("Fetched eventsJ from db: \(events)")
+			print("Fetched events from db: \(events)")
 			#endif
 			let es = events.map { e in
 				JetFireEvent.with {
@@ -182,7 +182,8 @@ public class DB {
 					if let cid = e[campaign_id] {
 						$0.campaignID = cid
 					}
-					if let eid = e[entity_id] {
+					#warning("Переделать, когда изменится протобаф")
+					if let eid = Int64(e[entity_id] ?? "") {
 						$0.entityID = eid
 					}
 					#warning("Add properties")

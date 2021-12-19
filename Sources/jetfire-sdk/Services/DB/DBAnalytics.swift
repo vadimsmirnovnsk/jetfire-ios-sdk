@@ -12,7 +12,7 @@ import UIKit
 //	date, timestamp – отдельно поле с датой без времени для удобства и поле с полным таймстемпом события
 //	data – поле текстовое, чтобы хранить например, json с дополнительными параметрами
 
-private enum DBEventType: Int {
+enum DBEventType: Int {
 	 case custom = 0
 	 case first_launch
 	 case application_start
@@ -52,11 +52,6 @@ final class DBAnalytics {
 		#endif
 	}
 
-	// 0 - custom
-	func trackCustomEvent(params: [ String : String ]) {
-		assertionFailure("123")
-	}
-
 	func flush(completion: @escaping BoolBlock) {
 		let since = self.ud.lastFlushDate ?? Date.distantPast
 		let till = Date()
@@ -92,220 +87,12 @@ final class DBAnalytics {
 		self.db.fetch(sql: sql)
 	}
 
-	// 1 - first_launch
-	func trackFirstLaunch() {
-		self.privateTrack(eventType: .first_launch)
-	}
-
-	// 2 - application_start
-	func trackApplicationStart() {
-		self.privateTrack(eventType: .application_start)
-	}
-
-	// 3 - application_shutdown
-	func trackApplicationStop() {
-		self.privateTrack(eventType: .application_shutdown)
-	}
-
-	// 4 - feature_open
-	func trackFeatureOpen(feature: String) {
-		self.privateTrack(
-			eventType: .feature_open,
-			campaignId: nil,
-			feature: feature,
-			featureId: nil,
-			entityId: nil
-		)
-	}
-
-	// 5 - feature_close
-	func trackFeatureClose(feature: String) {
-		self.privateTrack(
-			eventType: .feature_close,
-			campaignId: nil,
-			feature: feature,
-			featureId: nil,
-			entityId: nil
-		)
-	}
-
-	// 6 - feature_use
-	func trackFeatureUse(feature: String) {
-		self.privateTrack(
-			eventType: .feature_use,
-			campaignId: nil,
-			feature: feature,
-			featureId: nil,
-			entityId: nil
-		)
-	}
-
-	// 7 - story_open
-	func trackStoryOpen(
-		campaignId: Int?,
-		feature: String?,
-		featureId: Int?,
-		entityId: Int?
-	) {
-		self.privateTrack(
-			eventType: .story_open,
-			campaignId: campaignId,
-			feature: feature,
-			featureId: featureId,
-			entityId: entityId
-		)
-	}
-
-	// 8 - story_tap
-	func trackStoryTap(
-		campaignId: Int?,
-		feature: String?,
-		featureId: Int?,
-		entityId: Int?
-	) {
-		self.privateTrack(
-			eventType: .story_tap,
-			campaignId: campaignId,
-			feature: feature,
-			featureId: featureId,
-			entityId: entityId
-		)
-	}
-
-	// 9 - story_close
-	func trackStoryClose(
-		campaignId: Int?,
-		feature: String?,
-		featureId: Int?,
-		entityId: Int?
-	) {
-		self.privateTrack(
-			eventType: .story_close,
-			campaignId: campaignId,
-			feature: feature,
-			featureId: featureId,
-			entityId: entityId
-		)
-	}
-
-	// 10 - push_show
-	func trackPushShow(
-		campaignId: Int?,
-		feature: String,
-		featureId: Int,
-		entityId: Int?
-	) {
-		self.privateTrack(
-			eventType: .push_show,
-			campaignId: campaignId,
-			feature: feature,
-			featureId: featureId,
-			entityId: entityId
-		)
-	}
-
-	// 11 - push_tap
-	func trackPushTap(
-		campaignId: Int?,
-		feature: String,
-		featureId: Int,
-		entityId: Int?
-	) {
-		self.privateTrack(
-			eventType: .push_tap,
-			campaignId: campaignId,
-			feature: feature,
-			featureId: featureId,
-			entityId: entityId
-		)
-	}
-
-	// 12 - push_close
-	func trackPushClose(
-		campaignId: Int?,
-		feature: String,
-		featureId: Int,
-		entityId: Int?
-	) {
-		self.privateTrack(
-			eventType: .push_close,
-			campaignId: campaignId,
-			feature: feature,
-			featureId: featureId,
-			entityId: entityId
-		)
-	}
-
-	// 13 - toaster_show
-	func trackToasterShow(
-		campaignId: Int?,
-		feature: String,
-		featureId: Int,
-		entityId: Int?
-	) {
-		self.privateTrack(
-			eventType: .toaster_show,
-			campaignId: campaignId,
-			feature: feature,
-			featureId: featureId,
-			entityId: entityId
-		)
-	}
-
-	// 14 - toaster_tap
-	func trackToasterTap(
-		campaignId: Int?,
-		feature: String,
-		featureId: Int,
-		entityId: Int?
-	) {
-		self.privateTrack(
-			eventType: .toaster_tap,
-			campaignId: campaignId,
-			feature: feature,
-			featureId: featureId,
-			entityId: entityId
-		)
-	}
-
-	// 15 - toaster_close
-	func trackToasterClose(
-		campaignId: Int?,
-		feature: String,
-		featureId: Int,
-		entityId: Int?
-	) {
-		self.privateTrack(
-			eventType: .toaster_close,
-			campaignId: campaignId,
-			feature: feature,
-			featureId: featureId,
-			entityId: entityId
-		)
-	}
-
-	// 16 - feature_accepted
-	func trackFeatureAccepted(
-		campaignId: Int?,
-		feature: String,
-		featureId: Int,
-		entityId: Int?
-	) {
-		self.privateTrack(
-			eventType: .feature_accepted,
-			campaignId: campaignId,
-			feature: feature,
-			featureId: featureId,
-			entityId: entityId
-		)
-	}
-
-	private func privateTrack(
+	func track(
 		eventType: DBEventType,
 		campaignId: Int? = nil,
 		feature: String? = nil,
 		featureId: Int? = nil,
-		entityId: Int? = nil,
+		entityId: String? = nil,
 		customEvent: String? = nil,
 		data: Data? = nil
 	) {
@@ -324,30 +111,6 @@ final class DBAnalytics {
 			data: data
 		)
 		self.db.track(event: event)
-	}
-
-}
-
-extension DBAnalytics: IStoriesAnalytics {
-
-	func trackStoryDidStartShow(storyId: String) {
-		if let int = Int(storyId) {
-			self.trackStoryOpen(campaignId: int, feature: nil, featureId: nil, entityId: nil)
-		}
-	}
-
-	func trackStoryDidFinishShow(storyId: String) {
-		if let int = Int(storyId) {
-			self.trackStoryOpen(campaignId: int, feature: nil, featureId: nil, entityId: nil)
-		}
-	}
-
-	func trackStorySnapDidShow(storyId: String, index: Int) {
-		print(">>> ❌ Should add code")
-	}
-
-	func trackStoryDidTapButton(buttonOrSnapId: String, buttonTitle: String) {
-		print(">>> ❌ Should add code")
 	}
 
 }

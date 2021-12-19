@@ -8,6 +8,7 @@ final class FeaturingPushService {
 	let onGrantedEvent = Event<Bool>()
 
 	private let ud: IFUserDefaults
+	private let analytics: IJetfireAnalytics
 	private let notificationCenter = UNUserNotificationCenter.current()
 	private let localPushService: FeaturingLocalNotificationService
 
@@ -17,10 +18,11 @@ final class FeaturingPushService {
 		}
 	}
 
-	private var preparingCampaign: FeaturingCampaign?
+//	private var preparingCampaign: JetFireCampaign?
 
-	init(ud: IFUserDefaults) {
+	init(ud: IFUserDefaults, analytics: IJetfireAnalytics) {
 		self.ud = ud
+		self.analytics = analytics
 		self.localPushService = FeaturingLocalNotificationService(localNotificationsCenter: self.notificationCenter)
 
 		self.notificationCenter.getNotificationSettings { [weak self] settings in
@@ -34,9 +36,7 @@ final class FeaturingPushService {
 
 	func update(granted: Bool) {
 		self.isGranted = granted
-		Anl.trackUserProperties { track in
-			track.param(.jetfire_push_notifications, value: granted)
-		}
+		self.analytics.setUserProperty(String(granted), forName: ParameterId.jetfire_push_notifications.rawValue)
 	}
 
 	func removeAllFeaturings() {
@@ -44,21 +44,20 @@ final class FeaturingPushService {
 		self.ud.pendingNotificationIds = []
 	}
 
-	func prepareFeaturing(campaign: FeaturingCampaign) {
-		self.preparingCampaign = campaign
-		print("Did prepare for push promo featuring id: \(campaign.id)")
-	}
+//	func prepareFeaturing(campaign: JetFireCampaign) {
+//		self.preparingCampaign = campaign
+//		print("Did prepare for push promo featuring id: \(campaign.id)")
+//	}
+//
+//	func resetPreparingFeaturing() {
+//		self.preparingCampaign = nil
+//		print("Did reset push promo")
+//	}
 
-	func resetPreparingFeaturing() {
-		self.preparingCampaign = nil
-		print("Did reset push promo")
-	}
-
-	func scheduleActiveFeaturing(completion: (FeaturingCampaign) -> Void) {
-		guard let campaign = self.preparingCampaign else { return }
-		self.localPushService.schedulePush(for: campaign)
-		self.ud.pendingNotificationIds.append(campaign.id)
-		completion(campaign)
+	func schedule(campaign: JetFireCampaign, after: TimeInterval) {
+//		guard let campaign = self.preparingCampaign else { return }
+		self.localPushService.schedulePush(for: campaign, afterInterval: after)
+		self.ud.pendingNotificationIds.append(campaign.id.string)
 	}
 
 	func campaignId(from response: UNNotificationResponse) -> String {

@@ -6,33 +6,33 @@ import UIKit
 final public class FeaturingService {
 
 	private let manager: FeaturingManager
-	private let storiesService: IStoryService
 	private let pushService: FeaturingPushService
-	private let dbAnalytics: DBAnalytics
+	private let db: DBAnalytics
 	private let ud: IFUserDefaults
-	private let router: FeaturingRouter
+	private let scheduler: StoryScheduler
+	private let analytics: JetfireAnalytics
 
 	init(
 		manager: FeaturingManager,
-		storiesService: IStoryService,
 		pushService: FeaturingPushService,
-		dbAnalytics: DBAnalytics,
+		db: DBAnalytics,
 		ud: IFUserDefaults,
-		router: FeaturingRouter
+		scheduler: StoryScheduler,
+		analytics: JetfireAnalytics
 	) {
 		self.manager = manager
-		self.storiesService = storiesService
 		self.pushService = pushService
-		self.dbAnalytics = dbAnalytics
+		self.db = db
+		self.scheduler = scheduler
 		self.ud = ud
-		self.router = router
+		self.analytics = analytics
 
 //		self.reset()
 	}
 
 	func reset() {
 		#if DEBUG
-		self.dbAnalytics.reset()
+		self.db.reset()
 		self.ud.reset()
 		#endif
 	}
@@ -65,23 +65,19 @@ final public class FeaturingService {
 		let isFirstStart = !self.ud.didStartEarly
 		if isFirstStart {
 			self.ud.didStartEarly = true
-			self.dbAnalytics.trackFirstLaunch()
+			self.analytics.trackFirstLaunch()
 		}
 
-		self.dbAnalytics.trackApplicationStart()
-		Anl.track { $0.name(.jetfire_application_start) }
+		self.analytics.trackApplicationStart()
 	}
 
 	private func applicationDidBecomeActive() {
-		self.dbAnalytics.trackApplicationStart()
-		Anl.track { $0.name(.jetfire_become_active) }
+		self.analytics.trackApplicationStart()
 	}
 
 	private func applicationWillResignActive() {
-		self.dbAnalytics.trackApplicationStop()
-		Anl.track { $0.name(.jetfire_resign_active) }
-
-		self.dbAnalytics.flush(completion: { _ in })
+		self.analytics.trackApplicationStop()
+		self.db.flush(completion: { _ in })
 //		self.pushService.scheduleActiveFeaturing { campaign in
 //			self.manager.trackShow(campaign: campaign, featuringType: .push)
 //
@@ -94,24 +90,15 @@ final public class FeaturingService {
 	}
 
 	public func trackStart(feature: String) {
-		self.dbAnalytics.trackFeatureOpen(feature: feature)
+		self.analytics.trackFeatureOpen(feature: feature)
 		self.reschedulePushFeaturing()
 		self.rescheduleToasterFeaturing()
-
-		Anl.track { track in
-			track.name(.jetfire_feature_start)
-				.param(.jetfire_featuring_id, value: feature)
-		}
 	}
 
 	public func trackFinish(feature: String) {
-		self.dbAnalytics.trackFeatureUse(feature: feature)
+		self.analytics.trackFeatureUse(feature: feature)
 		self.reschedulePushFeaturing()
-
-		Anl.track { track in
-			track.name(.jetfire_feature_finish)
-				.param(.jetfire_featuring_id, value: feature)
-		}
+		self.rescheduleToasterFeaturing()
 	}
 
 	public func updatePushStatus(granted: Bool) {
@@ -121,47 +108,28 @@ final public class FeaturingService {
 	/// MARK: Private
 	/// При обновлении статуса пуш-нотификаций дёргается метод и перенастраивает пуш-компанию на следующую непоказанную
 	private func reschedulePushFeaturing() {
-//		guard self.pushService.isGranted else {
-//			self.pushService.removeAllFeaturings()
-//			return
-//		}
-//
+		guard self.pushService.isGranted else {
+			self.pushService.removeAllFeaturings()
+			return
+		}
+
 //		self.pushService.resetPreparingFeaturing()
-//		guard let campaign = self.manager.campaignForPush() else { return }
+		guard let campaign = self.manager.campaignForPush() else { return }
 //		self.pushService.prepareFeaturing(campaign: campaign.campaign)
 	}
 
 	private func rescheduleToasterFeaturing() {
 		self.manager.prepareTriggeredCampaigns()
 		if let campaign = self.manager.campaignForToaster() {
-			self.showToaster(campaign: campaign)
+			self.scheduler.scheduleToaster(campaign: campaign)
 		}
 	}
 
 	private func scheduleApplicationStartFeaturing() {
 		self.manager.prepareAvailableCampaigns()
 		if let campaign = self.manager.campaignForApplicationStart() {
-			self.show(campaign: campaign, featuringType: .applicationStart)
+			self.scheduler.scheduleShow(campaign: campaign, featuringType: .applicationStart)
 		}
-	}
-
-	private func show(campaign: FeaturingCampaignAndStory, featuringType: FeaturingCampaign.FeaturingType) {
-		self.manager.trackShow(campaign: campaign.campaign, featuringType: featuringType)
-		Anl.track { track in
-			track.name(.jetfire_featuring_campaign_show)
-				.param(.jetfire_featuring_type, value: featuringType.rawValue)
-				.param(.jetfire_featuring_id, value: campaign.campaign.id)
-		}
-		self.storiesService.show(story: campaign.story, in: [campaign.story])
-	}
-
-	private func showToaster(campaign: FeaturingCampaignAndStory) {
-		self.router.showToaster(style: .button(
-			title: campaign.campaign.toaster.title,
-			button: campaign.campaign.toaster.actionButton.title,
-			completion: { [weak self] in
-				self?.show(campaign: campaign, featuringType: .toaster)
-			}))
 	}
 
 	private func subscribeOnDataUpdates() {
@@ -185,7 +153,7 @@ extension FeaturingService {
 		let campaignId = self.pushService.campaignId(from: response)
 		self.manager.retreiveCampaign(with: campaignId) { [weak self] campaign in
 			guard let campaign = campaign else { return }
-			self?.show(campaign: campaign, featuringType: .push)
+			self?.scheduler.scheduleShow(campaign: campaign, featuringType: .push)
 		}
 	}
 

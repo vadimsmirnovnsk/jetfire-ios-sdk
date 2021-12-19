@@ -17,11 +17,13 @@ open class BaseStory: Equatable {
 	let snapVMs: [BaseSnapVM]
 
 	unowned let service: IStoryService!
+	private let analytics: IStoriesAnalytics
 
-	init(service: IStoryService, content: StoryContent,
+	init(service: IStoryService, analytics: IStoriesAnalytics, content: StoryContent,
 		 previewVM: StoryCollectionBaseCellVM, snaps: [BaseSnapVM])
 	{
 		self.service = service
+		self.analytics = analytics
 		self.content = content
 		self.previewCellVM = previewVM
 		self.snapVMs = snaps
@@ -57,12 +59,15 @@ open class BaseStory: Equatable {
 		self.snaps.safeObject(at: index)?.snapVM.appear()
 		self.snaps.safeObject(at: index - 1)?.snapVM.isRead = true
 
-		Jetfire.analytics.trackStorySnapDidShow(storyId: self.content.story.id, index: index)
+		self.analytics.trackStorySnapDidShow(
+			storyId: self.content.story.id,
+			index: index, campaignId: self.content.story.campaignId
+		)
 
 		if index == 0 {
-			Jetfire.analytics.trackStoryDidStartShow(storyId: self.content.story.id)
+			self.analytics.trackStoryDidStartShow(storyId: self.content.story.id, campaignId: self.content.story.campaignId)
 		} else if index == self.snaps.count - 1 {
-			Jetfire.analytics.trackStoryDidFinishShow(storyId: self.content.story.id)
+			self.analytics.trackStoryDidFinishShow(storyId: self.content.story.id, campaignId: self.content.story.campaignId)
 		}
 	}
 

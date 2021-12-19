@@ -15,7 +15,6 @@ final public class StoriesService {
 	let onChangeStories = Event<Void>()
 	/// Все истории в основной ленте — сверху экрана, данные для кругляшей
 	private (set) var stories: [BaseStory] = []
-	var allStories: [BaseStory] { self.storage.stories }
 
 	private let router: BaseRouter
 	private let storage: IStoriesStorage

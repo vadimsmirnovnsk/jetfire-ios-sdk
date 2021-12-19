@@ -24,11 +24,13 @@ final class FeaturingStorage: IStoriesStorage {
 	private let api: IFeaturingAPI
 	private let processTargetService: ProcessTargetService
 	private let router: BaseRouter
+	private let analytics: IStoriesAnalytics
 
-	init(api: IFeaturingAPI, processTargetService: ProcessTargetService, router: BaseRouter) {
+	init(api: IFeaturingAPI, processTargetService: ProcessTargetService, router: BaseRouter, analytics: IStoriesAnalytics) {
 		self.api = api
 		self.processTargetService = processTargetService
 		self.router = router
+		self.analytics = analytics
 	}
 
 	/// IStoriesStorage
@@ -65,7 +67,8 @@ final class FeaturingStorage: IStoriesStorage {
 		guard let campaignStory = campaign.stories.first else { return nil }
 
 		let infoStory = InfoStoryModel(
-			id: campaign.id.string,
+			id: campaignStory.id.string,
+			campaignId: campaign.id,
 			type: .firebaseInfo,
 			title: campaign.toaster.title,
 			duration: 15,
@@ -76,9 +79,12 @@ final class FeaturingStorage: IStoriesStorage {
 			isTest: nil,
 			alwaysRewind: nil
 		)
-		let infoSnaps = campaignStory.frames.map { fr in
+		let infoSnaps = campaignStory.frames.enumerated().map { index, fr in
 			return InfoSnap(
 				id: fr.id.string,
+				storyId: campaignStory.id.string,
+				campaignId: campaign.id,
+				index: index,
 				type: .info,
 				title: fr.title,
 				subtitle: fr.subtitle,
@@ -91,8 +97,8 @@ final class FeaturingStorage: IStoriesStorage {
 		}
 		let storyContent = StoryContent(story: infoStory, snaps: infoSnaps)
 		let cellVM = StoryInfoCellVM(infoStory: infoStory)
-		let snapVMs = infoSnaps.map { InfoSnapVM(snap: $0, processTargetService: self.processTargetService, router: self.router) }
-		let baseStory = BaseStory(service: self.service, content: storyContent, previewVM: cellVM, snaps: snapVMs)
+		let snapVMs = infoSnaps.map { InfoSnapVM(snap: $0, processTargetService: self.processTargetService, router: self.router, analytics: self.analytics) }
+		let baseStory = BaseStory(service: self.service, analytics: self.analytics, content: storyContent, previewVM: cellVM, snaps: snapVMs)
 		return baseStory
 	}
 

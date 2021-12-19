@@ -95,11 +95,13 @@ final class InfoSnapVM: BaseSnapVM {
 	let snap: InfoSnap
 	private let processTargetService: ProcessTargetService
 	private let router: BaseRouter
+	private let analytics: IStoriesAnalytics
 
-	init(snap: InfoSnap, processTargetService: ProcessTargetService, router: BaseRouter) {
+	init(snap: InfoSnap, processTargetService: ProcessTargetService, router: BaseRouter, analytics: IStoriesAnalytics) {
 		self.snap = snap
 		self.processTargetService = processTargetService
 		self.router = router
+		self.analytics = analytics
 	}
 
 	func didTapButton() {
@@ -116,9 +118,11 @@ final class InfoSnapVM: BaseSnapVM {
 			self.processTargetService.process(button: button)
 		}
 
-		Jetfire.analytics.trackStoryDidTapButton(
-			buttonOrSnapId: self.snap.button?.id ?? self.snap.id,
-			buttonTitle: self.snap.button?.title ?? "Unknown"
+		self.analytics.trackStoryDidTapButton(
+			storyId: self.snap.storyId,
+			index: self.snap.index,
+			buttonTitle: self.snap.button?.title ?? "Unknown",
+			campaignId: self.snap.campaignId
 		)
 	}
 

@@ -46,41 +46,23 @@ final class FeaturingManager {
 
 	func campaignForApplicationStart() -> FeaturingCampaignAndStory? {
 		guard self.canAlreadyShowApplicationStartFeaturing() else { return nil }
-		return self.campaign(for: .applicationStart)
+		guard let campaign = self.campaign(for: .applicationStart) else { return nil }
+		guard self.canAlreadyShow(campaign: campaign.campaign) else { return nil }
+		return campaign
 	}
 
 	func campaignForToaster() -> FeaturingCampaignAndStory? {
-		#warning("123 Добавить чек на правило показа повторного тостера")
+		guard self.canAlreadyShowToasterFeaturing() else { return nil }
 		guard let campaign = self.campaign(for: .toaster) else { return nil }
 		guard self.canAlreadyShow(campaign: campaign.campaign) else { return nil }
 		return campaign
 	}
 
 	func campaignForPush() -> FeaturingCampaignAndStory? {
-//		guard self.canAlreadyShowPushFeaturing() else { return nil }
-//		return self.campaign(for: [.push])
-		return nil
-	}
-
-	func trackShow(campaign: JetFireCampaign, featuringType: FeaturingCampaign.FeaturingType) {
-		self.ud.showCampaign[campaign.id.string] = Date()
-		self.track(featuringType: featuringType)
-	}
-
-//	func trackStartUsing(feature: String) {
-//	}
-
-//	func trackFinishUsing(feature: String) {
-//		self.ud.finishedFeatures.append(feature)
-//	}
-
-	private func track(featuringType: FeaturingCampaign.FeaturingType) {
-		switch featuringType {
-			case .applicationStart: self.ud.lastApplicationStartShowDate = Date()
-			case .push: self.ud.lastPushShowDate = Date()
-			case .toaster:  self.ud.lastToasterShowDate = Date()
-			case .deeplink: break
-		}
+		guard self.canAlreadyShowPushFeaturing() else { return nil }
+		guard let campaign = self.campaign(for: .push) else { return nil }
+		guard self.canAlreadyShow(campaign: campaign.campaign) else { return nil }
+		return campaign
 	}
 
 	private func campaign(for type: FeaturingCampaign.FeaturingType) -> FeaturingCampaignAndStory? {
@@ -88,6 +70,7 @@ final class FeaturingManager {
 
 		switch type {
 			case .applicationStart:
+				#warning("Передалать на application start")
 				guard let campaign = self.availableCampaigns.first(where: { !$0.hasPush && !$0.hasToaster } ) else { return nil }
 				guard let story = self.storage.story(for: campaign) else { return nil }
 				return FeaturingCampaignAndStory(campaign: campaign, story: story)
@@ -123,15 +106,17 @@ final class FeaturingManager {
 		return Date().timeIntervalSince(date) > self.storage.rules.retryApplicationStartShowTimeout
 	}
 
+	/// Можем ли показывать тостер повторно
+	private func canAlreadyShowToasterFeaturing() -> Bool {
+		guard let date = self.ud.lastToasterShowDate else { return true }
+		return Date().timeIntervalSince(date) > self.storage.rules.retryToasterShowTimeout
+	}
+
 	/// Можем ли показывать фичеринг пушом повторно
-//	private func canAlreadyShowPushFeaturing() -> Bool {
-//		guard let data = self.storage.data else {
-//			assertionFailure("Should not be nil. Call after fetching the data")
-//			return false
-//		}
-//		guard let date = self.ud.lastPushShowDate else { return true }
-//		return Date().timeIntervalSince(date) > data.rules.retryPushShowTimeout
-//	}
+	private func canAlreadyShowPushFeaturing() -> Bool {
+		guard let date = self.ud.lastPushShowDate else { return true }
+		return Date().timeIntervalSince(date) > self.storage.rules.retryPushShowTimeout
+	}
 
 	/// Можем ли показать фичеринг конкретной фичи повторно
 	private func canAlreadyShow(campaign: JetFireCampaign) -> Bool {

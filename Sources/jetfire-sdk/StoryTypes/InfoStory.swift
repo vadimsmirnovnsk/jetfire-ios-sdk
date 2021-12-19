@@ -4,6 +4,7 @@ import UIKit
 struct InfoStoryModel: Codable, IStory {
 
 	let id: String
+	let campaignId: Int64
 	let type: StoryType
 	let title: String
 	let duration: TimeInterval
@@ -28,6 +29,7 @@ struct InfoStoryModel: Codable, IStory {
 
 	enum CodingKeys: String, CodingKey {
 		case id
+		case campaignId = "campaign_id"
 		case type
 		case title
 		case duration
@@ -59,6 +61,9 @@ struct StoryButton: Codable {
 
 struct InfoSnap: Codable, ISnap {
 	let id: String
+	let storyId: String
+	let campaignId: Int64
+	let index: Int
 	let type: SnapType
 	let title: String?
 	let subtitle: String?
@@ -85,6 +90,9 @@ struct InfoSnap: Codable, ISnap {
 
 	enum CodingKeys: String, CodingKey {
 		case id
+		case storyId
+		case campaignId = "campaign_id"
+		case index
 		case type
 		case title
 		case subtitle

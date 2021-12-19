@@ -19,6 +19,7 @@ final class StoryBrowserCell: BaseCollectionViewCell<StoryBrowserCellVM>, Segmen
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 
+		self.backgroundColor = .black
 		self.contentView.backgroundColor = .black
 		self.contentView.layer.cornerRadius = 8
 		self.contentView.layer.masksToBounds = true
