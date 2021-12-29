@@ -123,7 +123,7 @@ public class Jetfire {
 	}
 
 	/// Container
-	func toaster(style: ToasterView.Style, visualStyle: ToasterView.VisualStyle) -> ToasterView {
+	internal func toaster(style: ToasterView.Style, visualStyle: ToasterView.VisualStyle) -> ToasterView {
 		return ToasterView(style: style, visualStyle: visualStyle)
 	}
 

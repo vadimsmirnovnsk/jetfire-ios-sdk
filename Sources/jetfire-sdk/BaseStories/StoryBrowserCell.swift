@@ -107,8 +107,8 @@ final class StoryBrowserCell: BaseCollectionViewCell<StoryBrowserCellVM>, Segmen
 	func segmentedProgressBarChangedIndex(index: Int) {
 		self.viewModel?.willShowSnap(at: index)
 
-		if let snap = self.layoutedSnapView(for: index) {
-			if index >= self.snapViews.count - 1 {
+		if let snap = self.layoutedSnapView(for: index), let vm = self.viewModel {
+			if index >= vm.snapsCount - 1 {
 				self.viewModel?.read()
 			}
 			self.snapsContainer.bringSubviewToFront(snap)
@@ -141,6 +141,7 @@ final class StoryBrowserCell: BaseCollectionViewCell<StoryBrowserCellVM>, Segmen
 
 final class StoryBrowserCellVM: BaseCellVM {
 
+	var snapsCount: Int { self.story.snaps.count }
 	var currentIndex: Int? = nil
 	var index: Int {
 		if let currentIndex = self.currentIndex { return currentIndex }

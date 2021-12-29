@@ -75,6 +75,7 @@ open class BaseStory: Equatable {
 
 	public static func == (lhs: BaseStory, rhs: BaseStory) -> Bool {
 		return lhs.content.story.id == rhs.content.story.id
+			&& lhs.content.story.campaignId == rhs.content.story.campaignId
 	}
 
 }

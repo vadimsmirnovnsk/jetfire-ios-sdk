@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol IFUserDefaults: AnyObject {
+public protocol IFUserDefaults: IUserDefaults {
 
 	var didStartEarly: Bool { get set }
 	var showCampaign: [String : Date] { get set }
@@ -24,6 +24,7 @@ extension IFUserDefaults {
 		self.lastPushShowDate = nil
 		self.lastToasterShowDate = nil
 		self.pendingNotificationIds = []
+		self.readStories = [:]
 		#endif
 	}
 

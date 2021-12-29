@@ -27,7 +27,7 @@ final public class FeaturingService {
 		self.ud = ud
 		self.analytics = analytics
 
-//		self.reset()
+		self.reset()
 	}
 
 	func reset() {
