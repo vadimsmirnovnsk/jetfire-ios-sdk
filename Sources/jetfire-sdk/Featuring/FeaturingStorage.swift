@@ -70,14 +70,14 @@ final class FeaturingStorage: IStoriesStorage {
 			id: campaignStory.id.string,
 			campaignId: campaign.id,
 			type: .firebaseInfo,
-			title: campaign.toaster.title,
+			title: campaignStory.cover.title,
 			duration: 15,
-			priority: 100,
-			image: nil,
+			priority: campaignStory.priority.int,
+			image: campaignStory.cover.image.url,
 			bgColorString: nil,
-			afterReadTime: nil,
+			afterReadTime: campaignStory.settings.afterReadExpire.timeInterval,
 			isTest: nil,
-			alwaysRewind: nil
+			alwaysRewind: campaignStory.settings.alwaysRewind
 		)
 		let infoSnaps = campaignStory.frames.enumerated().map { index, fr in
 			return InfoSnap(

@@ -177,6 +177,7 @@ message FeaturePush {
     optional Image image = 5;
     optional FeatureButton action_button = 6;
     optional Schedule schedule = 7;
+    optional Schedule expire = 8;
 }
 
 message FeatureToaster {
@@ -188,6 +189,7 @@ message FeatureToaster {
     optional FeatureButton action_button = 6;
     optional FeatureButton hide_button = 7;
     optional Schedule schedule = 8;
+    optional Schedule expire = 9;
 }
 
 message FeatureStoryFrameBackground {
@@ -196,6 +198,18 @@ message FeatureStoryFrameBackground {
 
 message FeatureStoryFrameFont {
     optional string color = 1;
+}
+
+message FeatureStoryCover {
+    reserved 1;
+    optional Image image = 2;
+    optional string title = 3;
+}
+
+message FeatureStorySettings {
+    reserved 1;
+    required bool always_rewind = 2;
+    required int64 after_read_expire = 3; // seconds
 }
 
 message FeatureStoryFrame {
@@ -213,8 +227,19 @@ message FeatureStoryFrame {
 
 message FeatureStory {
     required int64 id = 1;
-    repeated FeatureStoryFrame frames = 2;
+    optional FeatureStoryCover cover = 2;
+    repeated FeatureStoryFrame frames = 3;
+    optional Schedule schedule = 4;
+    optional Schedule expire = 5;
+    required FeatureStorySettings settings = 6;
+    required int64 priority = 7;
+}
+
+message FeatureData {
+    reserved 1;
+    required bytes data = 2;
     optional Schedule schedule = 3;
+    optional Schedule expire = 4;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -238,7 +263,8 @@ message Campaign {
     optional FeaturePush push = 2;
     optional FeatureToaster toaster = 3;
     repeated FeatureStory stories = 4;
-    required int32 priority = 5;
+    optional FeatureData data = 5;
+    required int32 priority = 6;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
