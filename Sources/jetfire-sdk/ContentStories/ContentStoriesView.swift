@@ -44,10 +44,9 @@ public class ContentStoriesView: BaseView<ContentStoriesVM> {
 			self.loader.stopAnimating()
 		}
 
-		if !vm.stories.isEmpty {
-			self.collectionView.viewModel.sections = [TableSectionVM(rows: vm.stories)]
-			print(">>> Loaded \(vm.stories.count) stories on Main thread \(Thread.current.isMainThread)")
-		}
+		self.collectionView.viewModel.items = vm.stories
+//			self.collectionView.viewModel.sections = [TableSectionVM(rows: vm.stories)]
+		print(">>> Loaded \(vm.stories.count) stories on Main thread \(Thread.current.isMainThread)")
 	}
 
 }

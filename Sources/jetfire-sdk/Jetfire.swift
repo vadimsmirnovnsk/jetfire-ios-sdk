@@ -11,8 +11,8 @@ public class Jetfire {
 		return JetfireAnalytics(db: self.dbAnalytics)
 	}()
 
+	public var cover: CoverStyle = .delo()
 	public let storiesConfig = StoriesConfig()
-	public var cover: CoverStyle = .instagram()
 	public let snapsConfig = StoryTypesConfig()
 
 	private let api: APIService
