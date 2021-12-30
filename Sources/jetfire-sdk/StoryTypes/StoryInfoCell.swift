@@ -57,6 +57,7 @@ final class StoryInfoCell: StoryCollectionBaseCell<StoryInfoCellVM> {
 				colors: [ gradient.startColor, gradient.endColor ],
 				points: GradientView.Points(start: gradient.startPoint, end: gradient.endPoint)
 			)
+			g.setCornerRadius(gradient.cornerRadius)
 
 			self.fgContent.addSubview(g) { make in
 				make.size.equalTo(gradient.size)

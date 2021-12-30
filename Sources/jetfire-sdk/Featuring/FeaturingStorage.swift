@@ -4,66 +4,64 @@ import UIColorHexSwift
 import VNBase
 
 /// Объект получает и хранит сториз и кампании для пользователя из нашего бэкенда
-final class FeaturingStorage: IStoriesStorage {
+/// Здесь лежат вообще все сториз, которые мы получили с бэка
+/// Дальше их нужно прогонять через availableStories, шедулить и закидывать в карусель
+final class FeaturingStorage  {
 
+	/// Чтобы не было циклической связи через FeaturingManager сетаю его в ините
 	unowned var service: IStoryService!
+
+	/// Вообще все сториз, которые пришли с бэка
 	private(set) var stories: [BaseStory] = []
 
-	var onUpdateData = Event<Bool>()
-
+	/// Мок для правил, которые должны приходить с бэка
 	let rules: FeaturingRules = .demo
+
 	var campaigns: [JetFireCampaign] { self.response?.campaigns ?? [] }
 	var sql: JetFireFeaturesSql? { self.response?.sql }
 
-	private(set) var response: JetFireListCampaignsResponse? {
-		didSet {
-			self.onUpdateData.raise(true)
-		}
-	}
+	private(set) var response: JetFireListCampaignsResponse?
 
 	private let api: IFeaturingAPI
 	private let processTargetService: ProcessTargetService
 	private let router: BaseRouter
 	private let analytics: IStoriesAnalytics
 
-	init(api: IFeaturingAPI, processTargetService: ProcessTargetService, router: BaseRouter, analytics: IStoriesAnalytics) {
+	init(
+		api: IFeaturingAPI,
+		processTargetService: ProcessTargetService,
+		router: BaseRouter,
+		analytics: IStoriesAnalytics
+	) {
 		self.api = api
 		self.processTargetService = processTargetService
 		self.router = router
 		self.analytics = analytics
 	}
 
-	/// IStoriesStorage
-	func refetchStories(completion: @escaping BoolBlock) {
-		self.refetchFeaturingData(completion: completion)
-	}
-
-	func refetchFeaturingData(completion: @escaping BoolBlock) {
+	func refetchFeaturingData(completion: @escaping (JetFireListCampaignsResponse?) -> Void) {
 		self.api.fetchCampaigns { [weak self] res in
 			guard let self = self else { return }
 			switch res {
 				case .failure(let error):
 					print("Fetched campaigns error: \(error)")
-					self.onUpdateData.raise(false)
-					completion(false)
+					completion(nil)
 
 				case .success(let response):
 					print("Fetched campaigns data: \(response)")
 					self.response = response
-					self.stories = response.campaigns.compactMap { self.story(for: $0) }
-					self.onUpdateData.raise(true)
-					completion(true)
+					self.stories = response.campaigns.compactMap { self.createStory(for: $0) }
+					completion(response)
 			}
 		}
 	}
 
-	//	func refetchData(competion: @escaping BoolBlock) {
-	//		self.storiesService.refetchStories { [weak self] in
-	//			self?.refetchFeaturingData(competion: competion)
-	//		}
-	//	}
+	func stories(for campaigns: [JetFireCampaign]) -> [BaseStory] {
+		let ids = campaigns.map { $0.id }
+		return self.stories.filter { ids.contains($0.content.story.campaignId) }
+	}
 
-	func story(for campaign: JetFireCampaign) -> BaseStory? {
+	private func createStory(for campaign: JetFireCampaign) -> BaseStory? {
 		guard let campaignStory = campaign.stories.first else { return nil }
 
 		let infoStory = InfoStoryModel(

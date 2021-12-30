@@ -12,7 +12,7 @@ public class Jetfire {
 	}()
 
 	public let storiesConfig = StoriesConfig()
-	public var cover = CoverStyle.delo()
+	public var cover: CoverStyle = .instagram()
 	public let snapsConfig = StoryTypesConfig()
 
 	private let api: APIService
@@ -56,7 +56,7 @@ public class Jetfire {
 	}()
 
 	private lazy var storiesService: StoriesService = { [unowned self] in
-		return StoriesService(router: self.router, storage: self.featuringStorage, ud: self.ud)
+		return StoriesService(router: self.router, storage: self.featuringManager, ud: self.ud)
 	}()
 
 	private lazy var scheduler: StoryScheduler = { [unowned self] in
@@ -90,6 +90,7 @@ public class Jetfire {
 		)
 		self.api.configure(forBaseUrlString: Constants.baseURL, overrideHeaders: [:])
 		self.deeplinkService.delegate = self.contentPresenter
+		self.featuringStorage.service = self.storiesService
     }
 
 	public func start(with userUuid: String) {

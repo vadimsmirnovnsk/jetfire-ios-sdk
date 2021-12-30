@@ -20,7 +20,7 @@ final public class StoriesService {
 	private let storage: IStoriesStorage
 	private let ud: IUserDefaults
 
-	private var storageUpdated: Bool = false
+	private(set) var storageUpdated: Bool = false
 	private var isReadyForReconstruct: Bool { self.storageUpdated }
 
 	init(router: BaseRouter, storage: IStoriesStorage, ud: IUserDefaults) {

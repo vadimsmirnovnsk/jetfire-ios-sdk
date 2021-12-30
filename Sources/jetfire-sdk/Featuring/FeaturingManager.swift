@@ -7,9 +7,14 @@ struct FeaturingCampaignAndStory {
 	let story: BaseStory
 }
 
-final class FeaturingManager {
+final class FeaturingManager: IStoriesStorage {
 
-	var onFeaturingUpdated: Event<Bool> { self.storage.onUpdateData }
+	/// Здесь только сториз, которые доступны пользователю
+	private(set) var stories: [BaseStory] = []
+	unowned var service: IStoryService!
+	var onUpdateData = Event<Bool>()
+
+	var onFeaturingUpdated: Event<Bool> { self.onUpdateData }
 
 	private let storage: FeaturingStorage
 	private let ud: IFUserDefaults
@@ -24,15 +29,23 @@ final class FeaturingManager {
 		self.db = db
 	}
 
-	func refetchData(completion: @escaping BoolBlock) {
-		self.storage.refetchFeaturingData(completion: completion)
+	func refetchStories(completion: @escaping BoolBlock) {
+		self.refetchData(completion: completion)
 	}
 
-	/// Дёргаем после рефетча, чтобы приготовить все availableCampaigns
+	func refetchData(completion: @escaping BoolBlock) {
+		self.storage.refetchFeaturingData { res in
+			completion(res != nil)
+		}
+	}
+
+	/// Дёргаем после каждого события чтобы приготовить все availableCampaigns
 	func prepareAvailableCampaigns() {
 		if let availableSql = self.storage.sql?.available {
 			let availableCampaignIds = self.db.execute(sql: availableSql)
 			self.availableCampaigns = self.storage.campaigns.filter { availableCampaignIds.contains($0.id) }
+			self.stories = self.storage.stories(for: self.availableCampaigns)
+			self.onUpdateData.raise(true)
 		}
 	}
 
@@ -72,14 +85,14 @@ final class FeaturingManager {
 			case .applicationStart:
 				#warning("Передалать на application start")
 				guard let campaign = self.availableCampaigns.first(where: { !$0.hasPush && !$0.hasToaster } ) else { return nil }
-				guard let story = self.storage.story(for: campaign) else { return nil }
+			guard let story = self.storage.stories(for: [campaign]).first else { return nil }
 				return FeaturingCampaignAndStory(campaign: campaign, story: story)
 
 			case .deeplink: return nil
 			case .push: return nil
 			case .toaster:
 				guard let campaign = self.triggeredCampaigns.first(where: { $0.hasToaster } ) else { return nil }
-				guard let story = self.storage.story(for: campaign) else { return nil }
+				guard let story = self.storage.stories(for: [campaign]).first else { return nil }
 				return FeaturingCampaignAndStory(campaign: campaign, story: story)
 		}
 

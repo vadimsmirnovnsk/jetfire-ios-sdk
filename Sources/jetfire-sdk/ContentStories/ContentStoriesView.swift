@@ -6,6 +6,7 @@ import UIKit
 public class ContentStoriesView: BaseView<ContentStoriesVM> {
 
 	private let collectionView = StoryCollectionView(viewModel: StoryCollectionVM())
+	private let loader = UIActivityIndicatorView(style: .medium)
 
 	public override var intrinsicContentSize: CGSize {
 		CGSize(width: UIView.noIntrinsicMetric, height: Jetfire.standard.cover.size.height)
@@ -24,6 +25,12 @@ public class ContentStoriesView: BaseView<ContentStoriesVM> {
 		self.addSubview(self.collectionView) { make in
 			make.edges.equalToSuperview()
 		}
+
+		self.loader.hidesWhenStopped = true
+		self.loader.tintColor = .white
+		self.addSubview(self.loader) { make in
+			make.center.equalToSuperview()
+		}
 	}
 
 	public override func viewModelChanged() {
@@ -31,13 +38,23 @@ public class ContentStoriesView: BaseView<ContentStoriesVM> {
 
 		guard let vm = self.viewModel else { return }
 
-		self.collectionView.viewModel.sections = [TableSectionVM(rows: vm.stories)]
+		if vm.shouldShowLoader {
+			self.loader.startAnimating()
+		} else {
+			self.loader.stopAnimating()
+		}
+
+		if !vm.stories.isEmpty {
+			self.collectionView.viewModel.sections = [TableSectionVM(rows: vm.stories)]
+			print(">>> Loaded \(vm.stories.count) stories on Main thread \(Thread.current.isMainThread)")
+		}
 	}
 
 }
 
 public class ContentStoriesVM: BaseVM {
 
+	var shouldShowLoader: Bool { !self.storiesService.storageUpdated }
 	var stories: [BaseCellVM] { self.storiesService.stories.map { $0.previewCellVM } }
 
 	private let storiesService: StoriesService
