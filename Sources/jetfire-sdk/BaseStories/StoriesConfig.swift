@@ -10,18 +10,6 @@ public final class StoriesConfig {
 
 	/// [ Base Stories
 
-	/// Story Circle
-	var storyCircleBackgroundColor: UIColor = .storiesAlmostWhite
-	var storyCircleTextStyle: TextStyle = .system13GraffitBlack
-	var storyCircleRingLeftGradientColor: UIColor = .gradientOrange
-	var storyCircleRingRightGradientColor: UIColor = .gradientYellow
-	var storyCircleCellWidth: CGFloat = 80
-	var storyCircleCellHeight: CGFloat = 100
-	var storyCircleCellInset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
-	var storyCircleImageDiameter: CGFloat = 60
-	var storyCircleSubstrateDiameter: CGFloat = 68
-	var storyCircleSubstrateWidth: CGFloat = 1
-
 	/// Story Browser
 	var progressBarTopColor: UIColor = .storiesAlmostWhite
 	var progressBarBottomColor: UIColor = .storiesAlmostWhite.withAlphaComponent(0.5)

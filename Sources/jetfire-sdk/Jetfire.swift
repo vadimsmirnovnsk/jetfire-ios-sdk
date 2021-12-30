@@ -12,6 +12,7 @@ public class Jetfire {
 	}()
 
 	public let storiesConfig = StoriesConfig()
+	public var cover = CoverStyle.delo()
 	public let snapsConfig = StoryTypesConfig()
 
 	private let api: APIService

@@ -7,12 +7,15 @@ public class ContentStoriesView: BaseView<ContentStoriesVM> {
 
 	private let collectionView = StoryCollectionView(viewModel: StoryCollectionVM())
 
-	public override var intrinsicContentSize: CGSize { CGSize(width: UIView.noIntrinsicMetric, height: Jetfire.standard.storiesConfig.storyCircleCellHeight) }
+	public override var intrinsicContentSize: CGSize {
+		CGSize(width: UIView.noIntrinsicMetric, height: Jetfire.standard.cover.size.height)
+	}
 
 	override init() {
 		super.init()
 
-		self.backgroundColor = Jetfire.standard.storiesConfig.storyCircleBackgroundColor
+		self.backgroundColor = Jetfire.standard.cover.bgColor
+		self.collectionView.backgroundColor = Jetfire.standard.cover.bgColor
 
 		self.collectionView.registerClasses([
 			StoryInfoCell.self

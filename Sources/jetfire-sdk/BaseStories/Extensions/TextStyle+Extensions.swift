@@ -4,6 +4,7 @@ import VNEssential
 extension TextStyle {
 
 	static let system13GraffitBlack = TextStyle(font: .systemFont(ofSize: 13), color: .graffitBlack, interLetterSpacing: 0)
+	static let system13White = TextStyle(font: .systemFont(ofSize: 13), color: .white, interLetterSpacing: 0)
 
 	// Firebase Stories
 	static func storyTitleBlack() -> TextStyle {

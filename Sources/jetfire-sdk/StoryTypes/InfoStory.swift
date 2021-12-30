@@ -23,8 +23,8 @@ struct InfoStoryModel: Codable, IStory {
 	}
 
 	var bgColor: UIColor {
-		guard let colorString = self.bgColorString else { return .gray }
-		return UIColor("#" + colorString, defaultColor: .gray)
+		guard let colorString = self.bgColorString else { return .clear }
+		return UIColor(colorString, defaultColor: .clear)
 	}
 
 	enum CodingKeys: String, CodingKey {
@@ -74,8 +74,8 @@ struct InfoSnap: Codable, ISnap {
 	let button: StoryButton?
 
 	var bgColor: UIColor {
-		guard let colorString = self.bgColorString else { return .gray }
-		return UIColor("#" + colorString, defaultColor: .gray)
+		guard let colorString = self.bgColorString else { return .lightGray }
+		return UIColor(colorString, defaultColor: .lightGray)
 	}
 
 	var bgImageURL: URL? {
@@ -85,7 +85,7 @@ struct InfoSnap: Codable, ISnap {
 
 	var textColor: UIColor {
 		guard let colorString = self.textColorString else { return .white }
-		return UIColor("#" + colorString, defaultColor: .white)
+		return UIColor(colorString, defaultColor: .white)
 	}
 
 	enum CodingKeys: String, CodingKey {

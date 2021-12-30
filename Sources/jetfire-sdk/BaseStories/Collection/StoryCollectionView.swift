@@ -12,7 +12,7 @@ open class StoryCollectionView<TViewModel: StoryCollectionVM>: BaseCollectionVie
 		self.isScrollEnabled = true
 		self.showsHorizontalScrollIndicator = false
 		self.showsVerticalScrollIndicator = false
-		self.backgroundColor = Jetfire.standard.storiesConfig.storyCircleBackgroundColor
+		self.backgroundColor = Jetfire.standard.cover.bgColor
 		self.backgroundView = UIView()
 		self.isUserInteractionEnabled = true
 		self.isUpdateAnimated = true
@@ -26,12 +26,10 @@ final class StoriesLayout: UICollectionViewFlowLayout {
 		super.init()
 
 		self.scrollDirection = .horizontal
-		self.minimumInteritemSpacing = 0
-		self.sectionInset = Jetfire.standard.storiesConfig.storyCircleCellInset
-		self.itemSize = CGSize(
-			width: Jetfire.standard.storiesConfig.storyCircleCellWidth,
-			height: Jetfire.standard.storiesConfig.storyCircleCellHeight
-		)
+		self.minimumInteritemSpacing = Jetfire.standard.cover.interItemOffset
+		self.minimumLineSpacing = Jetfire.standard.cover.interItemOffset
+		self.sectionInset = Jetfire.standard.cover.sectionInset
+		self.itemSize = Jetfire.standard.cover.size
 	}
 	
 	required init?(coder: NSCoder) {

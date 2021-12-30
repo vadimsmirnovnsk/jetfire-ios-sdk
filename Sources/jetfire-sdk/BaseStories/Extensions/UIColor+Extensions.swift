@@ -20,4 +20,7 @@ public extension UIColor {
 	/// #04D900 CommonGreen
 	static let CommonGreen			= #colorLiteral(red: 0.01568627451, green: 0.8509803922, blue: 0, alpha: 1)
 
+	/// #125DE5
+	static let deloBlue	= #colorLiteral(red: 0.07058823529, green: 0.3647058824, blue: 0.8980392157, alpha: 1)
+
 }
