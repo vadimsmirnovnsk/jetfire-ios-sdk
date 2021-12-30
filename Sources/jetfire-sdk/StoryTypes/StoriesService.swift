@@ -65,17 +65,18 @@ extension StoriesService: IStoryService {
 	static let kSecondsInDay: TimeInterval = 60 * 60 * 24
 
 	public func isRead(story: IStory) -> Bool {
-		return self.ud.readStories[story.id] != nil
+		return self.ud.readStories[story.readId] != nil
 	}
 
 	public func markRead(story: IStory) {
 		if self.isRead(story: story) { return }
 
-		self.ud.readStories[story.id] = Date()
+		self.ud.readStories[story.readId] = Date()
+		self.resortStories()
 	}
 
 	func shouldShowRead(story: IStory) -> Bool {
-		guard let date = self.ud.readStories[story.id] else { return true }
+		guard let date = self.ud.readStories[story.readId] else { return true }
 		return abs(Date().timeIntervalSince(date)) < story.lifetime * StoriesService.kSecondsInDay
 	}
 

@@ -73,10 +73,12 @@ final public class FeaturingService {
 
 	private func applicationDidBecomeActive() {
 		self.analytics.trackApplicationStart()
+		self.dbDidModify()
 	}
 
 	private func applicationWillResignActive() {
 		self.analytics.trackApplicationStop()
+		self.dbDidModify()
 		self.db.flush(completion: { _ in })
 //		self.pushService.scheduleActiveFeaturing { campaign in
 //			self.manager.trackShow(campaign: campaign, featuringType: .push)
@@ -91,14 +93,12 @@ final public class FeaturingService {
 
 	public func trackStart(feature: String) {
 		self.analytics.trackFeatureOpen(feature: feature)
-		self.reschedulePushFeaturing()
-		self.rescheduleToasterFeaturing()
+		self.dbDidModify()
 	}
 
 	public func trackFinish(feature: String) {
 		self.analytics.trackFeatureUse(feature: feature)
-		self.reschedulePushFeaturing()
-		self.rescheduleToasterFeaturing()
+		self.dbDidModify()
 	}
 
 	public func updatePushStatus(granted: Bool) {
@@ -106,6 +106,15 @@ final public class FeaturingService {
 	}
 
 	/// MARK: Private
+	private func dbDidModify() {
+		/// Чтобы появились новые сториз в карусели
+		self.manager.prepareAvailableCampaigns()
+		/// Решедулим тостер с новыми событиями в базе
+		self.rescheduleToasterFeaturing()
+		/// Решедулим пуши с новыми событиями в базе
+		self.reschedulePushFeaturing()
+	}
+
 	/// При обновлении статуса пуш-нотификаций дёргается метод и перенастраивает пуш-компанию на следующую непоказанную
 	private func reschedulePushFeaturing() {
 		guard self.pushService.isGranted else {

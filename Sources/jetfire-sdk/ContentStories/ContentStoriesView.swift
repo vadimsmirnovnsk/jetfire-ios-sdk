@@ -44,9 +44,9 @@ public class ContentStoriesView: BaseView<ContentStoriesVM> {
 			self.loader.stopAnimating()
 		}
 
-		self.collectionView.viewModel.items = vm.stories
-//			self.collectionView.viewModel.sections = [TableSectionVM(rows: vm.stories)]
-		print(">>> Loaded \(vm.stories.count) stories on Main thread \(Thread.current.isMainThread)")
+		#warning("Что-то асинхронное в коллекшен вьюхе, обновляется пока так")
+		self.collectionView.viewModel.sections = [TableSectionVM(rows: vm.stories)]
+		self.collectionView.viewModel.sections = [TableSectionVM(rows: vm.stories)]
 	}
 
 }

@@ -34,6 +34,12 @@ public protocol IStory {
 
 }
 
+extension IStory {
+
+	var readId: String { "\(self.campaignId.string)_\(self.id)" }
+
+}
+
 public protocol ISnap {
 
 	var id: String { get }

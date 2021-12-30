@@ -23,6 +23,7 @@ public class Jetfire {
 	private let preferences = PreferencesService()
 	private let userSessionService: UserSessionService
 	private var userUuid = UUID().uuidString
+	private var isStarted = false
 
 	private(set) lazy var router = FeaturingRouter(container: self)
 
@@ -94,19 +95,23 @@ public class Jetfire {
     }
 
 	public func start(with userUuid: String) {
+		self.isStarted = true
 		self.userUuid = userUuid
 		self.featuring.applicationStart()
 	}
 
 	public func trackStart(feature: String) {
+		guard self.isStarted else { return }
 		self.featuring.trackStart(feature: feature)
 	}
 
 	public func trackFinish(feature: String) {
+		guard self.isStarted else { return }
 		self.featuring.trackFinish(feature: feature)
 	}
 
 	public func updatePushStatus(granted: Bool) {
+		guard self.isStarted else { return }
 		self.featuring.updatePushStatus(granted: granted)
 	}
 

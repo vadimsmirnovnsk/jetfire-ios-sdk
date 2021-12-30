@@ -44,8 +44,11 @@ final class FeaturingManager: IStoriesStorage {
 		if let availableSql = self.storage.sql?.available {
 			let availableCampaignIds = self.db.execute(sql: availableSql)
 			self.availableCampaigns = self.storage.campaigns.filter { availableCampaignIds.contains($0.id) }
-			self.stories = self.storage.stories(for: self.availableCampaigns)
-			self.onUpdateData.raise(true)
+			let newStories = self.storage.stories(for: self.availableCampaigns)
+			if self.stories != newStories {
+				self.stories = newStories
+				self.onUpdateData.raise(true)
+			}
 		}
 	}
 
@@ -84,7 +87,7 @@ final class FeaturingManager: IStoriesStorage {
 		switch type {
 			case .applicationStart:
 				#warning("Передалать на application start")
-				guard let campaign = self.availableCampaigns.first(where: { !$0.hasPush && !$0.hasToaster } ) else { return nil }
+			guard let campaign = self.availableCampaigns.first(where: { !$0.hasPush && !$0.hasToaster && $0.canSchedule } ) else { return nil }
 			guard let story = self.storage.stories(for: [campaign]).first else { return nil }
 				return FeaturingCampaignAndStory(campaign: campaign, story: story)
 
