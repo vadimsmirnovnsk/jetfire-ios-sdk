@@ -2,7 +2,9 @@ import UserNotifications
 import UIKit
 
 /// Класс — точка входа на фичеринг снаружи.
-/// Он получает решения от фичеринг менеджера и показывает фичеринг + трекает события
+///
+/// Он получает решения от фичеринг менеджера и показывает фичеринг, трекает события фичеринга,
+/// управляет кругляшами в сториз карусели
 final public class FeaturingService {
 
 	private let manager: FeaturingManager
@@ -27,7 +29,7 @@ final public class FeaturingService {
 		self.ud = ud
 		self.analytics = analytics
 
-		self.reset()
+//		self.reset()
 	}
 
 	func reset() {
@@ -79,16 +81,10 @@ final public class FeaturingService {
 	private func applicationWillResignActive() {
 		self.analytics.trackApplicationStop()
 		self.dbDidModify()
+		/// Решедулим пуши только при выходе из приложения
+		self.reschedulePushFeaturing()
+
 		self.db.flush(completion: { _ in })
-//		self.pushService.scheduleActiveFeaturing { campaign in
-//			self.manager.trackShow(campaign: campaign, featuringType: .push)
-//
-//			Anl.track { track in
-//				track.name(.jetfire_featuring_trigger_show)
-//					.param(.jetfire_featuring_id, value: campaign.id)
-//					.param(.jetfire_trigger_type, value: String.kPush)
-//			}
-//		}
 	}
 
 	public func trackStart(feature: String) {
@@ -106,29 +102,23 @@ final public class FeaturingService {
 	}
 
 	/// MARK: Private
+	/// Это главная функция, которая дёргается на каждый чих в приложении, чтобы бросать в пользователя фичеринги
 	private func dbDidModify() {
 		/// Чтобы появились новые сториз в карусели
 		self.manager.prepareAvailableCampaigns()
+		/// И чтобы появились новые кампании для тостера/пуша
+		self.manager.prepareTriggeredCampaigns()
 		/// Решедулим тостер с новыми событиями в базе
 		self.rescheduleToasterFeaturing()
-		/// Решедулим пуши с новыми событиями в базе
-		self.reschedulePushFeaturing()
 	}
 
 	/// При обновлении статуса пуш-нотификаций дёргается метод и перенастраивает пуш-компанию на следующую непоказанную
 	private func reschedulePushFeaturing() {
-		guard self.pushService.isGranted else {
-			self.pushService.removeAllFeaturings()
-			return
-		}
-
-//		self.pushService.resetPreparingFeaturing()
 		guard let campaign = self.manager.campaignForPush() else { return }
-//		self.pushService.prepareFeaturing(campaign: campaign.campaign)
+		self.scheduler.schedulePush(campaign: campaign)
 	}
 
 	private func rescheduleToasterFeaturing() {
-		self.manager.prepareTriggeredCampaigns()
 		if let campaign = self.manager.campaignForToaster() {
 			self.scheduler.scheduleToaster(campaign: campaign)
 		}
@@ -143,7 +133,7 @@ final public class FeaturingService {
 
 	private func subscribeOnDataUpdates() {
 		self.manager.onFeaturingUpdated.add(self) { [weak self] _ in
-			self?.reschedulePushFeaturing()
+			self?.dbDidModify()
 		}
 
 		self.pushService.onGrantedEvent.add(self) { [weak self] _ in
@@ -160,6 +150,7 @@ extension FeaturingService {
 		didReceive response: UNNotificationResponse
 	) {
 		let campaignId = self.pushService.campaignId(from: response)
+		self.analytics.trackPushTap(campaignId: Int(campaignId))
 		self.manager.retreiveCampaign(with: campaignId) { [weak self] campaign in
 			guard let campaign = campaign else { return }
 			self?.scheduler.scheduleShow(campaign: campaign, featuringType: .push)

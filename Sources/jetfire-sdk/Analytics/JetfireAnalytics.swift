@@ -178,50 +178,35 @@ public final class JetfireAnalytics: IJetfireAnalytics, IStoriesAnalytics {
 	}
 
 	// 10 - push_show
-	func trackPushShow(
-		campaignId: Int?,
-		feature: String,
-		featureId: Int,
-		entityId: String?
-	) {
+	func trackPushShow(campaignId: Int?) {
 		self.db.track(
 			eventType: .push_show,
 			campaignId: campaignId,
-			feature: feature,
-			featureId: featureId,
-			entityId: entityId
+			feature: nil,
+			featureId: nil,
+			entityId: nil
 		)
 	}
 
 	// 11 - push_tap
-	func trackPushTap(
-		campaignId: Int?,
-		feature: String,
-		featureId: Int,
-		entityId: String?
-	) {
+	func trackPushTap(campaignId: Int?) {
 		self.db.track(
 			eventType: .push_tap,
 			campaignId: campaignId,
-			feature: feature,
-			featureId: featureId,
-			entityId: entityId
+			feature: nil,
+			featureId: nil,
+			entityId: nil
 		)
 	}
 
 	// 12 - push_close
-	func trackPushClose(
-		campaignId: Int?,
-		feature: String,
-		featureId: Int,
-		entityId: String?
-	) {
+	func trackPushClose(campaignId: Int?) {
 		self.db.track(
 			eventType: .push_close,
 			campaignId: campaignId,
-			feature: feature,
-			featureId: featureId,
-			entityId: entityId
+			feature: nil,
+			featureId: nil,
+			entityId: nil
 		)
 	}
 

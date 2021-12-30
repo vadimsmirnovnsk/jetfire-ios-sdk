@@ -1,6 +1,7 @@
 import VNEssential
 import UserNotifications
 import UserNotificationsUI
+import Foundation
 
 /// Этот объект запоминает/обновляет кампанию для пуша и когда надо шедулит
 final class FeaturingPushService {
@@ -18,7 +19,8 @@ final class FeaturingPushService {
 		}
 	}
 
-//	private var preparingCampaign: JetFireCampaign?
+	private var preparingCampaign: JetFireCampaign?
+	private var after: TimeInterval?
 
 	init(ud: IFUserDefaults, analytics: IJetfireAnalytics) {
 		self.ud = ud
@@ -44,18 +46,20 @@ final class FeaturingPushService {
 		self.ud.pendingNotificationIds = []
 	}
 
-//	func prepareFeaturing(campaign: JetFireCampaign) {
-//		self.preparingCampaign = campaign
-//		print("Did prepare for push promo featuring id: \(campaign.id)")
-//	}
-//
-//	func resetPreparingFeaturing() {
-//		self.preparingCampaign = nil
-//		print("Did reset push promo")
-//	}
+	func resetPreparingFeaturing() {
+		self.preparingCampaign = nil
+		self.after = nil
+		print("Did reset push promo")
+	}
 
-	func schedule(campaign: JetFireCampaign, after: TimeInterval) {
-//		guard let campaign = self.preparingCampaign else { return }
+	func prepareFeaturing(campaign: JetFireCampaign, after: TimeInterval) {
+		self.preparingCampaign = campaign
+		self.after = after
+		print("Did prepare for push promo campaign id: \(campaign.id) after: \(after)")
+	}
+
+	func schedulePreparedPush() {
+		guard let campaign = self.preparingCampaign, let after = after else { return }
 		self.localPushService.schedulePush(for: campaign, afterInterval: after)
 		self.ud.pendingNotificationIds.append(campaign.id.string)
 	}

@@ -46,8 +46,14 @@ final class StoryScheduler {
 	}
 
 	func schedulePush(campaign: FeaturingCampaignAndStory) {
+		guard self.pushService.isGranted else {
+			self.pushService.removeAllFeaturings()
+			return
+		}
+
 		guard let after = campaign.campaign.push.schedule.afterInterval else { return }
-		self.pushService.schedule(campaign: campaign.campaign, after: after)
+		self.pushService.prepareFeaturing(campaign: campaign.campaign, after: after)
+		self.pushService.schedulePreparedPush()
 	}
 
 	/// Запоминает, когда произошёл показ, чтобы не показывать фичеринги слишком часто

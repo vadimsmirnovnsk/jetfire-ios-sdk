@@ -56,7 +56,9 @@ final class FeaturingManager: IStoriesStorage {
 	func prepareTriggeredCampaigns() {
 		if let triggerSql = self.storage.sql?.trigger {
 			let triggeredCampaignIds = self.db.execute(sql: triggerSql)
-			self.triggeredCampaigns = self.storage.campaigns.filter { triggeredCampaignIds.contains($0.id) }
+			self.triggeredCampaigns = self.storage.campaigns
+				.filter { $0.hasPush || $0.hasToaster }
+//				.filter { triggeredCampaignIds.contains($0.id) }
 		}
 	}
 
@@ -86,34 +88,23 @@ final class FeaturingManager: IStoriesStorage {
 
 		switch type {
 			case .applicationStart:
-				#warning("Передалать на application start")
-			guard let campaign = self.availableCampaigns.first(where: { !$0.hasPush && !$0.hasToaster && $0.canSchedule } ) else { return nil }
-			guard let story = self.storage.stories(for: [campaign]).first else { return nil }
+				#warning("Переделать на application start?")
+				guard let campaign = self.availableCampaigns.first(where: { !$0.hasPush && !$0.hasToaster && $0.canSchedule } ) else { return nil }
+				guard let story = self.storage.stories(for: [campaign]).first else { return nil }
 				return FeaturingCampaignAndStory(campaign: campaign, story: story)
 
-			case .deeplink: return nil
-			case .push: return nil
+			case .push:
+				guard let campaign = self.triggeredCampaigns.filter({ $0.hasPush && $0.canSchedule }).first  else { return nil }
+				guard let story = self.storage.stories(for: [campaign]).first else { return nil }
+				return FeaturingCampaignAndStory(campaign: campaign, story: story)
+
 			case .toaster:
 				guard let campaign = self.triggeredCampaigns.first(where: { $0.hasToaster } ) else { return nil }
 				guard let story = self.storage.stories(for: [campaign]).first else { return nil }
 				return FeaturingCampaignAndStory(campaign: campaign, story: story)
+
+			case .deeplink: return nil
 		}
-
-
-//		let activeAppStartCampaign = data.activeCampaigns
-//			.filter { self.canAlreadyShow(campaign: $0) }
-//			.filter { !self.ud.finishedFeatures.contains($0.feature) }
-//			.sorted { $0.priority > $1.priority }
-//			.first(where: { !Set($0.featuringTypes).intersection(Set(types)).isEmpty })
-
-//		let commonAppStartCampaign = data.commonCampaigns
-//			.filter { self.canAlreadyShow(campaign: $0) }
-//			.filter { !self.ud.finishedFeatures.contains($0.feature) }
-//			.sorted { $0.priority > $1.priority }
-//			.first(where: { !Set($0.featuringTypes).intersection(Set(types)).isEmpty })
-
-//		guard let campaign = activeAppStartCampaign ?? commonAppStartCampaign else { return nil }
-//		guard let story = self.storage.story(for: campaign.storyId) else { return nil }
 	}
 
 	/// Можем ли показывать фичеринг в лицо повторно
@@ -140,35 +131,17 @@ final class FeaturingManager: IStoriesStorage {
 		return Date().timeIntervalSince(date) > self.storage.rules.retryFeatureShowTimeout
 	}
 
-	/// Отвратительный метод, переписать. Он нужен для открытия кампании с пуша
+	/// Метод для открытия кампании с пуша
 	func retreiveCampaign(with identifier: String, completion: @escaping (FeaturingCampaignAndStory?) -> Void) {
-//		if let data = self.storage.data, let campaign = data.campaign(for: identifier) {
-//			if let story = self.storage.story(for: campaign.storyId) {
-//				completion(FeaturingCampaignAndStory(campaign: campaign, story: story))
-//				return
-//			} else {
-//				/// Загрузилась дата, но не загрузились сториз, пробуем
-//				self.storage.refetchData { [weak self] _ in
-//					if let story = self?.storage.story(for: identifier) {
-//						completion(FeaturingCampaignAndStory(campaign: campaign, story: story))
-//						return
-//					} else {
-//						completion(nil)
-//						return
-//					}
-//				}
-//			}
-//		} else {
-//			self.storage.refetchData { [weak self] _ in
-//				if let data = self?.storage.data, let campaign = data.campaign(for: identifier), let story = self?.storage.story(for: campaign.storyId) {
-//					completion(FeaturingCampaignAndStory(campaign: campaign, story: story))
-//					return
-//				} else {
-//					completion(nil)
-//					return
-//				}
-//			}
-//		}
+		if let campaign = (self.triggeredCampaigns + self.availableCampaigns).first(where: { $0.id.string == identifier }),
+			let story = self.storage.stories(for: [campaign]).first
+		{
+			completion(FeaturingCampaignAndStory(campaign: campaign, story: story))
+			return
+		}
+
+		#warning("Загрузить с бэка кампанию")
+		completion(nil)
 	}
 
 }

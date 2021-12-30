@@ -53,9 +53,8 @@ final public class StoriesService {
 		let approvedStories = self.storage.stories
 			.filter { !($0.content.story.isTest ?? false) || self.showAll }
 		stories.append(contentsOf: approvedStories)
-		self.stories = stories
 
-		self.resortStories()
+		self.resort(newStories: stories)
 	}
 
 }
@@ -92,13 +91,20 @@ extension StoriesService: IStoryService {
 	}
 
 	public func resortStories() {
-		let unread = self.stories.filter { !$0.isRead }
+		self.resort(newStories: self.stories)
+	}
+
+	private func resort(newStories: [BaseStory]) {
+		let unread = newStories.filter { !$0.isRead }
 			.sorted { $0.content.story.priority > $1.content.story.priority }
-		let read = self.stories.filter { $0.isRead }
+		let read = newStories.filter { $0.isRead }
 			.filter { self.shouldShowRead(story: $0.content.story) }
 			.sorted { $0.content.story.priority > $1.content.story.priority }
-		self.stories = unread + read
-		self.onChangeStories.raise(())
+		let sortedStories = unread + read
+		if self.stories != sortedStories {
+			self.stories = sortedStories
+			self.onChangeStories.raise(())
+		}
 	}
 
 	private func storiesVC(story: BaseStory, in stories: [BaseStory]) -> UIViewController {
