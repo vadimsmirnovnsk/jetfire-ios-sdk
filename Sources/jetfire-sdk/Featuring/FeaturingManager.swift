@@ -83,7 +83,7 @@ final class FeaturingManager: IStoriesStorage {
 		return campaign
 	}
 
-	private func campaign(for type: FeaturingCampaign.FeaturingType) -> FeaturingCampaignAndStory? {
+	private func campaign(for type: FeaturingType) -> FeaturingCampaignAndStory? {
 		guard self.storage.rules.isFeaturingEnabled else { return nil }
 
 		switch type {

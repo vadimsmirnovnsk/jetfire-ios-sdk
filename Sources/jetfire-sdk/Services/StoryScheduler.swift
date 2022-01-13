@@ -14,7 +14,7 @@ final class StoryScheduler {
 		self.ud = ud
 	}
 
-	func scheduleShow(campaign: FeaturingCampaignAndStory, featuringType: FeaturingCampaign.FeaturingType) {
+	func scheduleShow(campaign: FeaturingCampaignAndStory, featuringType: FeaturingType) {
 		let after: TimeInterval?
 		switch featuringType {
 			case .applicationStart:
@@ -57,12 +57,12 @@ final class StoryScheduler {
 	}
 
 	/// Запоминает, когда произошёл показ, чтобы не показывать фичеринги слишком часто
-	func rememberShow(campaign: JetFireCampaign, featuringType: FeaturingCampaign.FeaturingType) {
+	func rememberShow(campaign: JetFireCampaign, featuringType: FeaturingType) {
 		self.ud.showCampaign[campaign.id.string] = Date()
 		self.remember(featuringType: featuringType)
 	}
 
-	private func remember(featuringType: FeaturingCampaign.FeaturingType) {
+	private func remember(featuringType: FeaturingType) {
 		switch featuringType {
 			case .applicationStart: self.ud.lastApplicationStartShowDate = Date()
 			case .push: self.ud.lastPushShowDate = Date()
