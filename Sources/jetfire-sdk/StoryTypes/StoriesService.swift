@@ -17,32 +17,23 @@ final public class StoriesService {
 	private (set) var stories: [BaseStory] = []
 
 	private let router: BaseRouter
-	private let storage: IStoriesStorage
+	private let storage: IStoriesDataSource
 	private let ud: IUserDefaults
 
 	private(set) var storageUpdated: Bool = false
 	private var isReadyForReconstruct: Bool { self.storageUpdated }
 
-	init(router: BaseRouter, storage: IStoriesStorage, ud: IUserDefaults) {
+	init(router: BaseRouter, storage: IStoriesDataSource, ud: IUserDefaults) {
 		self.router = router
 		self.storage = storage
 		self.ud = ud
 
-		self.storage.service = self
-
-		self.storage.onUpdateData.add(self) { [weak self] updated in
-			if updated {
-				DispatchQueue.main.async {
-					self?.storageUpdated = true
-					self?.reconstructStories()
-				}
-			}
+		self.storage.onChanged.add(self) { [weak self] updated in
+            DispatchQueue.main.async {
+                self?.storageUpdated = true
+                self?.reconstructStories()
+            }
 		}
-	}
-
-	public func refetchStories(completion: @escaping BoolBlock) {
-		self.storageUpdated = false
-		self.storage.refetchStories(completion: completion)
 	}
 
 	private func reconstructStories() {

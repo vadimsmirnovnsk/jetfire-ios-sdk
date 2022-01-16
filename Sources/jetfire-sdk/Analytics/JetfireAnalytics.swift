@@ -16,7 +16,7 @@ public protocol IJetfireAnalytics: AnyObject {
 
 }
 
-public final class JetfireAnalytics: IJetfireAnalytics, IStoriesAnalytics {
+final class JetfireAnalytics: IJetfireAnalytics, IStoriesAnalytics {
 
 	public var onLogEvent: ((_ name: EventId, _ params: [ ParameterId : Any ]) -> Void)?
 
@@ -98,7 +98,7 @@ public final class JetfireAnalytics: IJetfireAnalytics, IStoriesAnalytics {
 	}
 
 	// 3 - application_shutdown
-	func trackApplicationStop() {
+	func trackApplicationShutdown() {
 		self.db.track(eventType: .application_shutdown)
 	}
 
