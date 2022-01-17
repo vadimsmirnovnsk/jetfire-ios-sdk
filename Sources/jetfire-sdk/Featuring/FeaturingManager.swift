@@ -7,14 +7,14 @@ struct FeaturingCampaignAndStory {
 	let story: BaseStory
 }
 
-final class FeaturingManager: IStoriesStorage {
+final class FeaturingManager: IStoriesDataSource {
 
 	/// Здесь только сториз, которые доступны пользователю
 	private(set) var stories: [BaseStory] = []
 	unowned var service: IStoryService!
-	var onUpdateData = Event<Bool>()
+	var onChanged = Event<Void>()
 
-	var onFeaturingUpdated: Event<Bool> { self.onUpdateData }
+	var onFeaturingUpdated: Event<Void> { self.onChanged }
 
 	private let storage: FeaturingStorage
 	private let ud: IFUserDefaults
@@ -29,9 +29,9 @@ final class FeaturingManager: IStoriesStorage {
 		self.db = db
 	}
 
-	func refetchStories(completion: @escaping BoolBlock) {
-		self.refetchData(completion: completion)
-	}
+    func fetchStories(completion: @escaping (Result<[BaseStory], Error>) -> Void) {
+        completion(.success(self.stories))
+    }
 
 	func refetchData(completion: @escaping BoolBlock) {
 		self.storage.refetchFeaturingData { res in
@@ -47,7 +47,7 @@ final class FeaturingManager: IStoriesStorage {
 			let newStories = self.storage.stories(for: self.availableCampaigns)
 			if self.stories != newStories {
 				self.stories = newStories
-				self.onUpdateData.raise(true)
+				self.onChanged.raise(())
 			}
 		}
 	}

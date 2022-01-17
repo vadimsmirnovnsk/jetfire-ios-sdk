@@ -24,4 +24,8 @@ extension Date {
 		Int(self.morning.timeIntervalSince1970)
 	}
 
+    func appendingSeconds(_ value: Int) -> Date? {
+        Calendar.current.date(byAdding: .second, value: value, to: self)
+    }
+
 }

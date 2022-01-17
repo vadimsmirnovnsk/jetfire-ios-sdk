@@ -30,7 +30,7 @@ class ViewController: UIViewController {
 		let featureB = BlockButton { [weak self] _ in
 			self?.showFeatureB()
 		}
-		featureB.apply(text: "Feature B", normal: .systemSemiBold24Black)
+		featureB.apply(text: "toaster_demo", normal: .systemSemiBold24Black)
 		self.view.addSubview(featureB)
 		featureB.snp.makeConstraints { make in
 			make.centerX.equalToSuperview()
@@ -40,7 +40,7 @@ class ViewController: UIViewController {
 		let featureC = BlockButton { [weak self] _ in
 			self?.showFeatureC()
 		}
-		featureC.apply(text: "Feature C", normal: .systemSemiBold24Black)
+		featureC.apply(text: "application_start", normal: .systemSemiBold24Black)
 		self.view.addSubview(featureC)
 		featureC.snp.makeConstraints { make in
 			make.centerX.equalToSuperview()
@@ -54,11 +54,11 @@ class ViewController: UIViewController {
 	}
 
 	func showFeatureB() {
-
+        Jetfire.standard.trackStart(feature: "toaster_demo")
 	}
 
 	func showFeatureC() {
-
+        Jetfire.standard.trackStart(feature: "application_start")
 	}
 
 }

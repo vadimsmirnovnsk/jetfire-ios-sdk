@@ -79,7 +79,7 @@ final public class FeaturingService {
 	}
 
 	private func applicationWillResignActive() {
-		self.analytics.trackApplicationStop()
+		self.analytics.trackApplicationShutdown()
 		self.dbDidModify()
 		/// Решедулим пуши только при выходе из приложения
 		self.reschedulePushFeaturing()

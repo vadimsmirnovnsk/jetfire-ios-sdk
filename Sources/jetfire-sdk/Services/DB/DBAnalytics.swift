@@ -14,29 +14,33 @@ import UIKit
 
 enum DBEventType: Int {
 	 case custom = 0
-	 case first_launch
-	 case application_start
-	 case application_shutdown
-	 case feature_open
-	 case feature_close
-	 case feature_use
-	 case story_open
-	 case story_tap
-	 case story_close
-	 case push_show
-	 case push_tap
-	 case push_close
-	 case toaster_show
-	 case toaster_tap
-	 case toaster_close
-	 case feature_accepted
+	 case first_launch = 1
+	 case application_start = 2
+	 case application_shutdown = 3
+	 case feature_open = 4
+	 case feature_close = 5
+	 case feature_use = 6
+	 case story_open = 7
+	 case story_tap = 8
+	 case story_close = 9
+	 case push_show = 10
+	 case push_tap = 11
+	 case push_close = 12
+	 case toaster_show = 13
+	 case toaster_tap = 14
+	 case toaster_close = 15
+	 case feature_accepted = 16
 }
+
+// MARK: - DBAnalytics
 
 final class DBAnalytics {
 
 	private let db: DB!
 	private let ud: IFUserDefaults
 	private let api: IFeaturingAPI
+
+    let onChanged: Event<Void> = Event()
 
 	init(ud: IFUserDefaults, api: IFeaturingAPI) {
 		self.ud = ud
@@ -111,6 +115,7 @@ final class DBAnalytics {
 			data: data
 		)
 		self.db.track(event: event)
+        self.onChanged.raise(())
 	}
 
 }
