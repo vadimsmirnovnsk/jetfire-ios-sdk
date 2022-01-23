@@ -1,5 +1,4 @@
 import Foundation
-import OrderedCollections
 
 /// Планировщик сторис, тостеров, пушей
 protocol IFeaturingScheduler {
@@ -37,8 +36,10 @@ final class FeaturingScheduler: IFeaturingScheduler {
             userInfo: nil,
             repeats: true
         )
-        self.triggeredCampaignsProvider.onChanged.add(self) { [weak self] in
-            self?.refresh()
+        self.triggeredCampaignsProvider.onUpdate.add(self) { [weak self] isChanged in
+            if isChanged {
+                self?.refresh()
+            }
         }
     }
 }
@@ -53,31 +54,24 @@ extension FeaturingScheduler {
     }
 
     private func scheduleTasks() {
-        let triggeredTasks = self.triggeredCampaignsProvider.campaigns.flatMap { campaign in
-            campaign.stories
-                .map { self.factory.makeStorableTask(story: $0, campaignId: campaign.id) }
-                .filter { !$0.isExpired }
+        var triggeredTasks: [SchedulerStorableTask] = []
+        for campaign in self.triggeredCampaignsProvider.campaigns {
+            let stories = campaign.stories.map {
+                self.factory.makeStorableTask(story: $0, campaignId: campaign.id)
+            }
+            let toasters = campaign.hasToaster ? [campaign.toaster].map {
+                self.factory.makeStorableTask(toaster: $0, campaignId: campaign.id)
+            } : []
+            triggeredTasks.append(toasters)
+            triggeredTasks.append(stories)
         }
-        self.storableTasks = self.sync(oldTasks: self.storableTasks, newTasks: triggeredTasks)
+        self.storableTasks = sync(oldTasks: self.storableTasks, newTasks: triggeredTasks)
         self.liveTasks = Dictionary(uniqueKeysWithValues: self.storableTasks.compactMap { storable in
             self.factory.makeLiveTask(storableTask: storable) { [weak self] in
                 self?.remove(storableTask: storable)
             }
             .map { ($0.task, $0) }
         })
-    }
-
-    private func sync(oldTasks: [SchedulerStorableTask], newTasks: [SchedulerStorableTask]) -> [SchedulerStorableTask] {
-        var result: [SchedulerStorableTask] = []
-        for newItem in newTasks {
-            if let index = self.storableTasks.firstIndex(of: newItem) {
-                let existingItem = self.storableTasks[index]
-                result.append(existingItem)
-            } else {
-                result.append(newItem)
-            }
-        }
-        return result
     }
 
     private func remove(storableTask: SchedulerStorableTask) {
@@ -90,4 +84,19 @@ extension FeaturingScheduler {
     @objc private func timerTick() {
         self.liveTasks.values.forEach { $0.tick() }
     }
+}
+
+// MARK: - Private
+
+private func sync(oldTasks: [SchedulerStorableTask], newTasks: [SchedulerStorableTask]) -> [SchedulerStorableTask] {
+    var result: [SchedulerStorableTask] = []
+    for newItem in newTasks {
+        if let index = oldTasks.firstIndex(of: newItem) {
+            let existingItem = oldTasks[index]
+            result.append(existingItem)
+        } else {
+            result.append(newItem)
+        }
+    }
+    return result
 }

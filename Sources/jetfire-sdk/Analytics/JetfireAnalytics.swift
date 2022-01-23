@@ -41,7 +41,7 @@ final class JetfireAnalytics: IJetfireAnalytics, IStoriesAnalytics {
 			.jetfire_story_id : storyId,
 			.jetfire_campaign_id : campaignId
 		])
-		self.trackStoryOpen(campaignId: campaignId.int, entityId: storyId)
+		self.trackStoryOpen(campaignId: campaignId, entityId: storyId)
 	}
 
 	func trackStorySnapDidShow(storyId: String, index: Int, campaignId: Int64) {
@@ -50,7 +50,7 @@ final class JetfireAnalytics: IJetfireAnalytics, IStoriesAnalytics {
 			.jetfire_campaign_id : campaignId,
 			.jetfire_snap_index : index
 		])
-		self.trackStoryOpen(campaignId: campaignId.int, entityId: "\(storyId):\(index)")
+		self.trackStoryOpen(campaignId: campaignId, entityId: "\(storyId):\(index)")
 	}
 
 	func trackStoryDidFinishShow(storyId: String, campaignId: Int64) {
@@ -58,7 +58,7 @@ final class JetfireAnalytics: IJetfireAnalytics, IStoriesAnalytics {
 			.jetfire_story_id : storyId,
 			.jetfire_campaign_id : campaignId,
 		])
-		self.trackStoryClose(campaignId: campaignId.int, entityId: storyId)
+		self.trackStoryClose(campaignId: campaignId, entityId: storyId)
 	}
 
 	func trackStoryDidTapButton(storyId: String, index: Int, buttonTitle: String, campaignId: Int64) {
@@ -68,7 +68,7 @@ final class JetfireAnalytics: IJetfireAnalytics, IStoriesAnalytics {
 			.jetfire_snap_index : index,
 			.jetfire_button_title : buttonTitle,
 		])
-		self.trackStoryTap(campaignId: campaignId.int, entityId: "\(storyId):\(index)")
+		self.trackStoryTap(campaignId: campaignId, entityId: "\(storyId):\(index)")
 	}
 
 	/// DBAnalytics
@@ -137,7 +137,7 @@ final class JetfireAnalytics: IJetfireAnalytics, IStoriesAnalytics {
 
 	// 7 - story_open
 	func trackStoryOpen(
-		campaignId: Int, // Campaign.id
+		campaignId: Int64, // Campaign.id
 		entityId: String // == story_id FeatureStory.id:номер кадра 100:0
 	) {
 		self.db.track(
@@ -151,7 +151,7 @@ final class JetfireAnalytics: IJetfireAnalytics, IStoriesAnalytics {
 
 	// 8 - story_tap
 	func trackStoryTap(
-		campaignId: Int?,
+		campaignId: Int64?,
 		entityId: String
 	) {
 		self.db.track(
@@ -165,7 +165,7 @@ final class JetfireAnalytics: IJetfireAnalytics, IStoriesAnalytics {
 
 	// 9 - story_close
 	func trackStoryClose(
-		campaignId: Int?,
+		campaignId: Int64?,
 		entityId: String
 	) {
 		self.db.track(
@@ -178,7 +178,7 @@ final class JetfireAnalytics: IJetfireAnalytics, IStoriesAnalytics {
 	}
 
 	// 10 - push_show
-	func trackPushShow(campaignId: Int?) {
+	func trackPushShow(campaignId: Int64?) {
 		self.db.track(
 			eventType: .push_show,
 			campaignId: campaignId,
@@ -189,7 +189,7 @@ final class JetfireAnalytics: IJetfireAnalytics, IStoriesAnalytics {
 	}
 
 	// 11 - push_tap
-	func trackPushTap(campaignId: Int?) {
+	func trackPushTap(campaignId: Int64?) {
 		self.db.track(
 			eventType: .push_tap,
 			campaignId: campaignId,
@@ -200,7 +200,7 @@ final class JetfireAnalytics: IJetfireAnalytics, IStoriesAnalytics {
 	}
 
 	// 12 - push_close
-	func trackPushClose(campaignId: Int?) {
+	func trackPushClose(campaignId: Int64?) {
 		self.db.track(
 			eventType: .push_close,
 			campaignId: campaignId,
@@ -211,56 +211,32 @@ final class JetfireAnalytics: IJetfireAnalytics, IStoriesAnalytics {
 	}
 
 	// 13 - toaster_show
-	func trackToasterShow(
-		campaignId: Int?,
-		feature: String,
-		featureId: Int,
-		entityId: String?
-	) {
+	func trackToasterShow(campaignId: Int64) {
 		self.db.track(
 			eventType: .toaster_show,
-			campaignId: campaignId,
-			feature: feature,
-			featureId: featureId,
-			entityId: entityId
+			campaignId: campaignId
 		)
 	}
 
 	// 14 - toaster_tap
-	func trackToasterTap(
-		campaignId: Int?,
-		feature: String,
-		featureId: Int,
-		entityId: String?
-	) {
+	func trackToasterTap(campaignId: Int64) {
 		self.db.track(
 			eventType: .toaster_tap,
-			campaignId: campaignId,
-			feature: feature,
-			featureId: featureId,
-			entityId: entityId
+			campaignId: campaignId
 		)
 	}
 
 	// 15 - toaster_close
-	func trackToasterClose(
-		campaignId: Int?,
-		feature: String,
-		featureId: Int,
-		entityId: String?
-	) {
+	func trackToasterClose(campaignId: Int64) {
 		self.db.track(
 			eventType: .toaster_close,
-			campaignId: campaignId,
-			feature: feature,
-			featureId: featureId,
-			entityId: entityId
+			campaignId: campaignId
 		)
 	}
 
 	// 16 - feature_accepted
 	func trackFeatureAccepted(
-		campaignId: Int?,
+		campaignId: Int64?,
 		feature: String,
 		featureId: Int,
 		entityId: String?

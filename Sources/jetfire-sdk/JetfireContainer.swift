@@ -5,7 +5,6 @@ import UIKit
 final class JetfireContainer {
 
     private let application = UIApplication.shared
-    private let ud = UserDefaults.standard
     private let serviceInfo = ServiceInfo()
     private let preferences = PreferencesService()
     private let contentPresenter = ContentPresenter()
@@ -22,16 +21,28 @@ final class JetfireContainer {
         return storage
     }()
 
+    lazy private(set) var userSettings: IUserSettings = {
+        UserSettings()
+    }()
+
     lazy private(set) var featuringManager: FeaturingManager = {
-        FeaturingManager(ud: self.ud, storage: self.featuringStorage, db: self.dbAnalytics)
+        FeaturingManager(
+            ud: self.userSettings,
+            storage: self.featuringStorage,
+            db: self.dbAnalytics
+        )
     }()
 
     lazy private(set) var featuringPushService: FeaturingPushService = {
-        FeaturingPushService(ud: self.ud, analytics: self.analytics)
+        FeaturingPushService(ud: self.userSettings, analytics: self.analytics)
     }()
 
     lazy private(set) var storiesService: StoriesService = {
-        StoriesService(router: self.router, storage: self.storiesDataSource, ud: self.ud)
+        StoriesService(
+            router: self.router,
+            storage: self.storiesDataSource,
+            ud: self.userSettings
+        )
     }()
 
     lazy private(set) var scheduler: StoryScheduler = {
@@ -39,7 +50,7 @@ final class JetfireContainer {
             router: self.router,
             storiesService: self.storiesService,
             pushService: self.featuringPushService,
-            ud: self.ud
+            ud: self.userSettings
         )
     }()
 
@@ -48,7 +59,7 @@ final class JetfireContainer {
             manager: self.featuringManager,
             pushService: self.featuringPushService,
             db: self.dbAnalytics,
-            ud: self.ud,
+            ud: self.userSettings,
             scheduler: self.scheduler,
             analytics: self.analytics
         )
@@ -85,7 +96,7 @@ final class JetfireContainer {
     }()
 
     lazy private(set) var dbAnalytics: DBAnalytics = {
-        DBAnalytics(ud: self.ud, api: self.api)
+        DBAnalytics(ud: self.userSettings, api: self.api)
     }()
 
     lazy private(set) var campaignsProvider: ICampaignsProvider = {
@@ -115,10 +126,26 @@ final class JetfireContainer {
         )
     }()
 
+    lazy private(set) var toasterFactory: ToasterFactory = {
+        ToasterFactory(
+            storiesService: self.storiesService,
+            storiesFactory: self.storiesFactory,
+            jetfireAnalytics: self.analytics
+        )
+    }()
+
+    lazy private(set) var rulesProvider: IFeaturingRulesProvider = {
+        FeaturingRulesProvider()
+    }()
+
     lazy private(set) var schedulerTaskFactory: SchedulerTaskFactory = {
         SchedulerTaskFactory(
             triggeredCampaignsProvider: self.triggeredCampaignsProvider,
-            storiesDataSource: self.storiesDataSource
+            storiesDataSource: self.storiesDataSource,
+            toasterFactory: self.toasterFactory,
+            jetfireAnalytics: self.analytics,
+            ud: self.userSettings,
+            rulesProvider: self.rulesProvider
         )
     }()
 
@@ -131,14 +158,15 @@ final class JetfireContainer {
 
     lazy private(set) var jetfireMain: IJetfireMain = {
         JetfireMain(
-            ud: self.ud,
+            ud: self.userSettings,
             analytics: self.analytics,
-            scheduler: self.featuringScheduler
+            scheduler: self.featuringScheduler,
+            dbAnalytics: self.dbAnalytics
         )
     }()
 
     init(router: FeaturingRouter) {
         self.router = router
-        self.storiesFactory.storyService = self.storiesService
+        self.storiesFactory.storiesService = self.storiesService
     }
 }

@@ -11,19 +11,19 @@ final class FeaturingManager: IStoriesDataSource {
 
 	/// Здесь только сториз, которые доступны пользователю
 	private(set) var stories: [BaseStory] = []
-	unowned var service: IStoryService!
+	unowned var service: IStoriesService!
 	var onChanged = Event<Void>()
 
 	var onFeaturingUpdated: Event<Void> { self.onChanged }
 
 	private let storage: FeaturingStorage
-	private let ud: IFUserDefaults
+	private let ud: IUserSettings
 	private let db: DBAnalytics
 
 	private var availableCampaigns: [JetFireCampaign] = []
 	private var triggeredCampaigns: [JetFireCampaign] = []
 
-	init(ud: IFUserDefaults, storage: FeaturingStorage, db: DBAnalytics) {
+	init(ud: IUserSettings, storage: FeaturingStorage, db: DBAnalytics) {
 		self.ud = ud
 		self.storage = storage
 		self.db = db

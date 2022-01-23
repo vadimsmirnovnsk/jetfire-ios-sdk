@@ -1,4 +1,4 @@
-public protocol IStoryService: AnyObject {
+public protocol IStoriesService: AnyObject {
 
 	func isRead(story: IStory) -> Bool
 	func markRead(story: IStory)

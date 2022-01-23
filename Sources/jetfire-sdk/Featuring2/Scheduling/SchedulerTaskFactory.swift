@@ -5,13 +5,25 @@ final class SchedulerTaskFactory {
 
     private let triggeredCampaignsProvider: ITriggeredCampaignsProvider
     private let storiesDataSource: IMutableStoriesDataSource
+    private let toasterFactory: ToasterFactory
+    private let jetfireAnalytics: JetfireAnalytics
+    private let ud: IUserSettings
+    private let rulesProvider: IFeaturingRulesProvider
 
     init(
         triggeredCampaignsProvider: ITriggeredCampaignsProvider,
-        storiesDataSource: IMutableStoriesDataSource
+        storiesDataSource: IMutableStoriesDataSource,
+        toasterFactory: ToasterFactory,
+        jetfireAnalytics: JetfireAnalytics,
+        ud: IUserSettings,
+        rulesProvider: IFeaturingRulesProvider
     ) {
         self.triggeredCampaignsProvider = triggeredCampaignsProvider
         self.storiesDataSource = storiesDataSource
+        self.toasterFactory = toasterFactory
+        self.jetfireAnalytics = jetfireAnalytics
+        self.ud = ud
+        self.rulesProvider = rulesProvider
     }
 
     func makeStorableTask(
@@ -27,6 +39,19 @@ final class SchedulerTaskFactory {
         )
     }
 
+    func makeStorableTask(
+        toaster: JetFireFeatureToaster,
+        campaignId: Int64
+    ) -> SchedulerStorableTask {
+        SchedulerStorableTask(
+            type: .toaster,
+            campaignId: campaignId,
+            storyId: nil,
+            activationDate: toaster.activationDate(),
+            expirationDate: toaster.expirationDate()
+        )
+    }
+
     func makeLiveTask(
         storableTask: SchedulerStorableTask,
         completion: @escaping () -> Void
@@ -36,7 +61,7 @@ final class SchedulerTaskFactory {
             if let storyId = storableTask.storyId {
                 return SchedulerLiveTask(
                     task: storableTask,
-                    taskActivator: StoryTaskActivator(
+                    taskActivator: StoryActivator(
                         storyId: storyId,
                         campaignId: storableTask.campaignId,
                         triggeredCampaignsProvider: self.triggeredCampaignsProvider,
@@ -48,15 +73,36 @@ final class SchedulerTaskFactory {
                 assertionFailure("No storyId found")
                 return nil
             }
-        case .push:
-            return nil
+        case .toaster:
+            return SchedulerLiveTask(
+                task: storableTask,
+                taskActivator: ToasterActivator(
+                    campaignId: storableTask.campaignId,
+                    triggeredCampaignsProvider: self.triggeredCampaignsProvider,
+                    factory: self.toasterFactory,
+                    jetfireAnalytics: self.jetfireAnalytics,
+                    ud: self.ud,
+                    rulesProvider: self.rulesProvider
+                ),
+                completion: completion
+            )
         }
     }
 }
 
-// MARK: - JetFireFeatureStory
+// MARK: - IScheduleSupport
 
-private extension JetFireFeatureStory {
+protocol IScheduleSupport {
+    var hasSchedule: Bool { get }
+    var schedule: JetFireSchedule { get }
+    var hasExpire: Bool { get }
+    var expire: JetFireSchedule { get }
+}
+
+extension JetFireFeatureStory: IScheduleSupport {}
+extension JetFireFeatureToaster: IScheduleSupport {}
+
+private extension IScheduleSupport {
 
     func activationDate() -> Date? {
         if self.hasSchedule {
@@ -74,10 +120,10 @@ private extension JetFireFeatureStory {
 
     func expirationDate() -> Date? {
         if self.hasExpire {
-            if self.schedule.hasAtTime {
-                return Date(timeIntervalSince1970: Double(self.schedule.atTime.value) / 1000)
-            } else if self.schedule.hasAfter, let activationDate = self.activationDate() {
-                return activationDate.appendingSeconds(Int(self.schedule.after))
+            if self.expire.hasAtTime {
+                return Date(timeIntervalSince1970: Double(self.expire.atTime.value) / 1000)
+            } else if self.expire.hasAfter, let activationDate = self.activationDate() {
+                return activationDate.appendingSeconds(Int(self.expire.after))
             } else {
                 return nil
             }

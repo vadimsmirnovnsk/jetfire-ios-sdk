@@ -1,13 +1,7 @@
 import Foundation
 
 /// Активирует задание планировщика — добавляет историю в карусель
-protocol ISchedulerTaskActivator {
-    func activate()
-}
-
-// MARK: - StoryTaskActivator
-
-final class StoryTaskActivator: ISchedulerTaskActivator {
+final class StoryActivator: ISchedulerTaskActivator {
 
     private let storyId: Int64
     private let campaignId: Int64

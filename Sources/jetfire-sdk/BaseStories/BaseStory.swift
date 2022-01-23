@@ -16,10 +16,10 @@ open class BaseStory: Equatable {
 	var snaps: [BaseSnap] { self.snapVMs.map { BaseSnap(snapVM: $0) } }
 	let snapVMs: [BaseSnapVM]
 
-	unowned let service: IStoryService!
+	unowned let service: IStoriesService!
 	private let analytics: IStoriesAnalytics
 
-	init(service: IStoryService, analytics: IStoriesAnalytics, content: StoryContent,
+	init(service: IStoriesService, analytics: IStoriesAnalytics, content: StoryContent,
 		 previewVM: StoryCollectionBaseCellVM, snaps: [BaseSnapVM])
 	{
 		self.service = service
