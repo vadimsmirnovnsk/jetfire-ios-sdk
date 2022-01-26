@@ -47,7 +47,7 @@ final class DBAnalytics {
 		self.api = api
 		let url = FileManager.libraryPath(forFileName: "db-v1.sqlite3")!
 		self.db = try! DB(path: url)
-		print("Opened DB by path: \(url)")
+        Log.info("Did open DB by path: \(url)")
 	}
 
 	func reset() {
@@ -75,11 +75,11 @@ final class DBAnalytics {
 		self.api.sync(events: events) { [weak self] res in
 			switch res {
 				case .failure(let error):
-					print("💥 Jetfire sync data error: \(error)")
+                    Log.info("💥 Sync data error: \(error)")
 					completion(false)
 					internalCompletion()
 				case .success:
-					print("Jetfire synced data ad: \(till)")
+                    Log.info("Synced data ad: \(till)")
 					self?.ud.lastFlushDate = till
 					completion(true)
 					internalCompletion()
@@ -114,8 +114,62 @@ final class DBAnalytics {
 			timestamp: date,
 			data: data
 		)
-		self.db.track(event: event)
+        let params: [String: Any?] = [
+            "campaignId": campaignId,
+            "feature": feature,
+            "featureId": featureId,
+            "entityId": entityId,
+            "customEvent": customEvent
+        ]
+        let description = params.reduce(into: [:]) { result, item in result[item.key] = item.value }
+            .map { "\($0.key):\($0.value)" }
+            .joined(separator: ", ")
+        Log.info("Will insert event '\(eventType.stringValue)' [\(description)]")
+        self.db.track(event: event)
         self.onChanged.raise(())
-	}
+    }
 
+}
+
+// MARK: - DBEventType Log
+
+private extension DBEventType {
+    var stringValue: String {
+        switch self {
+        case .custom:
+            return "custom"
+        case .first_launch:
+            return "first_launch"
+        case .application_start:
+            return "application_start"
+        case .application_shutdown:
+            return "application_shutdown"
+        case .feature_open:
+            return "feature_open"
+        case .feature_close:
+            return "feature_close"
+        case .feature_use:
+            return "feature_use"
+        case .story_open:
+            return "story_open"
+        case .story_tap:
+            return "story_tap"
+        case .story_close:
+            return "story_close"
+        case .push_show:
+            return "push_show"
+        case .push_tap:
+            return "push_tap"
+        case .push_close:
+            return "push_close"
+        case .toaster_show:
+            return "toaster_show"
+        case .toaster_tap:
+            return "toaster_tap"
+        case .toaster_close:
+            return "toaster_close"
+        case .feature_accepted:
+            return "feature_accepted"
+        }
+    }
 }

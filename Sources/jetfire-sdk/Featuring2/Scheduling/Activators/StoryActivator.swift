@@ -27,7 +27,8 @@ final class StoryActivator: ISchedulerTaskActivator {
         // Если на момент активации историю не нашли в тригере,
         // значит состояние приложения поменялось, и эта история
         // уже не актуальна, игнорируем ее
-        guard let story = story else { return }
+        guard let campaign = campaign, let story = story else { return }
+        Log.info("Activate story \(campaign.debugDescription)")
         self.storiesDataSource.append(story: story, campaignId: self.campaignId)
     }
 }

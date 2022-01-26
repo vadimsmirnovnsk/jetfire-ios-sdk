@@ -43,12 +43,9 @@ final class FeaturingStorage  {
 		self.api.fetchCampaigns { [weak self] res in
 			guard let self = self else { return }
 			switch res {
-				case .failure(let error):
-					print("Fetched campaigns error: \(error)")
+				case .failure:
 					completion(nil)
-
 				case .success(let response):
-					print("Fetched campaigns data: \(response)")
 					self.response = response
 					self.stories = response.campaigns.compactMap { self.createStory(for: $0) }
 					completion(response)

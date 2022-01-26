@@ -118,13 +118,13 @@ class APIService: IAPIService {
 				params: nil,
 				body: data,
 				queue: queue,
-				debugRequest: protoObject?.debugDescription ?? "",
+                protoObject: protoObject,
 				timeoutInterval: timeoutInterval,
 				shouldLog: shouldLog,
 				callback: callback
 			)
 		} catch {
-			print("Serialise error: \(error)")
+            Log.info("Serialization error: \(error)")
 			queue.async {
 				callback(.failure(JetfireError.apiProtoWrapError))
 			}
@@ -162,7 +162,8 @@ class APIService: IAPIService {
 			method: method,
 			params: params,
 			body: body,
-			queue: queue,
+            queue: queue,
+            protoObject: nil,
 			timeoutInterval: timeoutInterval,
 			shouldLog: shouldLog
 		) { (response) in
@@ -181,7 +182,7 @@ class APIService: IAPIService {
 		params: [String : Any]?,
 		body: Data? = nil,
 		queue: DispatchQueue = .main,
-		debugRequest: String = "",
+        protoObject: SwiftProtobuf.Message?,
 		timeoutInterval: TimeInterval = Constants.timeoutIntervalForRequest,
 		shouldLog: Bool = true,
 		callback: @escaping ((Result<Data, Error>) -> Void)
@@ -195,9 +196,7 @@ class APIService: IAPIService {
 		}
 
 		if shouldLog {
-			#if DEBUG
-			print("Will perform \(httpMethod) \(urlString), params: \(String(describing: params)), request: \(debugRequest)")
-			#endif
+            Log.info("Will perform \(httpMethod) \(urlString), params: \(String(describing: params)), request:\n\(protoObject?.prettyPrintedJSONString ?? "")")
 		}
 
 		// Эта грязь для пуш-токенов
@@ -231,23 +230,13 @@ class APIService: IAPIService {
 		request.responseData(completionHandler: { response in
 			let result: Result<Data, Error>
 
-			let duration = Date().timeIntervalSince(startDate)
-			let durationsMessage = "Request duration \(duration) for \(urlString)"
-			if duration > 1 {
-				#if DEBUG
-				print(durationsMessage)
-				#endif
-			} else {
-				print(durationsMessage)
-			}
+            Log.info("Request duration \(Date().timeIntervalSince(startDate)) for \(urlString)")
 
 			if let data = response.data, let code = response.response?.statusCode {
 				if case 200..<310 = code {
 					// Хороший результат с сервера
 					if shouldLog {
-						#if DEBUG
-						print("Did successfully complete \(httpMethod) \(urlString), params: \(String(describing: params))")
-						#endif
+						Log.info("Did successfully complete \(httpMethod) \(urlString)")
 					}
 					result = .success(data)
 				} else {
@@ -258,7 +247,7 @@ class APIService: IAPIService {
 					switch errorResponse {
 						case .success(let errorModel):
 							result = .failure(errorModel)
-							print("Did receive error: \(errorModel) for \(httpMethod) \(urlString), params: \(String(describing: params)), DebugRequest: \(debugRequest)")
+                            Log.info("Did receive error: \(errorModel) for \(httpMethod) \(urlString)")
 //							Anal.track(.error_backend, params: [
 //								.error : errorModel.message,
 //								.message: errorModel.systemMessage,
@@ -267,9 +256,9 @@ class APIService: IAPIService {
 //							])
 						case .failure:
 							result = errorResult
-							let text = String(data: data, encoding: .utf8) ?? ""
-							let message = "Did receive unwrapped error code: \(code) result: \(errorResult) for \(httpMethod) \(urlString), params: \(String(describing: params)), string: \(text) DebugRequest: \(debugRequest)"
-							print(message)
+//							let text = String(data: data, encoding: .utf8) ?? ""
+//							let message = "Did receive unwrapped error code: \(code) result: \(errorResult) for \(httpMethod) \(urlString), params: \(String(describing: params)), string: \(text) DebugRequest: \(debugRequest)"
+                            Log.info("Did receive unwrapped error code: \(code) result: \(errorResult) for \(httpMethod) \(urlString), string: \(String(describing: String(data: data, encoding: .utf8)))")
 //							Anal.track(.error_backend, params: [
 //								.error : message,
 //								.error_code : code,
@@ -278,7 +267,7 @@ class APIService: IAPIService {
 				}
 			} else if let error = response.error {
 				// Ошибки сети
-				print("Did receive error: \(error) for \(httpMethod) \(urlString), params: \(String(describing: params))")
+                Log.info("Did receive error: \(error) for \(httpMethod) \(urlString)")
 				result = .failure(JetfireError.apiGeneral)
 
 //				Anal.track(.error_client, params: [
@@ -288,7 +277,7 @@ class APIService: IAPIService {
 //				])
 			} else {
 				// Прочие ошибки
-				print("Did receive nil data response for \(httpMethod) \(urlString), params: \(String(describing: params))")
+				Log.info("Did receive nil data response for \(httpMethod) \(urlString)")
 				result = .failure(JetfireError.apiNilDataError)
 
 //				Anal.track(.error_client, params: [
@@ -297,13 +286,13 @@ class APIService: IAPIService {
 //				])
 			}
 
-			#if DEBUG
-			if let data = response.data {
-				let str = String(data: data, encoding: .utf8) ?? ""
-				let code = response.response?.statusCode ?? -1
-				print("Did receive code: \(code) result: \(str) for \(httpMethod) \(urlString), params: \(String(describing: params))")
-			}
-			#endif
+//			#if DEBUG
+//			if let data = response.data {
+//				let str = String(data: data, encoding: .utf8) ?? ""
+//				let code = response.response?.statusCode ?? -1
+//				Log.info("Did receive code: \(code) result: \(str) for \(httpMethod) \(urlString), params: \(String(describing: params))")
+//			}
+//			#endif
 
 			queue.async {
 				callback(result)

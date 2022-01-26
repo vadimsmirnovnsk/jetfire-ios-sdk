@@ -21,7 +21,7 @@ class ServiceInfo {
 
 	var deeplinkScheme: String {
 		guard let scheme = self.plist?.deeplinkScheme else {
-			print("❌ Jetfire didn't load deeplink scheme in \(Self.serviceFilename).plist")
+            Log.info("❌ Didn't load deeplink scheme in \(Self.serviceFilename).plist")
 			return ServiceInfo.kUnknownKeyString
 		}
 		return scheme
@@ -29,7 +29,7 @@ class ServiceInfo {
 
 	var apiKey: String {
 		guard let apiKey = self.plist?.apiKey else {
-			print("❌ Jetfire didn't load API Key in \(Self.serviceFilename).plist")
+            Log.info("❌ Didn't load API Key in \(Self.serviceFilename).plist")
 			return ServiceInfo.kUnknownKeyString
 		}
 		return apiKey
@@ -39,7 +39,7 @@ class ServiceInfo {
 
 	init() {
 		self.plist = self.plist(withName: Self.serviceFilename)
-		print("Jetfire loaded deeplink scheme: \(self.deeplinkScheme)")
+        Log.info("Loaded deeplink scheme: \(self.deeplinkScheme)")
 	}
 
 	private func plist(withName name: String) -> InfoPlist? {
@@ -47,12 +47,11 @@ class ServiceInfo {
 			let xml = FileManager.default.contents(atPath: path),
 			let preferences = try? PropertyListDecoder().decode(InfoPlist.self, from: xml) else
 		{
-			print("❌ Jetfire didn't load \(Self.serviceFilename).plist")
+            Log.info("❌ Didn't load \(Self.serviceFilename).plist")
 			return nil
 		}
 
-		print("✅ Jetfire loaded JetfireService-Info.plist")
-		print(preferences)
+        Log.info("✅ Loaded JetfireService-Info.plist")
 		return preferences
 	}
 
