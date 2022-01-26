@@ -6,19 +6,26 @@ protocol IJetfireMain {
     func start()
 }
 
-// MARK: - JetfireCoordinator
+// MARK: - JetfireMain
 
 final class JetfireMain: IJetfireMain {
 
-    private let ud: IFUserDefaults
+    private let ud: IUserSettings
     private let analytics: JetfireAnalytics
     private let scheduler: IFeaturingScheduler
+    private let dbAnalytics: DBAnalytics
     private var started: Bool = false
 
-    init(ud: IFUserDefaults, analytics: JetfireAnalytics, scheduler: IFeaturingScheduler) {
+    init(
+        ud: IUserSettings,
+        analytics: JetfireAnalytics,
+        scheduler: IFeaturingScheduler,
+        dbAnalytics: DBAnalytics
+    ) {
         self.ud = ud
         self.analytics = analytics
         self.scheduler = scheduler
+        self.dbAnalytics = dbAnalytics
     }
 
     func start() {
@@ -57,5 +64,6 @@ extension JetfireMain {
 
     private func applicationWillResignActive() {
         self.analytics.trackApplicationShutdown()
+        self.dbAnalytics.flush(completion: { _ in })
     }
 }

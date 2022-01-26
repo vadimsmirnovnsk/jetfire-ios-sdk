@@ -18,12 +18,12 @@ final public class StoriesService {
 
 	private let router: BaseRouter
 	private let storage: IStoriesDataSource
-	private let ud: IUserDefaults
+	private let ud: IUserSettings
 
 	private(set) var storageUpdated: Bool = false
 	private var isReadyForReconstruct: Bool { self.storageUpdated }
 
-	init(router: BaseRouter, storage: IStoriesDataSource, ud: IUserDefaults) {
+	init(router: BaseRouter, storage: IStoriesDataSource, ud: IUserSettings) {
 		self.router = router
 		self.storage = storage
 		self.ud = ud
@@ -50,7 +50,7 @@ final public class StoriesService {
 
 }
 
-extension StoriesService: IStoryService {
+extension StoriesService: IStoriesService {
 
 	static let kSecondsInDay: TimeInterval = 60 * 60 * 24
 

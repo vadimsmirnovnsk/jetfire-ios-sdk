@@ -9,7 +9,7 @@ import VNBase
 final class FeaturingStorage  {
 
 	/// Чтобы не было циклической связи через FeaturingManager сетаю его в ините
-	unowned var service: IStoryService!
+	unowned var service: IStoriesService!
 
 	/// Вообще все сториз, которые пришли с бэка
 	private(set) var stories: [BaseStory] = []
@@ -70,7 +70,7 @@ final class FeaturingStorage  {
 			type: .firebaseInfo,
 			title: campaignStory.cover.title,
 			duration: 15,
-			priority: campaignStory.priority.int,
+			priority: Int(campaignStory.priority),
 			image: campaignStory.cover.image.url,
 			bgColorString: nil,
 			afterReadTime: campaignStory.settings.afterReadExpire.timeInterval,

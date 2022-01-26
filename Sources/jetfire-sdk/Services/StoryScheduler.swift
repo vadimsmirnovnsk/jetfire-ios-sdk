@@ -2,12 +2,12 @@ import Foundation
 
 final class StoryScheduler {
 
-	private let storiesService: IStoryService
+	private let storiesService: IStoriesService
 	private let router: FeaturingRouter
 	private let pushService: FeaturingPushService
-	private let ud: IFUserDefaults
+	private let ud: IUserSettings
 
-	init(router: FeaturingRouter, storiesService: IStoryService, pushService: FeaturingPushService, ud: IFUserDefaults) {
+	init(router: FeaturingRouter, storiesService: IStoriesService, pushService: FeaturingPushService, ud: IUserSettings) {
 		self.router = router
 		self.storiesService = storiesService
 		self.pushService = pushService

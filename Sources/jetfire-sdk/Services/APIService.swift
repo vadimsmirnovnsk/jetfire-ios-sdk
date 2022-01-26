@@ -321,7 +321,13 @@ extension APIService: IFeaturingAPI { // + Jetfire API
 			$0.session = self.userSessionService.session()
 		}
 		let method = "campaigns"
-		self.unwrappedProtoRequest(httpMethod: .post, method: method, protoObject: req, callback: completion)
+        self.unwrappedProtoRequest(
+            httpMethod: .post,
+            method: method,
+            protoObject: req,
+            queue: .jetfire,
+            callback: completion
+        )
 	}
 
 	func sync(events: [JetFireEvent], completion: @escaping (Result<JetFireOkResponse, Error>) -> Void) {

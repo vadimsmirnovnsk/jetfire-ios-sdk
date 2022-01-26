@@ -37,12 +37,12 @@ enum DBEventType: Int {
 final class DBAnalytics {
 
 	private let db: DB!
-	private let ud: IFUserDefaults
+	private let ud: IUserSettings
 	private let api: IFeaturingAPI
 
     let onChanged: Event<Void> = Event()
 
-	init(ud: IFUserDefaults, api: IFeaturingAPI) {
+	init(ud: IUserSettings, api: IFeaturingAPI) {
 		self.ud = ud
 		self.api = api
 		let url = FileManager.libraryPath(forFileName: "db-v1.sqlite3")!
@@ -93,7 +93,7 @@ final class DBAnalytics {
 
 	func track(
 		eventType: DBEventType,
-		campaignId: Int? = nil,
+		campaignId: Int64? = nil,
 		feature: String? = nil,
 		featureId: Int? = nil,
 		entityId: String? = nil,

@@ -3,13 +3,13 @@ import UIKit
 import UIColorHexSwift
 import VNBase
 
-/// Делает BaseStory из JetFireFeatureStory
+/// Делает `BaseStory` из `JetFireFeatureStory`
 final class StoriesFactory {
 
     private let processTargetService: ProcessTargetService
     private let router: BaseRouter
     private let storiesAnalytics: IStoriesAnalytics
-    unowned var storyService: IStoryService!
+    unowned var storiesService: IStoriesService!
 
     init(
         storiesAnalytics: IStoriesAnalytics,
@@ -28,7 +28,7 @@ final class StoriesFactory {
             type: .firebaseInfo,
             title: story.cover.title,
             duration: 15,
-            priority: story.priority.int,
+            priority: Int(story.priority),
             image: story.cover.image.url,
             bgColorString: nil,
             afterReadTime: story.settings.afterReadExpire.timeInterval,
@@ -54,7 +54,7 @@ final class StoriesFactory {
         let storyContent = StoryContent(story: infoStory, snaps: infoSnaps)
         let cellVM = StoryInfoCellVM(infoStory: infoStory)
         let snapVMs = infoSnaps.map { InfoSnapVM(snap: $0, processTargetService: self.processTargetService, router: self.router, analytics: self.storiesAnalytics) }
-        let baseStory = BaseStory(service: self.storyService, analytics: self.storiesAnalytics, content: storyContent, previewVM: cellVM, snaps: snapVMs)
+        let baseStory = BaseStory(service: self.storiesService, analytics: self.storiesAnalytics, content: storyContent, previewVM: cellVM, snaps: snapVMs)
         return baseStory
     }
 }

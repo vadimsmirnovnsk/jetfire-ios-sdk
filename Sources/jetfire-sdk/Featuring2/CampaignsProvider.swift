@@ -42,8 +42,10 @@ final class CachedCampaignsProvider: ICampaignsProvider {
         let operation = AsyncBlockOperation { [weak self] operationCompletion in
             guard let self = self else { return }
             if let cache = self.cache {
-                completion(.success(cache))
-                operationCompletion()
+                DispatchQueue.jetfire.async {
+                    completion(.success(cache))
+                    operationCompletion()
+                }
             } else {
                 self.campaignsProvider.fetchCampaigns { response in
                     switch response {

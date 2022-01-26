@@ -22,9 +22,9 @@ final class StoryBrowserVM: BaseViewControllerVM {
 
 	private let stories: [BaseStory]
 	private let since: BaseStory
-	private let storiesService: IStoryService
+	private let storiesService: IStoriesService
 
-	init(storiesService: IStoryService, stories: [BaseStory], since: BaseStory) {
+	init(storiesService: IStoriesService, stories: [BaseStory], since: BaseStory) {
 		self.stories = stories
 		self.since = since
 		self.storiesService = storiesService

@@ -10,7 +10,7 @@ final public class FeaturingService {
 	private let manager: FeaturingManager
 	private let pushService: FeaturingPushService
 	private let db: DBAnalytics
-	private let ud: IFUserDefaults
+	private let ud: IUserSettings
 	private let scheduler: StoryScheduler
 	private let analytics: JetfireAnalytics
 
@@ -18,7 +18,7 @@ final public class FeaturingService {
 		manager: FeaturingManager,
 		pushService: FeaturingPushService,
 		db: DBAnalytics,
-		ud: IFUserDefaults,
+		ud: IUserSettings,
 		scheduler: StoryScheduler,
 		analytics: JetfireAnalytics
 	) {
@@ -150,7 +150,7 @@ extension FeaturingService {
 		didReceive response: UNNotificationResponse
 	) {
 		let campaignId = self.pushService.campaignId(from: response)
-		self.analytics.trackPushTap(campaignId: Int(campaignId))
+		self.analytics.trackPushTap(campaignId: Int64(campaignId))
 		self.manager.retreiveCampaign(with: campaignId) { [weak self] campaign in
 			guard let campaign = campaign else { return }
 			self?.scheduler.scheduleShow(campaign: campaign, featuringType: .push)

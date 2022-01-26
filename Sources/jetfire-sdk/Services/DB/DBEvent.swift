@@ -29,7 +29,7 @@ public struct DBEvent: Codable {
 	let event_type: Int
 	let custom_event: String?
 	let event_uuid: String
-	let campaign_id: Int?
+	let campaign_id: Int64?
 	let feature: String?
 	let feature_id: Int?
 	let entity_id: String?

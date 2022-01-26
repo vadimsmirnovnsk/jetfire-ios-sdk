@@ -10,9 +10,3 @@ extension TimeInterval {
 		}
 	}
 }
-
-extension Int64 {
-
-	var int: Int { Int(self) }
-
-}

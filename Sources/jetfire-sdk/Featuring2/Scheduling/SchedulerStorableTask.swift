@@ -2,7 +2,7 @@ import Foundation
 
 enum SchedulerTaskType {
     case story
-    case push
+    case toaster
 }
 
 /// Задание планировщика, пригодное для сериализации
