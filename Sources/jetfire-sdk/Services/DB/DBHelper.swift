@@ -5,15 +5,13 @@ import VNBase
 extension DB {
 
 	public func track(event: DBEvent) {
-		if let eventId = try? self.insertEvent(event) {
-			#if DEBUG
-			print("Inserted event with id: \(eventId)")
-			#endif
-		} else {
-			#if DEBUG
-			print("Error db inserting event: \(event)")
-			#endif
-		}
+        do {
+            let eventId = try self.insertEvent(event)
+            Log.info("Inserted event with id: \(eventId)")
+        } catch let error {
+            Log.error(error)
+            assertionFailure(String(describing: error))
+        }
 	}
 
 //	public func addWater(volumeL: Double, date: Date) throws {
@@ -138,7 +136,6 @@ extension DB {
 public class DB {
 
 	private let db: Connection
-//	private let log: ILogger
 
 	private let id = Expression<Int64>(DBEvent.CodingKeys.id.rawValue)
 	private let event_type = Expression<Int64>(DBEvent.CodingKeys.event_type.rawValue)
@@ -154,48 +151,43 @@ public class DB {
 	private let events = Table("events")
 
 	public init(path: URL) throws {
-//		self.log = logger
 		self.db = try Connection(path.path)
 		try self.makeTables()
 	}
 
 	func fetchEvents(since: Date, till: Date) -> [JetFireEvent] {
-		let query = self.events.select(*)
-			.where(timestamp >= since)
-			.where(timestamp <= till)
-
-		if let events = try? self.db.prepare(query) {
-			#if DEBUG
-			print("Fetched events from db: \(events)")
-			#endif
-			let es = events.map { e in
-				JetFireEvent.with {
-					$0.uuid = e[event_uuid]
-					$0.timestamp = e[timestamp].timeIntervalSince1970.timestamp
-					$0.eventType = e[event_type].eventType
-					if let ce = e[custom_event] {
-						$0.customEvent = ce
-					}
-					if let f = e[feature] {
-						$0.feature = f
-					}
-					if let cid = e[campaign_id] {
-						$0.campaignID = cid
-					}
-					#warning("Переделать, когда изменится протобаф")
-					if let eid = Int64(e[entity_id] ?? "") {
-						$0.entityID = eid
-					}
-					#warning("Add properties")
-				}
-			}
-			return es
-		} else {
-			#if DEBUG
-			print("Error db fetching events")
-			#endif
-			return []
-		}
+        do {
+            let query = self.events.select(*)
+                .where(timestamp >= since)
+                .where(timestamp <= till)
+            let events = try self.db.prepare(query)
+            let es = events.map { e in
+                JetFireEvent.with {
+                    $0.uuid = e[event_uuid]
+                    $0.timestamp = e[timestamp].timeIntervalSince1970.timestamp
+                    $0.eventType = e[event_type].eventType
+                    if let ce = e[custom_event] {
+                        $0.customEvent = ce
+                    }
+                    if let f = e[feature] {
+                        $0.feature = f
+                    }
+                    if let cid = e[campaign_id] {
+                        $0.campaignID = cid
+                    }
+                    #warning("Переделать, когда изменится протобаф")
+                    if let eid = Int64(e[entity_id] ?? "") {
+                        $0.entityID = eid
+                    }
+                    #warning("Add properties")
+                }
+            }
+            return es
+        } catch let error {
+            Log.error(error)
+            assertionFailure(String(describing: error))
+            return []
+        }
 	}
 
 	func makeTables() throws {
@@ -223,17 +215,14 @@ public class DB {
 	}
 
 	func fetch(sql: String) -> [Int64] {
-		if let stmt = try? self.db.prepare(sql) {
-			#if DEBUG
-			print("Fetched from db: \(stmt)")
-			#endif
-			return stmt.flatMap { $0 }.compactMap { $0 as? Int64 }
-		} else {
-			#if DEBUG
-			print("Error db fetching")
-			#endif
-			return []
-		}
+        do {
+            let stmt = try self.db.prepare(sql)
+            return stmt.flatMap { $0 }.compactMap { $0 as? Int64 }
+        } catch let error {
+            Log.error(error)
+            assertionFailure(String(describing: error))
+            return []
+        }
 	}
 
 	private func insertEvent(_ event: DBEvent) throws -> Int64 {

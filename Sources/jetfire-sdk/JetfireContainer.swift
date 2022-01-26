@@ -5,10 +5,23 @@ import UIKit
 final class JetfireContainer {
 
     private let application = UIApplication.shared
-    private let serviceInfo = ServiceInfo()
-    private let preferences = PreferencesService()
-    private let contentPresenter = ContentPresenter()
     private let router: FeaturingRouter
+
+    lazy private(set) var contentPresenter: ContentPresenter = {
+        ContentPresenter()
+    }()
+
+    lazy private(set) var preferences: PreferencesService = {
+        PreferencesService()
+    }()
+
+    lazy private(set) var serviceInfo: ServiceInfo = {
+        ServiceInfo()
+    }()
+
+    lazy private(set) var logger: ILoggerService = {
+        LoggerService()
+    }()
 
     lazy private(set) var featuringStorage: FeaturingStorage = {
         let storage = FeaturingStorage(
@@ -167,6 +180,7 @@ final class JetfireContainer {
 
     init(router: FeaturingRouter) {
         self.router = router
+        LoggerContainer.logger = self.logger
         self.storiesFactory.storiesService = self.storiesService
     }
 }

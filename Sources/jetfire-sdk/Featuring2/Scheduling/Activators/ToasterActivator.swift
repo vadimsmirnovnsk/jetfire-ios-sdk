@@ -42,6 +42,7 @@ final class ToasterActivator: ISchedulerTaskActivator {
         self.ud.shownToasters[campaign.id] = Date()
         self.ud.lastToasterShowDate = Date()
         // Показываем
+        Log.info("Activate toaster \(campaign.debugDescription)")
         let toasterView = self.factory.makeToaster(toaster: toaster, campaign: campaign)
         toasterView.show()
     }

@@ -8,8 +8,7 @@ extension Keychain {
 			return try self.getString(key)
 		} catch {
 			let msg = "Keychain getter error for key:\(key). Error: \(error)"
-			print(msg)
-			assert(false, msg)
+            assertionFailure(msg)
 			return nil
 		}
 	}
@@ -19,8 +18,7 @@ extension Keychain {
 			try self.set(value, key: key)
 		} catch {
 			let msg = "Keychain setter error for key:\(key). Error: \(error)"
-			print(msg)
-			assert(false, msg)
+            assertionFailure(msg)
 		}
 	}
 
@@ -30,8 +28,7 @@ extension Keychain {
 			return boolString?.boolValue ?? false
 		} catch {
 			let msg = "Keychain getter error for key:\(key). Error: \(error)"
-			print(msg)
-			assert(false, msg)
+            assertionFailure(msg)
 			return false
 		}
 	}
@@ -41,8 +38,7 @@ extension Keychain {
 			try self.set(value.stringValue, key: key)
 		} catch {
 			let msg = "Keychain setter error for key:\(key). Error: \(error)"
-			print(msg)
-			assert(false, msg)
+            assertionFailure(msg)
 		}
 	}
 
@@ -52,8 +48,7 @@ extension Keychain {
 			return data
 		} catch {
 			let msg = "Keychain getter error for key:\(key). Error: \(error)"
-			print(msg)
-			assert(false, msg)
+            assertionFailure(msg)
 			return nil
 		}
 	}
@@ -63,8 +58,7 @@ extension Keychain {
 			try self.set(value, key: key)
 		} catch {
 			let msg = "Keychain setter error for key:\(key). Error: \(error)"
-			print(msg)
-			assert(false, msg)
+			assertionFailure(msg)
 		}
 	}
 

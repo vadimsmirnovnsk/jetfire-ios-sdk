@@ -14,6 +14,12 @@ extension JetFireCampaign: CustomDebugStringConvertible {
         if self.hasToaster {
             result.append("toaster")
         }
-        return result.joined(separator: ",")
+        return result.joined(separator: ", ")
+    }
+}
+
+extension Array where Element == JetFireCampaign{
+    public var debugDescription: String {
+        self.map { $0.debugDescription }.joined(separator: ", ")
     }
 }

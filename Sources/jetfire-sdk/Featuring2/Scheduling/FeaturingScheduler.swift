@@ -65,13 +65,16 @@ extension FeaturingScheduler {
             triggeredTasks.append(toasters)
             triggeredTasks.append(stories)
         }
-        self.storableTasks = sync(oldTasks: self.storableTasks, newTasks: triggeredTasks)
-        self.liveTasks = Dictionary(uniqueKeysWithValues: self.storableTasks.compactMap { storable in
-            self.factory.makeLiveTask(storableTask: storable) { [weak self] in
-                self?.remove(storableTask: storable)
-            }
-            .map { ($0.task, $0) }
-        })
+        let newStorableTasks = sync(oldTasks: self.storableTasks, newTasks: triggeredTasks)
+        if self.storableTasks != newStorableTasks {
+            self.storableTasks = newStorableTasks
+            self.liveTasks = Dictionary(uniqueKeysWithValues: self.storableTasks.compactMap { storable in
+                self.factory.makeLiveTask(storableTask: storable) { [weak self] in
+                    self?.remove(storableTask: storable)
+                }
+                .map { ($0.task, $0) }
+            })
+        }
     }
 
     private func remove(storableTask: SchedulerStorableTask) {

@@ -41,8 +41,12 @@ extension TriggeredCampaignsProvider {
                 let old = self.campaigns.map { $0.id }
                 let new = newCampaigns.map { $0.id }
                 self.campaigns = newCampaigns
+                let changed = old != new
+                if changed {
+                    Log.info("Triggered campaigns changed: \(newCampaigns.debugDescription)")
+                }
                 DispatchQueue.main.async {
-                    self.onUpdate.raise(old != new)
+                    self.onUpdate.raise(changed)
                 }
             case .failure:
                 break
