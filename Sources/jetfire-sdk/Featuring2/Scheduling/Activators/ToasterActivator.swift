@@ -38,13 +38,17 @@ final class ToasterActivator: ISchedulerTaskActivator {
         // по времени, игнорируем его
         guard self.canShowAnyToaster() && self.canShowToaster(campaignId: campaign.id) else { return }
         // Трекаем
-        self.jetfireAnalytics.trackToasterShow(campaignId: campaign.id)
+        Log.info("Activate toaster \(campaign.debugDescription)")
         self.ud.shownToasters[campaign.id] = Date()
         self.ud.lastToasterShowDate = Date()
         // Показываем
-        Log.info("Activate toaster \(campaign.debugDescription)")
         let toasterView = self.factory.makeToaster(toaster: toaster, campaign: campaign)
         toasterView.show()
+        // Запись в БД нового события может приводить к повторному вызову activate,
+        // поэтому пишем на следующем цикле ранлупа, чтобы разорвать цепочку
+        DispatchQueue.main.async {
+            self.jetfireAnalytics.trackToasterShow(campaignId: campaign.id)
+        }
     }
 }
 

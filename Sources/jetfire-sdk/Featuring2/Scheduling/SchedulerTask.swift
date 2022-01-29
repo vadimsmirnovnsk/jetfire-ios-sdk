@@ -2,7 +2,7 @@ import Foundation
 
 /// Активная задача планировщика
 /// Если наступило время активации, то активирует себя посредством активатора :)
-final class SchedulerLiveTask {
+final class SchedulerTask {
 
     let task: SchedulerStorableTask
     private let taskActivator: ISchedulerTaskActivator
@@ -19,11 +19,8 @@ final class SchedulerLiveTask {
     }
 
     func tick() {
-        if self.task.isExpired {
-            self.completion()
-        } else if self.task.canBeActivated {
-            self.taskActivator.activate()
-            self.completion()
-        }
+        guard !self.task.isExpired && self.task.canBeActivated else { return }
+        self.taskActivator.activate()
+        self.completion()
     }
 }

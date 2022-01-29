@@ -3,8 +3,9 @@ import VNEssential
 
 /// Раздает доступные кампании
 protocol IAvailableCampaignsProvider {
+    var isDirty: Bool { get }
     var campaigns: [JetFireCampaign] { get }
-    var onUpdate: Event<Bool> { get }
+    var onUpdate: Event<Void> { get }
 }
 
 // MARK: - AvailableCampaignsProvider
@@ -14,8 +15,9 @@ final class AvailableCampaignsProvider: IAvailableCampaignsProvider {
     private let campaignsProvider: ICampaignsProvider
     private let db: DBAnalytics
 
+    var isDirty: Bool = true
     var campaigns: [JetFireCampaign] = []
-    let onUpdate: Event<Bool> = Event()
+    let onUpdate: Event<Void> = Event()
 
     init(campaignsProvider: ICampaignsProvider, db: DBAnalytics) {
         self.campaignsProvider = campaignsProvider
@@ -46,7 +48,10 @@ extension AvailableCampaignsProvider {
                     Log.info("Available campaigns changed: \(newCampaigns.debugDescription)")
                 }
                 DispatchQueue.main.async {
-                    self.onUpdate.raise(changed)
+                    self.isDirty = false
+                    if changed {
+                        self.onUpdate.raise(())
+                    }
                 }
             case .failure:
                 break

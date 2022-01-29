@@ -12,6 +12,7 @@ final class JetfireMain: IJetfireMain {
 
     private let ud: IUserSettings
     private let analytics: JetfireAnalytics
+    private let storiesDataSource: IMutableStoriesDataSource
     private let scheduler: IFeaturingScheduler
     private let dbAnalytics: DBAnalytics
     private var started: Bool = false
@@ -19,11 +20,13 @@ final class JetfireMain: IJetfireMain {
     init(
         ud: IUserSettings,
         analytics: JetfireAnalytics,
+        storiesDataSource: IMutableStoriesDataSource,
         scheduler: IFeaturingScheduler,
         dbAnalytics: DBAnalytics
     ) {
         self.ud = ud
         self.analytics = analytics
+        self.storiesDataSource = storiesDataSource
         self.scheduler = scheduler
         self.dbAnalytics = dbAnalytics
     }
@@ -31,6 +34,7 @@ final class JetfireMain: IJetfireMain {
     func start() {
         guard !self.started else { return }
         self.started = true
+        self.storiesDataSource.start()
         self.scheduler.start()
         let isFirstStart = !self.ud.didStartEarly
         if isFirstStart {

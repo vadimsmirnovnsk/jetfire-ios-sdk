@@ -125,8 +125,9 @@ final class DBAnalytics {
             .map { "\($0.key):\($0.value)" }
             .joined(separator: ", ")
         Log.info("Will insert event '\(eventType.stringValue)' [\(description)]")
-        self.db.track(event: event)
-        self.onChanged.raise(())
+        if self.db.track(event: event) {
+            self.onChanged.raise(())
+        }
     }
 
 }

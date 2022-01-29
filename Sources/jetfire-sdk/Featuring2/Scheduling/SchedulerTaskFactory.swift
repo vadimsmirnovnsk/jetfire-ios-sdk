@@ -52,14 +52,14 @@ final class SchedulerTaskFactory {
         )
     }
 
-    func makeLiveTask(
+    func makeTask(
         storableTask: SchedulerStorableTask,
         completion: @escaping () -> Void
-    ) -> SchedulerLiveTask? {
+    ) -> SchedulerTask? {
         switch storableTask.type {
         case .story:
             if let storyId = storableTask.storyId {
-                return SchedulerLiveTask(
+                return SchedulerTask(
                     task: storableTask,
                     taskActivator: StoryActivator(
                         storyId: storyId,
@@ -74,7 +74,7 @@ final class SchedulerTaskFactory {
                 return nil
             }
         case .toaster:
-            return SchedulerLiveTask(
+            return SchedulerTask(
                 task: storableTask,
                 taskActivator: ToasterActivator(
                     campaignId: storableTask.campaignId,
