@@ -1,13 +1,13 @@
 import Foundation
 
-enum SchedulerTaskType {
+enum SchedulerTaskType: Codable {
     case story
     case toaster
 }
 
 /// Задание планировщика, пригодное для сериализации
-/// Нужно только для того чтобы сохранить на диск, восстановить и сделать из него `SchedulerLiveTask`
-struct SchedulerStorableTask {
+/// Нужно только для того чтобы сохранить на диск, восстановить и сделать из него `SchedulerTask`
+struct SchedulerStorableTask: Codable {
     let type: SchedulerTaskType
     let campaignId: Int64
     let storyId: Int64?

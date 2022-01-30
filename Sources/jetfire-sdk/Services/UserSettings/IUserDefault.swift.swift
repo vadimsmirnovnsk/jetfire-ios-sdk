@@ -37,6 +37,9 @@ extension IUserDefault {
             let data = try JSONEncoder().encode(value)
             storage.set(data, forKey: key)
             runtimeValue = value
+            #if DEBUG
+            storage.synchronize()
+            #endif
         } catch let error {
             runtimeValue = nil
             assertionFailure(String(describing: error))

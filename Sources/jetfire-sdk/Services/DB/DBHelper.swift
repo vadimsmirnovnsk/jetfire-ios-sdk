@@ -4,13 +4,14 @@ import VNBase
 
 extension DB {
 
-	public func track(event: DBEvent) {
+	public func track(event: DBEvent) -> Bool {
         do {
-            let eventId = try self.insertEvent(event)
-            Log.info("Inserted event with id: \(eventId)")
+            _ = try self.insertEvent(event)
+            return true
         } catch let error {
             Log.error(error)
             assertionFailure(String(describing: error))
+            return false
         }
 	}
 

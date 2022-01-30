@@ -4,7 +4,8 @@ import VNEssential
 /// Раздает тригернутые кампании
 protocol ITriggeredCampaignsProvider {
     var campaigns: [JetFireCampaign] { get }
-    var onUpdate: Event<Bool> { get }
+    var isDirty: Bool { get }
+    var onUpdate: Event<Void> { get }
 }
 
 // MARK: - TriggeredCampaignsProvider
@@ -14,8 +15,9 @@ final class TriggeredCampaignsProvider: ITriggeredCampaignsProvider {
     private let campaignsProvider: ICampaignsProvider
     private let db: DBAnalytics
 
+    var isDirty: Bool = true
     var campaigns: [JetFireCampaign] = []
-    let onUpdate: Event<Bool> = Event()
+    let onUpdate: Event<Void> = Event()
 
     init(campaignsProvider: ICampaignsProvider, db: DBAnalytics) {
         self.campaignsProvider = campaignsProvider
@@ -46,7 +48,10 @@ extension TriggeredCampaignsProvider {
                     Log.info("Triggered campaigns changed: \(newCampaigns.debugDescription)")
                 }
                 DispatchQueue.main.async {
-                    self.onUpdate.raise(changed)
+                    self.isDirty = false
+                    if changed {
+                        self.onUpdate.raise(())
+                    }
                 }
             case .failure:
                 break

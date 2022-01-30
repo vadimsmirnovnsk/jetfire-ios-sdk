@@ -1,5 +1,6 @@
 import Foundation
 
+/// Хранимые настройки пользователя
 protocol IUserSettings: AnyObject {
 
     var didStartEarly: Bool { get set }
@@ -12,6 +13,8 @@ protocol IUserSettings: AnyObject {
     var userId: String { get set }
     var pendingNotificationIds: [String] { get set }
     var lastFlushDate: Date? { get set }
+    var schedulerStorableTasks: [SchedulerStorableTask] { get set }
+    var storableStories: [StorableStory] { get set }
 
     func reset()
 }
@@ -49,6 +52,12 @@ class UserSettings: IUserSettings {
 
     @UserDefault(key: "jetfire_lastFlushDate", defaultValue: nil)
     var lastFlushDate: Date?
+
+    @UserDefault(key: "jetfire_schedulerStorableTasks", defaultValue: [])
+    var schedulerStorableTasks: [SchedulerStorableTask]
+
+    @UserDefault(key: "jetfire_storableStories", defaultValue: [])
+    var storableStories: [StorableStory]
 }
 
 // MARK: - Reset

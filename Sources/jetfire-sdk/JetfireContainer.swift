@@ -118,6 +118,13 @@ final class JetfireContainer {
         )
     }()
 
+    lazy private(set) var availableCampaignsProvider: IAvailableCampaignsProvider = {
+        AvailableCampaignsProvider(
+            campaignsProvider: self.campaignsProvider,
+            db: self.dbAnalytics
+        )
+    }()
+
     lazy private(set) var triggeredCampaignsProvider: ITriggeredCampaignsProvider = {
         TriggeredCampaignsProvider(
             campaignsProvider: self.campaignsProvider,
@@ -135,6 +142,8 @@ final class JetfireContainer {
 
     lazy private(set) var storiesDataSource: IStoriesDataSource & IMutableStoriesDataSource = {
         StoriesDataSource(
+            availableCampaignsProvider: self.availableCampaignsProvider,
+            userSettings: self.userSettings,
             factory: self.storiesFactory
         )
     }()
@@ -165,7 +174,8 @@ final class JetfireContainer {
     lazy private(set) var featuringScheduler: IFeaturingScheduler = {
         FeaturingScheduler(
             triggeredCampaignsProvider: self.triggeredCampaignsProvider,
-            factory: self.schedulerTaskFactory
+            factory: self.schedulerTaskFactory,
+            userSettings: self.userSettings
         )
     }()
 
@@ -173,6 +183,7 @@ final class JetfireContainer {
         JetfireMain(
             ud: self.userSettings,
             analytics: self.analytics,
+            storiesDataSource: self.storiesDataSource,
             scheduler: self.featuringScheduler,
             dbAnalytics: self.dbAnalytics
         )

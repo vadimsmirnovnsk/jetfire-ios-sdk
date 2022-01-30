@@ -11,24 +11,31 @@ final class FeaturingScheduler: IFeaturingScheduler {
 
     private let triggeredCampaignsProvider: ITriggeredCampaignsProvider
     private let factory: SchedulerTaskFactory
+    private let userSettings: IUserSettings
     private var started: Bool = false
     private var timer: Timer?
 
-    #warning("Нужна сериализация")
-    private var storableTasks: [SchedulerStorableTask] = []
-    private var liveTasks: [SchedulerStorableTask: SchedulerLiveTask] = [:]
+    private var storableTasks: [SchedulerStorableTask] {
+        get { self.userSettings.schedulerStorableTasks }
+        set { self.userSettings.schedulerStorableTasks = newValue }
+    }
+
+    private var tasks: [SchedulerStorableTask: SchedulerTask] = [:]
 
     init(
         triggeredCampaignsProvider: ITriggeredCampaignsProvider,
-        factory: SchedulerTaskFactory
+        factory: SchedulerTaskFactory,
+        userSettings: IUserSettings
     ) {
         self.triggeredCampaignsProvider = triggeredCampaignsProvider
         self.factory = factory
+        self.userSettings = userSettings
     }
 
     func start() {
         guard !self.started else { return }
         self.started = true
+        self.tasks = self.makeTasks()
         self.timer = Timer.scheduledTimer(
             timeInterval: 5,
             target: self,
@@ -37,9 +44,7 @@ final class FeaturingScheduler: IFeaturingScheduler {
             repeats: true
         )
         self.triggeredCampaignsProvider.onUpdate.add(self) { [weak self] isChanged in
-            if isChanged {
-                self?.refresh()
-            }
+            self?.refresh()
         }
     }
 }
@@ -68,24 +73,28 @@ extension FeaturingScheduler {
         let newStorableTasks = sync(oldTasks: self.storableTasks, newTasks: triggeredTasks)
         if self.storableTasks != newStorableTasks {
             self.storableTasks = newStorableTasks
-            self.liveTasks = Dictionary(uniqueKeysWithValues: self.storableTasks.compactMap { storable in
-                self.factory.makeLiveTask(storableTask: storable) { [weak self] in
-                    self?.remove(storableTask: storable)
-                }
-                .map { ($0.task, $0) }
-            })
+            self.tasks = self.makeTasks()
         }
+    }
+
+    private func makeTasks() -> [SchedulerStorableTask: SchedulerTask] {
+        Dictionary(uniqueKeysWithValues: self.storableTasks.compactMap { storable in
+            self.factory.makeTask(storableTask: storable) { [weak self] in
+                self?.remove(storableTask: storable)
+            }
+            .map { ($0.task, $0) }
+        })
     }
 
     private func remove(storableTask: SchedulerStorableTask) {
         if let index = self.storableTasks.firstIndex(of: storableTask) {
             self.storableTasks.remove(at: index)
         }
-        self.liveTasks[storableTask] = nil
+        self.tasks[storableTask] = nil
     }
 
     @objc private func timerTick() {
-        self.liveTasks.values.forEach { $0.tick() }
+        self.tasks.values.forEach { $0.tick() }
     }
 }
 
