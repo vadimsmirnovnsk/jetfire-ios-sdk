@@ -41,7 +41,7 @@ final class FeaturingManager: IStoriesDataSource {
 
 	/// Дёргаем после каждого события чтобы приготовить все availableCampaigns
 	func prepareAvailableCampaigns() {
-		if let availableSql = self.storage.sql?.available {
+		if let availableSql = self.storage.sql?.stories {
 			let availableCampaignIds = self.db.execute(sql: availableSql)
 			self.availableCampaigns = self.storage.campaigns.filter { availableCampaignIds.contains($0.id) }
 			let newStories = self.storage.stories(for: self.availableCampaigns)

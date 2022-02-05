@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //		let text = NegativeReviewCommentGenerator().generate(for: "John")
 //		print("Generated text:\n\(text)")
 
-		self.requestPushes()
+//		self.requestPushes()
 
 		return true
 	}

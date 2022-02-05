@@ -51,7 +51,7 @@ final class CachedCampaignsProvider: ICampaignsProvider {
                     switch response {
                     case .success(let result):
                         self.cache = result
-                        Log.info("Available SQL:\n\(result.sql.available)")
+                        Log.info("Stories SQL:\n\(result.sql.stories)")
                         Log.info("Trigger SQL:\n\(result.sql.trigger)")
                         completion(.success(result))
                         operationCompletion()

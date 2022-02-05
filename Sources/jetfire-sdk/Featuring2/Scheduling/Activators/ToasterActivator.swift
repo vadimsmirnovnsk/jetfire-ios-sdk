@@ -50,6 +50,10 @@ final class ToasterActivator: ISchedulerTaskActivator {
             self.jetfireAnalytics.trackToasterShow(campaignId: campaign.id)
         }
     }
+
+    func deactivate() {
+        // Деактивация для тостера не имеет смысла
+    }
 }
 
 // MARK: - Private

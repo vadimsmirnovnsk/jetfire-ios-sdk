@@ -4,23 +4,22 @@ import Foundation
 /// Если наступило время активации, то активирует себя посредством активатора :)
 final class SchedulerTask {
 
-    let task: SchedulerStorableTask
+    private let task: SchedulerStorableTask
     private let taskActivator: ISchedulerTaskActivator
-    private let completion: () -> Void
 
     init(
         task: SchedulerStorableTask,
-        taskActivator: ISchedulerTaskActivator,
-        completion: @escaping () -> Void
+        taskActivator: ISchedulerTaskActivator
     ) {
         self.task = task
         self.taskActivator = taskActivator
-        self.completion = completion
     }
 
     func tick() {
-        guard !self.task.isExpired && self.task.canBeActivated else { return }
-        self.taskActivator.activate()
-        self.completion()
+        if self.task.isExpired {
+            self.taskActivator.deactivate()
+        } else if self.task.canBeActivated {
+            self.taskActivator.activate()
+        }
     }
 }

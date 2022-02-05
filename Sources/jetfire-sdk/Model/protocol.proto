@@ -33,6 +33,12 @@ message EventType {
     required int64 value = 1;
 }
 
+message ActionType {
+    // 1 – deeplink
+    // 2 – stories
+    required int64 value = 1;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////// Entities
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -70,7 +76,8 @@ message Image {
 }
 
 message Action {
-    required string deeplink = 1;
+    required ActionType type = 1;
+    optional string deeplink = 2;
 }
 
 message Schedule {
@@ -116,6 +123,11 @@ message App {
     required string version = 2;
 }
 
+message Sdk {
+    reserved 1;
+    required string version = 2;
+}
+
 message Device {
     reserved 1;
     required string platform = 2; // ios, android
@@ -152,14 +164,15 @@ message Session {
     required string uuid = 2;
     required Timestamp timestamp = 3; // milliseconds
     required App app = 4;
-    required Device device = 5;
-    optional Location location = 6;
-    repeated Property properties = 7;
+    required Sdk sdk = 5;
+    required Device device = 6;
+    optional Location location = 7;
+    repeated Property properties = 8;
 }
 
 message FeaturesSql {
     reserved 1;
-    required string available = 2;
+    required string stories = 2;
     required string trigger = 3;
 }
 

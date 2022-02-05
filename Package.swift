@@ -20,7 +20,8 @@ let package = Package(
 		.package(url: "https://github.com/yeahdongcn/UIColor-Hex-Swift", from: "5.1.7"),
 		.package(name: "SwiftProtobuf", url: "https://github.com/apple/swift-protobuf.git", from: "1.17.0"),
 		.package(name: "KeychainAccess", url: "https://github.com/kishikawakatsumi/KeychainAccess", from: "4.2.2"),
-		.package(url: "https://github.com/stephencelis/SQLite.swift.git", from: "0.12.0")
+		.package(url: "https://github.com/stephencelis/SQLite.swift.git", from: "0.12.0"),
+        .package(url: "https://github.com/apple/swift-collections.git", .upToNextMajor(from: "1.0.2"))
 	],
     targets: [
         .target(
@@ -34,7 +35,8 @@ let package = Package(
 				.product(name: "UIColorHexSwift", package: "UIColor-Hex-Swift"),
 				.product(name: "SwiftProtobuf", package: "SwiftProtobuf"),
 				.product(name: "KeychainAccess", package: "KeychainAccess"),
-				.product(name: "SQLite", package: "SQLite.swift")
+				.product(name: "SQLite", package: "SQLite.swift"),
+                .product(name: "OrderedCollections", package: "swift-collections")
 			],
 			exclude: ["Model/protocol.proto"]
 		),

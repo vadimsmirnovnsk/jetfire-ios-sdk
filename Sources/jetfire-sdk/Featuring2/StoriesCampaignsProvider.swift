@@ -1,21 +1,19 @@
 import Foundation
 import VNEssential
 
-/// Раздает доступные кампании
-protocol IAvailableCampaignsProvider {
-    var isDirty: Bool { get }
+/// Раздает кампании для карусели сторис
+protocol IStoriesCampaignsProvider {
     var campaigns: [JetFireCampaign] { get }
     var onUpdate: Event<Void> { get }
 }
 
-// MARK: - AvailableCampaignsProvider
+// MARK: - StoriesCampaignsProvider
 
-final class AvailableCampaignsProvider: IAvailableCampaignsProvider {
+final class StoriesCampaignsProvider: IStoriesCampaignsProvider {
 
     private let campaignsProvider: ICampaignsProvider
     private let db: DBAnalytics
 
-    var isDirty: Bool = true
     var campaigns: [JetFireCampaign] = []
     let onUpdate: Event<Void> = Event()
 
@@ -31,25 +29,22 @@ final class AvailableCampaignsProvider: IAvailableCampaignsProvider {
 
 // MARK: - Private
 
-extension AvailableCampaignsProvider {
+extension StoriesCampaignsProvider {
 
     func refresh() {
         self.campaignsProvider.fetchCampaigns { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let response):
-                let newIds = Set(self.db.execute(sql: response.sql.available))
+                let newIds = Set(self.db.execute(sql: response.sql.stories))
                 let newCampaigns = response.campaigns.filter { newIds.contains($0.id) }
                 let old = self.campaigns.map { $0.id }
                 let new = newCampaigns.map { $0.id }
                 self.campaigns = newCampaigns
                 let changed = old != new
                 if changed {
-                    Log.info("Available campaigns changed: \(newCampaigns.debugDescription)")
-                }
-                DispatchQueue.main.async {
-                    self.isDirty = false
-                    if changed {
+                    Log.info("Stories campaigns changed: \(newCampaigns.debugDescription)")
+                    DispatchQueue.main.async {
                         self.onUpdate.raise(())
                     }
                 }
