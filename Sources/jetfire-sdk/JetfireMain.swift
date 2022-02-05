@@ -34,7 +34,6 @@ final class JetfireMain: IJetfireMain {
     func start() {
         guard !self.started else { return }
         self.started = true
-        self.storiesDataSource.start()
         self.scheduler.start()
         let isFirstStart = !self.ud.didStartEarly
         if isFirstStart {

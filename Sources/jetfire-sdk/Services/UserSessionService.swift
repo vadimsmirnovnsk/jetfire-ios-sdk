@@ -14,6 +14,12 @@ final class UserSessionService {
 		}
 	}()
 
+    private lazy var sdk: JetFireSdk = {
+        return JetFireSdk.with {
+            $0.version = "1"
+        }
+    }()
+
 	private lazy var device: JetFireDevice = {
 		return JetFireDevice.with {
 			$0.platform = Constants.mobileOSName
@@ -22,11 +28,7 @@ final class UserSessionService {
 			$0.os = Constants.mobileOSName
 			$0.osVersion = Constants.platformOSVersion
 			$0.language = Constants.currentLanguage
-			#if DEBUG
-			$0.locale = "en_TR" // Constants.currentLocale
-			#else
-			$0.locale = Constants.currentLocale
-			#endif
+            $0.locale = Constants.currentLocale
 			$0.timeZone = Constants.currentTimeZone
 			$0.carrier = self.carriers
 			$0.screen = self.screen
@@ -63,6 +65,7 @@ final class UserSessionService {
 			$0.timestamp = Date().timeIntervalSince1970.timestamp
 			$0.app = self.app
 			$0.device = self.device
+            $0.sdk = self.sdk
 			$0.properties = []
 		}
 	}

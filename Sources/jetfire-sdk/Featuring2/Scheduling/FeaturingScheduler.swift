@@ -1,4 +1,5 @@
 import Foundation
+import OrderedCollections
 
 /// Планировщик сторис, тостеров, пушей
 protocol IFeaturingScheduler {
@@ -9,24 +10,28 @@ protocol IFeaturingScheduler {
 
 final class FeaturingScheduler: IFeaturingScheduler {
 
+    private let storiesCampaignsProvider: IStoriesCampaignsProvider
     private let triggeredCampaignsProvider: ITriggeredCampaignsProvider
     private let factory: SchedulerTaskFactory
     private let userSettings: IUserSettings
     private var started: Bool = false
     private var timer: Timer?
 
-    private var storableTasks: [SchedulerStorableTask] {
-        get { self.userSettings.schedulerStorableTasks }
-        set { self.userSettings.schedulerStorableTasks = newValue }
+    private lazy var storableTasks = { self.makeStorableTasks() }() {
+        didSet {
+            self.userSettings.schedulerStorableTasks = self.storableTasks.elements
+        }
     }
 
-    private var tasks: [SchedulerStorableTask: SchedulerTask] = [:]
+    private var tasks: [SchedulerTask] = []
 
     init(
+        storiesCampaignsProvider: IStoriesCampaignsProvider,
         triggeredCampaignsProvider: ITriggeredCampaignsProvider,
         factory: SchedulerTaskFactory,
         userSettings: IUserSettings
     ) {
+        self.storiesCampaignsProvider = storiesCampaignsProvider
         self.triggeredCampaignsProvider = triggeredCampaignsProvider
         self.factory = factory
         self.userSettings = userSettings
@@ -43,7 +48,11 @@ final class FeaturingScheduler: IFeaturingScheduler {
             userInfo: nil,
             repeats: true
         )
-        self.triggeredCampaignsProvider.onUpdate.add(self) { [weak self] isChanged in
+        self.refresh()
+        self.storiesCampaignsProvider.onUpdate.add(self) { [weak self] in
+            self?.refresh()
+        }
+        self.triggeredCampaignsProvider.onUpdate.add(self) { [weak self] in
             self?.refresh()
         }
     }
@@ -60,55 +69,46 @@ extension FeaturingScheduler {
 
     private func scheduleTasks() {
         var triggeredTasks: [SchedulerStorableTask] = []
-        for campaign in self.triggeredCampaignsProvider.campaigns {
+        for campaign in self.storiesCampaignsProvider.campaigns {
             let stories = campaign.stories.map {
                 self.factory.makeStorableTask(story: $0, campaignId: campaign.id)
             }
+            triggeredTasks.append(stories)
+        }
+        for campaign in self.triggeredCampaignsProvider.campaigns {
             let toasters = campaign.hasToaster ? [campaign.toaster].map {
                 self.factory.makeStorableTask(toaster: $0, campaignId: campaign.id)
             } : []
             triggeredTasks.append(toasters)
-            triggeredTasks.append(stories)
         }
-        let newStorableTasks = sync(oldTasks: self.storableTasks, newTasks: triggeredTasks)
-        if self.storableTasks != newStorableTasks {
-            self.storableTasks = newStorableTasks
+        self.sync(newTasks: triggeredTasks)
+    }
+
+    private func sync(newTasks: [SchedulerStorableTask]) {
+        var result: OrderedSet<SchedulerStorableTask> = []
+        for newItem in newTasks {
+            if let index = self.storableTasks.firstIndex(of: newItem) {
+                let existingItem = self.storableTasks[index]
+                result.append(existingItem)
+            } else {
+                result.append(newItem)
+            }
+        }
+        if self.storableTasks != result {
+            self.storableTasks = result
             self.tasks = self.makeTasks()
         }
     }
 
-    private func makeTasks() -> [SchedulerStorableTask: SchedulerTask] {
-        Dictionary(uniqueKeysWithValues: self.storableTasks.compactMap { storable in
-            self.factory.makeTask(storableTask: storable) { [weak self] in
-                self?.remove(storableTask: storable)
-            }
-            .map { ($0.task, $0) }
-        })
+    private func makeTasks() -> [SchedulerTask] {
+        self.storableTasks.compactMap { self.factory.makeTask(storableTask: $0) }
     }
 
-    private func remove(storableTask: SchedulerStorableTask) {
-        if let index = self.storableTasks.firstIndex(of: storableTask) {
-            self.storableTasks.remove(at: index)
-        }
-        self.tasks[storableTask] = nil
+    private func makeStorableTasks() -> OrderedSet<SchedulerStorableTask> {
+        OrderedSet(self.userSettings.schedulerStorableTasks)
     }
 
     @objc private func timerTick() {
-        self.tasks.values.forEach { $0.tick() }
+        self.tasks.forEach { $0.tick() }
     }
-}
-
-// MARK: - Private
-
-private func sync(oldTasks: [SchedulerStorableTask], newTasks: [SchedulerStorableTask]) -> [SchedulerStorableTask] {
-    var result: [SchedulerStorableTask] = []
-    for newItem in newTasks {
-        if let index = oldTasks.firstIndex(of: newItem) {
-            let existingItem = oldTasks[index]
-            result.append(existingItem)
-        } else {
-            result.append(newItem)
-        }
-    }
-    return result
 }

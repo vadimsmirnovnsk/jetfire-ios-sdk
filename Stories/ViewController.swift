@@ -8,7 +8,7 @@ class ViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		self.view.backgroundColor = .lightGray
+		self.view.backgroundColor = .white
 
 		let storiesView = Jetfire.standard.storiesView()
 		self.view.addSubview(storiesView)

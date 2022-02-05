@@ -14,7 +14,6 @@ protocol IUserSettings: AnyObject {
     var pendingNotificationIds: [String] { get set }
     var lastFlushDate: Date? { get set }
     var schedulerStorableTasks: [SchedulerStorableTask] { get set }
-    var storableStories: [StorableStory] { get set }
 
     func reset()
 }
@@ -55,9 +54,6 @@ class UserSettings: IUserSettings {
 
     @UserDefault(key: "jetfire_schedulerStorableTasks", defaultValue: [])
     var schedulerStorableTasks: [SchedulerStorableTask]
-
-    @UserDefault(key: "jetfire_storableStories", defaultValue: [])
-    var storableStories: [StorableStory]
 }
 
 // MARK: - Reset
@@ -75,5 +71,6 @@ extension UserSettings {
         _userId.reset()
         _pendingNotificationIds.reset()
         _lastFlushDate.reset()
+        _schedulerStorableTasks.reset()
     }
 }

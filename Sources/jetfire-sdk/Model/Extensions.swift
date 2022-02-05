@@ -22,6 +22,6 @@ extension JetFireCampaign: CustomDebugStringConvertible {
 
 extension Array where Element == JetFireCampaign {
     public var debugDescription: String {
-        self.map { $0.debugDescription }.joined(separator: ", ")
+        self.isEmpty ? "[]" : self.map { $0.debugDescription }.joined(separator: ", ")
     }
 }

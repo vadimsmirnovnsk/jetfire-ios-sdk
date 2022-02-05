@@ -52,10 +52,7 @@ final class SchedulerTaskFactory {
         )
     }
 
-    func makeTask(
-        storableTask: SchedulerStorableTask,
-        completion: @escaping () -> Void
-    ) -> SchedulerTask? {
+    func makeTask(storableTask: SchedulerStorableTask) -> SchedulerTask? {
         switch storableTask.type {
         case .story:
             if let storyId = storableTask.storyId {
@@ -64,10 +61,8 @@ final class SchedulerTaskFactory {
                     taskActivator: StoryActivator(
                         storyId: storyId,
                         campaignId: storableTask.campaignId,
-                        triggeredCampaignsProvider: self.triggeredCampaignsProvider,
                         storiesDataSource: self.storiesDataSource
-                    ),
-                    completion: completion
+                    )
                 )
             } else {
                 assertionFailure("No storyId found")
@@ -83,8 +78,7 @@ final class SchedulerTaskFactory {
                     jetfireAnalytics: self.jetfireAnalytics,
                     ud: self.ud,
                     rulesProvider: self.rulesProvider
-                ),
-                completion: completion
+                )
             )
         }
     }
