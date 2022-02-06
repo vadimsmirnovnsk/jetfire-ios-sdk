@@ -18,12 +18,12 @@ final class FeaturingManager: IStoriesDataSource {
 
 	private let storage: FeaturingStorage
 	private let ud: IUserSettings
-	private let db: DBAnalytics
+	private let db: IDatabaseService
 
 	private var availableCampaigns: [JetFireCampaign] = []
 	private var triggeredCampaigns: [JetFireCampaign] = []
 
-	init(ud: IUserSettings, storage: FeaturingStorage, db: DBAnalytics) {
+	init(ud: IUserSettings, storage: FeaturingStorage, db: IDatabaseService) {
 		self.ud = ud
 		self.storage = storage
 		self.db = db
@@ -54,12 +54,12 @@ final class FeaturingManager: IStoriesDataSource {
 
 	/// Дёргаем после триггера, чтобы показать нужный triggerCampaign
 	func prepareTriggeredCampaigns() {
-		if let triggerSql = self.storage.sql?.trigger {
-			let triggeredCampaignIds = self.db.execute(sql: triggerSql)
-			self.triggeredCampaigns = self.storage.campaigns
-				.filter { $0.hasPush || $0.hasToaster }
+//		if let triggerSql = self.storage.sql?.trigger {
+//			let triggeredCampaignIds = self.db.execute(sql: triggerSql)
+//			self.triggeredCampaigns = self.storage.campaigns
+//				.filter { $0.hasPush || $0.hasToaster }
 //				.filter { triggeredCampaignIds.contains($0.id) }
-		}
+//		}
 	}
 
 	func campaignForApplicationStart() -> FeaturingCampaignAndStory? {

@@ -26,13 +26,13 @@ class APIService: IAPIService {
 	private var baseURLString: String = ""
 	private var headers: [String : String]
 	private let bearer: String
-	private let userSessionService: UserSessionService
+	private let userSessionService: IUserSessionService
 
 	private var localTime: String {
 		DateFormatter.preferencesDateFormatter.string(from: Date.now)
 	}
 
-	init(bearer: String, userSessionService: UserSessionService) {
+	init(bearer: String, userSessionService: IUserSessionService) {
 		self.bearer = bearer
 		self.userSessionService = userSessionService
 

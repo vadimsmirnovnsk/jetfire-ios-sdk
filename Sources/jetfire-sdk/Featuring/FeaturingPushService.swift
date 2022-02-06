@@ -9,7 +9,6 @@ final class FeaturingPushService {
 	let onGrantedEvent = Event<Bool>()
 
 	private let ud: IUserSettings
-	private let analytics: IJetfireAnalytics
 	private let notificationCenter = UNUserNotificationCenter.current()
 	private let localPushService: FeaturingLocalNotificationService
 
@@ -22,9 +21,8 @@ final class FeaturingPushService {
 	private var preparingCampaign: JetFireCampaign?
 	private var after: TimeInterval?
 
-	init(ud: IUserSettings, analytics: IJetfireAnalytics) {
+	init(ud: IUserSettings) {
 		self.ud = ud
-		self.analytics = analytics
 		self.localPushService = FeaturingLocalNotificationService(localNotificationsCenter: self.notificationCenter)
 
 		self.notificationCenter.getNotificationSettings { [weak self] settings in
@@ -38,7 +36,6 @@ final class FeaturingPushService {
 
 	func update(granted: Bool) {
 		self.isGranted = granted
-		self.analytics.setUserProperty(String(granted), forName: ParameterId.jetfire_push_notifications.rawValue)
 	}
 
 	func removeAllFeaturings() {

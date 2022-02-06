@@ -3,7 +3,27 @@ import Foundation
 import CoreTelephony
 import UIKit
 
-final class UserSessionService {
+protocol IUserSessionService {
+    func user() -> JetFireUser
+    func session() -> JetFireSession
+    func requestUser() -> JetFireRequestUser
+    func requestSession() -> JetFireRequestSession
+}
+
+// MARK: - IUserProperty
+
+private protocol IUserProperty {
+    var key: String { get }
+    var value: String? { get }
+    var numericValue: Double? { get }
+}
+
+extension DBUserProperty: IUserProperty {}
+extension DBSessionProperty: IUserProperty {}
+
+// MARK: - UserSessionService
+
+final class UserSessionService: IUserSessionService {
 
 	private let userId: APIUserId
 	private let sessionId: APISessionId
@@ -47,15 +67,20 @@ final class UserSessionService {
 		}
 	}()
 
-	init(userId: APIUserId, sessionId: APISessionId) {
+    private let databaseService: IDatabaseService
+
+    init(userId: APIUserId, sessionId: APISessionId, databaseService: IDatabaseService) {
 		self.userId = userId
 		self.sessionId = sessionId
+        self.databaseService = databaseService
 	}
 
 	func user() -> JetFireUser {
 		return JetFireUser.with {
 			$0.uuid = self.userId.rawValue
-			$0.properties = []
+            $0.properties = self.databaseService
+                .getUserProperties()
+                .map(\.jetFireProperty)
 		}
 	}
 
@@ -66,7 +91,9 @@ final class UserSessionService {
 			$0.app = self.app
 			$0.device = self.device
             $0.sdk = self.sdk
-			$0.properties = []
+            $0.properties = self.databaseService
+                .getSessionProperties()
+                .map(\.jetFireProperty)
 		}
 	}
 
@@ -82,4 +109,21 @@ final class UserSessionService {
 		}
 	}
 
+}
+
+// MARK: - IUserProperty
+
+private extension IUserProperty {
+    var jetFireProperty: JetFireProperty {
+        JetFireProperty.with {
+            $0.name = self.key
+            $0.value = JetFireAnyValue.with {
+                if let doubleValue = self.numericValue {
+                    $0.double = doubleValue
+                } else if let stringValue = self.value {
+                    $0.string = stringValue
+                }
+            }
+        }
+    }
 }

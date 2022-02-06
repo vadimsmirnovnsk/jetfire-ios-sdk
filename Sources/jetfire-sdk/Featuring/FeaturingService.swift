@@ -9,7 +9,6 @@ final public class FeaturingService {
 
 	private let manager: FeaturingManager
 	private let pushService: FeaturingPushService
-	private let db: DBAnalytics
 	private let ud: IUserSettings
 	private let scheduler: StoryScheduler
 	private let analytics: JetfireAnalytics
@@ -17,14 +16,12 @@ final public class FeaturingService {
 	init(
 		manager: FeaturingManager,
 		pushService: FeaturingPushService,
-		db: DBAnalytics,
 		ud: IUserSettings,
 		scheduler: StoryScheduler,
 		analytics: JetfireAnalytics
 	) {
 		self.manager = manager
 		self.pushService = pushService
-		self.db = db
 		self.scheduler = scheduler
 		self.ud = ud
 		self.analytics = analytics
@@ -32,12 +29,12 @@ final public class FeaturingService {
 //		self.reset()
 	}
 
-	func reset() {
-		#if DEBUG
-		self.db.reset()
-		self.ud.reset()
-		#endif
-	}
+//	func reset() {
+//		#if DEBUG
+//		self.db.reset()
+//		self.ud.reset()
+//		#endif
+//	}
 
 	/// На старте загружаем данные, по готовности показываем фичеринг и шедулим пуш активной кампании
 	public func applicationStart() {
@@ -83,8 +80,6 @@ final public class FeaturingService {
 		self.dbDidModify()
 		/// Решедулим пуши только при выходе из приложения
 		self.reschedulePushFeaturing()
-
-		self.db.flush(completion: { _ in })
 	}
 
 	public func trackStart(feature: String) {

@@ -42,12 +42,12 @@ final class JetfireContainer {
         FeaturingManager(
             ud: self.userSettings,
             storage: self.featuringStorage,
-            db: self.dbAnalytics
+            db: self.databaseService
         )
     }()
 
     lazy private(set) var featuringPushService: FeaturingPushService = {
-        FeaturingPushService(ud: self.userSettings, analytics: self.analytics)
+        FeaturingPushService(ud: self.userSettings)
     }()
 
     lazy private(set) var storiesService: StoriesService = {
@@ -71,7 +71,6 @@ final class JetfireContainer {
         FeaturingService(
             manager: self.featuringManager,
             pushService: self.featuringPushService,
-            db: self.dbAnalytics,
             ud: self.userSettings,
             scheduler: self.scheduler,
             analytics: self.analytics
@@ -79,7 +78,7 @@ final class JetfireContainer {
     }()
 
     lazy private(set) var analytics: JetfireAnalytics = {
-        JetfireAnalytics(db: self.dbAnalytics)
+        JetfireAnalytics(db: self.databaseService)
     }()
 
     lazy private(set) var processTargetService: ProcessTargetService = {
@@ -92,10 +91,11 @@ final class JetfireContainer {
         return serivice
     }()
 
-    lazy private(set) var userSessionService: UserSessionService = {
+    lazy private(set) var userSessionService: IUserSessionService = {
         UserSessionService(
             userId: self.preferences.userId,
-            sessionId: self.preferences.sessionId
+            sessionId: self.preferences.sessionId,
+            databaseService: self.databaseService
         )
     }()
 
@@ -108,10 +108,6 @@ final class JetfireContainer {
         return service
     }()
 
-    lazy private(set) var dbAnalytics: DBAnalytics = {
-        DBAnalytics(ud: self.userSettings, api: self.api)
-    }()
-
     lazy private(set) var campaignsProvider: ICampaignsProvider = {
         CachedCampaignsProvider(
             campaignsProvider: CampaignsProvider(api: self.api)
@@ -121,14 +117,14 @@ final class JetfireContainer {
     lazy private(set) var storiesCampaignsProvider: IStoriesCampaignsProvider = {
         StoriesCampaignsProvider(
             campaignsProvider: self.campaignsProvider,
-            db: self.dbAnalytics
+            db: self.databaseService
         )
     }()
 
     lazy private(set) var triggeredCampaignsProvider: ITriggeredCampaignsProvider = {
         TriggeredCampaignsProvider(
             campaignsProvider: self.campaignsProvider,
-            db: self.dbAnalytics
+            db: self.databaseService
         )
     }()
 
@@ -179,13 +175,30 @@ final class JetfireContainer {
         )
     }()
 
+    lazy private(set) var databaseService: IDatabaseService = {
+        DatabaseService()
+    }()
+
+    lazy private(set) var eventsFlusherService: IEventsFlusherService = {
+        EventsFlusherService(
+            userSettings: self.userSettings,
+            api: self.api,
+            databaseService: self.databaseService
+        )
+    }()
+
+    lazy private(set) var externalAnalyticsService: IExternalAnalyticsService = {
+        ExternalAnalyticsService(databaseService: self.databaseService)
+    }()
+
     lazy private(set) var jetfireMain: IJetfireMain = {
         JetfireMain(
             ud: self.userSettings,
             analytics: self.analytics,
             storiesDataSource: self.storiesDataSource,
             scheduler: self.featuringScheduler,
-            dbAnalytics: self.dbAnalytics
+            databaseService: self.databaseService,
+            eventsFlusherService: self.eventsFlusherService
         )
     }()
 

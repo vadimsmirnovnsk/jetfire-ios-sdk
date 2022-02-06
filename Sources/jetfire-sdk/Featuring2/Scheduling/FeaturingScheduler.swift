@@ -97,6 +97,7 @@ extension FeaturingScheduler {
         if self.storableTasks != result {
             self.storableTasks = result
             self.tasks = self.makeTasks()
+            Log.info("Sheduler tasks: \(self.tasks.debugDescription)")
         }
     }
 

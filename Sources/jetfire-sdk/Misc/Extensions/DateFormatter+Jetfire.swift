@@ -8,18 +8,26 @@ extension DateFormatter {
 		df.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
 		return df
 	}()
-	static let YYYYMMDD: DateFormatter = {
+
+	static let yyyyMMdd: DateFormatter = {
 		let df = DateFormatter()
 		df.formatterBehavior = .behavior10_4
-		df.dateFormat = "YYYYMMdd"
+		df.dateFormat = "yyyyMMdd"
 		return df
 	}()
+
 	static let db_yyyy_mm_dd: DateFormatter = {
 		let df = DateFormatter()
 		df.formatterBehavior = .behavior10_4
-		df.dateFormat = "YYYY-MM-dd"
+		df.dateFormat = "yyyy-MM-dd"
 		return df
 	}()
+
+    static let dateTime: DateFormatter = {
+        let df = DateFormatter()
+        df.dateFormat = "dd.MM.yyyy HH:mm:ss"
+        return df
+    }()
 
 }
 
