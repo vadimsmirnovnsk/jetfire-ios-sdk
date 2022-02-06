@@ -11,7 +11,6 @@ public class Jetfire {
 	public let storiesConfig = StoriesConfig()
 	public let snapsConfig = StoryTypesConfig()
 
-	private var userUuid = UUID().uuidString
 	private var isStarted = false
 
 	private(set) lazy var router = FeaturingRouter(container: self)
@@ -19,35 +18,11 @@ public class Jetfire {
         JetfireContainer(router: router)
     }()
 
-    public init() {
-    }
+    private init() {}
 
-	public func start(with userUuid: String) {
+	public func start() {
 		self.isStarted = true
-		self.userUuid = userUuid
         self.container.jetfireMain.start()
-	}
-
-	public func trackStart(feature: String) {
-		guard self.isStarted else { return }
-        self.container.featuring.trackStart(feature: feature)
-	}
-
-	public func trackFinish(feature: String) {
-		guard self.isStarted else { return }
-        self.container.featuring.trackFinish(feature: feature)
-	}
-
-	public func updatePushStatus(granted: Bool) {
-		guard self.isStarted else { return }
-        self.container.featuring.updatePushStatus(granted: granted)
-	}
-
-	public func userNotificationCenter(
-		_ center: UNUserNotificationCenter,
-		didReceive response: UNNotificationResponse
-	) {
-        self.container.featuring.userNotificationCenter(center, didReceive: response)
 	}
 
 	public func storiesView() -> UIView {
@@ -57,9 +32,47 @@ public class Jetfire {
 		return view
 	}
 
-	/// Container
-	internal func toaster(style: ToasterView.Style, visualStyle: ToasterView.VisualStyle) -> ToasterView {
+    func toaster(style: ToasterView.Style, visualStyle: ToasterView.VisualStyle) -> ToasterView {
 		return ToasterView(style: style, visualStyle: visualStyle)
 	}
+}
 
+// MARK: - Analytics
+
+public extension Jetfire {
+
+    func trackStart(feature: String) {
+        guard self.isStarted else { return }
+        self.container.featuring.trackStart(feature: feature)
+    }
+
+    func trackFinish(feature: String) {
+        guard self.isStarted else { return }
+        self.container.featuring.trackFinish(feature: feature)
+    }
+
+    func logEvent(_ name: String) {
+        guard self.isStarted else { return }
+        self.container.externalAnalyticsService.logEvent(name)
+    }
+
+    func setUserProperty(_ value: Any, forName name: String) {
+        guard self.isStarted else { return }
+        self.container.externalAnalyticsService.setUserProperty(value, forName: name)
+    }
+
+    func removeUserProperty(forName name: String) {
+        guard self.isStarted else { return }
+        self.container.externalAnalyticsService.removeUserProperty(forName: name)
+    }
+
+    func setSessionProperty(_ value: Any, forName name: String) {
+        guard self.isStarted else { return }
+        self.container.externalAnalyticsService.setSessionProperty(value, forName: name)
+    }
+
+    func removeSessionProperty(forName name: String) {
+        guard self.isStarted else { return }
+        self.container.externalAnalyticsService.removeSessionProperty(forName: name)
+    }
 }

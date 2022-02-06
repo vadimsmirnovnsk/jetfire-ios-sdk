@@ -12,12 +12,12 @@ protocol IStoriesCampaignsProvider {
 final class StoriesCampaignsProvider: IStoriesCampaignsProvider {
 
     private let campaignsProvider: ICampaignsProvider
-    private let db: DBAnalytics
+    private let db: IDatabaseService
 
     var campaigns: [JetFireCampaign] = []
     let onUpdate: Event<Void> = Event()
 
-    init(campaignsProvider: ICampaignsProvider, db: DBAnalytics) {
+    init(campaignsProvider: ICampaignsProvider, db: IDatabaseService) {
         self.campaignsProvider = campaignsProvider
         self.db = db
 

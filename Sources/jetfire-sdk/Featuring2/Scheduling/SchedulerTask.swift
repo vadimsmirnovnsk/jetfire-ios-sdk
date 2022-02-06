@@ -23,3 +23,50 @@ final class SchedulerTask {
         }
     }
 }
+
+// MARK: - CustomDebugStringConvertible
+
+extension SchedulerTask: CustomDebugStringConvertible {
+
+    var debugDescription: String {
+        "Task '\(self.task.type.stringValue)' [\(self.info)]"
+    }
+
+    private var info: String {
+        var result: [String] = []
+        result.append("campain: \(self.task.campaignId)")
+        if let activationDate = self.task.activationDate {
+            result.append("activation: \(DateFormatter.dateTime.string(from: activationDate))")
+        }
+        if let expirationDate = self.task.expirationDate {
+            result.append("expiration: \(DateFormatter.dateTime.string(from: expirationDate))")
+        }
+        if self.task.isExpired {
+            result.append("isExpired")
+        } else if self.task.canBeActivated {
+            result.append("canBeActivated")
+        }
+        return result.joined(separator: ", ")
+    }
+}
+
+// MARK: - Array<SchedulerTask>
+
+extension Array where Element == SchedulerTask {
+    var debugDescription: String {
+        self.isEmpty ? "[]" : self.map { $0.debugDescription }.joined(separator: ", ")
+    }
+}
+
+// MARK: - SchedulerTaskType
+
+private extension SchedulerTaskType {
+    var stringValue: String {
+        switch self {
+        case .story:
+            return "story"
+        case .toaster:
+            return "toaster"
+        }
+    }
+}

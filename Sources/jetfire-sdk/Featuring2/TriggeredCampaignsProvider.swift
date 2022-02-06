@@ -12,12 +12,12 @@ protocol ITriggeredCampaignsProvider {
 final class TriggeredCampaignsProvider: ITriggeredCampaignsProvider {
 
     private let campaignsProvider: ICampaignsProvider
-    private let db: DBAnalytics
+    private let db: IDatabaseService
 
     var campaigns: [JetFireCampaign] = []
     let onUpdate: Event<Void> = Event()
 
-    init(campaignsProvider: ICampaignsProvider, db: DBAnalytics) {
+    init(campaignsProvider: ICampaignsProvider, db: IDatabaseService) {
         self.campaignsProvider = campaignsProvider
         self.db = db
 

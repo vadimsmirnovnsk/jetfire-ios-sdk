@@ -14,7 +14,8 @@ final class JetfireMain: IJetfireMain {
     private let analytics: JetfireAnalytics
     private let storiesDataSource: IMutableStoriesDataSource
     private let scheduler: IFeaturingScheduler
-    private let dbAnalytics: DBAnalytics
+    private let databaseService: IDatabaseService
+    private let eventsFlusherService: IEventsFlusherService
     private var started: Bool = false
 
     init(
@@ -22,18 +23,21 @@ final class JetfireMain: IJetfireMain {
         analytics: JetfireAnalytics,
         storiesDataSource: IMutableStoriesDataSource,
         scheduler: IFeaturingScheduler,
-        dbAnalytics: DBAnalytics
+        databaseService: IDatabaseService,
+        eventsFlusherService: IEventsFlusherService
     ) {
         self.ud = ud
         self.analytics = analytics
         self.storiesDataSource = storiesDataSource
         self.scheduler = scheduler
-        self.dbAnalytics = dbAnalytics
+        self.databaseService = databaseService
+        self.eventsFlusherService = eventsFlusherService
     }
 
     func start() {
         guard !self.started else { return }
         self.started = true
+        self.databaseService.start()
         self.scheduler.start()
         let isFirstStart = !self.ud.didStartEarly
         if isFirstStart {
@@ -67,6 +71,6 @@ extension JetfireMain {
 
     private func applicationWillResignActive() {
         self.analytics.trackApplicationShutdown()
-        self.dbAnalytics.flush(completion: { _ in })
+        self.eventsFlusherService.flush()
     }
 }

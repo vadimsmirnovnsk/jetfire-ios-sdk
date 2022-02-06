@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		self.window?.rootViewController = nc
 		self.window?.makeKeyAndVisible()
 
-		Jetfire.standard.start(with: UUID().uuidString)
+		Jetfire.standard.start()
 
 //		let text = NegativeReviewCommentGenerator().generate(for: "John")
 //		print("Generated text:\n\(text)")
@@ -27,12 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 
 	func requestPushes() {
-		UNUserNotificationCenter.current().requestAuthorization(options: [ .alert, .badge, .sound ]) { (granted, error) in
-			if let error = error { print("Did receive register notification error: \(error)") }
-			DispatchQueue.main.async { Jetfire.standard.updatePushStatus(granted: granted) }
-		}
-
-		UNUserNotificationCenter.current().delegate = self
+//		UNUserNotificationCenter.current().requestAuthorization(options: [ .alert, .badge, .sound ]) { (granted, error) in
+//			if let error = error { print("Did receive register notification error: \(error)") }
+//			DispatchQueue.main.async { Jetfire.standard.updatePushStatus(granted: granted) }
+//		}
+//
+//		UNUserNotificationCenter.current().delegate = self
 	}
 
 }
@@ -52,7 +52,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 		didReceive response: UNNotificationResponse,
 		withCompletionHandler completionHandler: @escaping () -> Void
 	) {
-		Jetfire.standard.userNotificationCenter(center, didReceive: response)
+//		Jetfire.standard.userNotificationCenter(center, didReceive: response)
 		completionHandler()
 	}
 
