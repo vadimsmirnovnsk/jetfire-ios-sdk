@@ -15,23 +15,22 @@ class DeeplinkService: IOpenURLHandler {
 
 	weak var delegate: ICanShowContent?
 
-	private let serviceInfo: ServiceInfo
+	private let plistSettingsService: IPlistSettingsService
 
-	init(serviceInfo: ServiceInfo) {
-		self.serviceInfo = serviceInfo
+	init(plistSettingsService: IPlistSettingsService) {
+		self.plistSettingsService = plistSettingsService
 	}
 
 	func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
 		guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return false }
-		guard components.scheme == self.serviceInfo.deeplinkScheme else { return false }
 		guard components.host == DeeplinkService.jetfireHost else { return false }
 
 		var isHandled = false
-		var headers = [String: String]()
-		if let headersString = components.query(with: "headers") {
-			headers = headersString.urlHeaders()
-			isHandled = true
-		}
+//		var headers = [String: String]()
+//		if let headersString = components.query(with: "headers") {
+//			headers = headersString.urlHeaders()
+//			isHandled = true
+//		}
 //		let saveBaseUrl = components.query(with: "save_baseurl")?.boolValue ?? false
 //		if !saveBaseUrl {
 //			self.ud.baseURL = nil
@@ -57,10 +56,10 @@ class DeeplinkService: IOpenURLHandler {
 			isHandled = true
 		}
 
-		if let skipCount = components.query(with: "skip_count") {
+//		if let skipCount = components.query(with: "skip_count") {
 //			Constants.skipExerciseCount = Int(skipCount)
-			isHandled = true
-		}
+//			isHandled = true
+//		}
 		if components.query(with: "debug_log") != nil {
 //			Logger.enableDebugLogger()
 			isHandled = true
@@ -85,10 +84,10 @@ class DeeplinkService: IOpenURLHandler {
 //			self.apiService.cancelSubscription()
 			isHandled = true
 		}
-		if let style = UIUserInterfaceStyle(string: components.query(with: "user_interface_style")) {
+//		if let style = UIUserInterfaceStyle(string: components.query(with: "user_interface_style")) {
 //			self.interfaceStyleService.updateUserInterfaceStyle(style)
-			isHandled = true
-		}
+//			isHandled = true
+//		}
 		return isHandled
 	}
 	

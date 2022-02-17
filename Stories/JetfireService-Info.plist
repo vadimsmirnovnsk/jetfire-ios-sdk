@@ -2,9 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>DEEPLINK_SCHEME</key>
-	<string>jetfiredemo</string>
+	<key>API_BASE_URL</key>
+	<string>https://api.staging.jetfire.xyz/jetfire/api</string>
+	<key>PROJECT_ID</key>
+	<string>demo_project</string>
 	<key>API_KEY</key>
 	<string>1-Qt+J38tJoZviGbd35l8+bZOLVxssfrDO+uSpK5EhmUGY0Dl3LFf6NFKcJTocpoZIAlqZZbP2YbvTX1LAG4NCiorGi9Q65xmy7FlKEiMzz7hC7TnOR8qYPvthRFNpI7KVWiWacXPR9joBLKmW/6VGCkB+nuUfhODxtR1oY+iZ6Ah1Cn/ewCJ6pSgtZbvI6u0m</string>
+	<key>BUNDLE_ID</key>
+	<string></string>
 </dict>
 </plist>

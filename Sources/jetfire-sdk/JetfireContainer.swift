@@ -15,8 +15,8 @@ final class JetfireContainer {
         PreferencesService()
     }()
 
-    lazy private(set) var serviceInfo: ServiceInfo = {
-        ServiceInfo()
+    lazy private(set) var plistSettingsService: IPlistSettingsService = {
+        PlistSettingsService()
     }()
 
     lazy private(set) var logger: ILoggerService = {
@@ -86,7 +86,7 @@ final class JetfireContainer {
     }()
 
     lazy private(set) var deeplinkService: DeeplinkService = {
-        let serivice = DeeplinkService(serviceInfo: self.serviceInfo)
+        let serivice = DeeplinkService(plistSettingsService: self.plistSettingsService)
         serivice.delegate = self.contentPresenter
         return serivice
     }()
@@ -101,10 +101,9 @@ final class JetfireContainer {
 
     lazy private(set) var api: IAPIService & IFeaturingAPI = {
         let service = APIService(
-            bearer: self.serviceInfo.apiKey,
+            plistSettingsService: self.plistSettingsService,
             userSessionService: self.userSessionService
         )
-        service.configure(forBaseUrlString: Constants.baseURL, overrideHeaders: [:])
         return service
     }()
 
