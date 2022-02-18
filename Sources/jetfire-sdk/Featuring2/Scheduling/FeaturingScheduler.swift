@@ -55,6 +55,8 @@ final class FeaturingScheduler: IFeaturingScheduler {
         self.triggeredCampaignsProvider.onUpdate.add(self) { [weak self] in
             self?.refresh()
         }
+        self.storiesCampaignsProvider.refresh()
+        self.triggeredCampaignsProvider.refresh()
     }
 }
 

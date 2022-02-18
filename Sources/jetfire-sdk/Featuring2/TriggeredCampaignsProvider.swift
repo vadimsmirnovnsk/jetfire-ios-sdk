@@ -5,6 +5,7 @@ import VNEssential
 protocol ITriggeredCampaignsProvider {
     var campaigns: [JetFireCampaign] { get }
     var onUpdate: Event<Void> { get }
+    func refresh()
 }
 
 // MARK: - TriggeredCampaignsProvider
