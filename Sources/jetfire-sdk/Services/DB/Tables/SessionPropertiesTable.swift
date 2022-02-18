@@ -26,6 +26,11 @@ class SessionPropertiesTable {
         })
     }
 
+    func reset(db: Connection) throws {
+        try db.run(sessionProperties.drop(ifExists: true))
+        try create(db: db)
+    }
+
     func insertOrReplace(property: DBSessionProperty, db: Connection) throws {
         Log.info("Will insert \(property.debugDescription)")
         try db.run(sessionProperties.insert(or: .replace, encodable: property))

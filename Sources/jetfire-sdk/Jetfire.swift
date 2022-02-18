@@ -25,6 +25,10 @@ public class Jetfire {
         self.container.jetfireMain.start()
 	}
 
+    public func reset() {
+        self.container.jetfireMain.reset()
+    }
+
 	public func storiesView() -> UIView {
         let vm = ContentStoriesVM(storiesService: self.container.storiesService)
 		let view = ContentStoriesView()

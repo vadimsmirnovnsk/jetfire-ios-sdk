@@ -4,6 +4,7 @@ import UIKit
 /// Запускает работу основных сервисов
 protocol IJetfireMain {
     func start()
+    func reset()
 }
 
 // MARK: - JetfireMain
@@ -37,6 +38,7 @@ final class JetfireMain: IJetfireMain {
     func start() {
         guard !self.started else { return }
         self.started = true
+        Log.info("Jetfire started")
         self.databaseService.start()
         self.scheduler.start()
         let isFirstStart = !self.ud.didStartEarly
@@ -58,6 +60,12 @@ final class JetfireMain: IJetfireMain {
         ) { [weak self] _ in
             self?.applicationDidBecomeActive()
         }
+    }
+
+    func reset() {
+        Log.info("Will reset all internal state and storage")
+        self.ud.reset()
+        self.databaseService.reset()
     }
 }
 
