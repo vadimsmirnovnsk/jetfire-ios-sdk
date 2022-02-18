@@ -21,7 +21,7 @@ final class PreferencesService {
 		self.set(value: newUserId, key: C.userIdKey)
 		let apiUserId = APIUserId(rawValue: newUserId)
 
-        Log.info("❊ Jetfire did create new user id")
+        Log.info("Jetfire did create new user id")
 
 		return apiUserId
 	}()
@@ -36,7 +36,7 @@ final class PreferencesService {
 
 	init() {
 		let keychainId = "xyz.jetfire.\(Constants.bundleID)"
-        Log.info("❊ Jetfire is using keychain id: \(keychainId)")
+        Log.info("Jetfire is using keychain id: \(keychainId)")
 		self.keychain = Keychain(service: keychainId)
 			.accessibility(.afterFirstUnlock)
 			.synchronizable(true)

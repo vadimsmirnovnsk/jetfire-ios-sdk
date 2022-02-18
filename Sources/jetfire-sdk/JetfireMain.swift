@@ -17,6 +17,7 @@ final class JetfireMain: IJetfireMain {
     private let scheduler: IFeaturingScheduler
     private let databaseService: IDatabaseService
     private let eventsFlusherService: IEventsFlusherService
+    private let logger: ILoggerService
     private var started: Bool = false
 
     init(
@@ -25,7 +26,8 @@ final class JetfireMain: IJetfireMain {
         storiesDataSource: IMutableStoriesDataSource,
         scheduler: IFeaturingScheduler,
         databaseService: IDatabaseService,
-        eventsFlusherService: IEventsFlusherService
+        eventsFlusherService: IEventsFlusherService,
+        logger: ILoggerService
     ) {
         self.ud = ud
         self.analytics = analytics
@@ -33,11 +35,13 @@ final class JetfireMain: IJetfireMain {
         self.scheduler = scheduler
         self.databaseService = databaseService
         self.eventsFlusherService = eventsFlusherService
+        self.logger = logger
     }
 
     func start() {
         guard !self.started else { return }
         self.started = true
+//        self.logger.appendTracker(ConsoleLogTracker())
         Log.info("Jetfire started")
         self.databaseService.start()
         self.scheduler.start()
