@@ -47,6 +47,11 @@ class EventsTable {
         })
     }
 
+    func reset(db: Connection) throws {
+        try db.run(events.drop(ifExists: true))
+        try create(db: db)
+    }
+
     func insert(event: DBEvent, db: Connection) throws {
         Log.info("Will insert \(event)")
         try db.run(events.insert(event))

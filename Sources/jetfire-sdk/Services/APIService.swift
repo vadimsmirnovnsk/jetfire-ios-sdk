@@ -23,23 +23,24 @@ class APIService: IAPIService {
 	public let manager: Session
 	public let downloadManager: Session
 
-	private var baseURLString: String = ""
-	private var headers: [String : String]
-	private let bearer: String
+	private let plistSettingsService: IPlistSettingsService
 	private let userSessionService: IUserSessionService
 
 	private var localTime: String {
 		DateFormatter.preferencesDateFormatter.string(from: Date.now)
 	}
 
-	init(bearer: String, userSessionService: IUserSessionService) {
-		self.bearer = bearer
-		self.userSessionService = userSessionService
+    private var headers: [String: String] {
+        ["Authorization" : "Bearer \(self.plistSettingsService.current.apiKey)"]
+    }
 
-		let headers: [String : String] = [
-			"Authorization" : "Bearer \(bearer)",
-		]
-		self.headers = headers
+    private var baseURLString: String {
+        self.plistSettingsService.current.baseURLString
+    }
+
+	init(plistSettingsService: IPlistSettingsService, userSessionService: IUserSessionService) {
+		self.plistSettingsService = plistSettingsService
+		self.userSessionService = userSessionService
 
 		let configuration = URLSessionConfiguration.default
 		configuration.timeoutIntervalForRequest = Constants.timeoutIntervalForRequest
@@ -51,28 +52,6 @@ class APIService: IAPIService {
 		downloadConfiguration.timeoutIntervalForResource = 600
 		downloadConfiguration.timeoutIntervalForRequest = 180
 		self.downloadManager = Session(configuration: downloadConfiguration)
-	}
-
-	func configure(
-		forBaseUrlString urlString: String?,
-		overrideHeaders: [String: String]
-	) {
-		if let urlString = urlString {
-			self.baseURLString = urlString
-		}
-		overrideHeaders.forEach { (key, value) in
-			self.headers[key] = value
-		}
-
-		#if DEBUG
-//		if TestConfig.loginAsUser {
-//			self.headers["X-User-Idfa"] = "D22B16CB-9E77-4800-A898-0693CE895BBF"
-//			self.headers["X-User-Session-UUID"] = "C7797D0F-A6F9-4A07-B06D-F6EAEE6E556B"
-//			self.headers["X-User-UUID"] = "D22B16CB-9E77-4800-A898-0693CE895BBF"
-//			self.headers["X-Device-Id"] = "001D2E5D-1401-4AA6-B15F-A263AA134AE7"
-//			self.headers["X-User-Token"] = "44323242313643422d394537372d343830302d413839382d303639334345383935424246"
-//		}
-		#endif
 	}
 
 	fileprivate func unwrappedProtoRequest<T: Message>(
@@ -309,7 +288,7 @@ extension APIService: IFeaturingAPI { // + Jetfire API
 			$0.user = self.userSessionService.user()
 			$0.session = self.userSessionService.session()
 		}
-		let method = "campaigns"
+		let method = "/1.0/campaigns"
         self.unwrappedProtoRequest(
             httpMethod: .post,
             method: method,
@@ -325,7 +304,7 @@ extension APIService: IFeaturingAPI { // + Jetfire API
 			$0.session = self.userSessionService.requestSession()
 			$0.events = events
 		}
-		let method = "sink"
+		let method = "/1.0/sink"
 		self.unwrappedProtoRequest(httpMethod: .post, method: method, protoObject: req, callback: completion)
 	}
 

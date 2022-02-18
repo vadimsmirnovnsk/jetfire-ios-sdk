@@ -5,11 +5,9 @@ enum Constants {
 	#if DEBUG
 	static let timeoutIntervalForRequest: TimeInterval = 60
 	static let timeoutIntervalForResource: TimeInterval = 300
-	static let baseURL: String = "https://api.staging.jetfire.xyz/jetfire/api/1.0/"
 	#else
 	static let timeoutIntervalForRequest: TimeInterval = 60
 	static let timeoutIntervalForResource: TimeInterval = 300
-	static let baseURL: String = "https://api.jetfire.xyz/jetfire/api/1.0/"
 	#endif
 
 	static let verboseVersion = String(format: "Version %@ (%@)", Constants.currentVersion, Constants.currentBuild)

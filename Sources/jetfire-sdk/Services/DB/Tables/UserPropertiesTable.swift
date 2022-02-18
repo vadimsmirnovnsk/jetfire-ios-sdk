@@ -25,6 +25,11 @@ class UserPropertiesTable {
         })
     }
 
+    func reset(db: Connection) throws {
+        try db.run(userProperties.drop(ifExists: true))
+        try create(db: db)
+    }
+
     func insertOrReplace(property: DBUserProperty, db: Connection) throws {
         Log.info("Will insert \(property.debugDescription)")
         try db.run(userProperties.insert(or: .replace, encodable: property))

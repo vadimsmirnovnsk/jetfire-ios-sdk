@@ -22,6 +22,8 @@ protocol IDatabaseService {
     func removeSessionProperty(for key: String)
 
     func execute(sql: String) -> [Int64]
+
+    func reset()
 }
 
 // MARK: - DatabaseService
@@ -51,6 +53,16 @@ class DatabaseService: IDatabaseService {
             try events.create(db: db)
             try sessionProperties.create(db: db)
             try userProperties.create(db: db)
+        } catch let error {
+            Log.error(error)
+        }
+    }
+
+    func reset() {
+        do {
+            try events.reset(db: db)
+            try sessionProperties.reset(db: db)
+            try userProperties.reset(db: db)
         } catch let error {
             Log.error(error)
         }
