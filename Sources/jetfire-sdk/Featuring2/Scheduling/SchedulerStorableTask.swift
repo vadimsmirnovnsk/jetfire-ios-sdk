@@ -1,6 +1,6 @@
 import Foundation
 
-enum SchedulerTaskType: Codable {
+enum SchedulerTaskType: String, Codable {
     case story
     case toaster
 }
