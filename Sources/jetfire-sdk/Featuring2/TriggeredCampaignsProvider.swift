@@ -6,6 +6,7 @@ protocol ITriggeredCampaignsProvider {
     var campaigns: [JetFireCampaign] { get }
     var onUpdate: Event<Void> { get }
     func refresh()
+    func start()
 }
 
 // MARK: - TriggeredCampaignsProvider
@@ -14,6 +15,7 @@ final class TriggeredCampaignsProvider: ITriggeredCampaignsProvider {
 
     private let campaignsProvider: ICampaignsProvider
     private let db: IDatabaseService
+    private var started: Bool = false
 
     var campaigns: [JetFireCampaign] = []
     let onUpdate: Event<Void> = Event()
@@ -21,7 +23,11 @@ final class TriggeredCampaignsProvider: ITriggeredCampaignsProvider {
     init(campaignsProvider: ICampaignsProvider, db: IDatabaseService) {
         self.campaignsProvider = campaignsProvider
         self.db = db
+    }
 
+    func start() {
+        guard !self.started else { return }
+        self.started = true
         self.db.onChanged.add(self) { [weak self] in
             self?.refresh()
         }

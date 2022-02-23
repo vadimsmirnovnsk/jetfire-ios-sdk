@@ -53,7 +53,7 @@ class EventsTable {
     }
 
     func insert(event: DBEvent, db: Connection) throws {
-        Log.info("Will insert \(event)")
+        Log.info("Will insert \(event.debugDescription)")
         try db.run(events.insert(event))
     }
 

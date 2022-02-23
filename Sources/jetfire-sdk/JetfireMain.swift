@@ -4,6 +4,7 @@ import UIKit
 /// Запускает работу основных сервисов
 protocol IJetfireMain {
     func start()
+    func enableFeaturing()
     func reset()
 }
 
@@ -16,6 +17,8 @@ final class JetfireMain: IJetfireMain {
     private let storiesDataSource: IMutableStoriesDataSource
     private let scheduler: IFeaturingScheduler
     private let databaseService: IDatabaseService
+    private let storiesCampaignsProvider: IStoriesCampaignsProvider
+    private let triggeredCampaignsProvider: ITriggeredCampaignsProvider
     private let eventsFlusherService: IEventsFlusherService
     private let logger: ILoggerService
     private var started: Bool = false
@@ -26,6 +29,8 @@ final class JetfireMain: IJetfireMain {
         storiesDataSource: IMutableStoriesDataSource,
         scheduler: IFeaturingScheduler,
         databaseService: IDatabaseService,
+        storiesCampaignsProvider: IStoriesCampaignsProvider,
+        triggeredCampaignsProvider: ITriggeredCampaignsProvider,
         eventsFlusherService: IEventsFlusherService,
         logger: ILoggerService
     ) {
@@ -34,6 +39,8 @@ final class JetfireMain: IJetfireMain {
         self.storiesDataSource = storiesDataSource
         self.scheduler = scheduler
         self.databaseService = databaseService
+        self.storiesCampaignsProvider = storiesCampaignsProvider
+        self.triggeredCampaignsProvider = triggeredCampaignsProvider
         self.eventsFlusherService = eventsFlusherService
         self.logger = logger
     }
@@ -43,7 +50,6 @@ final class JetfireMain: IJetfireMain {
         self.started = true
         Log.info("Jetfire started")
         self.databaseService.start()
-        self.scheduler.start()
         let isFirstStart = !self.ud.didStartEarly
         if isFirstStart {
             self.ud.didStartEarly = true
@@ -63,6 +69,13 @@ final class JetfireMain: IJetfireMain {
         ) { [weak self] _ in
             self?.applicationDidBecomeActive()
         }
+    }
+
+    func enableFeaturing() {
+        Log.info("Enable featuring")
+        self.storiesCampaignsProvider.start()
+        self.triggeredCampaignsProvider.start()
+        self.scheduler.start()
     }
 
     func reset() {

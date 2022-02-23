@@ -17,7 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		self.window?.makeKeyAndVisible()
 
         Jetfire.standard.appendLogTracker(ConsoleLogTracker())
+
 		Jetfire.standard.start()
+        Jetfire.standard.enableFeaturing()
 
 //		let text = NegativeReviewCommentGenerator().generate(for: "John")
 //		print("Generated text:\n\(text)")
