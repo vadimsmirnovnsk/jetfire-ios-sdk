@@ -1,5 +1,5 @@
 import Foundation
-import jetfire_sdk
+import Jetfire
 
 class ConsoleLogTracker: IJetfireLogTracker {
 

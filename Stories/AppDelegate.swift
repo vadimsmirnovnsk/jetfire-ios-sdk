@@ -1,6 +1,5 @@
 import UIKit
-//import Firebase
-import jetfire_sdk
+import Jetfire
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
