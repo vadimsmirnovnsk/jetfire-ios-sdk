@@ -41,7 +41,6 @@ final class JetfireMain: IJetfireMain {
     func start() {
         guard !self.started else { return }
         self.started = true
-//        self.logger.appendTracker(ConsoleLogTracker())
         Log.info("Jetfire started")
         self.databaseService.start()
         self.scheduler.start()

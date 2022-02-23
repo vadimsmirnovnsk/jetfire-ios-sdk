@@ -23,8 +23,12 @@ enum Constants {
 	static let mobileOSName = "ios"
 	static let mobileVendorName = "Apple"
 	static let platformOSVersion = UIDevice.current.systemVersion
-	static let currentLanguage = Locale.preferredLanguages.first ?? "ru"
 	static let currentLocale = Locale.current.identifier
 	static let currentTimeZone = TimeZone.current.identifier
+
+    static var currentLanguage: String {
+        let language = Locale.preferredLanguages.first
+        return language?.split(separator: "-").first.map { String($0) } ?? "en"
+    }
 
 }
