@@ -197,6 +197,8 @@ final class JetfireContainer {
             storiesDataSource: self.storiesDataSource,
             scheduler: self.featuringScheduler,
             databaseService: self.databaseService,
+            storiesCampaignsProvider: self.storiesCampaignsProvider,
+            triggeredCampaignsProvider: self.triggeredCampaignsProvider,
             eventsFlusherService: self.eventsFlusherService,
             logger: self.logger
         )

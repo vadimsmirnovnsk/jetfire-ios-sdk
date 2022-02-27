@@ -4,14 +4,14 @@
 import PackageDescription
 
 let package = Package(
-    name: "jetfire-sdk",
+    name: "Jetfire",
 	platforms: [
 		.iOS(.v13),
 	],
     products: [
         .library(
-            name: "jetfire-sdk",
-            targets: ["jetfire-sdk"]),
+            name: "Jetfire",
+            targets: ["Jetfire"]),
     ],
 	dependencies: [
 		.package(url: "https://github.com/teanet/VNBase.git", .branch("master")),
@@ -25,7 +25,7 @@ let package = Package(
 	],
     targets: [
         .target(
-            name: "jetfire-sdk",
+            name: "Jetfire",
             dependencies: [
 				.product(name: "VNHandlers", package: "VNBase"),
 				.product(name: "VNEssential", package: "VNBase"),
@@ -41,8 +41,8 @@ let package = Package(
 			exclude: ["Model/protocol.proto"]
 		),
         .testTarget(
-            name: "jetfire-sdkTests",
-            dependencies: ["jetfire-sdk"],
+            name: "JetfireTests",
+            dependencies: ["Jetfire"],
 			resources: [
 				.copy("JetfireService-Info.plist")
 		]),

@@ -25,6 +25,11 @@ public class Jetfire {
         self.container.jetfireMain.start()
 	}
 
+    public func enableFeaturing() {
+        self.checkStarted()
+        self.container.jetfireMain.enableFeaturing()
+    }
+
     public func reset() {
         self.container.jetfireMain.reset()
     }
@@ -50,37 +55,47 @@ public class Jetfire {
 public extension Jetfire {
 
     func trackStart(feature: String) {
-        guard self.isStarted else { return }
+        self.checkStarted()
         self.container.featuring.trackStart(feature: feature)
     }
 
     func trackFinish(feature: String) {
-        guard self.isStarted else { return }
+        self.checkStarted()
         self.container.featuring.trackFinish(feature: feature)
     }
 
     func logEvent(_ name: String) {
-        guard self.isStarted else { return }
+        self.checkStarted()
         self.container.externalAnalyticsService.logEvent(name)
     }
 
     func setUserProperty(_ value: Any, forName name: String) {
-        guard self.isStarted else { return }
+        self.checkStarted()
         self.container.externalAnalyticsService.setUserProperty(value, forName: name)
     }
 
     func removeUserProperty(forName name: String) {
-        guard self.isStarted else { return }
+        self.checkStarted()
         self.container.externalAnalyticsService.removeUserProperty(forName: name)
     }
 
     func setSessionProperty(_ value: Any, forName name: String) {
-        guard self.isStarted else { return }
+        self.checkStarted()
         self.container.externalAnalyticsService.setSessionProperty(value, forName: name)
     }
 
     func removeSessionProperty(forName name: String) {
-        guard self.isStarted else { return }
+        self.checkStarted()
         self.container.externalAnalyticsService.removeSessionProperty(forName: name)
+    }
+}
+
+// MARK: - Private
+
+private extension Jetfire {
+
+    func checkStarted() {
+        guard !self.isStarted else { return }
+        fatalError("You must call 'start' first")
     }
 }

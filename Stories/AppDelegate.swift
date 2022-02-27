@@ -1,6 +1,5 @@
 import UIKit
-//import Firebase
-import jetfire_sdk
+import Jetfire
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,7 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		self.window?.rootViewController = nc
 		self.window?.makeKeyAndVisible()
 
+        Jetfire.standard.appendLogTracker(ConsoleLogTracker())
+
 		Jetfire.standard.start()
+        Jetfire.standard.enableFeaturing()
 
 //		let text = NegativeReviewCommentGenerator().generate(for: "John")
 //		print("Generated text:\n\(text)")

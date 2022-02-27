@@ -1,7 +1,7 @@
 import UIKit
 import VNBase
 import SnapKit
-import jetfire_sdk
+import Jetfire
 
 class ViewController: UIViewController {
 

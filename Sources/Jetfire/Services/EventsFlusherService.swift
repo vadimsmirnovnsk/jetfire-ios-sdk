@@ -12,6 +12,7 @@ class EventsFlusherService: IEventsFlusherService {
     private let userSettings: IUserSettings
     private let databaseService: IDatabaseService
     private let api: IFeaturingAPI
+    private var backgroundTaskId: UIBackgroundTaskIdentifier = .invalid
 
     init(userSettings: IUserSettings, api: IFeaturingAPI, databaseService: IDatabaseService) {
         self.userSettings = userSettings
@@ -20,21 +21,31 @@ class EventsFlusherService: IEventsFlusherService {
     }
 
     func flush() {
+        DispatchQueue.jetfire.async {
+            self.performFlush()
+        }
+    }
+}
+
+// MARK: - Private
+
+extension EventsFlusherService {
+
+    private func performFlush() {
+        guard self.backgroundTaskId == .invalid else { return }
         let from = self.userSettings.lastFlushDate ?? Date.distantPast
         let dbEvents = self.databaseService.selectEvents(from: from)
         let to = Date()
 
-        let app = UIApplication.shared
-        var taskId: UIBackgroundTaskIdentifier = .invalid
-        let completion: () -> Void = {
-            if taskId != .invalid {
-                app.endBackgroundTask(taskId)
-                taskId = .invalid
+        let taskId = UIApplication.shared.beginBackgroundTask { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.jetfire.async {
+                Log.info("Sync data error: background task expired")
+                self.endBackgroundTask()
             }
         }
-        taskId = app.beginBackgroundTask {
-            completion()
-        }
+
+        self.backgroundTaskId = taskId
 
         let events: [JetFireEvent] = dbEvents.map { event in
             JetFireEvent.with {
@@ -59,15 +70,25 @@ class EventsFlusherService: IEventsFlusherService {
         }
         
         self.api.sync(events: events) { [weak self] res in
-            switch res {
-            case .failure(let error):
-                Log.info("💥 Sync data error: \(error)")
-                completion()
-            case .success:
-                Log.info("Synced data from '\(from)' to '\(to)'")
-                self?.userSettings.lastFlushDate = to
-                completion()
+            guard let self = self else { return }
+            DispatchQueue.jetfire.async {
+                switch res {
+                case .failure(let error):
+                    Log.info("Sync data error: \(error)")
+                    self.endBackgroundTask()
+                case .success:
+                    Log.info("Synced data from '\(from)' to '\(to)'")
+                    self.userSettings.lastFlushDate = to
+                    self.endBackgroundTask()
+                }
             }
         }
+    }
+
+    private func endBackgroundTask() {
+        let id = self.backgroundTaskId
+        guard id != .invalid else { return }
+        self.backgroundTaskId = .invalid
+        UIApplication.shared.endBackgroundTask(id)
     }
 }

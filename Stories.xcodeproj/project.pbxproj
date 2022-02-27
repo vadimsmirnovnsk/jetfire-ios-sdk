@@ -17,7 +17,8 @@
 		3090F73E26B6EC28002F2B9D /* FeatureAVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3090F73D26B6EC28002F2B9D /* FeatureAVC.swift */; };
 		30B2C3C826B198410072EB9E /* ReviewCommentGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2C3C726B198400072EB9E /* ReviewCommentGenerator.swift */; };
 		73FB8BDE27216816001705FC /* VNBase in Frameworks */ = {isa = PBXBuildFile; productRef = 73FB8BDD27216816001705FC /* VNBase */; };
-		73FB8BE02721682D001705FC /* jetfire-sdk in Frameworks */ = {isa = PBXBuildFile; productRef = 73FB8BDF2721682D001705FC /* jetfire-sdk */; };
+		9794FB7E27C65191000D3761 /* ConsoleLogTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9794FB7D27C65191000D3761 /* ConsoleLogTracker.swift */; };
+		9794FB8027C69E3A000D3761 /* Jetfire in Frameworks */ = {isa = PBXBuildFile; productRef = 9794FB7F27C69E3A000D3761 /* Jetfire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		3090F73D26B6EC28002F2B9D /* FeatureAVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureAVC.swift; sourceTree = "<group>"; };
 		30B2C38226ADFBC20072EB9E /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		30B2C3C726B198400072EB9E /* ReviewCommentGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCommentGenerator.swift; sourceTree = "<group>"; };
+		9794FB7D27C65191000D3761 /* ConsoleLogTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleLogTracker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,8 +42,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9794FB8027C69E3A000D3761 /* Jetfire in Frameworks */,
 				73FB8BDE27216816001705FC /* VNBase in Frameworks */,
-				73FB8BE02721682D001705FC /* jetfire-sdk in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +81,7 @@
 				3008683727208EB5003B4335 /* JetfireService-Info.plist */,
 				3090F73B26B6E7DD002F2B9D /* GoogleService-Info.plist */,
 				301F88E426ADECB900BAE24D /* Info.plist */,
+				9794FB7D27C65191000D3761 /* ConsoleLogTracker.swift */,
 			);
 			path = Stories;
 			sourceTree = "<group>";
@@ -108,7 +111,7 @@
 			name = Stories;
 			packageProductDependencies = (
 				73FB8BDD27216816001705FC /* VNBase */,
-				73FB8BDF2721682D001705FC /* jetfire-sdk */,
+				9794FB7F27C69E3A000D3761 /* Jetfire */,
 			);
 			productName = Stories;
 			productReference = 301F88D326ADECB600BAE24D /* Stories.app */;
@@ -169,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				301F88DB26ADECB600BAE24D /* ViewController.swift in Sources */,
+				9794FB7E27C65191000D3761 /* ConsoleLogTracker.swift in Sources */,
 				301F88D726ADECB600BAE24D /* AppDelegate.swift in Sources */,
 				300868222714F0D5003B4335 /* TextStyle+Demo.swift in Sources */,
 				30B2C3C826B198410072EB9E /* ReviewCommentGenerator.swift in Sources */,
@@ -386,9 +390,9 @@
 			package = 73FB8BD9272167A5001705FC /* XCRemoteSwiftPackageReference "VNBase" */;
 			productName = VNBase;
 		};
-		73FB8BDF2721682D001705FC /* jetfire-sdk */ = {
+		9794FB7F27C69E3A000D3761 /* Jetfire */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = "jetfire-sdk";
+			productName = Jetfire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

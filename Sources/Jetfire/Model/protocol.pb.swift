@@ -20,29 +20,29 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
-public struct JetFireTimestamp {
+struct JetFireTimestamp {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
   /// Unix timestamp (milliseconds)
-  public var value: Int64 {
+  var value: Int64 {
     get {return _value ?? 0}
     set {_value = newValue}
   }
   /// Returns true if `value` has been explicitly set.
-  public var hasValue: Bool {return self._value != nil}
+  var hasValue: Bool {return self._value != nil}
   /// Clears the value of `value`. Subsequent reads from it will return its default value.
-  public mutating func clearValue() {self._value = nil}
+  mutating func clearValue() {self._value = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _value: Int64? = nil
 }
 
-public struct JetFireEventType {
+struct JetFireEventType {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -64,116 +64,116 @@ public struct JetFireEventType {
   /// 14 - toaster_tap
   /// 15 - toaster_close
   /// 16 - feature_accepted
-  public var value: Int64 {
+  var value: Int64 {
     get {return _value ?? 0}
     set {_value = newValue}
   }
   /// Returns true if `value` has been explicitly set.
-  public var hasValue: Bool {return self._value != nil}
+  var hasValue: Bool {return self._value != nil}
   /// Clears the value of `value`. Subsequent reads from it will return its default value.
-  public mutating func clearValue() {self._value = nil}
+  mutating func clearValue() {self._value = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _value: Int64? = nil
 }
 
-public struct JetFireActionType {
+struct JetFireActionType {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
   /// 1 – deeplink
   /// 2 – stories
-  public var value: Int64 {
+  var value: Int64 {
     get {return _value ?? 0}
     set {_value = newValue}
   }
   /// Returns true if `value` has been explicitly set.
-  public var hasValue: Bool {return self._value != nil}
+  var hasValue: Bool {return self._value != nil}
   /// Clears the value of `value`. Subsequent reads from it will return its default value.
-  public mutating func clearValue() {self._value = nil}
+  mutating func clearValue() {self._value = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _value: Int64? = nil
 }
 
-public struct JetFireAnyValue {
+struct JetFireAnyValue {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var int: Int32 {
+  var int: Int32 {
     get {return _int ?? 0}
     set {_int = newValue}
   }
   /// Returns true if `int` has been explicitly set.
-  public var hasInt: Bool {return self._int != nil}
+  var hasInt: Bool {return self._int != nil}
   /// Clears the value of `int`. Subsequent reads from it will return its default value.
-  public mutating func clearInt() {self._int = nil}
+  mutating func clearInt() {self._int = nil}
 
-  public var long: Int64 {
+  var long: Int64 {
     get {return _long ?? 0}
     set {_long = newValue}
   }
   /// Returns true if `long` has been explicitly set.
-  public var hasLong: Bool {return self._long != nil}
+  var hasLong: Bool {return self._long != nil}
   /// Clears the value of `long`. Subsequent reads from it will return its default value.
-  public mutating func clearLong() {self._long = nil}
+  mutating func clearLong() {self._long = nil}
 
-  public var double: Double {
+  var double: Double {
     get {return _double ?? 0}
     set {_double = newValue}
   }
   /// Returns true if `double` has been explicitly set.
-  public var hasDouble: Bool {return self._double != nil}
+  var hasDouble: Bool {return self._double != nil}
   /// Clears the value of `double`. Subsequent reads from it will return its default value.
-  public mutating func clearDouble() {self._double = nil}
+  mutating func clearDouble() {self._double = nil}
 
-  public var bool: Bool {
+  var bool: Bool {
     get {return _bool ?? false}
     set {_bool = newValue}
   }
   /// Returns true if `bool` has been explicitly set.
-  public var hasBool: Bool {return self._bool != nil}
+  var hasBool: Bool {return self._bool != nil}
   /// Clears the value of `bool`. Subsequent reads from it will return its default value.
-  public mutating func clearBool() {self._bool = nil}
+  mutating func clearBool() {self._bool = nil}
 
-  public var string: String {
+  var string: String {
     get {return _string ?? String()}
     set {_string = newValue}
   }
   /// Returns true if `string` has been explicitly set.
-  public var hasString: Bool {return self._string != nil}
+  var hasString: Bool {return self._string != nil}
   /// Clears the value of `string`. Subsequent reads from it will return its default value.
-  public mutating func clearString() {self._string = nil}
+  mutating func clearString() {self._string = nil}
 
-  public var json: String {
+  var json: String {
     get {return _json ?? String()}
     set {_json = newValue}
   }
   /// Returns true if `json` has been explicitly set.
-  public var hasJson: Bool {return self._json != nil}
+  var hasJson: Bool {return self._json != nil}
   /// Clears the value of `json`. Subsequent reads from it will return its default value.
-  public mutating func clearJson() {self._json = nil}
+  mutating func clearJson() {self._json = nil}
 
-  public var bytes: Data {
+  var bytes: Data {
     get {return _bytes ?? Data()}
     set {_bytes = newValue}
   }
   /// Returns true if `bytes` has been explicitly set.
-  public var hasBytes: Bool {return self._bytes != nil}
+  var hasBytes: Bool {return self._bytes != nil}
   /// Clears the value of `bytes`. Subsequent reads from it will return its default value.
-  public mutating func clearBytes() {self._bytes = nil}
+  mutating func clearBytes() {self._bytes = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _int: Int32? = nil
   fileprivate var _long: Int64? = nil
@@ -184,326 +184,326 @@ public struct JetFireAnyValue {
   fileprivate var _bytes: Data? = nil
 }
 
-public struct JetFireLocation {
+struct JetFireLocation {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var lat: Double {
+  var lat: Double {
     get {return _lat ?? 0}
     set {_lat = newValue}
   }
   /// Returns true if `lat` has been explicitly set.
-  public var hasLat: Bool {return self._lat != nil}
+  var hasLat: Bool {return self._lat != nil}
   /// Clears the value of `lat`. Subsequent reads from it will return its default value.
-  public mutating func clearLat() {self._lat = nil}
+  mutating func clearLat() {self._lat = nil}
 
-  public var lon: Double {
+  var lon: Double {
     get {return _lon ?? 0}
     set {_lon = newValue}
   }
   /// Returns true if `lon` has been explicitly set.
-  public var hasLon: Bool {return self._lon != nil}
+  var hasLon: Bool {return self._lon != nil}
   /// Clears the value of `lon`. Subsequent reads from it will return its default value.
-  public mutating func clearLon() {self._lon = nil}
+  mutating func clearLon() {self._lon = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _lat: Double? = nil
   fileprivate var _lon: Double? = nil
 }
 
-public struct JetFireScreen {
+struct JetFireScreen {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var width: Int32 {
+  var width: Int32 {
     get {return _width ?? 0}
     set {_width = newValue}
   }
   /// Returns true if `width` has been explicitly set.
-  public var hasWidth: Bool {return self._width != nil}
+  var hasWidth: Bool {return self._width != nil}
   /// Clears the value of `width`. Subsequent reads from it will return its default value.
-  public mutating func clearWidth() {self._width = nil}
+  mutating func clearWidth() {self._width = nil}
 
-  public var height: Int32 {
+  var height: Int32 {
     get {return _height ?? 0}
     set {_height = newValue}
   }
   /// Returns true if `height` has been explicitly set.
-  public var hasHeight: Bool {return self._height != nil}
+  var hasHeight: Bool {return self._height != nil}
   /// Clears the value of `height`. Subsequent reads from it will return its default value.
-  public mutating func clearHeight() {self._height = nil}
+  mutating func clearHeight() {self._height = nil}
 
-  public var dpi: Int32 {
+  var dpi: Int32 {
     get {return _dpi ?? 0}
     set {_dpi = newValue}
   }
   /// Returns true if `dpi` has been explicitly set.
-  public var hasDpi: Bool {return self._dpi != nil}
+  var hasDpi: Bool {return self._dpi != nil}
   /// Clears the value of `dpi`. Subsequent reads from it will return its default value.
-  public mutating func clearDpi() {self._dpi = nil}
+  mutating func clearDpi() {self._dpi = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _width: Int32? = nil
   fileprivate var _height: Int32? = nil
   fileprivate var _dpi: Int32? = nil
 }
 
-public struct JetFireProperty {
+struct JetFireProperty {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var name: String {
+  var name: String {
     get {return _name ?? String()}
     set {_name = newValue}
   }
   /// Returns true if `name` has been explicitly set.
-  public var hasName: Bool {return self._name != nil}
+  var hasName: Bool {return self._name != nil}
   /// Clears the value of `name`. Subsequent reads from it will return its default value.
-  public mutating func clearName() {self._name = nil}
+  mutating func clearName() {self._name = nil}
 
-  public var value: JetFireAnyValue {
+  var value: JetFireAnyValue {
     get {return _value ?? JetFireAnyValue()}
     set {_value = newValue}
   }
   /// Returns true if `value` has been explicitly set.
-  public var hasValue: Bool {return self._value != nil}
+  var hasValue: Bool {return self._value != nil}
   /// Clears the value of `value`. Subsequent reads from it will return its default value.
-  public mutating func clearValue() {self._value = nil}
+  mutating func clearValue() {self._value = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _name: String? = nil
   fileprivate var _value: JetFireAnyValue? = nil
 }
 
-public struct JetFireImage {
+struct JetFireImage {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var previewURL: String {
+  var previewURL: String {
     get {return _previewURL ?? String()}
     set {_previewURL = newValue}
   }
   /// Returns true if `previewURL` has been explicitly set.
-  public var hasPreviewURL: Bool {return self._previewURL != nil}
+  var hasPreviewURL: Bool {return self._previewURL != nil}
   /// Clears the value of `previewURL`. Subsequent reads from it will return its default value.
-  public mutating func clearPreviewURL() {self._previewURL = nil}
+  mutating func clearPreviewURL() {self._previewURL = nil}
 
   /// base url, url for other screens will be down there
-  public var url: String {
+  var url: String {
     get {return _url ?? String()}
     set {_url = newValue}
   }
   /// Returns true if `url` has been explicitly set.
-  public var hasURL: Bool {return self._url != nil}
+  var hasURL: Bool {return self._url != nil}
   /// Clears the value of `url`. Subsequent reads from it will return its default value.
-  public mutating func clearURL() {self._url = nil}
+  mutating func clearURL() {self._url = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _previewURL: String? = nil
   fileprivate var _url: String? = nil
 }
 
-public struct JetFireAction {
+struct JetFireAction {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var type: JetFireActionType {
+  var type: JetFireActionType {
     get {return _type ?? JetFireActionType()}
     set {_type = newValue}
   }
   /// Returns true if `type` has been explicitly set.
-  public var hasType: Bool {return self._type != nil}
+  var hasType: Bool {return self._type != nil}
   /// Clears the value of `type`. Subsequent reads from it will return its default value.
-  public mutating func clearType() {self._type = nil}
+  mutating func clearType() {self._type = nil}
 
-  public var deeplink: String {
+  var deeplink: String {
     get {return _deeplink ?? String()}
     set {_deeplink = newValue}
   }
   /// Returns true if `deeplink` has been explicitly set.
-  public var hasDeeplink: Bool {return self._deeplink != nil}
+  var hasDeeplink: Bool {return self._deeplink != nil}
   /// Clears the value of `deeplink`. Subsequent reads from it will return its default value.
-  public mutating func clearDeeplink() {self._deeplink = nil}
+  mutating func clearDeeplink() {self._deeplink = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _type: JetFireActionType? = nil
   fileprivate var _deeplink: String? = nil
 }
 
-public struct JetFireSchedule {
+struct JetFireSchedule {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var atTime: JetFireTimestamp {
+  var atTime: JetFireTimestamp {
     get {return _atTime ?? JetFireTimestamp()}
     set {_atTime = newValue}
   }
   /// Returns true if `atTime` has been explicitly set.
-  public var hasAtTime: Bool {return self._atTime != nil}
+  var hasAtTime: Bool {return self._atTime != nil}
   /// Clears the value of `atTime`. Subsequent reads from it will return its default value.
-  public mutating func clearAtTime() {self._atTime = nil}
+  mutating func clearAtTime() {self._atTime = nil}
 
   /// seconds
-  public var after: Int64 {
+  var after: Int64 {
     get {return _after ?? 0}
     set {_after = newValue}
   }
   /// Returns true if `after` has been explicitly set.
-  public var hasAfter: Bool {return self._after != nil}
+  var hasAfter: Bool {return self._after != nil}
   /// Clears the value of `after`. Subsequent reads from it will return its default value.
-  public mutating func clearAfter() {self._after = nil}
+  mutating func clearAfter() {self._after = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _atTime: JetFireTimestamp? = nil
   fileprivate var _after: Int64? = nil
 }
 
-public struct JetFirePropertySet {
+struct JetFirePropertySet {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var name: String {
+  var name: String {
     get {return _name ?? String()}
     set {_name = newValue}
   }
   /// Returns true if `name` has been explicitly set.
-  public var hasName: Bool {return self._name != nil}
+  var hasName: Bool {return self._name != nil}
   /// Clears the value of `name`. Subsequent reads from it will return its default value.
-  public mutating func clearName() {self._name = nil}
+  mutating func clearName() {self._name = nil}
 
-  public var value: JetFireAnyValue {
+  var value: JetFireAnyValue {
     get {return _value ?? JetFireAnyValue()}
     set {_value = newValue}
   }
   /// Returns true if `value` has been explicitly set.
-  public var hasValue: Bool {return self._value != nil}
+  var hasValue: Bool {return self._value != nil}
   /// Clears the value of `value`. Subsequent reads from it will return its default value.
-  public mutating func clearValue() {self._value = nil}
+  mutating func clearValue() {self._value = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _name: String? = nil
   fileprivate var _value: JetFireAnyValue? = nil
 }
 
-public struct JetFirePropertyRemove {
+struct JetFirePropertyRemove {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var name: String {
+  var name: String {
     get {return _name ?? String()}
     set {_name = newValue}
   }
   /// Returns true if `name` has been explicitly set.
-  public var hasName: Bool {return self._name != nil}
+  var hasName: Bool {return self._name != nil}
   /// Clears the value of `name`. Subsequent reads from it will return its default value.
-  public mutating func clearName() {self._name = nil}
+  mutating func clearName() {self._name = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _name: String? = nil
 }
 
-public struct JetFirePropertyIncrement {
+struct JetFirePropertyIncrement {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var name: String {
+  var name: String {
     get {return _name ?? String()}
     set {_name = newValue}
   }
   /// Returns true if `name` has been explicitly set.
-  public var hasName: Bool {return self._name != nil}
+  var hasName: Bool {return self._name != nil}
   /// Clears the value of `name`. Subsequent reads from it will return its default value.
-  public mutating func clearName() {self._name = nil}
+  mutating func clearName() {self._name = nil}
 
-  public var increment: Double {
+  var increment: Double {
     get {return _increment ?? 0}
     set {_increment = newValue}
   }
   /// Returns true if `increment` has been explicitly set.
-  public var hasIncrement: Bool {return self._increment != nil}
+  var hasIncrement: Bool {return self._increment != nil}
   /// Clears the value of `increment`. Subsequent reads from it will return its default value.
-  public mutating func clearIncrement() {self._increment = nil}
+  mutating func clearIncrement() {self._increment = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _name: String? = nil
   fileprivate var _increment: Double? = nil
 }
 
-public struct JetFirePropertyDecrement {
+struct JetFirePropertyDecrement {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var name: String {
+  var name: String {
     get {return _name ?? String()}
     set {_name = newValue}
   }
   /// Returns true if `name` has been explicitly set.
-  public var hasName: Bool {return self._name != nil}
+  var hasName: Bool {return self._name != nil}
   /// Clears the value of `name`. Subsequent reads from it will return its default value.
-  public mutating func clearName() {self._name = nil}
+  mutating func clearName() {self._name = nil}
 
-  public var decrement: Double {
+  var decrement: Double {
     get {return _decrement ?? 0}
     set {_decrement = newValue}
   }
   /// Returns true if `decrement` has been explicitly set.
-  public var hasDecrement: Bool {return self._decrement != nil}
+  var hasDecrement: Bool {return self._decrement != nil}
   /// Clears the value of `decrement`. Subsequent reads from it will return its default value.
-  public mutating func clearDecrement() {self._decrement = nil}
+  mutating func clearDecrement() {self._decrement = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _name: String? = nil
   fileprivate var _decrement: Double? = nil
 }
 
-public struct JetFirePropertyOperation {
+struct JetFirePropertyOperation {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var operation: JetFirePropertyOperation.OneOf_Operation? = nil
+  var operation: JetFirePropertyOperation.OneOf_Operation? = nil
 
-  public var set: JetFirePropertySet {
+  var set: JetFirePropertySet {
     get {
       if case .set(let v)? = operation {return v}
       return JetFirePropertySet()
@@ -511,7 +511,7 @@ public struct JetFirePropertyOperation {
     set {operation = .set(newValue)}
   }
 
-  public var remove: JetFirePropertyRemove {
+  var remove: JetFirePropertyRemove {
     get {
       if case .remove(let v)? = operation {return v}
       return JetFirePropertyRemove()
@@ -519,7 +519,7 @@ public struct JetFirePropertyOperation {
     set {operation = .remove(newValue)}
   }
 
-  public var increment: JetFirePropertyIncrement {
+  var increment: JetFirePropertyIncrement {
     get {
       if case .increment(let v)? = operation {return v}
       return JetFirePropertyIncrement()
@@ -527,7 +527,7 @@ public struct JetFirePropertyOperation {
     set {operation = .increment(newValue)}
   }
 
-  public var decrement: JetFirePropertyDecrement {
+  var decrement: JetFirePropertyDecrement {
     get {
       if case .decrement(let v)? = operation {return v}
       return JetFirePropertyDecrement()
@@ -535,9 +535,9 @@ public struct JetFirePropertyOperation {
     set {operation = .decrement(newValue)}
   }
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_Operation: Equatable {
+  enum OneOf_Operation: Equatable {
     case set(JetFirePropertySet)
     case remove(JetFirePropertyRemove)
     case increment(JetFirePropertyIncrement)
@@ -568,7 +568,7 @@ public struct JetFirePropertyOperation {
     }
 
   #if !swift(>=4.1)
-    public static func ==(lhs: JetFirePropertyOperation.OneOf_Operation, rhs: JetFirePropertyOperation.OneOf_Operation) -> Bool {
+    static func ==(lhs: JetFirePropertyOperation.OneOf_Operation, rhs: JetFirePropertyOperation.OneOf_Operation) -> Bool {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
@@ -595,160 +595,160 @@ public struct JetFirePropertyOperation {
   #endif
   }
 
-  public init() {}
+  init() {}
 }
 
-public struct JetFireApp {
+struct JetFireApp {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var version: String {
+  var version: String {
     get {return _version ?? String()}
     set {_version = newValue}
   }
   /// Returns true if `version` has been explicitly set.
-  public var hasVersion: Bool {return self._version != nil}
+  var hasVersion: Bool {return self._version != nil}
   /// Clears the value of `version`. Subsequent reads from it will return its default value.
-  public mutating func clearVersion() {self._version = nil}
+  mutating func clearVersion() {self._version = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _version: String? = nil
 }
 
-public struct JetFireSdk {
+struct JetFireSdk {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var version: String {
+  var version: String {
     get {return _version ?? String()}
     set {_version = newValue}
   }
   /// Returns true if `version` has been explicitly set.
-  public var hasVersion: Bool {return self._version != nil}
+  var hasVersion: Bool {return self._version != nil}
   /// Clears the value of `version`. Subsequent reads from it will return its default value.
-  public mutating func clearVersion() {self._version = nil}
+  mutating func clearVersion() {self._version = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _version: String? = nil
 }
 
-public struct JetFireDevice {
+struct JetFireDevice {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
   /// ios, android
-  public var platform: String {
+  var platform: String {
     get {return _platform ?? String()}
     set {_platform = newValue}
   }
   /// Returns true if `platform` has been explicitly set.
-  public var hasPlatform: Bool {return self._platform != nil}
+  var hasPlatform: Bool {return self._platform != nil}
   /// Clears the value of `platform`. Subsequent reads from it will return its default value.
-  public mutating func clearPlatform() {self._platform = nil}
+  mutating func clearPlatform() {self._platform = nil}
 
   /// apple
-  public var vendor: String {
+  var vendor: String {
     get {return _vendor ?? String()}
     set {_vendor = newValue}
   }
   /// Returns true if `vendor` has been explicitly set.
-  public var hasVendor: Bool {return self._vendor != nil}
+  var hasVendor: Bool {return self._vendor != nil}
   /// Clears the value of `vendor`. Subsequent reads from it will return its default value.
-  public mutating func clearVendor() {self._vendor = nil}
+  mutating func clearVendor() {self._vendor = nil}
 
   /// iphone,13
-  public var model: String {
+  var model: String {
     get {return _model ?? String()}
     set {_model = newValue}
   }
   /// Returns true if `model` has been explicitly set.
-  public var hasModel: Bool {return self._model != nil}
+  var hasModel: Bool {return self._model != nil}
   /// Clears the value of `model`. Subsequent reads from it will return its default value.
-  public mutating func clearModel() {self._model = nil}
+  mutating func clearModel() {self._model = nil}
 
   /// ios
-  public var os: String {
+  var os: String {
     get {return _os ?? String()}
     set {_os = newValue}
   }
   /// Returns true if `os` has been explicitly set.
-  public var hasOs: Bool {return self._os != nil}
+  var hasOs: Bool {return self._os != nil}
   /// Clears the value of `os`. Subsequent reads from it will return its default value.
-  public mutating func clearOs() {self._os = nil}
+  mutating func clearOs() {self._os = nil}
 
   /// 14.1.1
-  public var osVersion: String {
+  var osVersion: String {
     get {return _osVersion ?? String()}
     set {_osVersion = newValue}
   }
   /// Returns true if `osVersion` has been explicitly set.
-  public var hasOsVersion: Bool {return self._osVersion != nil}
+  var hasOsVersion: Bool {return self._osVersion != nil}
   /// Clears the value of `osVersion`. Subsequent reads from it will return its default value.
-  public mutating func clearOsVersion() {self._osVersion = nil}
+  mutating func clearOsVersion() {self._osVersion = nil}
 
   /// for android
-  public var firmware: String {
+  var firmware: String {
     get {return _firmware ?? String()}
     set {_firmware = newValue}
   }
   /// Returns true if `firmware` has been explicitly set.
-  public var hasFirmware: Bool {return self._firmware != nil}
+  var hasFirmware: Bool {return self._firmware != nil}
   /// Clears the value of `firmware`. Subsequent reads from it will return its default value.
-  public mutating func clearFirmware() {self._firmware = nil}
+  mutating func clearFirmware() {self._firmware = nil}
 
   /// ru
-  public var language: String {
+  var language: String {
     get {return _language ?? String()}
     set {_language = newValue}
   }
   /// Returns true if `language` has been explicitly set.
-  public var hasLanguage: Bool {return self._language != nil}
+  var hasLanguage: Bool {return self._language != nil}
   /// Clears the value of `language`. Subsequent reads from it will return its default value.
-  public mutating func clearLanguage() {self._language = nil}
+  mutating func clearLanguage() {self._language = nil}
 
   /// ru_RU
-  public var locale: String {
+  var locale: String {
     get {return _locale ?? String()}
     set {_locale = newValue}
   }
   /// Returns true if `locale` has been explicitly set.
-  public var hasLocale: Bool {return self._locale != nil}
+  var hasLocale: Bool {return self._locale != nil}
   /// Clears the value of `locale`. Subsequent reads from it will return its default value.
-  public mutating func clearLocale() {self._locale = nil}
+  mutating func clearLocale() {self._locale = nil}
 
   /// Europe/Moscow
-  public var timeZone: String {
+  var timeZone: String {
     get {return _timeZone ?? String()}
     set {_timeZone = newValue}
   }
   /// Returns true if `timeZone` has been explicitly set.
-  public var hasTimeZone: Bool {return self._timeZone != nil}
+  var hasTimeZone: Bool {return self._timeZone != nil}
   /// Clears the value of `timeZone`. Subsequent reads from it will return its default value.
-  public mutating func clearTimeZone() {self._timeZone = nil}
+  mutating func clearTimeZone() {self._timeZone = nil}
 
-  public var carrier: [String] = []
+  var carrier: [String] = []
 
-  public var screen: JetFireScreen {
+  var screen: JetFireScreen {
     get {return _screen ?? JetFireScreen()}
     set {_screen = newValue}
   }
   /// Returns true if `screen` has been explicitly set.
-  public var hasScreen: Bool {return self._screen != nil}
+  var hasScreen: Bool {return self._screen != nil}
   /// Clears the value of `screen`. Subsequent reads from it will return its default value.
-  public mutating func clearScreen() {self._screen = nil}
+  mutating func clearScreen() {self._screen = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _platform: String? = nil
   fileprivate var _vendor: String? = nil
@@ -762,276 +762,276 @@ public struct JetFireDevice {
   fileprivate var _screen: JetFireScreen? = nil
 }
 
-public struct JetFireRequestUser {
+struct JetFireRequestUser {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var uuid: String {
+  var uuid: String {
     get {return _uuid ?? String()}
     set {_uuid = newValue}
   }
   /// Returns true if `uuid` has been explicitly set.
-  public var hasUuid: Bool {return self._uuid != nil}
+  var hasUuid: Bool {return self._uuid != nil}
   /// Clears the value of `uuid`. Subsequent reads from it will return its default value.
-  public mutating func clearUuid() {self._uuid = nil}
+  mutating func clearUuid() {self._uuid = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _uuid: String? = nil
 }
 
-public struct JetFireUser {
+struct JetFireUser {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var uuid: String {
+  var uuid: String {
     get {return _uuid ?? String()}
     set {_uuid = newValue}
   }
   /// Returns true if `uuid` has been explicitly set.
-  public var hasUuid: Bool {return self._uuid != nil}
+  var hasUuid: Bool {return self._uuid != nil}
   /// Clears the value of `uuid`. Subsequent reads from it will return its default value.
-  public mutating func clearUuid() {self._uuid = nil}
+  mutating func clearUuid() {self._uuid = nil}
 
-  public var properties: [JetFireProperty] = []
+  var properties: [JetFireProperty] = []
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _uuid: String? = nil
 }
 
-public struct JetFireRequestSession {
+struct JetFireRequestSession {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var uuid: String {
+  var uuid: String {
     get {return _uuid ?? String()}
     set {_uuid = newValue}
   }
   /// Returns true if `uuid` has been explicitly set.
-  public var hasUuid: Bool {return self._uuid != nil}
+  var hasUuid: Bool {return self._uuid != nil}
   /// Clears the value of `uuid`. Subsequent reads from it will return its default value.
-  public mutating func clearUuid() {self._uuid = nil}
+  mutating func clearUuid() {self._uuid = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _uuid: String? = nil
 }
 
-public struct JetFireSession {
+struct JetFireSession {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var uuid: String {
+  var uuid: String {
     get {return _storage._uuid ?? String()}
     set {_uniqueStorage()._uuid = newValue}
   }
   /// Returns true if `uuid` has been explicitly set.
-  public var hasUuid: Bool {return _storage._uuid != nil}
+  var hasUuid: Bool {return _storage._uuid != nil}
   /// Clears the value of `uuid`. Subsequent reads from it will return its default value.
-  public mutating func clearUuid() {_uniqueStorage()._uuid = nil}
+  mutating func clearUuid() {_uniqueStorage()._uuid = nil}
 
   /// milliseconds
-  public var timestamp: JetFireTimestamp {
+  var timestamp: JetFireTimestamp {
     get {return _storage._timestamp ?? JetFireTimestamp()}
     set {_uniqueStorage()._timestamp = newValue}
   }
   /// Returns true if `timestamp` has been explicitly set.
-  public var hasTimestamp: Bool {return _storage._timestamp != nil}
+  var hasTimestamp: Bool {return _storage._timestamp != nil}
   /// Clears the value of `timestamp`. Subsequent reads from it will return its default value.
-  public mutating func clearTimestamp() {_uniqueStorage()._timestamp = nil}
+  mutating func clearTimestamp() {_uniqueStorage()._timestamp = nil}
 
-  public var app: JetFireApp {
+  var app: JetFireApp {
     get {return _storage._app ?? JetFireApp()}
     set {_uniqueStorage()._app = newValue}
   }
   /// Returns true if `app` has been explicitly set.
-  public var hasApp: Bool {return _storage._app != nil}
+  var hasApp: Bool {return _storage._app != nil}
   /// Clears the value of `app`. Subsequent reads from it will return its default value.
-  public mutating func clearApp() {_uniqueStorage()._app = nil}
+  mutating func clearApp() {_uniqueStorage()._app = nil}
 
-  public var sdk: JetFireSdk {
+  var sdk: JetFireSdk {
     get {return _storage._sdk ?? JetFireSdk()}
     set {_uniqueStorage()._sdk = newValue}
   }
   /// Returns true if `sdk` has been explicitly set.
-  public var hasSdk: Bool {return _storage._sdk != nil}
+  var hasSdk: Bool {return _storage._sdk != nil}
   /// Clears the value of `sdk`. Subsequent reads from it will return its default value.
-  public mutating func clearSdk() {_uniqueStorage()._sdk = nil}
+  mutating func clearSdk() {_uniqueStorage()._sdk = nil}
 
-  public var device: JetFireDevice {
+  var device: JetFireDevice {
     get {return _storage._device ?? JetFireDevice()}
     set {_uniqueStorage()._device = newValue}
   }
   /// Returns true if `device` has been explicitly set.
-  public var hasDevice: Bool {return _storage._device != nil}
+  var hasDevice: Bool {return _storage._device != nil}
   /// Clears the value of `device`. Subsequent reads from it will return its default value.
-  public mutating func clearDevice() {_uniqueStorage()._device = nil}
+  mutating func clearDevice() {_uniqueStorage()._device = nil}
 
-  public var location: JetFireLocation {
+  var location: JetFireLocation {
     get {return _storage._location ?? JetFireLocation()}
     set {_uniqueStorage()._location = newValue}
   }
   /// Returns true if `location` has been explicitly set.
-  public var hasLocation: Bool {return _storage._location != nil}
+  var hasLocation: Bool {return _storage._location != nil}
   /// Clears the value of `location`. Subsequent reads from it will return its default value.
-  public mutating func clearLocation() {_uniqueStorage()._location = nil}
+  mutating func clearLocation() {_uniqueStorage()._location = nil}
 
-  public var properties: [JetFireProperty] {
+  var properties: [JetFireProperty] {
     get {return _storage._properties}
     set {_uniqueStorage()._properties = newValue}
   }
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-public struct JetFireFeaturesSql {
+struct JetFireFeaturesSql {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var stories: String {
+  var stories: String {
     get {return _stories ?? String()}
     set {_stories = newValue}
   }
   /// Returns true if `stories` has been explicitly set.
-  public var hasStories: Bool {return self._stories != nil}
+  var hasStories: Bool {return self._stories != nil}
   /// Clears the value of `stories`. Subsequent reads from it will return its default value.
-  public mutating func clearStories() {self._stories = nil}
+  mutating func clearStories() {self._stories = nil}
 
-  public var trigger: String {
+  var trigger: String {
     get {return _trigger ?? String()}
     set {_trigger = newValue}
   }
   /// Returns true if `trigger` has been explicitly set.
-  public var hasTrigger: Bool {return self._trigger != nil}
+  var hasTrigger: Bool {return self._trigger != nil}
   /// Clears the value of `trigger`. Subsequent reads from it will return its default value.
-  public mutating func clearTrigger() {self._trigger = nil}
+  mutating func clearTrigger() {self._trigger = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _stories: String? = nil
   fileprivate var _trigger: String? = nil
 }
 
-public struct JetFireFeatureButton {
+struct JetFireFeatureButton {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var title: String {
+  var title: String {
     get {return _title ?? String()}
     set {_title = newValue}
   }
   /// Returns true if `title` has been explicitly set.
-  public var hasTitle: Bool {return self._title != nil}
+  var hasTitle: Bool {return self._title != nil}
   /// Clears the value of `title`. Subsequent reads from it will return its default value.
-  public mutating func clearTitle() {self._title = nil}
+  mutating func clearTitle() {self._title = nil}
 
-  public var action: JetFireAction {
+  var action: JetFireAction {
     get {return _action ?? JetFireAction()}
     set {_action = newValue}
   }
   /// Returns true if `action` has been explicitly set.
-  public var hasAction: Bool {return self._action != nil}
+  var hasAction: Bool {return self._action != nil}
   /// Clears the value of `action`. Subsequent reads from it will return its default value.
-  public mutating func clearAction() {self._action = nil}
+  mutating func clearAction() {self._action = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _title: String? = nil
   fileprivate var _action: JetFireAction? = nil
 }
 
-public struct JetFireFeaturePush {
+struct JetFireFeaturePush {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var title: String {
+  var title: String {
     get {return _title ?? String()}
     set {_title = newValue}
   }
   /// Returns true if `title` has been explicitly set.
-  public var hasTitle: Bool {return self._title != nil}
+  var hasTitle: Bool {return self._title != nil}
   /// Clears the value of `title`. Subsequent reads from it will return its default value.
-  public mutating func clearTitle() {self._title = nil}
+  mutating func clearTitle() {self._title = nil}
 
-  public var subtitle: String {
+  var subtitle: String {
     get {return _subtitle ?? String()}
     set {_subtitle = newValue}
   }
   /// Returns true if `subtitle` has been explicitly set.
-  public var hasSubtitle: Bool {return self._subtitle != nil}
+  var hasSubtitle: Bool {return self._subtitle != nil}
   /// Clears the value of `subtitle`. Subsequent reads from it will return its default value.
-  public mutating func clearSubtitle() {self._subtitle = nil}
+  mutating func clearSubtitle() {self._subtitle = nil}
 
-  public var message: String {
+  var message: String {
     get {return _message ?? String()}
     set {_message = newValue}
   }
   /// Returns true if `message` has been explicitly set.
-  public var hasMessage: Bool {return self._message != nil}
+  var hasMessage: Bool {return self._message != nil}
   /// Clears the value of `message`. Subsequent reads from it will return its default value.
-  public mutating func clearMessage() {self._message = nil}
+  mutating func clearMessage() {self._message = nil}
 
-  public var image: JetFireImage {
+  var image: JetFireImage {
     get {return _image ?? JetFireImage()}
     set {_image = newValue}
   }
   /// Returns true if `image` has been explicitly set.
-  public var hasImage: Bool {return self._image != nil}
+  var hasImage: Bool {return self._image != nil}
   /// Clears the value of `image`. Subsequent reads from it will return its default value.
-  public mutating func clearImage() {self._image = nil}
+  mutating func clearImage() {self._image = nil}
 
-  public var actionButton: JetFireFeatureButton {
+  var actionButton: JetFireFeatureButton {
     get {return _actionButton ?? JetFireFeatureButton()}
     set {_actionButton = newValue}
   }
   /// Returns true if `actionButton` has been explicitly set.
-  public var hasActionButton: Bool {return self._actionButton != nil}
+  var hasActionButton: Bool {return self._actionButton != nil}
   /// Clears the value of `actionButton`. Subsequent reads from it will return its default value.
-  public mutating func clearActionButton() {self._actionButton = nil}
+  mutating func clearActionButton() {self._actionButton = nil}
 
-  public var schedule: JetFireSchedule {
+  var schedule: JetFireSchedule {
     get {return _schedule ?? JetFireSchedule()}
     set {_schedule = newValue}
   }
   /// Returns true if `schedule` has been explicitly set.
-  public var hasSchedule: Bool {return self._schedule != nil}
+  var hasSchedule: Bool {return self._schedule != nil}
   /// Clears the value of `schedule`. Subsequent reads from it will return its default value.
-  public mutating func clearSchedule() {self._schedule = nil}
+  mutating func clearSchedule() {self._schedule = nil}
 
-  public var expire: JetFireSchedule {
+  var expire: JetFireSchedule {
     get {return _expire ?? JetFireSchedule()}
     set {_expire = newValue}
   }
   /// Returns true if `expire` has been explicitly set.
-  public var hasExpire: Bool {return self._expire != nil}
+  var hasExpire: Bool {return self._expire != nil}
   /// Clears the value of `expire`. Subsequent reads from it will return its default value.
-  public mutating func clearExpire() {self._expire = nil}
+  mutating func clearExpire() {self._expire = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _title: String? = nil
   fileprivate var _subtitle: String? = nil
@@ -1042,86 +1042,86 @@ public struct JetFireFeaturePush {
   fileprivate var _expire: JetFireSchedule? = nil
 }
 
-public struct JetFireFeatureToaster {
+struct JetFireFeatureToaster {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var title: String {
+  var title: String {
     get {return _title ?? String()}
     set {_title = newValue}
   }
   /// Returns true if `title` has been explicitly set.
-  public var hasTitle: Bool {return self._title != nil}
+  var hasTitle: Bool {return self._title != nil}
   /// Clears the value of `title`. Subsequent reads from it will return its default value.
-  public mutating func clearTitle() {self._title = nil}
+  mutating func clearTitle() {self._title = nil}
 
-  public var subtitle: String {
+  var subtitle: String {
     get {return _subtitle ?? String()}
     set {_subtitle = newValue}
   }
   /// Returns true if `subtitle` has been explicitly set.
-  public var hasSubtitle: Bool {return self._subtitle != nil}
+  var hasSubtitle: Bool {return self._subtitle != nil}
   /// Clears the value of `subtitle`. Subsequent reads from it will return its default value.
-  public mutating func clearSubtitle() {self._subtitle = nil}
+  mutating func clearSubtitle() {self._subtitle = nil}
 
-  public var message: String {
+  var message: String {
     get {return _message ?? String()}
     set {_message = newValue}
   }
   /// Returns true if `message` has been explicitly set.
-  public var hasMessage: Bool {return self._message != nil}
+  var hasMessage: Bool {return self._message != nil}
   /// Clears the value of `message`. Subsequent reads from it will return its default value.
-  public mutating func clearMessage() {self._message = nil}
+  mutating func clearMessage() {self._message = nil}
 
-  public var image: JetFireImage {
+  var image: JetFireImage {
     get {return _image ?? JetFireImage()}
     set {_image = newValue}
   }
   /// Returns true if `image` has been explicitly set.
-  public var hasImage: Bool {return self._image != nil}
+  var hasImage: Bool {return self._image != nil}
   /// Clears the value of `image`. Subsequent reads from it will return its default value.
-  public mutating func clearImage() {self._image = nil}
+  mutating func clearImage() {self._image = nil}
 
-  public var actionButton: JetFireFeatureButton {
+  var actionButton: JetFireFeatureButton {
     get {return _actionButton ?? JetFireFeatureButton()}
     set {_actionButton = newValue}
   }
   /// Returns true if `actionButton` has been explicitly set.
-  public var hasActionButton: Bool {return self._actionButton != nil}
+  var hasActionButton: Bool {return self._actionButton != nil}
   /// Clears the value of `actionButton`. Subsequent reads from it will return its default value.
-  public mutating func clearActionButton() {self._actionButton = nil}
+  mutating func clearActionButton() {self._actionButton = nil}
 
-  public var hideButton: JetFireFeatureButton {
+  var hideButton: JetFireFeatureButton {
     get {return _hideButton ?? JetFireFeatureButton()}
     set {_hideButton = newValue}
   }
   /// Returns true if `hideButton` has been explicitly set.
-  public var hasHideButton: Bool {return self._hideButton != nil}
+  var hasHideButton: Bool {return self._hideButton != nil}
   /// Clears the value of `hideButton`. Subsequent reads from it will return its default value.
-  public mutating func clearHideButton() {self._hideButton = nil}
+  mutating func clearHideButton() {self._hideButton = nil}
 
-  public var schedule: JetFireSchedule {
+  var schedule: JetFireSchedule {
     get {return _schedule ?? JetFireSchedule()}
     set {_schedule = newValue}
   }
   /// Returns true if `schedule` has been explicitly set.
-  public var hasSchedule: Bool {return self._schedule != nil}
+  var hasSchedule: Bool {return self._schedule != nil}
   /// Clears the value of `schedule`. Subsequent reads from it will return its default value.
-  public mutating func clearSchedule() {self._schedule = nil}
+  mutating func clearSchedule() {self._schedule = nil}
 
-  public var expire: JetFireSchedule {
+  var expire: JetFireSchedule {
     get {return _expire ?? JetFireSchedule()}
     set {_expire = newValue}
   }
   /// Returns true if `expire` has been explicitly set.
-  public var hasExpire: Bool {return self._expire != nil}
+  var hasExpire: Bool {return self._expire != nil}
   /// Clears the value of `expire`. Subsequent reads from it will return its default value.
-  public mutating func clearExpire() {self._expire = nil}
+  mutating func clearExpire() {self._expire = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _title: String? = nil
   fileprivate var _subtitle: String? = nil
@@ -1133,209 +1133,209 @@ public struct JetFireFeatureToaster {
   fileprivate var _expire: JetFireSchedule? = nil
 }
 
-public struct JetFireFeatureStoryFrameBackground {
+struct JetFireFeatureStoryFrameBackground {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var color: String {
+  var color: String {
     get {return _color ?? String()}
     set {_color = newValue}
   }
   /// Returns true if `color` has been explicitly set.
-  public var hasColor: Bool {return self._color != nil}
+  var hasColor: Bool {return self._color != nil}
   /// Clears the value of `color`. Subsequent reads from it will return its default value.
-  public mutating func clearColor() {self._color = nil}
+  mutating func clearColor() {self._color = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _color: String? = nil
 }
 
-public struct JetFireFeatureStoryFrameFont {
+struct JetFireFeatureStoryFrameFont {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var color: String {
+  var color: String {
     get {return _color ?? String()}
     set {_color = newValue}
   }
   /// Returns true if `color` has been explicitly set.
-  public var hasColor: Bool {return self._color != nil}
+  var hasColor: Bool {return self._color != nil}
   /// Clears the value of `color`. Subsequent reads from it will return its default value.
-  public mutating func clearColor() {self._color = nil}
+  mutating func clearColor() {self._color = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _color: String? = nil
 }
 
-public struct JetFireFeatureStoryCover {
+struct JetFireFeatureStoryCover {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var image: JetFireImage {
+  var image: JetFireImage {
     get {return _image ?? JetFireImage()}
     set {_image = newValue}
   }
   /// Returns true if `image` has been explicitly set.
-  public var hasImage: Bool {return self._image != nil}
+  var hasImage: Bool {return self._image != nil}
   /// Clears the value of `image`. Subsequent reads from it will return its default value.
-  public mutating func clearImage() {self._image = nil}
+  mutating func clearImage() {self._image = nil}
 
-  public var title: String {
+  var title: String {
     get {return _title ?? String()}
     set {_title = newValue}
   }
   /// Returns true if `title` has been explicitly set.
-  public var hasTitle: Bool {return self._title != nil}
+  var hasTitle: Bool {return self._title != nil}
   /// Clears the value of `title`. Subsequent reads from it will return its default value.
-  public mutating func clearTitle() {self._title = nil}
+  mutating func clearTitle() {self._title = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _image: JetFireImage? = nil
   fileprivate var _title: String? = nil
 }
 
-public struct JetFireFeatureStorySettings {
+struct JetFireFeatureStorySettings {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var alwaysRewind: Bool {
+  var alwaysRewind: Bool {
     get {return _alwaysRewind ?? false}
     set {_alwaysRewind = newValue}
   }
   /// Returns true if `alwaysRewind` has been explicitly set.
-  public var hasAlwaysRewind: Bool {return self._alwaysRewind != nil}
+  var hasAlwaysRewind: Bool {return self._alwaysRewind != nil}
   /// Clears the value of `alwaysRewind`. Subsequent reads from it will return its default value.
-  public mutating func clearAlwaysRewind() {self._alwaysRewind = nil}
+  mutating func clearAlwaysRewind() {self._alwaysRewind = nil}
 
   /// seconds
-  public var afterReadExpire: Int64 {
+  var afterReadExpire: Int64 {
     get {return _afterReadExpire ?? 0}
     set {_afterReadExpire = newValue}
   }
   /// Returns true if `afterReadExpire` has been explicitly set.
-  public var hasAfterReadExpire: Bool {return self._afterReadExpire != nil}
+  var hasAfterReadExpire: Bool {return self._afterReadExpire != nil}
   /// Clears the value of `afterReadExpire`. Subsequent reads from it will return its default value.
-  public mutating func clearAfterReadExpire() {self._afterReadExpire = nil}
+  mutating func clearAfterReadExpire() {self._afterReadExpire = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _alwaysRewind: Bool? = nil
   fileprivate var _afterReadExpire: Int64? = nil
 }
 
-public struct JetFireFeatureStoryFrame {
+struct JetFireFeatureStoryFrame {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var id: Int64 {
+  var id: Int64 {
     get {return _id ?? 0}
     set {_id = newValue}
   }
   /// Returns true if `id` has been explicitly set.
-  public var hasID: Bool {return self._id != nil}
+  var hasID: Bool {return self._id != nil}
   /// Clears the value of `id`. Subsequent reads from it will return its default value.
-  public mutating func clearID() {self._id = nil}
+  mutating func clearID() {self._id = nil}
 
-  public var title: String {
+  var title: String {
     get {return _title ?? String()}
     set {_title = newValue}
   }
   /// Returns true if `title` has been explicitly set.
-  public var hasTitle: Bool {return self._title != nil}
+  var hasTitle: Bool {return self._title != nil}
   /// Clears the value of `title`. Subsequent reads from it will return its default value.
-  public mutating func clearTitle() {self._title = nil}
+  mutating func clearTitle() {self._title = nil}
 
-  public var subtitle: String {
+  var subtitle: String {
     get {return _subtitle ?? String()}
     set {_subtitle = newValue}
   }
   /// Returns true if `subtitle` has been explicitly set.
-  public var hasSubtitle: Bool {return self._subtitle != nil}
+  var hasSubtitle: Bool {return self._subtitle != nil}
   /// Clears the value of `subtitle`. Subsequent reads from it will return its default value.
-  public mutating func clearSubtitle() {self._subtitle = nil}
+  mutating func clearSubtitle() {self._subtitle = nil}
 
-  public var message: String {
+  var message: String {
     get {return _message ?? String()}
     set {_message = newValue}
   }
   /// Returns true if `message` has been explicitly set.
-  public var hasMessage: Bool {return self._message != nil}
+  var hasMessage: Bool {return self._message != nil}
   /// Clears the value of `message`. Subsequent reads from it will return its default value.
-  public mutating func clearMessage() {self._message = nil}
+  mutating func clearMessage() {self._message = nil}
 
-  public var image: JetFireImage {
+  var image: JetFireImage {
     get {return _image ?? JetFireImage()}
     set {_image = newValue}
   }
   /// Returns true if `image` has been explicitly set.
-  public var hasImage: Bool {return self._image != nil}
+  var hasImage: Bool {return self._image != nil}
   /// Clears the value of `image`. Subsequent reads from it will return its default value.
-  public mutating func clearImage() {self._image = nil}
+  mutating func clearImage() {self._image = nil}
 
-  public var background: JetFireFeatureStoryFrameBackground {
+  var background: JetFireFeatureStoryFrameBackground {
     get {return _background ?? JetFireFeatureStoryFrameBackground()}
     set {_background = newValue}
   }
   /// Returns true if `background` has been explicitly set.
-  public var hasBackground: Bool {return self._background != nil}
+  var hasBackground: Bool {return self._background != nil}
   /// Clears the value of `background`. Subsequent reads from it will return its default value.
-  public mutating func clearBackground() {self._background = nil}
+  mutating func clearBackground() {self._background = nil}
 
-  public var font: JetFireFeatureStoryFrameFont {
+  var font: JetFireFeatureStoryFrameFont {
     get {return _font ?? JetFireFeatureStoryFrameFont()}
     set {_font = newValue}
   }
   /// Returns true if `font` has been explicitly set.
-  public var hasFont: Bool {return self._font != nil}
+  var hasFont: Bool {return self._font != nil}
   /// Clears the value of `font`. Subsequent reads from it will return its default value.
-  public mutating func clearFont() {self._font = nil}
+  mutating func clearFont() {self._font = nil}
 
-  public var actionButton: JetFireFeatureButton {
+  var actionButton: JetFireFeatureButton {
     get {return _actionButton ?? JetFireFeatureButton()}
     set {_actionButton = newValue}
   }
   /// Returns true if `actionButton` has been explicitly set.
-  public var hasActionButton: Bool {return self._actionButton != nil}
+  var hasActionButton: Bool {return self._actionButton != nil}
   /// Clears the value of `actionButton`. Subsequent reads from it will return its default value.
-  public mutating func clearActionButton() {self._actionButton = nil}
+  mutating func clearActionButton() {self._actionButton = nil}
 
-  public var hideButton: JetFireFeatureButton {
+  var hideButton: JetFireFeatureButton {
     get {return _hideButton ?? JetFireFeatureButton()}
     set {_hideButton = newValue}
   }
   /// Returns true if `hideButton` has been explicitly set.
-  public var hasHideButton: Bool {return self._hideButton != nil}
+  var hasHideButton: Bool {return self._hideButton != nil}
   /// Clears the value of `hideButton`. Subsequent reads from it will return its default value.
-  public mutating func clearHideButton() {self._hideButton = nil}
+  mutating func clearHideButton() {self._hideButton = nil}
 
-  public var duration: Int32 {
+  var duration: Int32 {
     get {return _duration ?? 0}
     set {_duration = newValue}
   }
   /// Returns true if `duration` has been explicitly set.
-  public var hasDuration: Bool {return self._duration != nil}
+  var hasDuration: Bool {return self._duration != nil}
   /// Clears the value of `duration`. Subsequent reads from it will return its default value.
-  public mutating func clearDuration() {self._duration = nil}
+  mutating func clearDuration() {self._duration = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _id: Int64? = nil
   fileprivate var _title: String? = nil
@@ -1349,70 +1349,70 @@ public struct JetFireFeatureStoryFrame {
   fileprivate var _duration: Int32? = nil
 }
 
-public struct JetFireFeatureStory {
+struct JetFireFeatureStory {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var id: Int64 {
+  var id: Int64 {
     get {return _id ?? 0}
     set {_id = newValue}
   }
   /// Returns true if `id` has been explicitly set.
-  public var hasID: Bool {return self._id != nil}
+  var hasID: Bool {return self._id != nil}
   /// Clears the value of `id`. Subsequent reads from it will return its default value.
-  public mutating func clearID() {self._id = nil}
+  mutating func clearID() {self._id = nil}
 
-  public var cover: JetFireFeatureStoryCover {
+  var cover: JetFireFeatureStoryCover {
     get {return _cover ?? JetFireFeatureStoryCover()}
     set {_cover = newValue}
   }
   /// Returns true if `cover` has been explicitly set.
-  public var hasCover: Bool {return self._cover != nil}
+  var hasCover: Bool {return self._cover != nil}
   /// Clears the value of `cover`. Subsequent reads from it will return its default value.
-  public mutating func clearCover() {self._cover = nil}
+  mutating func clearCover() {self._cover = nil}
 
-  public var frames: [JetFireFeatureStoryFrame] = []
+  var frames: [JetFireFeatureStoryFrame] = []
 
-  public var schedule: JetFireSchedule {
+  var schedule: JetFireSchedule {
     get {return _schedule ?? JetFireSchedule()}
     set {_schedule = newValue}
   }
   /// Returns true if `schedule` has been explicitly set.
-  public var hasSchedule: Bool {return self._schedule != nil}
+  var hasSchedule: Bool {return self._schedule != nil}
   /// Clears the value of `schedule`. Subsequent reads from it will return its default value.
-  public mutating func clearSchedule() {self._schedule = nil}
+  mutating func clearSchedule() {self._schedule = nil}
 
-  public var expire: JetFireSchedule {
+  var expire: JetFireSchedule {
     get {return _expire ?? JetFireSchedule()}
     set {_expire = newValue}
   }
   /// Returns true if `expire` has been explicitly set.
-  public var hasExpire: Bool {return self._expire != nil}
+  var hasExpire: Bool {return self._expire != nil}
   /// Clears the value of `expire`. Subsequent reads from it will return its default value.
-  public mutating func clearExpire() {self._expire = nil}
+  mutating func clearExpire() {self._expire = nil}
 
-  public var settings: JetFireFeatureStorySettings {
+  var settings: JetFireFeatureStorySettings {
     get {return _settings ?? JetFireFeatureStorySettings()}
     set {_settings = newValue}
   }
   /// Returns true if `settings` has been explicitly set.
-  public var hasSettings: Bool {return self._settings != nil}
+  var hasSettings: Bool {return self._settings != nil}
   /// Clears the value of `settings`. Subsequent reads from it will return its default value.
-  public mutating func clearSettings() {self._settings = nil}
+  mutating func clearSettings() {self._settings = nil}
 
-  public var priority: Int64 {
+  var priority: Int64 {
     get {return _priority ?? 0}
     set {_priority = newValue}
   }
   /// Returns true if `priority` has been explicitly set.
-  public var hasPriority: Bool {return self._priority != nil}
+  var hasPriority: Bool {return self._priority != nil}
   /// Clears the value of `priority`. Subsequent reads from it will return its default value.
-  public mutating func clearPriority() {self._priority = nil}
+  mutating func clearPriority() {self._priority = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _id: Int64? = nil
   fileprivate var _cover: JetFireFeatureStoryCover? = nil
@@ -1422,122 +1422,122 @@ public struct JetFireFeatureStory {
   fileprivate var _priority: Int64? = nil
 }
 
-public struct JetFireFeatureData {
+struct JetFireFeatureData {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var data: Data {
+  var data: Data {
     get {return _data ?? Data()}
     set {_data = newValue}
   }
   /// Returns true if `data` has been explicitly set.
-  public var hasData: Bool {return self._data != nil}
+  var hasData: Bool {return self._data != nil}
   /// Clears the value of `data`. Subsequent reads from it will return its default value.
-  public mutating func clearData() {self._data = nil}
+  mutating func clearData() {self._data = nil}
 
-  public var schedule: JetFireSchedule {
+  var schedule: JetFireSchedule {
     get {return _schedule ?? JetFireSchedule()}
     set {_schedule = newValue}
   }
   /// Returns true if `schedule` has been explicitly set.
-  public var hasSchedule: Bool {return self._schedule != nil}
+  var hasSchedule: Bool {return self._schedule != nil}
   /// Clears the value of `schedule`. Subsequent reads from it will return its default value.
-  public mutating func clearSchedule() {self._schedule = nil}
+  mutating func clearSchedule() {self._schedule = nil}
 
-  public var expire: JetFireSchedule {
+  var expire: JetFireSchedule {
     get {return _expire ?? JetFireSchedule()}
     set {_expire = newValue}
   }
   /// Returns true if `expire` has been explicitly set.
-  public var hasExpire: Bool {return self._expire != nil}
+  var hasExpire: Bool {return self._expire != nil}
   /// Clears the value of `expire`. Subsequent reads from it will return its default value.
-  public mutating func clearExpire() {self._expire = nil}
+  mutating func clearExpire() {self._expire = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _data: Data? = nil
   fileprivate var _schedule: JetFireSchedule? = nil
   fileprivate var _expire: JetFireSchedule? = nil
 }
 
-public struct JetFireEvent {
+struct JetFireEvent {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var uuid: String {
+  var uuid: String {
     get {return _uuid ?? String()}
     set {_uuid = newValue}
   }
   /// Returns true if `uuid` has been explicitly set.
-  public var hasUuid: Bool {return self._uuid != nil}
+  var hasUuid: Bool {return self._uuid != nil}
   /// Clears the value of `uuid`. Subsequent reads from it will return its default value.
-  public mutating func clearUuid() {self._uuid = nil}
+  mutating func clearUuid() {self._uuid = nil}
 
   /// milliseconds
-  public var timestamp: JetFireTimestamp {
+  var timestamp: JetFireTimestamp {
     get {return _timestamp ?? JetFireTimestamp()}
     set {_timestamp = newValue}
   }
   /// Returns true if `timestamp` has been explicitly set.
-  public var hasTimestamp: Bool {return self._timestamp != nil}
+  var hasTimestamp: Bool {return self._timestamp != nil}
   /// Clears the value of `timestamp`. Subsequent reads from it will return its default value.
-  public mutating func clearTimestamp() {self._timestamp = nil}
+  mutating func clearTimestamp() {self._timestamp = nil}
 
-  public var eventType: JetFireEventType {
+  var eventType: JetFireEventType {
     get {return _eventType ?? JetFireEventType()}
     set {_eventType = newValue}
   }
   /// Returns true if `eventType` has been explicitly set.
-  public var hasEventType: Bool {return self._eventType != nil}
+  var hasEventType: Bool {return self._eventType != nil}
   /// Clears the value of `eventType`. Subsequent reads from it will return its default value.
-  public mutating func clearEventType() {self._eventType = nil}
+  mutating func clearEventType() {self._eventType = nil}
 
-  public var customEvent: String {
+  var customEvent: String {
     get {return _customEvent ?? String()}
     set {_customEvent = newValue}
   }
   /// Returns true if `customEvent` has been explicitly set.
-  public var hasCustomEvent: Bool {return self._customEvent != nil}
+  var hasCustomEvent: Bool {return self._customEvent != nil}
   /// Clears the value of `customEvent`. Subsequent reads from it will return its default value.
-  public mutating func clearCustomEvent() {self._customEvent = nil}
+  mutating func clearCustomEvent() {self._customEvent = nil}
 
-  public var feature: String {
+  var feature: String {
     get {return _feature ?? String()}
     set {_feature = newValue}
   }
   /// Returns true if `feature` has been explicitly set.
-  public var hasFeature: Bool {return self._feature != nil}
+  var hasFeature: Bool {return self._feature != nil}
   /// Clears the value of `feature`. Subsequent reads from it will return its default value.
-  public mutating func clearFeature() {self._feature = nil}
+  mutating func clearFeature() {self._feature = nil}
 
-  public var campaignID: Int64 {
+  var campaignID: Int64 {
     get {return _campaignID ?? 0}
     set {_campaignID = newValue}
   }
   /// Returns true if `campaignID` has been explicitly set.
-  public var hasCampaignID: Bool {return self._campaignID != nil}
+  var hasCampaignID: Bool {return self._campaignID != nil}
   /// Clears the value of `campaignID`. Subsequent reads from it will return its default value.
-  public mutating func clearCampaignID() {self._campaignID = nil}
+  mutating func clearCampaignID() {self._campaignID = nil}
 
   /// story_id, ...
-  public var entityID: Int64 {
+  var entityID: Int64 {
     get {return _entityID ?? 0}
     set {_entityID = newValue}
   }
   /// Returns true if `entityID` has been explicitly set.
-  public var hasEntityID: Bool {return self._entityID != nil}
+  var hasEntityID: Bool {return self._entityID != nil}
   /// Clears the value of `entityID`. Subsequent reads from it will return its default value.
-  public mutating func clearEntityID() {self._entityID = nil}
+  mutating func clearEntityID() {self._entityID = nil}
 
-  public var properties: [JetFireProperty] = []
+  var properties: [JetFireProperty] = []
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _uuid: String? = nil
   fileprivate var _timestamp: JetFireTimestamp? = nil
@@ -1548,296 +1548,296 @@ public struct JetFireEvent {
   fileprivate var _entityID: Int64? = nil
 }
 
-public struct JetFireCampaign {
+struct JetFireCampaign {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var id: Int64 {
+  var id: Int64 {
     get {return _storage._id ?? 0}
     set {_uniqueStorage()._id = newValue}
   }
   /// Returns true if `id` has been explicitly set.
-  public var hasID: Bool {return _storage._id != nil}
+  var hasID: Bool {return _storage._id != nil}
   /// Clears the value of `id`. Subsequent reads from it will return its default value.
-  public mutating func clearID() {_uniqueStorage()._id = nil}
+  mutating func clearID() {_uniqueStorage()._id = nil}
 
-  public var push: JetFireFeaturePush {
+  var push: JetFireFeaturePush {
     get {return _storage._push ?? JetFireFeaturePush()}
     set {_uniqueStorage()._push = newValue}
   }
   /// Returns true if `push` has been explicitly set.
-  public var hasPush: Bool {return _storage._push != nil}
+  var hasPush: Bool {return _storage._push != nil}
   /// Clears the value of `push`. Subsequent reads from it will return its default value.
-  public mutating func clearPush() {_uniqueStorage()._push = nil}
+  mutating func clearPush() {_uniqueStorage()._push = nil}
 
-  public var toaster: JetFireFeatureToaster {
+  var toaster: JetFireFeatureToaster {
     get {return _storage._toaster ?? JetFireFeatureToaster()}
     set {_uniqueStorage()._toaster = newValue}
   }
   /// Returns true if `toaster` has been explicitly set.
-  public var hasToaster: Bool {return _storage._toaster != nil}
+  var hasToaster: Bool {return _storage._toaster != nil}
   /// Clears the value of `toaster`. Subsequent reads from it will return its default value.
-  public mutating func clearToaster() {_uniqueStorage()._toaster = nil}
+  mutating func clearToaster() {_uniqueStorage()._toaster = nil}
 
-  public var stories: [JetFireFeatureStory] {
+  var stories: [JetFireFeatureStory] {
     get {return _storage._stories}
     set {_uniqueStorage()._stories = newValue}
   }
 
-  public var data: JetFireFeatureData {
+  var data: JetFireFeatureData {
     get {return _storage._data ?? JetFireFeatureData()}
     set {_uniqueStorage()._data = newValue}
   }
   /// Returns true if `data` has been explicitly set.
-  public var hasData: Bool {return _storage._data != nil}
+  var hasData: Bool {return _storage._data != nil}
   /// Clears the value of `data`. Subsequent reads from it will return its default value.
-  public mutating func clearData() {_uniqueStorage()._data = nil}
+  mutating func clearData() {_uniqueStorage()._data = nil}
 
-  public var priority: Int32 {
+  var priority: Int32 {
     get {return _storage._priority ?? 0}
     set {_uniqueStorage()._priority = newValue}
   }
   /// Returns true if `priority` has been explicitly set.
-  public var hasPriority: Bool {return _storage._priority != nil}
+  var hasPriority: Bool {return _storage._priority != nil}
   /// Clears the value of `priority`. Subsequent reads from it will return its default value.
-  public mutating func clearPriority() {_uniqueStorage()._priority = nil}
+  mutating func clearPriority() {_uniqueStorage()._priority = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-public struct JetFireListCampaignsRequest {
+struct JetFireListCampaignsRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var user: JetFireUser {
+  var user: JetFireUser {
     get {return _user ?? JetFireUser()}
     set {_user = newValue}
   }
   /// Returns true if `user` has been explicitly set.
-  public var hasUser: Bool {return self._user != nil}
+  var hasUser: Bool {return self._user != nil}
   /// Clears the value of `user`. Subsequent reads from it will return its default value.
-  public mutating func clearUser() {self._user = nil}
+  mutating func clearUser() {self._user = nil}
 
-  public var session: JetFireSession {
+  var session: JetFireSession {
     get {return _session ?? JetFireSession()}
     set {_session = newValue}
   }
   /// Returns true if `session` has been explicitly set.
-  public var hasSession: Bool {return self._session != nil}
+  var hasSession: Bool {return self._session != nil}
   /// Clears the value of `session`. Subsequent reads from it will return its default value.
-  public mutating func clearSession() {self._session = nil}
+  mutating func clearSession() {self._session = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _user: JetFireUser? = nil
   fileprivate var _session: JetFireSession? = nil
 }
 
-public struct JetFireUpdateUserProperties {
+struct JetFireUpdateUserProperties {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var user: JetFireRequestUser {
+  var user: JetFireRequestUser {
     get {return _user ?? JetFireRequestUser()}
     set {_user = newValue}
   }
   /// Returns true if `user` has been explicitly set.
-  public var hasUser: Bool {return self._user != nil}
+  var hasUser: Bool {return self._user != nil}
   /// Clears the value of `user`. Subsequent reads from it will return its default value.
-  public mutating func clearUser() {self._user = nil}
+  mutating func clearUser() {self._user = nil}
 
-  public var session: JetFireRequestSession {
+  var session: JetFireRequestSession {
     get {return _session ?? JetFireRequestSession()}
     set {_session = newValue}
   }
   /// Returns true if `session` has been explicitly set.
-  public var hasSession: Bool {return self._session != nil}
+  var hasSession: Bool {return self._session != nil}
   /// Clears the value of `session`. Subsequent reads from it will return its default value.
-  public mutating func clearSession() {self._session = nil}
+  mutating func clearSession() {self._session = nil}
 
-  public var propertyOperations: [JetFirePropertyOperation] = []
+  var propertyOperations: [JetFirePropertyOperation] = []
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _user: JetFireRequestUser? = nil
   fileprivate var _session: JetFireRequestSession? = nil
 }
 
-public struct JetFireUpdateSessionProperties {
+struct JetFireUpdateSessionProperties {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var user: JetFireRequestUser {
+  var user: JetFireRequestUser {
     get {return _user ?? JetFireRequestUser()}
     set {_user = newValue}
   }
   /// Returns true if `user` has been explicitly set.
-  public var hasUser: Bool {return self._user != nil}
+  var hasUser: Bool {return self._user != nil}
   /// Clears the value of `user`. Subsequent reads from it will return its default value.
-  public mutating func clearUser() {self._user = nil}
+  mutating func clearUser() {self._user = nil}
 
-  public var session: JetFireRequestSession {
+  var session: JetFireRequestSession {
     get {return _session ?? JetFireRequestSession()}
     set {_session = newValue}
   }
   /// Returns true if `session` has been explicitly set.
-  public var hasSession: Bool {return self._session != nil}
+  var hasSession: Bool {return self._session != nil}
   /// Clears the value of `session`. Subsequent reads from it will return its default value.
-  public mutating func clearSession() {self._session = nil}
+  mutating func clearSession() {self._session = nil}
 
-  public var propertyOperations: [JetFirePropertyOperation] = []
+  var propertyOperations: [JetFirePropertyOperation] = []
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _user: JetFireRequestUser? = nil
   fileprivate var _session: JetFireRequestSession? = nil
 }
 
-public struct JetFireRegisterEventsRequest {
+struct JetFireRegisterEventsRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var user: JetFireRequestUser {
+  var user: JetFireRequestUser {
     get {return _user ?? JetFireRequestUser()}
     set {_user = newValue}
   }
   /// Returns true if `user` has been explicitly set.
-  public var hasUser: Bool {return self._user != nil}
+  var hasUser: Bool {return self._user != nil}
   /// Clears the value of `user`. Subsequent reads from it will return its default value.
-  public mutating func clearUser() {self._user = nil}
+  mutating func clearUser() {self._user = nil}
 
-  public var session: JetFireRequestSession {
+  var session: JetFireRequestSession {
     get {return _session ?? JetFireRequestSession()}
     set {_session = newValue}
   }
   /// Returns true if `session` has been explicitly set.
-  public var hasSession: Bool {return self._session != nil}
+  var hasSession: Bool {return self._session != nil}
   /// Clears the value of `session`. Subsequent reads from it will return its default value.
-  public mutating func clearSession() {self._session = nil}
+  mutating func clearSession() {self._session = nil}
 
-  public var events: [JetFireEvent] = []
+  var events: [JetFireEvent] = []
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _user: JetFireRequestUser? = nil
   fileprivate var _session: JetFireRequestSession? = nil
 }
 
-public struct JetFireListCampaignsResponse {
+struct JetFireListCampaignsResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var total: Int32 {
+  var total: Int32 {
     get {return _total ?? 0}
     set {_total = newValue}
   }
   /// Returns true if `total` has been explicitly set.
-  public var hasTotal: Bool {return self._total != nil}
+  var hasTotal: Bool {return self._total != nil}
   /// Clears the value of `total`. Subsequent reads from it will return its default value.
-  public mutating func clearTotal() {self._total = nil}
+  mutating func clearTotal() {self._total = nil}
 
-  public var campaigns: [JetFireCampaign] = []
+  var campaigns: [JetFireCampaign] = []
 
-  public var sql: JetFireFeaturesSql {
+  var sql: JetFireFeaturesSql {
     get {return _sql ?? JetFireFeaturesSql()}
     set {_sql = newValue}
   }
   /// Returns true if `sql` has been explicitly set.
-  public var hasSql: Bool {return self._sql != nil}
+  var hasSql: Bool {return self._sql != nil}
   /// Clears the value of `sql`. Subsequent reads from it will return its default value.
-  public mutating func clearSql() {self._sql = nil}
+  mutating func clearSql() {self._sql = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _total: Int32? = nil
   fileprivate var _sql: JetFireFeaturesSql? = nil
 }
 
-public struct JetFireOkResponse {
+struct JetFireOkResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var code: Int32 {
+  var code: Int32 {
     get {return _code ?? 0}
     set {_code = newValue}
   }
   /// Returns true if `code` has been explicitly set.
-  public var hasCode: Bool {return self._code != nil}
+  var hasCode: Bool {return self._code != nil}
   /// Clears the value of `code`. Subsequent reads from it will return its default value.
-  public mutating func clearCode() {self._code = nil}
+  mutating func clearCode() {self._code = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _code: Int32? = nil
 }
 
-public struct JetFireErrorResponse {
+struct JetFireErrorResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var code: Int32 {
+  var code: Int32 {
     get {return _code ?? 0}
     set {_code = newValue}
   }
   /// Returns true if `code` has been explicitly set.
-  public var hasCode: Bool {return self._code != nil}
+  var hasCode: Bool {return self._code != nil}
   /// Clears the value of `code`. Subsequent reads from it will return its default value.
-  public mutating func clearCode() {self._code = nil}
+  mutating func clearCode() {self._code = nil}
 
-  public var message: String {
+  var message: String {
     get {return _message ?? String()}
     set {_message = newValue}
   }
   /// Returns true if `message` has been explicitly set.
-  public var hasMessage: Bool {return self._message != nil}
+  var hasMessage: Bool {return self._message != nil}
   /// Clears the value of `message`. Subsequent reads from it will return its default value.
-  public mutating func clearMessage() {self._message = nil}
+  mutating func clearMessage() {self._message = nil}
 
-  public var systemMessage: String {
+  var systemMessage: String {
     get {return _systemMessage ?? String()}
     set {_systemMessage = newValue}
   }
   /// Returns true if `systemMessage` has been explicitly set.
-  public var hasSystemMessage: Bool {return self._systemMessage != nil}
+  var hasSystemMessage: Bool {return self._systemMessage != nil}
   /// Clears the value of `systemMessage`. Subsequent reads from it will return its default value.
-  public mutating func clearSystemMessage() {self._systemMessage = nil}
+  mutating func clearSystemMessage() {self._systemMessage = nil}
 
-  public var type: String {
+  var type: String {
     get {return _type ?? String()}
     set {_type = newValue}
   }
   /// Returns true if `type` has been explicitly set.
-  public var hasType: Bool {return self._type != nil}
+  var hasType: Bool {return self._type != nil}
   /// Clears the value of `type`. Subsequent reads from it will return its default value.
-  public mutating func clearType() {self._type = nil}
+  mutating func clearType() {self._type = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _code: Int32? = nil
   fileprivate var _message: String? = nil
@@ -1845,101 +1845,101 @@ public struct JetFireErrorResponse {
   fileprivate var _type: String? = nil
 }
 
-public struct JetFireJwt {
+struct JetFireJwt {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var token: String {
+  var token: String {
     get {return _token ?? String()}
     set {_token = newValue}
   }
   /// Returns true if `token` has been explicitly set.
-  public var hasToken: Bool {return self._token != nil}
+  var hasToken: Bool {return self._token != nil}
   /// Clears the value of `token`. Subsequent reads from it will return its default value.
-  public mutating func clearToken() {self._token = nil}
+  mutating func clearToken() {self._token = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _token: String? = nil
 }
 
-public struct JetFireRequest {
+struct JetFireRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var ip: String {
+  var ip: String {
     get {return _ip ?? String()}
     set {_ip = newValue}
   }
   /// Returns true if `ip` has been explicitly set.
-  public var hasIp: Bool {return self._ip != nil}
+  var hasIp: Bool {return self._ip != nil}
   /// Clears the value of `ip`. Subsequent reads from it will return its default value.
-  public mutating func clearIp() {self._ip = nil}
+  mutating func clearIp() {self._ip = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _ip: String? = nil
 }
 
-public struct JetFireRegisterUserAndSessionMessage {
+struct JetFireRegisterUserAndSessionMessage {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var jwt: JetFireJwt {
+  var jwt: JetFireJwt {
     get {return _jwt ?? JetFireJwt()}
     set {_jwt = newValue}
   }
   /// Returns true if `jwt` has been explicitly set.
-  public var hasJwt: Bool {return self._jwt != nil}
+  var hasJwt: Bool {return self._jwt != nil}
   /// Clears the value of `jwt`. Subsequent reads from it will return its default value.
-  public mutating func clearJwt() {self._jwt = nil}
+  mutating func clearJwt() {self._jwt = nil}
 
-  public var salt: String {
+  var salt: String {
     get {return _salt ?? String()}
     set {_salt = newValue}
   }
   /// Returns true if `salt` has been explicitly set.
-  public var hasSalt: Bool {return self._salt != nil}
+  var hasSalt: Bool {return self._salt != nil}
   /// Clears the value of `salt`. Subsequent reads from it will return its default value.
-  public mutating func clearSalt() {self._salt = nil}
+  mutating func clearSalt() {self._salt = nil}
 
-  public var request: JetFireRequest {
+  var request: JetFireRequest {
     get {return _request ?? JetFireRequest()}
     set {_request = newValue}
   }
   /// Returns true if `request` has been explicitly set.
-  public var hasRequest: Bool {return self._request != nil}
+  var hasRequest: Bool {return self._request != nil}
   /// Clears the value of `request`. Subsequent reads from it will return its default value.
-  public mutating func clearRequest() {self._request = nil}
+  mutating func clearRequest() {self._request = nil}
 
-  public var user: JetFireUser {
+  var user: JetFireUser {
     get {return _user ?? JetFireUser()}
     set {_user = newValue}
   }
   /// Returns true if `user` has been explicitly set.
-  public var hasUser: Bool {return self._user != nil}
+  var hasUser: Bool {return self._user != nil}
   /// Clears the value of `user`. Subsequent reads from it will return its default value.
-  public mutating func clearUser() {self._user = nil}
+  mutating func clearUser() {self._user = nil}
 
-  public var session: JetFireSession {
+  var session: JetFireSession {
     get {return _session ?? JetFireSession()}
     set {_session = newValue}
   }
   /// Returns true if `session` has been explicitly set.
-  public var hasSession: Bool {return self._session != nil}
+  var hasSession: Bool {return self._session != nil}
   /// Clears the value of `session`. Subsequent reads from it will return its default value.
-  public mutating func clearSession() {self._session = nil}
+  mutating func clearSession() {self._session = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _jwt: JetFireJwt? = nil
   fileprivate var _salt: String? = nil
@@ -1948,61 +1948,61 @@ public struct JetFireRegisterUserAndSessionMessage {
   fileprivate var _session: JetFireSession? = nil
 }
 
-public struct JetFireUpdateUserPropertiesMessage {
+struct JetFireUpdateUserPropertiesMessage {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var jwt: JetFireJwt {
+  var jwt: JetFireJwt {
     get {return _jwt ?? JetFireJwt()}
     set {_jwt = newValue}
   }
   /// Returns true if `jwt` has been explicitly set.
-  public var hasJwt: Bool {return self._jwt != nil}
+  var hasJwt: Bool {return self._jwt != nil}
   /// Clears the value of `jwt`. Subsequent reads from it will return its default value.
-  public mutating func clearJwt() {self._jwt = nil}
+  mutating func clearJwt() {self._jwt = nil}
 
-  public var salt: String {
+  var salt: String {
     get {return _salt ?? String()}
     set {_salt = newValue}
   }
   /// Returns true if `salt` has been explicitly set.
-  public var hasSalt: Bool {return self._salt != nil}
+  var hasSalt: Bool {return self._salt != nil}
   /// Clears the value of `salt`. Subsequent reads from it will return its default value.
-  public mutating func clearSalt() {self._salt = nil}
+  mutating func clearSalt() {self._salt = nil}
 
-  public var request: JetFireRequest {
+  var request: JetFireRequest {
     get {return _request ?? JetFireRequest()}
     set {_request = newValue}
   }
   /// Returns true if `request` has been explicitly set.
-  public var hasRequest: Bool {return self._request != nil}
+  var hasRequest: Bool {return self._request != nil}
   /// Clears the value of `request`. Subsequent reads from it will return its default value.
-  public mutating func clearRequest() {self._request = nil}
+  mutating func clearRequest() {self._request = nil}
 
-  public var user: JetFireRequestUser {
+  var user: JetFireRequestUser {
     get {return _user ?? JetFireRequestUser()}
     set {_user = newValue}
   }
   /// Returns true if `user` has been explicitly set.
-  public var hasUser: Bool {return self._user != nil}
+  var hasUser: Bool {return self._user != nil}
   /// Clears the value of `user`. Subsequent reads from it will return its default value.
-  public mutating func clearUser() {self._user = nil}
+  mutating func clearUser() {self._user = nil}
 
-  public var session: JetFireRequestSession {
+  var session: JetFireRequestSession {
     get {return _session ?? JetFireRequestSession()}
     set {_session = newValue}
   }
   /// Returns true if `session` has been explicitly set.
-  public var hasSession: Bool {return self._session != nil}
+  var hasSession: Bool {return self._session != nil}
   /// Clears the value of `session`. Subsequent reads from it will return its default value.
-  public mutating func clearSession() {self._session = nil}
+  mutating func clearSession() {self._session = nil}
 
-  public var propertyOperations: [JetFirePropertyOperation] = []
+  var propertyOperations: [JetFirePropertyOperation] = []
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _jwt: JetFireJwt? = nil
   fileprivate var _salt: String? = nil
@@ -2011,61 +2011,61 @@ public struct JetFireUpdateUserPropertiesMessage {
   fileprivate var _session: JetFireRequestSession? = nil
 }
 
-public struct JetFireUpdateSessionPropertiesMessage {
+struct JetFireUpdateSessionPropertiesMessage {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var jwt: JetFireJwt {
+  var jwt: JetFireJwt {
     get {return _jwt ?? JetFireJwt()}
     set {_jwt = newValue}
   }
   /// Returns true if `jwt` has been explicitly set.
-  public var hasJwt: Bool {return self._jwt != nil}
+  var hasJwt: Bool {return self._jwt != nil}
   /// Clears the value of `jwt`. Subsequent reads from it will return its default value.
-  public mutating func clearJwt() {self._jwt = nil}
+  mutating func clearJwt() {self._jwt = nil}
 
-  public var salt: String {
+  var salt: String {
     get {return _salt ?? String()}
     set {_salt = newValue}
   }
   /// Returns true if `salt` has been explicitly set.
-  public var hasSalt: Bool {return self._salt != nil}
+  var hasSalt: Bool {return self._salt != nil}
   /// Clears the value of `salt`. Subsequent reads from it will return its default value.
-  public mutating func clearSalt() {self._salt = nil}
+  mutating func clearSalt() {self._salt = nil}
 
-  public var request: JetFireRequest {
+  var request: JetFireRequest {
     get {return _request ?? JetFireRequest()}
     set {_request = newValue}
   }
   /// Returns true if `request` has been explicitly set.
-  public var hasRequest: Bool {return self._request != nil}
+  var hasRequest: Bool {return self._request != nil}
   /// Clears the value of `request`. Subsequent reads from it will return its default value.
-  public mutating func clearRequest() {self._request = nil}
+  mutating func clearRequest() {self._request = nil}
 
-  public var user: JetFireRequestUser {
+  var user: JetFireRequestUser {
     get {return _user ?? JetFireRequestUser()}
     set {_user = newValue}
   }
   /// Returns true if `user` has been explicitly set.
-  public var hasUser: Bool {return self._user != nil}
+  var hasUser: Bool {return self._user != nil}
   /// Clears the value of `user`. Subsequent reads from it will return its default value.
-  public mutating func clearUser() {self._user = nil}
+  mutating func clearUser() {self._user = nil}
 
-  public var session: JetFireRequestSession {
+  var session: JetFireRequestSession {
     get {return _session ?? JetFireRequestSession()}
     set {_session = newValue}
   }
   /// Returns true if `session` has been explicitly set.
-  public var hasSession: Bool {return self._session != nil}
+  var hasSession: Bool {return self._session != nil}
   /// Clears the value of `session`. Subsequent reads from it will return its default value.
-  public mutating func clearSession() {self._session = nil}
+  mutating func clearSession() {self._session = nil}
 
-  public var propertyOperations: [JetFirePropertyOperation] = []
+  var propertyOperations: [JetFirePropertyOperation] = []
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _jwt: JetFireJwt? = nil
   fileprivate var _salt: String? = nil
@@ -2074,68 +2074,68 @@ public struct JetFireUpdateSessionPropertiesMessage {
   fileprivate var _session: JetFireRequestSession? = nil
 }
 
-public struct JetFireEventMessage {
+struct JetFireEventMessage {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var jwt: JetFireJwt {
+  var jwt: JetFireJwt {
     get {return _jwt ?? JetFireJwt()}
     set {_jwt = newValue}
   }
   /// Returns true if `jwt` has been explicitly set.
-  public var hasJwt: Bool {return self._jwt != nil}
+  var hasJwt: Bool {return self._jwt != nil}
   /// Clears the value of `jwt`. Subsequent reads from it will return its default value.
-  public mutating func clearJwt() {self._jwt = nil}
+  mutating func clearJwt() {self._jwt = nil}
 
-  public var salt: String {
+  var salt: String {
     get {return _salt ?? String()}
     set {_salt = newValue}
   }
   /// Returns true if `salt` has been explicitly set.
-  public var hasSalt: Bool {return self._salt != nil}
+  var hasSalt: Bool {return self._salt != nil}
   /// Clears the value of `salt`. Subsequent reads from it will return its default value.
-  public mutating func clearSalt() {self._salt = nil}
+  mutating func clearSalt() {self._salt = nil}
 
-  public var request: JetFireRequest {
+  var request: JetFireRequest {
     get {return _request ?? JetFireRequest()}
     set {_request = newValue}
   }
   /// Returns true if `request` has been explicitly set.
-  public var hasRequest: Bool {return self._request != nil}
+  var hasRequest: Bool {return self._request != nil}
   /// Clears the value of `request`. Subsequent reads from it will return its default value.
-  public mutating func clearRequest() {self._request = nil}
+  mutating func clearRequest() {self._request = nil}
 
-  public var user: JetFireRequestUser {
+  var user: JetFireRequestUser {
     get {return _user ?? JetFireRequestUser()}
     set {_user = newValue}
   }
   /// Returns true if `user` has been explicitly set.
-  public var hasUser: Bool {return self._user != nil}
+  var hasUser: Bool {return self._user != nil}
   /// Clears the value of `user`. Subsequent reads from it will return its default value.
-  public mutating func clearUser() {self._user = nil}
+  mutating func clearUser() {self._user = nil}
 
-  public var session: JetFireRequestSession {
+  var session: JetFireRequestSession {
     get {return _session ?? JetFireRequestSession()}
     set {_session = newValue}
   }
   /// Returns true if `session` has been explicitly set.
-  public var hasSession: Bool {return self._session != nil}
+  var hasSession: Bool {return self._session != nil}
   /// Clears the value of `session`. Subsequent reads from it will return its default value.
-  public mutating func clearSession() {self._session = nil}
+  mutating func clearSession() {self._session = nil}
 
-  public var event: JetFireEvent {
+  var event: JetFireEvent {
     get {return _event ?? JetFireEvent()}
     set {_event = newValue}
   }
   /// Returns true if `event` has been explicitly set.
-  public var hasEvent: Bool {return self._event != nil}
+  var hasEvent: Bool {return self._event != nil}
   /// Clears the value of `event`. Subsequent reads from it will return its default value.
-  public mutating func clearEvent() {self._event = nil}
+  mutating func clearEvent() {self._event = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _jwt: JetFireJwt? = nil
   fileprivate var _salt: String? = nil
@@ -2148,8 +2148,8 @@ public struct JetFireEventMessage {
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 extension JetFireTimestamp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "Timestamp"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "Timestamp"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "value"),
   ]
 
@@ -2158,7 +2158,7 @@ extension JetFireTimestamp: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2170,14 +2170,14 @@ extension JetFireTimestamp: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._value {
       try visitor.visitSingularInt64Field(value: v, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireTimestamp, rhs: JetFireTimestamp) -> Bool {
+  static func ==(lhs: JetFireTimestamp, rhs: JetFireTimestamp) -> Bool {
     if lhs._value != rhs._value {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -2185,8 +2185,8 @@ extension JetFireTimestamp: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
 }
 
 extension JetFireEventType: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "EventType"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "EventType"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "value"),
   ]
 
@@ -2195,7 +2195,7 @@ extension JetFireEventType: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2207,14 +2207,14 @@ extension JetFireEventType: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._value {
       try visitor.visitSingularInt64Field(value: v, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireEventType, rhs: JetFireEventType) -> Bool {
+  static func ==(lhs: JetFireEventType, rhs: JetFireEventType) -> Bool {
     if lhs._value != rhs._value {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -2222,8 +2222,8 @@ extension JetFireEventType: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
 }
 
 extension JetFireActionType: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "ActionType"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "ActionType"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "value"),
   ]
 
@@ -2232,7 +2232,7 @@ extension JetFireActionType: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2244,14 +2244,14 @@ extension JetFireActionType: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._value {
       try visitor.visitSingularInt64Field(value: v, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireActionType, rhs: JetFireActionType) -> Bool {
+  static func ==(lhs: JetFireActionType, rhs: JetFireActionType) -> Bool {
     if lhs._value != rhs._value {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -2259,8 +2259,8 @@ extension JetFireActionType: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
 }
 
 extension JetFireAnyValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "AnyValue"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "AnyValue"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     101: .same(proto: "int"),
     102: .same(proto: "long"),
     103: .same(proto: "double"),
@@ -2270,7 +2270,7 @@ extension JetFireAnyValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
     107: .same(proto: "bytes"),
   ]
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2288,7 +2288,7 @@ extension JetFireAnyValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._int {
       try visitor.visitSingularInt32Field(value: v, fieldNumber: 101)
     }
@@ -2313,7 +2313,7 @@ extension JetFireAnyValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireAnyValue, rhs: JetFireAnyValue) -> Bool {
+  static func ==(lhs: JetFireAnyValue, rhs: JetFireAnyValue) -> Bool {
     if lhs._int != rhs._int {return false}
     if lhs._long != rhs._long {return false}
     if lhs._double != rhs._double {return false}
@@ -2327,8 +2327,8 @@ extension JetFireAnyValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
 }
 
 extension JetFireLocation: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "Location"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "Location"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "lat"),
     2: .same(proto: "lon"),
   ]
@@ -2339,7 +2339,7 @@ extension JetFireLocation: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2352,7 +2352,7 @@ extension JetFireLocation: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._lat {
       try visitor.visitSingularDoubleField(value: v, fieldNumber: 1)
     }
@@ -2362,7 +2362,7 @@ extension JetFireLocation: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireLocation, rhs: JetFireLocation) -> Bool {
+  static func ==(lhs: JetFireLocation, rhs: JetFireLocation) -> Bool {
     if lhs._lat != rhs._lat {return false}
     if lhs._lon != rhs._lon {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -2371,8 +2371,8 @@ extension JetFireLocation: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
 }
 
 extension JetFireScreen: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "Screen"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "Screen"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "width"),
     2: .same(proto: "height"),
     3: .same(proto: "dpi"),
@@ -2385,7 +2385,7 @@ extension JetFireScreen: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2399,7 +2399,7 @@ extension JetFireScreen: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._width {
       try visitor.visitSingularInt32Field(value: v, fieldNumber: 1)
     }
@@ -2412,7 +2412,7 @@ extension JetFireScreen: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireScreen, rhs: JetFireScreen) -> Bool {
+  static func ==(lhs: JetFireScreen, rhs: JetFireScreen) -> Bool {
     if lhs._width != rhs._width {return false}
     if lhs._height != rhs._height {return false}
     if lhs._dpi != rhs._dpi {return false}
@@ -2422,8 +2422,8 @@ extension JetFireScreen: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
 }
 
 extension JetFireProperty: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "Property"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "Property"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "name"),
     2: .same(proto: "value"),
   ]
@@ -2434,7 +2434,7 @@ extension JetFireProperty: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2447,7 +2447,7 @@ extension JetFireProperty: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._name {
       try visitor.visitSingularStringField(value: v, fieldNumber: 1)
     }
@@ -2457,7 +2457,7 @@ extension JetFireProperty: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireProperty, rhs: JetFireProperty) -> Bool {
+  static func ==(lhs: JetFireProperty, rhs: JetFireProperty) -> Bool {
     if lhs._name != rhs._name {return false}
     if lhs._value != rhs._value {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -2466,8 +2466,8 @@ extension JetFireProperty: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
 }
 
 extension JetFireImage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "Image"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "Image"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "preview_url"),
     2: .same(proto: "url"),
   ]
@@ -2477,7 +2477,7 @@ extension JetFireImage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2490,7 +2490,7 @@ extension JetFireImage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._previewURL {
       try visitor.visitSingularStringField(value: v, fieldNumber: 1)
     }
@@ -2500,7 +2500,7 @@ extension JetFireImage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireImage, rhs: JetFireImage) -> Bool {
+  static func ==(lhs: JetFireImage, rhs: JetFireImage) -> Bool {
     if lhs._previewURL != rhs._previewURL {return false}
     if lhs._url != rhs._url {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -2509,8 +2509,8 @@ extension JetFireImage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
 }
 
 extension JetFireAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "Action"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "Action"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "type"),
     2: .same(proto: "deeplink"),
   ]
@@ -2521,7 +2521,7 @@ extension JetFireAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2534,7 +2534,7 @@ extension JetFireAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._type {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
     }
@@ -2544,7 +2544,7 @@ extension JetFireAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireAction, rhs: JetFireAction) -> Bool {
+  static func ==(lhs: JetFireAction, rhs: JetFireAction) -> Bool {
     if lhs._type != rhs._type {return false}
     if lhs._deeplink != rhs._deeplink {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -2553,8 +2553,8 @@ extension JetFireAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
 }
 
 extension JetFireSchedule: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "Schedule"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "Schedule"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "at_time"),
     2: .same(proto: "after"),
   ]
@@ -2564,7 +2564,7 @@ extension JetFireSchedule: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2577,7 +2577,7 @@ extension JetFireSchedule: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._atTime {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
     }
@@ -2587,7 +2587,7 @@ extension JetFireSchedule: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireSchedule, rhs: JetFireSchedule) -> Bool {
+  static func ==(lhs: JetFireSchedule, rhs: JetFireSchedule) -> Bool {
     if lhs._atTime != rhs._atTime {return false}
     if lhs._after != rhs._after {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -2596,8 +2596,8 @@ extension JetFireSchedule: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
 }
 
 extension JetFirePropertySet: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "PropertySet"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "PropertySet"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "name"),
     2: .same(proto: "value"),
   ]
@@ -2608,7 +2608,7 @@ extension JetFirePropertySet: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2621,7 +2621,7 @@ extension JetFirePropertySet: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._name {
       try visitor.visitSingularStringField(value: v, fieldNumber: 1)
     }
@@ -2631,7 +2631,7 @@ extension JetFirePropertySet: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFirePropertySet, rhs: JetFirePropertySet) -> Bool {
+  static func ==(lhs: JetFirePropertySet, rhs: JetFirePropertySet) -> Bool {
     if lhs._name != rhs._name {return false}
     if lhs._value != rhs._value {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -2640,8 +2640,8 @@ extension JetFirePropertySet: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
 }
 
 extension JetFirePropertyRemove: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "PropertyRemove"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "PropertyRemove"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "name"),
   ]
 
@@ -2650,7 +2650,7 @@ extension JetFirePropertyRemove: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2662,14 +2662,14 @@ extension JetFirePropertyRemove: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._name {
       try visitor.visitSingularStringField(value: v, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFirePropertyRemove, rhs: JetFirePropertyRemove) -> Bool {
+  static func ==(lhs: JetFirePropertyRemove, rhs: JetFirePropertyRemove) -> Bool {
     if lhs._name != rhs._name {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -2677,8 +2677,8 @@ extension JetFirePropertyRemove: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
 }
 
 extension JetFirePropertyIncrement: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "PropertyIncrement"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "PropertyIncrement"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "name"),
     2: .same(proto: "increment"),
   ]
@@ -2689,7 +2689,7 @@ extension JetFirePropertyIncrement: SwiftProtobuf.Message, SwiftProtobuf._Messag
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2702,7 +2702,7 @@ extension JetFirePropertyIncrement: SwiftProtobuf.Message, SwiftProtobuf._Messag
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._name {
       try visitor.visitSingularStringField(value: v, fieldNumber: 1)
     }
@@ -2712,7 +2712,7 @@ extension JetFirePropertyIncrement: SwiftProtobuf.Message, SwiftProtobuf._Messag
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFirePropertyIncrement, rhs: JetFirePropertyIncrement) -> Bool {
+  static func ==(lhs: JetFirePropertyIncrement, rhs: JetFirePropertyIncrement) -> Bool {
     if lhs._name != rhs._name {return false}
     if lhs._increment != rhs._increment {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -2721,8 +2721,8 @@ extension JetFirePropertyIncrement: SwiftProtobuf.Message, SwiftProtobuf._Messag
 }
 
 extension JetFirePropertyDecrement: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "PropertyDecrement"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "PropertyDecrement"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "name"),
     2: .same(proto: "decrement"),
   ]
@@ -2733,7 +2733,7 @@ extension JetFirePropertyDecrement: SwiftProtobuf.Message, SwiftProtobuf._Messag
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2746,7 +2746,7 @@ extension JetFirePropertyDecrement: SwiftProtobuf.Message, SwiftProtobuf._Messag
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._name {
       try visitor.visitSingularStringField(value: v, fieldNumber: 1)
     }
@@ -2756,7 +2756,7 @@ extension JetFirePropertyDecrement: SwiftProtobuf.Message, SwiftProtobuf._Messag
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFirePropertyDecrement, rhs: JetFirePropertyDecrement) -> Bool {
+  static func ==(lhs: JetFirePropertyDecrement, rhs: JetFirePropertyDecrement) -> Bool {
     if lhs._name != rhs._name {return false}
     if lhs._decrement != rhs._decrement {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -2765,8 +2765,8 @@ extension JetFirePropertyDecrement: SwiftProtobuf.Message, SwiftProtobuf._Messag
 }
 
 extension JetFirePropertyOperation: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "PropertyOperation"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "PropertyOperation"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "set"),
     3: .same(proto: "remove"),
     4: .same(proto: "increment"),
@@ -2778,7 +2778,7 @@ extension JetFirePropertyOperation: SwiftProtobuf.Message, SwiftProtobuf._Messag
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2841,7 +2841,7 @@ extension JetFirePropertyOperation: SwiftProtobuf.Message, SwiftProtobuf._Messag
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every case branch when no optimizations are
     // enabled. https://github.com/apple/swift-protobuf/issues/1034
@@ -2867,7 +2867,7 @@ extension JetFirePropertyOperation: SwiftProtobuf.Message, SwiftProtobuf._Messag
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFirePropertyOperation, rhs: JetFirePropertyOperation) -> Bool {
+  static func ==(lhs: JetFirePropertyOperation, rhs: JetFirePropertyOperation) -> Bool {
     if lhs.operation != rhs.operation {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -2875,8 +2875,8 @@ extension JetFirePropertyOperation: SwiftProtobuf.Message, SwiftProtobuf._Messag
 }
 
 extension JetFireApp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "App"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "App"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "version"),
   ]
 
@@ -2885,7 +2885,7 @@ extension JetFireApp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2897,14 +2897,14 @@ extension JetFireApp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._version {
       try visitor.visitSingularStringField(value: v, fieldNumber: 2)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireApp, rhs: JetFireApp) -> Bool {
+  static func ==(lhs: JetFireApp, rhs: JetFireApp) -> Bool {
     if lhs._version != rhs._version {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -2912,8 +2912,8 @@ extension JetFireApp: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
 }
 
 extension JetFireSdk: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "Sdk"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "Sdk"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "version"),
   ]
 
@@ -2922,7 +2922,7 @@ extension JetFireSdk: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2934,14 +2934,14 @@ extension JetFireSdk: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._version {
       try visitor.visitSingularStringField(value: v, fieldNumber: 2)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireSdk, rhs: JetFireSdk) -> Bool {
+  static func ==(lhs: JetFireSdk, rhs: JetFireSdk) -> Bool {
     if lhs._version != rhs._version {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -2949,8 +2949,8 @@ extension JetFireSdk: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
 }
 
 extension JetFireDevice: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "Device"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "Device"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "platform"),
     3: .same(proto: "vendor"),
     4: .same(proto: "model"),
@@ -2978,7 +2978,7 @@ extension JetFireDevice: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -3000,7 +3000,7 @@ extension JetFireDevice: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._platform {
       try visitor.visitSingularStringField(value: v, fieldNumber: 2)
     }
@@ -3037,7 +3037,7 @@ extension JetFireDevice: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireDevice, rhs: JetFireDevice) -> Bool {
+  static func ==(lhs: JetFireDevice, rhs: JetFireDevice) -> Bool {
     if lhs._platform != rhs._platform {return false}
     if lhs._vendor != rhs._vendor {return false}
     if lhs._model != rhs._model {return false}
@@ -3055,8 +3055,8 @@ extension JetFireDevice: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
 }
 
 extension JetFireRequestUser: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "RequestUser"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "RequestUser"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "uuid"),
   ]
 
@@ -3065,7 +3065,7 @@ extension JetFireRequestUser: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -3077,14 +3077,14 @@ extension JetFireRequestUser: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._uuid {
       try visitor.visitSingularStringField(value: v, fieldNumber: 2)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireRequestUser, rhs: JetFireRequestUser) -> Bool {
+  static func ==(lhs: JetFireRequestUser, rhs: JetFireRequestUser) -> Bool {
     if lhs._uuid != rhs._uuid {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -3092,8 +3092,8 @@ extension JetFireRequestUser: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
 }
 
 extension JetFireUser: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "User"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "User"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "uuid"),
     3: .same(proto: "properties"),
   ]
@@ -3104,7 +3104,7 @@ extension JetFireUser: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementati
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -3117,7 +3117,7 @@ extension JetFireUser: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementati
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._uuid {
       try visitor.visitSingularStringField(value: v, fieldNumber: 2)
     }
@@ -3127,7 +3127,7 @@ extension JetFireUser: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementati
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireUser, rhs: JetFireUser) -> Bool {
+  static func ==(lhs: JetFireUser, rhs: JetFireUser) -> Bool {
     if lhs._uuid != rhs._uuid {return false}
     if lhs.properties != rhs.properties {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -3136,8 +3136,8 @@ extension JetFireUser: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementati
 }
 
 extension JetFireRequestSession: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "RequestSession"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "RequestSession"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "uuid"),
   ]
 
@@ -3146,7 +3146,7 @@ extension JetFireRequestSession: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -3158,14 +3158,14 @@ extension JetFireRequestSession: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._uuid {
       try visitor.visitSingularStringField(value: v, fieldNumber: 2)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireRequestSession, rhs: JetFireRequestSession) -> Bool {
+  static func ==(lhs: JetFireRequestSession, rhs: JetFireRequestSession) -> Bool {
     if lhs._uuid != rhs._uuid {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -3173,8 +3173,8 @@ extension JetFireRequestSession: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
 }
 
 extension JetFireSession: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "Session"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "Session"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "uuid"),
     3: .same(proto: "timestamp"),
     4: .same(proto: "app"),
@@ -3232,7 +3232,7 @@ extension JetFireSession: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     }
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     _ = _uniqueStorage()
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       while let fieldNumber = try decoder.nextFieldNumber() {
@@ -3253,7 +3253,7 @@ extension JetFireSession: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       if let v = _storage._uuid {
         try visitor.visitSingularStringField(value: v, fieldNumber: 2)
@@ -3280,7 +3280,7 @@ extension JetFireSession: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireSession, rhs: JetFireSession) -> Bool {
+  static func ==(lhs: JetFireSession, rhs: JetFireSession) -> Bool {
     if lhs._storage !== rhs._storage {
       let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
         let _storage = _args.0
@@ -3302,8 +3302,8 @@ extension JetFireSession: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
 }
 
 extension JetFireFeaturesSql: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "FeaturesSql"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "FeaturesSql"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "stories"),
     3: .same(proto: "trigger"),
   ]
@@ -3314,7 +3314,7 @@ extension JetFireFeaturesSql: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -3327,7 +3327,7 @@ extension JetFireFeaturesSql: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._stories {
       try visitor.visitSingularStringField(value: v, fieldNumber: 2)
     }
@@ -3337,7 +3337,7 @@ extension JetFireFeaturesSql: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireFeaturesSql, rhs: JetFireFeaturesSql) -> Bool {
+  static func ==(lhs: JetFireFeaturesSql, rhs: JetFireFeaturesSql) -> Bool {
     if lhs._stories != rhs._stories {return false}
     if lhs._trigger != rhs._trigger {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -3346,8 +3346,8 @@ extension JetFireFeaturesSql: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
 }
 
 extension JetFireFeatureButton: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "FeatureButton"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "FeatureButton"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "title"),
     3: .same(proto: "action"),
   ]
@@ -3357,7 +3357,7 @@ extension JetFireFeatureButton: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -3370,7 +3370,7 @@ extension JetFireFeatureButton: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._title {
       try visitor.visitSingularStringField(value: v, fieldNumber: 2)
     }
@@ -3380,7 +3380,7 @@ extension JetFireFeatureButton: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireFeatureButton, rhs: JetFireFeatureButton) -> Bool {
+  static func ==(lhs: JetFireFeatureButton, rhs: JetFireFeatureButton) -> Bool {
     if lhs._title != rhs._title {return false}
     if lhs._action != rhs._action {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -3389,8 +3389,8 @@ extension JetFireFeatureButton: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
 }
 
 extension JetFireFeaturePush: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "FeaturePush"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "FeaturePush"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "title"),
     3: .same(proto: "subtitle"),
     4: .same(proto: "message"),
@@ -3408,7 +3408,7 @@ extension JetFireFeaturePush: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -3426,7 +3426,7 @@ extension JetFireFeaturePush: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._title {
       try visitor.visitSingularStringField(value: v, fieldNumber: 2)
     }
@@ -3451,7 +3451,7 @@ extension JetFireFeaturePush: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireFeaturePush, rhs: JetFireFeaturePush) -> Bool {
+  static func ==(lhs: JetFireFeaturePush, rhs: JetFireFeaturePush) -> Bool {
     if lhs._title != rhs._title {return false}
     if lhs._subtitle != rhs._subtitle {return false}
     if lhs._message != rhs._message {return false}
@@ -3465,8 +3465,8 @@ extension JetFireFeaturePush: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
 }
 
 extension JetFireFeatureToaster: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "FeatureToaster"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "FeatureToaster"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "title"),
     3: .same(proto: "subtitle"),
     4: .same(proto: "message"),
@@ -3486,7 +3486,7 @@ extension JetFireFeatureToaster: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -3505,7 +3505,7 @@ extension JetFireFeatureToaster: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._title {
       try visitor.visitSingularStringField(value: v, fieldNumber: 2)
     }
@@ -3533,7 +3533,7 @@ extension JetFireFeatureToaster: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireFeatureToaster, rhs: JetFireFeatureToaster) -> Bool {
+  static func ==(lhs: JetFireFeatureToaster, rhs: JetFireFeatureToaster) -> Bool {
     if lhs._title != rhs._title {return false}
     if lhs._subtitle != rhs._subtitle {return false}
     if lhs._message != rhs._message {return false}
@@ -3548,12 +3548,12 @@ extension JetFireFeatureToaster: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
 }
 
 extension JetFireFeatureStoryFrameBackground: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "FeatureStoryFrameBackground"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "FeatureStoryFrameBackground"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "color"),
   ]
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -3565,14 +3565,14 @@ extension JetFireFeatureStoryFrameBackground: SwiftProtobuf.Message, SwiftProtob
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._color {
       try visitor.visitSingularStringField(value: v, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireFeatureStoryFrameBackground, rhs: JetFireFeatureStoryFrameBackground) -> Bool {
+  static func ==(lhs: JetFireFeatureStoryFrameBackground, rhs: JetFireFeatureStoryFrameBackground) -> Bool {
     if lhs._color != rhs._color {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -3580,12 +3580,12 @@ extension JetFireFeatureStoryFrameBackground: SwiftProtobuf.Message, SwiftProtob
 }
 
 extension JetFireFeatureStoryFrameFont: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "FeatureStoryFrameFont"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "FeatureStoryFrameFont"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "color"),
   ]
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -3597,14 +3597,14 @@ extension JetFireFeatureStoryFrameFont: SwiftProtobuf.Message, SwiftProtobuf._Me
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._color {
       try visitor.visitSingularStringField(value: v, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireFeatureStoryFrameFont, rhs: JetFireFeatureStoryFrameFont) -> Bool {
+  static func ==(lhs: JetFireFeatureStoryFrameFont, rhs: JetFireFeatureStoryFrameFont) -> Bool {
     if lhs._color != rhs._color {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -3612,8 +3612,8 @@ extension JetFireFeatureStoryFrameFont: SwiftProtobuf.Message, SwiftProtobuf._Me
 }
 
 extension JetFireFeatureStoryCover: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "FeatureStoryCover"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "FeatureStoryCover"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "image"),
     3: .same(proto: "title"),
   ]
@@ -3623,7 +3623,7 @@ extension JetFireFeatureStoryCover: SwiftProtobuf.Message, SwiftProtobuf._Messag
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -3636,7 +3636,7 @@ extension JetFireFeatureStoryCover: SwiftProtobuf.Message, SwiftProtobuf._Messag
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._image {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
     }
@@ -3646,7 +3646,7 @@ extension JetFireFeatureStoryCover: SwiftProtobuf.Message, SwiftProtobuf._Messag
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireFeatureStoryCover, rhs: JetFireFeatureStoryCover) -> Bool {
+  static func ==(lhs: JetFireFeatureStoryCover, rhs: JetFireFeatureStoryCover) -> Bool {
     if lhs._image != rhs._image {return false}
     if lhs._title != rhs._title {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -3655,8 +3655,8 @@ extension JetFireFeatureStoryCover: SwiftProtobuf.Message, SwiftProtobuf._Messag
 }
 
 extension JetFireFeatureStorySettings: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "FeatureStorySettings"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "FeatureStorySettings"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .standard(proto: "always_rewind"),
     3: .standard(proto: "after_read_expire"),
   ]
@@ -3667,7 +3667,7 @@ extension JetFireFeatureStorySettings: SwiftProtobuf.Message, SwiftProtobuf._Mes
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -3680,7 +3680,7 @@ extension JetFireFeatureStorySettings: SwiftProtobuf.Message, SwiftProtobuf._Mes
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._alwaysRewind {
       try visitor.visitSingularBoolField(value: v, fieldNumber: 2)
     }
@@ -3690,7 +3690,7 @@ extension JetFireFeatureStorySettings: SwiftProtobuf.Message, SwiftProtobuf._Mes
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireFeatureStorySettings, rhs: JetFireFeatureStorySettings) -> Bool {
+  static func ==(lhs: JetFireFeatureStorySettings, rhs: JetFireFeatureStorySettings) -> Bool {
     if lhs._alwaysRewind != rhs._alwaysRewind {return false}
     if lhs._afterReadExpire != rhs._afterReadExpire {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -3699,8 +3699,8 @@ extension JetFireFeatureStorySettings: SwiftProtobuf.Message, SwiftProtobuf._Mes
 }
 
 extension JetFireFeatureStoryFrame: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "FeatureStoryFrame"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "FeatureStoryFrame"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "id"),
     2: .same(proto: "title"),
     3: .same(proto: "subtitle"),
@@ -3722,7 +3722,7 @@ extension JetFireFeatureStoryFrame: SwiftProtobuf.Message, SwiftProtobuf._Messag
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -3743,7 +3743,7 @@ extension JetFireFeatureStoryFrame: SwiftProtobuf.Message, SwiftProtobuf._Messag
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._id {
       try visitor.visitSingularInt64Field(value: v, fieldNumber: 1)
     }
@@ -3777,7 +3777,7 @@ extension JetFireFeatureStoryFrame: SwiftProtobuf.Message, SwiftProtobuf._Messag
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireFeatureStoryFrame, rhs: JetFireFeatureStoryFrame) -> Bool {
+  static func ==(lhs: JetFireFeatureStoryFrame, rhs: JetFireFeatureStoryFrame) -> Bool {
     if lhs._id != rhs._id {return false}
     if lhs._title != rhs._title {return false}
     if lhs._subtitle != rhs._subtitle {return false}
@@ -3794,8 +3794,8 @@ extension JetFireFeatureStoryFrame: SwiftProtobuf.Message, SwiftProtobuf._Messag
 }
 
 extension JetFireFeatureStory: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "FeatureStory"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "FeatureStory"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "id"),
     2: .same(proto: "cover"),
     3: .same(proto: "frames"),
@@ -3817,7 +3817,7 @@ extension JetFireFeatureStory: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -3835,7 +3835,7 @@ extension JetFireFeatureStory: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._id {
       try visitor.visitSingularInt64Field(value: v, fieldNumber: 1)
     }
@@ -3860,7 +3860,7 @@ extension JetFireFeatureStory: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireFeatureStory, rhs: JetFireFeatureStory) -> Bool {
+  static func ==(lhs: JetFireFeatureStory, rhs: JetFireFeatureStory) -> Bool {
     if lhs._id != rhs._id {return false}
     if lhs._cover != rhs._cover {return false}
     if lhs.frames != rhs.frames {return false}
@@ -3874,8 +3874,8 @@ extension JetFireFeatureStory: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
 }
 
 extension JetFireFeatureData: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "FeatureData"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "FeatureData"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "data"),
     3: .same(proto: "schedule"),
     4: .same(proto: "expire"),
@@ -3888,7 +3888,7 @@ extension JetFireFeatureData: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -3902,7 +3902,7 @@ extension JetFireFeatureData: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._data {
       try visitor.visitSingularBytesField(value: v, fieldNumber: 2)
     }
@@ -3915,7 +3915,7 @@ extension JetFireFeatureData: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireFeatureData, rhs: JetFireFeatureData) -> Bool {
+  static func ==(lhs: JetFireFeatureData, rhs: JetFireFeatureData) -> Bool {
     if lhs._data != rhs._data {return false}
     if lhs._schedule != rhs._schedule {return false}
     if lhs._expire != rhs._expire {return false}
@@ -3925,8 +3925,8 @@ extension JetFireFeatureData: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
 }
 
 extension JetFireEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "Event"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "Event"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "uuid"),
     3: .same(proto: "timestamp"),
     4: .standard(proto: "event_type"),
@@ -3947,7 +3947,7 @@ extension JetFireEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -3966,7 +3966,7 @@ extension JetFireEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._uuid {
       try visitor.visitSingularStringField(value: v, fieldNumber: 2)
     }
@@ -3994,7 +3994,7 @@ extension JetFireEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireEvent, rhs: JetFireEvent) -> Bool {
+  static func ==(lhs: JetFireEvent, rhs: JetFireEvent) -> Bool {
     if lhs._uuid != rhs._uuid {return false}
     if lhs._timestamp != rhs._timestamp {return false}
     if lhs._eventType != rhs._eventType {return false}
@@ -4009,8 +4009,8 @@ extension JetFireEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
 }
 
 extension JetFireCampaign: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "Campaign"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "Campaign"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "id"),
     2: .same(proto: "push"),
     3: .same(proto: "toaster"),
@@ -4060,7 +4060,7 @@ extension JetFireCampaign: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
     }
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     _ = _uniqueStorage()
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       while let fieldNumber = try decoder.nextFieldNumber() {
@@ -4080,7 +4080,7 @@ extension JetFireCampaign: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       if let v = _storage._id {
         try visitor.visitSingularInt64Field(value: v, fieldNumber: 1)
@@ -4104,7 +4104,7 @@ extension JetFireCampaign: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireCampaign, rhs: JetFireCampaign) -> Bool {
+  static func ==(lhs: JetFireCampaign, rhs: JetFireCampaign) -> Bool {
     if lhs._storage !== rhs._storage {
       let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
         let _storage = _args.0
@@ -4125,8 +4125,8 @@ extension JetFireCampaign: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
 }
 
 extension JetFireListCampaignsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "ListCampaignsRequest"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "ListCampaignsRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     3: .same(proto: "user"),
     4: .same(proto: "session"),
   ]
@@ -4139,7 +4139,7 @@ extension JetFireListCampaignsRequest: SwiftProtobuf.Message, SwiftProtobuf._Mes
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -4152,7 +4152,7 @@ extension JetFireListCampaignsRequest: SwiftProtobuf.Message, SwiftProtobuf._Mes
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._user {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
     }
@@ -4162,7 +4162,7 @@ extension JetFireListCampaignsRequest: SwiftProtobuf.Message, SwiftProtobuf._Mes
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireListCampaignsRequest, rhs: JetFireListCampaignsRequest) -> Bool {
+  static func ==(lhs: JetFireListCampaignsRequest, rhs: JetFireListCampaignsRequest) -> Bool {
     if lhs._user != rhs._user {return false}
     if lhs._session != rhs._session {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -4171,8 +4171,8 @@ extension JetFireListCampaignsRequest: SwiftProtobuf.Message, SwiftProtobuf._Mes
 }
 
 extension JetFireUpdateUserProperties: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "UpdateUserProperties"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "UpdateUserProperties"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "user"),
     3: .same(proto: "session"),
     4: .standard(proto: "property_operations"),
@@ -4187,7 +4187,7 @@ extension JetFireUpdateUserProperties: SwiftProtobuf.Message, SwiftProtobuf._Mes
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -4201,7 +4201,7 @@ extension JetFireUpdateUserProperties: SwiftProtobuf.Message, SwiftProtobuf._Mes
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._user {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
     }
@@ -4214,7 +4214,7 @@ extension JetFireUpdateUserProperties: SwiftProtobuf.Message, SwiftProtobuf._Mes
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireUpdateUserProperties, rhs: JetFireUpdateUserProperties) -> Bool {
+  static func ==(lhs: JetFireUpdateUserProperties, rhs: JetFireUpdateUserProperties) -> Bool {
     if lhs._user != rhs._user {return false}
     if lhs._session != rhs._session {return false}
     if lhs.propertyOperations != rhs.propertyOperations {return false}
@@ -4224,8 +4224,8 @@ extension JetFireUpdateUserProperties: SwiftProtobuf.Message, SwiftProtobuf._Mes
 }
 
 extension JetFireUpdateSessionProperties: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "UpdateSessionProperties"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "UpdateSessionProperties"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "user"),
     3: .same(proto: "session"),
     4: .standard(proto: "property_operations"),
@@ -4240,7 +4240,7 @@ extension JetFireUpdateSessionProperties: SwiftProtobuf.Message, SwiftProtobuf._
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -4254,7 +4254,7 @@ extension JetFireUpdateSessionProperties: SwiftProtobuf.Message, SwiftProtobuf._
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._user {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
     }
@@ -4267,7 +4267,7 @@ extension JetFireUpdateSessionProperties: SwiftProtobuf.Message, SwiftProtobuf._
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireUpdateSessionProperties, rhs: JetFireUpdateSessionProperties) -> Bool {
+  static func ==(lhs: JetFireUpdateSessionProperties, rhs: JetFireUpdateSessionProperties) -> Bool {
     if lhs._user != rhs._user {return false}
     if lhs._session != rhs._session {return false}
     if lhs.propertyOperations != rhs.propertyOperations {return false}
@@ -4277,8 +4277,8 @@ extension JetFireUpdateSessionProperties: SwiftProtobuf.Message, SwiftProtobuf._
 }
 
 extension JetFireRegisterEventsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "RegisterEventsRequest"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "RegisterEventsRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "user"),
     3: .same(proto: "session"),
     4: .same(proto: "events"),
@@ -4293,7 +4293,7 @@ extension JetFireRegisterEventsRequest: SwiftProtobuf.Message, SwiftProtobuf._Me
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -4307,7 +4307,7 @@ extension JetFireRegisterEventsRequest: SwiftProtobuf.Message, SwiftProtobuf._Me
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._user {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
     }
@@ -4320,7 +4320,7 @@ extension JetFireRegisterEventsRequest: SwiftProtobuf.Message, SwiftProtobuf._Me
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireRegisterEventsRequest, rhs: JetFireRegisterEventsRequest) -> Bool {
+  static func ==(lhs: JetFireRegisterEventsRequest, rhs: JetFireRegisterEventsRequest) -> Bool {
     if lhs._user != rhs._user {return false}
     if lhs._session != rhs._session {return false}
     if lhs.events != rhs.events {return false}
@@ -4330,8 +4330,8 @@ extension JetFireRegisterEventsRequest: SwiftProtobuf.Message, SwiftProtobuf._Me
 }
 
 extension JetFireListCampaignsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "ListCampaignsResponse"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "ListCampaignsResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "total"),
     3: .same(proto: "campaigns"),
     4: .same(proto: "sql"),
@@ -4345,7 +4345,7 @@ extension JetFireListCampaignsResponse: SwiftProtobuf.Message, SwiftProtobuf._Me
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -4359,7 +4359,7 @@ extension JetFireListCampaignsResponse: SwiftProtobuf.Message, SwiftProtobuf._Me
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._total {
       try visitor.visitSingularInt32Field(value: v, fieldNumber: 2)
     }
@@ -4372,7 +4372,7 @@ extension JetFireListCampaignsResponse: SwiftProtobuf.Message, SwiftProtobuf._Me
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireListCampaignsResponse, rhs: JetFireListCampaignsResponse) -> Bool {
+  static func ==(lhs: JetFireListCampaignsResponse, rhs: JetFireListCampaignsResponse) -> Bool {
     if lhs._total != rhs._total {return false}
     if lhs.campaigns != rhs.campaigns {return false}
     if lhs._sql != rhs._sql {return false}
@@ -4382,8 +4382,8 @@ extension JetFireListCampaignsResponse: SwiftProtobuf.Message, SwiftProtobuf._Me
 }
 
 extension JetFireOkResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "OkResponse"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "OkResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "code"),
   ]
 
@@ -4392,7 +4392,7 @@ extension JetFireOkResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -4404,14 +4404,14 @@ extension JetFireOkResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._code {
       try visitor.visitSingularInt32Field(value: v, fieldNumber: 2)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireOkResponse, rhs: JetFireOkResponse) -> Bool {
+  static func ==(lhs: JetFireOkResponse, rhs: JetFireOkResponse) -> Bool {
     if lhs._code != rhs._code {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -4419,8 +4419,8 @@ extension JetFireOkResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
 }
 
 extension JetFireErrorResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "ErrorResponse"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "ErrorResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "code"),
     3: .same(proto: "message"),
     4: .standard(proto: "system_message"),
@@ -4434,7 +4434,7 @@ extension JetFireErrorResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -4449,7 +4449,7 @@ extension JetFireErrorResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._code {
       try visitor.visitSingularInt32Field(value: v, fieldNumber: 2)
     }
@@ -4465,7 +4465,7 @@ extension JetFireErrorResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireErrorResponse, rhs: JetFireErrorResponse) -> Bool {
+  static func ==(lhs: JetFireErrorResponse, rhs: JetFireErrorResponse) -> Bool {
     if lhs._code != rhs._code {return false}
     if lhs._message != rhs._message {return false}
     if lhs._systemMessage != rhs._systemMessage {return false}
@@ -4476,8 +4476,8 @@ extension JetFireErrorResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
 }
 
 extension JetFireJwt: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "Jwt"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "Jwt"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "token"),
   ]
 
@@ -4486,7 +4486,7 @@ extension JetFireJwt: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -4498,14 +4498,14 @@ extension JetFireJwt: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._token {
       try visitor.visitSingularStringField(value: v, fieldNumber: 2)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireJwt, rhs: JetFireJwt) -> Bool {
+  static func ==(lhs: JetFireJwt, rhs: JetFireJwt) -> Bool {
     if lhs._token != rhs._token {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -4513,12 +4513,12 @@ extension JetFireJwt: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
 }
 
 extension JetFireRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "Request"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "Request"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "ip"),
   ]
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -4530,14 +4530,14 @@ extension JetFireRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._ip {
       try visitor.visitSingularStringField(value: v, fieldNumber: 2)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireRequest, rhs: JetFireRequest) -> Bool {
+  static func ==(lhs: JetFireRequest, rhs: JetFireRequest) -> Bool {
     if lhs._ip != rhs._ip {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -4545,8 +4545,8 @@ extension JetFireRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
 }
 
 extension JetFireRegisterUserAndSessionMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "RegisterUserAndSessionMessage"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "RegisterUserAndSessionMessage"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "jwt"),
     3: .same(proto: "salt"),
     4: .same(proto: "request"),
@@ -4566,7 +4566,7 @@ extension JetFireRegisterUserAndSessionMessage: SwiftProtobuf.Message, SwiftProt
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -4582,7 +4582,7 @@ extension JetFireRegisterUserAndSessionMessage: SwiftProtobuf.Message, SwiftProt
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._jwt {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
     }
@@ -4601,7 +4601,7 @@ extension JetFireRegisterUserAndSessionMessage: SwiftProtobuf.Message, SwiftProt
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireRegisterUserAndSessionMessage, rhs: JetFireRegisterUserAndSessionMessage) -> Bool {
+  static func ==(lhs: JetFireRegisterUserAndSessionMessage, rhs: JetFireRegisterUserAndSessionMessage) -> Bool {
     if lhs._jwt != rhs._jwt {return false}
     if lhs._salt != rhs._salt {return false}
     if lhs._request != rhs._request {return false}
@@ -4613,8 +4613,8 @@ extension JetFireRegisterUserAndSessionMessage: SwiftProtobuf.Message, SwiftProt
 }
 
 extension JetFireUpdateUserPropertiesMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "UpdateUserPropertiesMessage"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "UpdateUserPropertiesMessage"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "jwt"),
     3: .same(proto: "salt"),
     4: .same(proto: "request"),
@@ -4636,7 +4636,7 @@ extension JetFireUpdateUserPropertiesMessage: SwiftProtobuf.Message, SwiftProtob
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -4653,7 +4653,7 @@ extension JetFireUpdateUserPropertiesMessage: SwiftProtobuf.Message, SwiftProtob
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._jwt {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
     }
@@ -4675,7 +4675,7 @@ extension JetFireUpdateUserPropertiesMessage: SwiftProtobuf.Message, SwiftProtob
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireUpdateUserPropertiesMessage, rhs: JetFireUpdateUserPropertiesMessage) -> Bool {
+  static func ==(lhs: JetFireUpdateUserPropertiesMessage, rhs: JetFireUpdateUserPropertiesMessage) -> Bool {
     if lhs._jwt != rhs._jwt {return false}
     if lhs._salt != rhs._salt {return false}
     if lhs._request != rhs._request {return false}
@@ -4688,8 +4688,8 @@ extension JetFireUpdateUserPropertiesMessage: SwiftProtobuf.Message, SwiftProtob
 }
 
 extension JetFireUpdateSessionPropertiesMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "UpdateSessionPropertiesMessage"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "UpdateSessionPropertiesMessage"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "jwt"),
     3: .same(proto: "salt"),
     4: .same(proto: "request"),
@@ -4711,7 +4711,7 @@ extension JetFireUpdateSessionPropertiesMessage: SwiftProtobuf.Message, SwiftPro
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -4728,7 +4728,7 @@ extension JetFireUpdateSessionPropertiesMessage: SwiftProtobuf.Message, SwiftPro
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._jwt {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
     }
@@ -4750,7 +4750,7 @@ extension JetFireUpdateSessionPropertiesMessage: SwiftProtobuf.Message, SwiftPro
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireUpdateSessionPropertiesMessage, rhs: JetFireUpdateSessionPropertiesMessage) -> Bool {
+  static func ==(lhs: JetFireUpdateSessionPropertiesMessage, rhs: JetFireUpdateSessionPropertiesMessage) -> Bool {
     if lhs._jwt != rhs._jwt {return false}
     if lhs._salt != rhs._salt {return false}
     if lhs._request != rhs._request {return false}
@@ -4763,8 +4763,8 @@ extension JetFireUpdateSessionPropertiesMessage: SwiftProtobuf.Message, SwiftPro
 }
 
 extension JetFireEventMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = "EventMessage"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = "EventMessage"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .same(proto: "jwt"),
     3: .same(proto: "salt"),
     4: .same(proto: "request"),
@@ -4787,7 +4787,7 @@ extension JetFireEventMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     return true
   }
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -4804,7 +4804,7 @@ extension JetFireEventMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._jwt {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
     }
@@ -4826,7 +4826,7 @@ extension JetFireEventMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: JetFireEventMessage, rhs: JetFireEventMessage) -> Bool {
+  static func ==(lhs: JetFireEventMessage, rhs: JetFireEventMessage) -> Bool {
     if lhs._jwt != rhs._jwt {return false}
     if lhs._salt != rhs._salt {return false}
     if lhs._request != rhs._request {return false}
