@@ -160,23 +160,25 @@ struct DBEvent: Codable {
 // MARK: - DBEventType
 
 enum DBEventType: Int, Codable {
-     case custom = 0
-     case firstLaunch = 1
-     case applicationStart = 2
-     case applicationShutdown = 3
-     case featureOpen = 4
-     case featureClose = 5
-     case featureUse = 6
-     case storyOpen = 7
-     case storyTap = 8
-     case storyClose = 9
-     case pushShow = 10
-     case pushTap = 11
-     case pushClose = 12
-     case toasterShow = 13
-     case toasterTap = 14
-     case toasterClose = 15
-     case featureAccepted = 16
+    case custom = 0
+    case firstLaunch = 1
+    case applicationStart = 2
+    case applicationShutdown = 3
+    case featureOpen = 4
+    case featureClose = 5
+    case featureUse = 6
+    case storyOpen = 7
+    case storyTap = 8
+    case storyClose = 9
+    case pushShow = 10
+    case pushTap = 11
+    case pushClose = 12
+    case toasterShow = 13
+    case toasterTap = 14
+    case toasterClose = 15
+    case featureAccepted = 16
+    case jetfireStart = 17
+    case jetfireFeaturingStart = 18
 }
 
 // MARK: - DBEventType Log
@@ -218,6 +220,10 @@ private extension DBEventType {
             return "toaster_close"
         case .featureAccepted:
             return "feature_accepted"
+        case .jetfireStart:
+            return "jetfire_start"
+        case .jetfireFeaturingStart:
+            return "jetfire_featuring_start"
         }
     }
 }

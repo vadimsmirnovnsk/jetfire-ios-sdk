@@ -161,4 +161,14 @@ final class JetfireAnalytics: IStoriesAnalytics {
         self.db.insertEvent(event)
 	}
 
+    // 17 - jetfire_start
+    func trackStart() {
+        self.db.insertEvent(DBEvent(eventType: .jetfireStart))
+    }
+
+    // 18 - jetfire_featuring_start
+    func trackFeaturingStart() {
+        self.db.insertEvent(DBEvent(eventType: .jetfireFeaturingStart))
+    }
+
 }

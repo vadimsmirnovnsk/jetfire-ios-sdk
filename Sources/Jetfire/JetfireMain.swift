@@ -50,6 +50,7 @@ final class JetfireMain: IJetfireMain {
         self.started = true
         Log.info("Jetfire started")
         self.databaseService.start()
+        self.analytics.trackStart()
         let isFirstStart = !self.ud.didStartEarly
         if isFirstStart {
             self.ud.didStartEarly = true
@@ -73,6 +74,7 @@ final class JetfireMain: IJetfireMain {
 
     func enableFeaturing() {
         Log.info("Enable featuring")
+        self.analytics.trackFeaturingStart()
         self.storiesCampaignsProvider.start()
         self.triggeredCampaignsProvider.start()
         self.scheduler.start()
