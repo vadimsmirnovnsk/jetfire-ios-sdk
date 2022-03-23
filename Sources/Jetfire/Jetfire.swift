@@ -8,6 +8,8 @@ public class Jetfire {
 	public static let standard = Jetfire()
 
 	public var cover: CoverStyle = .delo()
+	public var toast: ToastStyle = .delo()
+	public var toastVisualStyle: ToastVisualStyle = .dark
 	public let storiesConfig = StoriesConfig()
 	public let snapsConfig = StoryTypesConfig()
 
@@ -45,9 +47,6 @@ public class Jetfire {
 		return view
 	}
 
-    func toaster(style: ToasterView.Style, visualStyle: ToasterView.VisualStyle) -> ToasterView {
-		return ToasterView(style: style, visualStyle: visualStyle)
-	}
 }
 
 // MARK: - Analytics

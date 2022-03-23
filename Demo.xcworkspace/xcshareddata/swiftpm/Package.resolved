@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
         "state": {
           "branch": null,
-          "revision": "a72df4849408da7e5d3c1b586797b7c601c41d1b",
-          "version": "5.12.1"
+          "revision": "2e63d0061da449ad0ed130768d05dceb1496de44",
+          "version": "5.12.5"
         }
       },
       {
@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/stephencelis/SQLite.swift.git",
         "state": {
           "branch": null,
-          "revision": "60a65015f6402b7c34b9a924f755ca0a73afeeaa",
-          "version": "0.13.1"
+          "revision": "5f5ad81ac0d0a0f3e56e39e646e8423c617df523",
+          "version": "0.13.2"
         }
       },
       {
@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/apple/swift-protobuf.git",
         "state": {
           "branch": null,
-          "revision": "7e2c5f3cbbeea68e004915e3a8961e20bd11d824",
-          "version": "1.18.0"
+          "revision": "e1499bc69b9040b29184f7f2996f7bab467c1639",
+          "version": "1.19.0"
         }
       },
       {
@@ -69,8 +69,8 @@
         "repositoryURL": "https://github.com/yeahdongcn/UIColor-Hex-Swift",
         "state": {
           "branch": null,
-          "revision": "304ae671f4db4208a13999bbe026b1869ad614de",
-          "version": "5.1.7"
+          "revision": "4e0c1bc57c02fcb19c3b34ec5e6188383a95aa94",
+          "version": "5.1.8"
         }
       },
       {
@@ -78,7 +78,7 @@
         "repositoryURL": "https://github.com/teanet/VNBase.git",
         "state": {
           "branch": "master",
-          "revision": "06146c60f1fe30e2e72416896f1f93aacffc6f79",
+          "revision": "843d5386b26c430e17c983b57d0b9798beddc624",
           "version": null
         }
       }

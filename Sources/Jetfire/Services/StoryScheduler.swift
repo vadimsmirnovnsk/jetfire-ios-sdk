@@ -6,12 +6,20 @@ final class StoryScheduler {
 	private let router: FeaturingRouter
 	private let pushService: FeaturingPushService
 	private let ud: IUserSettings
+	private let toasterFactory: ToasterFactory
 
-	init(router: FeaturingRouter, storiesService: IStoriesService, pushService: FeaturingPushService, ud: IUserSettings) {
+	init(
+		router: FeaturingRouter,
+		storiesService: IStoriesService,
+		pushService: FeaturingPushService,
+		ud: IUserSettings,
+		toasterFactory: ToasterFactory
+	) {
 		self.router = router
 		self.storiesService = storiesService
 		self.pushService = pushService
 		self.ud = ud
+		self.toasterFactory = toasterFactory
 	}
 
 	func scheduleShow(campaign: FeaturingCampaignAndStory, featuringType: FeaturingType) {
@@ -35,12 +43,8 @@ final class StoryScheduler {
 		guard let after = campaign.campaign.toaster.schedule.afterInterval else { return }
 
 		DispatchQueue.main.asyncAfter(deadline: .now() + after) {
-			self.router.showToaster(style: .button(
-				title: campaign.campaign.toaster.title,
-				button: campaign.campaign.toaster.actionButton.title,
-				completion: { [weak self] in
-					self?.storiesService.show(story: campaign.story, in: [campaign.story])
-				}))
+			let toast = self.toasterFactory.makeToaster(toaster: campaign.campaign.toaster, campaign: campaign.campaign)
+			toast.show()
 			self.rememberShow(campaign: campaign.campaign, featuringType: .toaster)
 		}
 	}

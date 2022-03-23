@@ -63,7 +63,8 @@ final class JetfireContainer {
             router: self.router,
             storiesService: self.storiesService,
             pushService: self.featuringPushService,
-            ud: self.userSettings
+			ud: self.userSettings,
+			toasterFactory: self.toasterFactory
         )
     }()
 

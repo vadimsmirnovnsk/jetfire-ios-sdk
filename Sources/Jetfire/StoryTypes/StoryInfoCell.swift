@@ -66,6 +66,10 @@ final class StoryInfoCell: StoryCollectionBaseCell<StoryInfoCellVM> {
 			}
 		}
 
+		self.title.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+		self.title.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+		self.title.setContentHuggingPriority(.defaultHigh, for: .vertical)
+		self.title.setContentHuggingPriority(.defaultHigh, for: .horizontal)
 		self.fgContent.addSubview(self.title) { make in
 			make.left.bottom.right.equalToSuperview().inset(Jetfire.standard.cover.title.bottomInset)
 		}
@@ -81,6 +85,7 @@ final class StoryInfoCell: StoryCollectionBaseCell<StoryInfoCellVM> {
 			text: vm.title,
 			textAlignment: Jetfire.standard.cover.title.textAlignment
 		)
+		self.title.numberOfLines = Jetfire.standard.cover.title.linesNumber
 		self.substrate.isHidden = vm.isRead
 		self.readSubstrate.isHidden = !vm.isRead
 
