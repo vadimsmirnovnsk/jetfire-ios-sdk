@@ -46,6 +46,16 @@ class ViewController: UIViewController {
 			make.centerX.equalToSuperview()
 			make.top.equalTo(featureB.snp.bottom).offset(48)
 		}
+
+		let featureD = BlockButton { [weak self] _ in
+			Jetfire.standard.logEvent("feed_show")
+		}
+		featureD.apply(text: "feed_show", normal: .systemSemiBold24Black)
+		self.view.addSubview(featureD)
+		featureD.snp.makeConstraints { make in
+			make.centerX.equalToSuperview()
+			make.top.equalTo(featureC.snp.bottom).offset(48)
+		}
 	}
 
 	func showFeatureA() {

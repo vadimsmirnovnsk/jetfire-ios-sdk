@@ -87,7 +87,7 @@ final class FeaturingStorage  {
 				bgColorString: fr.background.color,
 				bgImageString: fr.image.url,
 				textColorString: fr.font.color,
-				button: nil
+				button: fr.storyButton()
 			)
 		}
 		let storyContent = StoryContent(story: infoStory, snaps: infoSnaps)

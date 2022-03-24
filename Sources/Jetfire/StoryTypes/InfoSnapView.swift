@@ -8,9 +8,9 @@ final class InfoSnapView: BaseSnapView<InfoSnapVM> {
 	private let stack = UIStackView.stack(spacing: 0, alignment: .leading)
 	private let title = MultilineLabel()
 	private let subtitle = MultilineLabel()
-	private let messageSpacing = UIView.stackSpacing(with: 16)
+	private let messageSpacing = UIView.stackSpacing(with: Jetfire.standard.snap.messageSpacing)
 	private let message = MultilineLabel()
-	private let buttonSpacing = UIView.stackSpacing(with: 24)
+	private let buttonSpacing = UIView.stackSpacing(with: Jetfire.standard.snap.buttonSpacing)
 	private let button = InfoStoryButton()
 
 	override init() {
@@ -23,8 +23,8 @@ final class InfoSnapView: BaseSnapView<InfoSnapVM> {
 		}
 
 		self.addSubview(self.stack) { make in
-			make.left.bottom.right.equalToSuperview().inset(32)
-			make.top.greaterThanOrEqualToSuperview().offset(32)
+			make.left.bottom.right.equalToSuperview().inset(Jetfire.standard.snap.containerInsets)
+			make.top.greaterThanOrEqualToSuperview().offset(Jetfire.standard.snap.containerInsets.top)
 		}
 
 		self.title.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
@@ -62,15 +62,15 @@ final class InfoSnapView: BaseSnapView<InfoSnapVM> {
 		self.button.isHidden = !vm.shouldShowButton
 		self.buttonSpacing.isHidden = !vm.shouldShowButton
 
-		self.title.apply(Jetfire.standard.snapsConfig.snapTitleTextStyle.with { $0.color = vm.snap.textColor },
+		self.title.apply(Jetfire.standard.snap.titleStyle.with { $0.color = vm.snap.textColor },
 						 text: vm.title)
 		self.subtitle.apply(
-			Jetfire.standard.snapsConfig.snapSubitleTextStyle.with { $0.color = vm.snap.textColor.withAlphaComponent(0.5) },
+			Jetfire.standard.snap.subtitleStyle.with { $0.color = vm.snap.textColor.withAlphaComponent(0.5) },
 			text: vm.subtitle
 		)
-		self.message.apply(Jetfire.standard.snapsConfig.snapSubitleTextStyle.with { $0.color = vm.snap.textColor },
+		self.message.apply(Jetfire.standard.snap.messageStyle.with { $0.color = vm.snap.textColor },
 						   text: vm.message)
-		self.button.title.apply(Jetfire.standard.snapsConfig.snapButtonTextStyle, text: vm.buttonTitle,
+		self.button.title.apply(Jetfire.standard.snap.buttonStyle.titleStyle, text: vm.buttonTitle,
 								textAlignment: .center)
 	}
 

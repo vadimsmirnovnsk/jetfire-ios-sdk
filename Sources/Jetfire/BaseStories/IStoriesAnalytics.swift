@@ -6,17 +6,6 @@ import UIKit
 /// BaseStories — это базовая логика сториз: карусель кругляшей и открывающиеся по тапу в них сториз с пустыми снапами.
 /// Трекинг показа историй в аналитику, прокручивания снапов и т.д.
 /// Типы историй и снапов в отдельной папочке — StoryTypes
-public final class StoriesConfig {
-
-	/// [ Base Stories
-
-	/// Story Browser
-	var progressBarTopColor: UIColor = .storiesAlmostWhite
-	var progressBarBottomColor: UIColor = .storiesAlmostWhite.withAlphaComponent(0.5)
-
-	/// ] Base Stories
-
-}
 
 internal protocol IStoriesAnalytics: AnyObject {
 
