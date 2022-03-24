@@ -27,7 +27,7 @@ final class StoriesFactory {
             campaignId: campaignId,
             type: .firebaseInfo,
             title: story.cover.title,
-            duration: 15,
+			duration: TimeInterval(story.frames.first?.duration ?? 15),
             priority: Int(story.priority),
             image: story.cover.image.url,
             bgColorString: nil,
@@ -48,7 +48,7 @@ final class StoriesFactory {
                 bgColorString: fr.background.color,
                 bgImageString: fr.image.url,
                 textColorString: fr.font.color,
-                button: nil
+                button: fr.storyButton()
             )
         }
         let storyContent = StoryContent(story: infoStory, snaps: infoSnaps)

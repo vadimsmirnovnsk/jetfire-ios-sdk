@@ -8,7 +8,7 @@ final class InfoStoryButton: BlockButton {
 
 	let title = UILabel()
 	let titleAndImage = ImageAndLabelView(textInsets: UIEdgeInsets(top: 3, left: 6, bottom: 0, right: 0))
-	let bgView = UIView.colored(Jetfire.standard.snapsConfig.snapButtonForegroundColor)
+	let bgView = UIView.colored(Jetfire.standard.snap.buttonStyle.bgColor)
 	
 	private let shadow = UIView()
 
@@ -34,9 +34,11 @@ final class InfoStoryButton: BlockButton {
 		self.title.isUserInteractionEnabled = false
 		self.bgView.isUserInteractionEnabled = false
 
-		self.shadow.addShadow(color: UIColor.black,
-							  offset: CGSize(width: 0.0, height: 5.0),
-							  radius: 30.0, opacity: 0.3)
+		if Jetfire.standard.snap.buttonStyle.addShadow {
+			self.shadow.addShadow(color: UIColor.black,
+								  offset: CGSize(width: 0.0, height: 5.0),
+								  radius: 30.0, opacity: 0.3)
+		}
 
 		self.shadow.isUserInteractionEnabled = false
 		self.addSubview(self.shadow) { make in
@@ -45,16 +47,16 @@ final class InfoStoryButton: BlockButton {
 
 		let content = UIView()
 		content.isUserInteractionEnabled = false
-		content.setCornerRadius(24)
+		content.setCornerRadius(Jetfire.standard.snap.buttonStyle.cornerRadius)
 		self.shadow.addSubview(content) { make in
 			make.edges.equalToSuperview()
-			make.height.equalTo(48)
-			make.width.greaterThanOrEqualTo(256).dgs_priority749()
+			make.height.equalTo(Jetfire.standard.snap.buttonStyle.height)
+			make.width.greaterThanOrEqualTo(Jetfire.standard.snap.buttonStyle.preferredWidth).dgs_priority749()
 		}
 
 		content.addSubview(self.bgView) { make in make.edges.equalToSuperview() }
 		content.addSubview(self.title) { make in
-			make.edges.equalToSuperview().inset(UIEdgeInsets(top: 2, left: 12, bottom: 0, right: 12))
+			make.edges.equalToSuperview().inset(Jetfire.standard.snap.buttonStyle.titleInsets)
 		}
 
 		content.addSubview(self.titleAndImage) { make in

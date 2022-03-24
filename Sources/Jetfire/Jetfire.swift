@@ -9,9 +9,8 @@ public class Jetfire {
 
 	public var cover: CoverStyle = .delo()
 	public var toast: ToastStyle = .delo()
+	public var snap: SnapStyle = .delo()
 	public var toastVisualStyle: ToastVisualStyle = .dark
-	public let storiesConfig = StoriesConfig()
-	public let snapsConfig = StoryTypesConfig()
 
 	private var isStarted = false
 
