@@ -3,7 +3,7 @@ import Foundation
 extension JetFireCampaign: CustomDebugStringConvertible {
 
     public var debugDescription: String {
-        "Campaig \(self.id) [\(self.info)]"
+        "Campaign \(self.id) [\(self.info)]"
     }
 
     private var info: String {
