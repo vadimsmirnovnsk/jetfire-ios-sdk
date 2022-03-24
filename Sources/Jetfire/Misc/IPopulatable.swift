@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol IPopulatable: AnyObject {
+public protocol IPopulatable: Any {
 	associatedtype T
 	func with(_ populator: (inout T) throws -> Void) rethrows -> T
 }

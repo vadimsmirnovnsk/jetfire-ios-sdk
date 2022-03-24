@@ -1,7 +1,7 @@
 import UIKit
 import VNEssential
 
-public final class CoverStyle: IPopulatable {
+public struct CoverStyle: IPopulatable {
 
 	public typealias T = CoverStyle
 
@@ -89,8 +89,8 @@ public final class CoverStyle: IPopulatable {
 
 	static func delo() -> CoverStyle {
 		let substrate = CoverSubstrate(
-			size: CGSize(width: 120, height: 120),
-			cornerRadius: 10,
+			size: CGSize(width: 102, height: 102),
+			cornerRadius: 15,
 			width: 2,
 			centerInset: CGPoint(x: 0, y: 0),
 			startColor: .deloBlue,
@@ -100,45 +100,45 @@ public final class CoverStyle: IPopulatable {
 		)
 
 		let readSubstrate =  CoverSubstrate(
-			size: CGSize(width: 120, height: 120),
+			size: CGSize(width: 102, height: 102),
 			cornerRadius: 10,
-			width: 1,
+			width: 0,
 			centerInset: CGPoint(x: 0, y: 0),
-			startColor: UIColor("#141414FF", defaultColor: .black),
-			endColor: UIColor("#141414FF", defaultColor: .black),
+			startColor: .clear,
+			endColor: .clear,
 			startPoint: CGPoint(x: 0, y: 0),
 			endPoint: CGPoint(x: 1, y: 1)
 		)
 
 		let image = CoverImage(
-			size: CGSize(width: 116, height: 116),
-			cornerRadius: 8,
+			size: CGSize(width: 96, height: 96),
+			cornerRadius: 12,
 			centerInset: .zero,
-			readAlpha: 0.7
+			readAlpha: 1
 		)
 
 		let title: CoverTitle = CoverTitle(
 			textStyle: .system13White,
 			textAlignment: .left,
 			linesNumber: 4,
-			bottomInset: UIEdgeInsets(top: 0, left: 8, bottom: 8, right: 8)
+			bottomInset: UIEdgeInsets(top: 0, left: 9, bottom: 12, right: 9)
 		)
 
 		let gradient = CoverGradient(
-			size: CGSize(width: 116, height: 116),
-			cornerRadius: 8,
-			centerInset: .zero,
-			startColor: UIColor.black.withAlphaComponent(0.2),
-			endColor: UIColor.black.withAlphaComponent(0.8),
+			size: CGSize(width: 96, height: 64),
+			cornerRadius: 12,
+			centerInset: CGPoint(x: 0, y: 16),
+			startColor: UIColor.black.withAlphaComponent(0),
+			endColor: UIColor.black.withAlphaComponent(0.7),
 			startPoint: CGPoint(x: 0.5, y: 0),
 			endPoint: CGPoint(x: 0.5, y: 1)
 		)
 
 		return CoverStyle(
-		   size: CGSize(width: 120, height: 120),
+		   size: CGSize(width: 104, height: 104),
 		   sectionInset: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16),
 		   interItemOffset: 8,
-		   bgColor: UIColor("#141414FF", defaultColor: .red),
+		   bgColor: .black,
 		   substrate: substrate,
 		   readSubstrate: readSubstrate,
 		   image: image,
@@ -149,7 +149,7 @@ public final class CoverStyle: IPopulatable {
 
 }
 
-public final class CoverImage: IPopulatable {
+public struct CoverImage: IPopulatable {
 
 	public typealias T = CoverImage
 
@@ -172,7 +172,7 @@ public final class CoverImage: IPopulatable {
 
 }
 
-public final class CoverTitle: IPopulatable {
+public struct CoverTitle: IPopulatable {
 
 	public typealias T = CoverTitle
 
@@ -195,7 +195,7 @@ public final class CoverTitle: IPopulatable {
 
 }
 
-public final class CoverSubstrate: IPopulatable {
+public struct CoverSubstrate: IPopulatable {
 
 	public typealias T = CoverSubstrate
 
@@ -230,7 +230,7 @@ public final class CoverSubstrate: IPopulatable {
 
 }
 
-public final class CoverGradient: IPopulatable {
+public struct CoverGradient: IPopulatable {
 
 	public typealias T = CoverSubstrate
 
