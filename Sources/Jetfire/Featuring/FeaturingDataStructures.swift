@@ -34,10 +34,11 @@ struct FeaturingRules: Codable {
 	/// Таймаут для повторного промо той же фичи любым способом
 	let retryFeatureShowTimeout: TimeInterval
 
+	#if DEBUG
 	static var demo: FeaturingRules {
 		return FeaturingRules(
 			isFeaturingEnabled: true,
-			isTest: false,
+			isTest: true,
 			featuringApplicationStartShowStyle: .modal,
 			retryApplicationStartShowTimeout: 60,
 			retryPushShowTimeout: 60,
@@ -45,5 +46,18 @@ struct FeaturingRules: Codable {
 			retryFeatureShowTimeout: 120
 		)
 	}
+	#else
+	static var demo: FeaturingRules {
+		return FeaturingRules(
+			isFeaturingEnabled: true,
+			isTest: false,
+			featuringApplicationStartShowStyle: .modal,
+			retryApplicationStartShowTimeout: 60*60*24,
+			retryPushShowTimeout: 60*60*24,
+			retryToasterShowTimeout: 60*60*24,
+			retryFeatureShowTimeout: 60*60*24
+		)
+	}
+	#endif
 
 }
