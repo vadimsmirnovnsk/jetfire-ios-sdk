@@ -64,7 +64,8 @@ final class JetfireContainer {
             storiesService: self.storiesService,
             pushService: self.featuringPushService,
 			ud: self.userSettings,
-			toasterFactory: self.toasterFactory
+			toasterFactory: self.toasterFactory,
+			jetfireAnalytics: self.analytics
         )
     }()
 

@@ -10,7 +10,8 @@ final class JetfireAnalytics: IStoriesAnalytics {
 		self.db = db
 	}
 
-	/// IStoriesAnalytics — трекаем и в базу и наружу
+	/// IStoriesAnalytics — трекаем и в базу и наружу, чтобы отправлять аналитику Jetfire во внешнюю систему аналитики.
+	/// Соответствующие методы DB помечены приватными, чтобы не ошибиться при вызове методов
 	func trackStoryDidStartShow(storyId: String, campaignId: Int64) {
 		self.onLogEvent?(.jetfire_story_start_show, [
 			.jetfire_story_id : storyId,
@@ -44,6 +45,38 @@ final class JetfireAnalytics: IStoriesAnalytics {
 			.jetfire_button_title : buttonTitle,
 		])
 		self.trackStoryTap(campaignId: campaignId, entityId: "\(storyId):\(index)")
+	}
+
+	func trackToastDidShow(campaignId: Int64) {
+		self.onLogEvent?(.jetfire_toast_show, [
+			.jetfire_campaign_id : campaignId
+		])
+
+		self.trackToasterShow(campaignId: campaignId)
+	}
+
+	func trackToastDidTap(campaignId: Int64) {
+		self.onLogEvent?(.jetfire_toast_tap, [
+			.jetfire_campaign_id : campaignId
+		])
+
+		self.trackToasterTap(campaignId: campaignId)
+	}
+
+	func trackPushDidShow(campaignId: Int64) {
+		self.onLogEvent?(.jetfire_push_show, [
+			.jetfire_campaign_id : campaignId
+		])
+
+		self.trackPushShow(campaignId: campaignId)
+	}
+
+	func trackPushDidTap(campaignId: Int64) {
+		self.onLogEvent?(.jetfire_push_tap, [
+			.jetfire_campaign_id : campaignId
+		])
+
+		self.trackPushTap(campaignId: campaignId)
 	}
 
 	/// DB
@@ -89,7 +122,7 @@ final class JetfireAnalytics: IStoriesAnalytics {
 	}
 
 	// 7 - story_open
-	func trackStoryOpen(
+	private func trackStoryOpen(
 		campaignId: Int64, // Campaign.id
 		entityId: String // == story_id FeatureStory.id:номер кадра 100:0
 	) {
@@ -98,7 +131,7 @@ final class JetfireAnalytics: IStoriesAnalytics {
 	}
 
 	// 8 - story_tap
-	func trackStoryTap(
+	private func trackStoryTap(
 		campaignId: Int64?,
 		entityId: String
 	) {
@@ -107,7 +140,7 @@ final class JetfireAnalytics: IStoriesAnalytics {
 	}
 
 	// 9 - story_close
-	func trackStoryClose(
+	private func trackStoryClose(
 		campaignId: Int64?,
 		entityId: String
 	) {
@@ -116,37 +149,37 @@ final class JetfireAnalytics: IStoriesAnalytics {
 	}
 
 	// 10 - push_show
-	func trackPushShow(campaignId: Int64?) {
+	private func trackPushShow(campaignId: Int64?) {
         let event = DBEvent(eventType: .pushShow, campaignId: campaignId)
         self.db.insertEvent(event)
 	}
 
 	// 11 - push_tap
-	func trackPushTap(campaignId: Int64?) {
+	private func trackPushTap(campaignId: Int64?) {
         let event = DBEvent(eventType: .pushTap, campaignId: campaignId)
         self.db.insertEvent(event)
 	}
 
 	// 12 - push_close
-	func trackPushClose(campaignId: Int64?) {
+	private func trackPushClose(campaignId: Int64?) {
         let event = DBEvent(eventType: .pushClose, campaignId: campaignId)
         self.db.insertEvent(event)
 	}
 
 	// 13 - toaster_show
-	func trackToasterShow(campaignId: Int64) {
+	private func trackToasterShow(campaignId: Int64) {
         let event = DBEvent(eventType: .toasterShow, campaignId: campaignId)
         self.db.insertEvent(event)
 	}
 
 	// 14 - toaster_tap
-	func trackToasterTap(campaignId: Int64) {
+	private func trackToasterTap(campaignId: Int64) {
         let event = DBEvent(eventType: .toasterTap, campaignId: campaignId)
         self.db.insertEvent(event)
 	}
 
 	// 15 - toaster_close
-	func trackToasterClose(campaignId: Int64) {
+	private func trackToasterClose(campaignId: Int64) {
         let event = DBEvent(eventType: .toasterClose, campaignId: campaignId)
         self.db.insertEvent(event)
 	}

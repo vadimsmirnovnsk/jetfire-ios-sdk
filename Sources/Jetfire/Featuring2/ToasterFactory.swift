@@ -8,12 +8,12 @@ final class ToasterFactory {
 
     private let storiesService: IStoriesService
     private let storiesFactory: StoriesFactory
-    private let jetfireAnalytics: JetfireAnalytics
+    private let jetfireAnalytics: IStoriesAnalytics
 
     init(
         storiesService: IStoriesService,
         storiesFactory: StoriesFactory,
-        jetfireAnalytics: JetfireAnalytics
+        jetfireAnalytics: IStoriesAnalytics
     ) {
         self.storiesService = storiesService
         self.storiesFactory = storiesFactory
@@ -23,7 +23,7 @@ final class ToasterFactory {
     func makeToaster(toaster: JetFireFeatureToaster, campaign: JetFireCampaign) -> ToasterView {
 		let completion: VoidBlock = { [weak self] in
 			guard let self = self else { return }
-			self.jetfireAnalytics.trackToasterTap(campaignId: campaign.id)
+			self.jetfireAnalytics.trackToastDidTap(campaignId: campaign.id)
 			let stories = campaign.stories.map {
 				self.storiesFactory.makeStory(story: $0, campaignId: campaign.id)
 			}

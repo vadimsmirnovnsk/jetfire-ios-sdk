@@ -6,7 +6,7 @@ final class ToasterActivator: ISchedulerTaskActivator {
     private let campaignId: Int64
     private let triggeredCampaignsProvider: ITriggeredCampaignsProvider
     private let factory: ToasterFactory
-    private let jetfireAnalytics: JetfireAnalytics
+    private let jetfireAnalytics: IStoriesAnalytics
     private let ud: IUserSettings
     private let rulesProvider: IFeaturingRulesProvider
 
@@ -14,7 +14,7 @@ final class ToasterActivator: ISchedulerTaskActivator {
         campaignId: Int64,
         triggeredCampaignsProvider: ITriggeredCampaignsProvider,
         factory: ToasterFactory,
-        jetfireAnalytics: JetfireAnalytics,
+        jetfireAnalytics: IStoriesAnalytics,
         ud: IUserSettings,
         rulesProvider: IFeaturingRulesProvider
     ) {
@@ -47,7 +47,7 @@ final class ToasterActivator: ISchedulerTaskActivator {
         // Запись в БД нового события может приводить к повторному вызову activate,
         // поэтому пишем на следующем цикле ранлупа, чтобы разорвать цепочку
         DispatchQueue.main.async {
-            self.jetfireAnalytics.trackToasterShow(campaignId: campaign.id)
+            self.jetfireAnalytics.trackToastDidShow(campaignId: campaign.id)
         }
     }
 
