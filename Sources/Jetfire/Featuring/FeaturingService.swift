@@ -145,7 +145,7 @@ extension FeaturingService {
 		didReceive response: UNNotificationResponse
 	) {
 		let campaignId = self.pushService.campaignId(from: response)
-		self.analytics.trackPushTap(campaignId: Int64(campaignId))
+		self.analytics.trackPushDidShow(campaignId: Int64(campaignId) ?? -1)
 		self.manager.retreiveCampaign(with: campaignId) { [weak self] campaign in
 			guard let campaign = campaign else { return }
 			self?.scheduler.scheduleShow(campaign: campaign, featuringType: .push)

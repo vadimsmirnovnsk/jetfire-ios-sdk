@@ -9,15 +9,21 @@ public struct SnapStyle: IPopulatable {
 
 	public typealias T = SnapStyle
 
+	/// Стиль Title (к нему будет применяться цвет из данных снапа)
 	public var titleStyle: TextStyle
+	/// Стиль Subtitle (но к нему будет применяться 50% альфа и цвет из снапа)
 	public var subtitleStyle: TextStyle
+	/// Стиль Message (к нему будет применяться цвет из данных снапа)
 	public var messageStyle: TextStyle
+	/// Инсеты контейнера с текстами и кнопкой относительно краёв снапа
 	public var containerInsets: UIEdgeInsets
 	/// Инсет между тайтлом/сабтайтлом и текстом
 	public var messageSpacing: CGFloat
 	/// Инсет между текстом и кнопкой
 	public var buttonSpacing: CGFloat
+	/// Стиль кнопки
 	public var buttonStyle: SnapButtonStyle
+	/// Стиль прогресс бара
 	public var barStyle: SnapProgressBarStyle
 
 	public static func delo() -> SnapStyle {
@@ -39,12 +45,26 @@ public struct SnapButtonStyle: IPopulatable {
 
 	public typealias T = SnapButtonStyle
 
+	public enum Behavior {
+		case fullscreen
+		case part
+	}
+
+	/// Цвет кнопки
 	public var bgColor: UIColor
+	/// Цвет заголовка кнопки
 	public var titleStyle: TextStyle
+	/// Инсеты заголовка относительно краёв кнопки
 	public var titleInsets: UIEdgeInsets
+	/// Высота кнопки
 	public var height: CGFloat
+	/// Радиус скругления кнопки
 	public var cornerRadius: CGFloat
+	/// Как выглядит кнопка — на весь экран или занимает только часть слева
+	public var behavior: SnapButtonStyle.Behavior
+	/// Предпочитаемая ширина кнопки, если behavior = .part
 	public var preferredWidth: CGFloat
+	/// Добавлять ли тень для кнопки
 	public var addShadow: Bool
 
 	public static func delo() -> SnapButtonStyle {
@@ -54,6 +74,7 @@ public struct SnapButtonStyle: IPopulatable {
 			titleInsets: UIEdgeInsets(top: 2, left: 12, bottom: 0, right: 12),
 			height: 50,
 			cornerRadius: 12,
+			behavior: .fullscreen,
 			preferredWidth: 256,
 			addShadow: true
 		)
@@ -65,10 +86,15 @@ public struct SnapProgressBarStyle: IPopulatable {
 
 	public typealias T = SnapProgressBarStyle
 
+	/// Цвет заполнения прогресс бара
 	public var topColor: UIColor
+	/// Цвет подложки
 	public var bottomColor: UIColor
+	/// Расстояние между сегментами
 	public var padding: CGFloat
+	/// Высота сегментов
 	public var height: CGFloat
+	/// Инсеты от левого, верхнего и правого края экрана
 	public var insets: UIEdgeInsets
 
 	public static func delo() -> SnapProgressBarStyle {

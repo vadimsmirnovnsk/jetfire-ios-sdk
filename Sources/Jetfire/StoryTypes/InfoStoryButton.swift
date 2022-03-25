@@ -8,8 +8,9 @@ final class InfoStoryButton: BlockButton {
 
 	let title = UILabel()
 	let titleAndImage = ImageAndLabelView(textInsets: UIEdgeInsets(top: 3, left: 6, bottom: 0, right: 0))
-	let bgView = UIView.colored(Jetfire.standard.snap.buttonStyle.bgColor)
-	
+	let bgView: UIView
+
+	private let style: SnapButtonStyle
 	private let shadow = UIView()
 
 	override var isHighlighted: Bool {
@@ -24,17 +25,22 @@ final class InfoStoryButton: BlockButton {
 		}
 	}
 
-	override init(
+	init(
 		block: ButtonBlock? = nil,
 		fadeOnHighlighted: Bool = false,
-		height: CGFloat = UIView.noIntrinsicMetric
+		height: CGFloat = UIView.noIntrinsicMetric,
+		style: SnapButtonStyle
 	) {
+		self.style = style
+		self.bgView = UIView.colored(style.bgColor)
+
+
 		super.init(block: block)
 
 		self.title.isUserInteractionEnabled = false
 		self.bgView.isUserInteractionEnabled = false
 
-		if Jetfire.standard.snap.buttonStyle.addShadow {
+		if self.style.addShadow {
 			self.shadow.addShadow(color: UIColor.black,
 								  offset: CGSize(width: 0.0, height: 5.0),
 								  radius: 30.0, opacity: 0.3)
@@ -47,16 +53,16 @@ final class InfoStoryButton: BlockButton {
 
 		let content = UIView()
 		content.isUserInteractionEnabled = false
-		content.setCornerRadius(Jetfire.standard.snap.buttonStyle.cornerRadius)
+		content.setCornerRadius(self.style.cornerRadius)
 		self.shadow.addSubview(content) { make in
 			make.edges.equalToSuperview()
-			make.height.equalTo(Jetfire.standard.snap.buttonStyle.height)
-			make.width.greaterThanOrEqualTo(Jetfire.standard.snap.buttonStyle.preferredWidth).dgs_priority749()
+			make.height.equalTo(self.style.height)
+			make.width.greaterThanOrEqualTo(self.style.preferredWidth).dgs_priority749()
 		}
 
 		content.addSubview(self.bgView) { make in make.edges.equalToSuperview() }
 		content.addSubview(self.title) { make in
-			make.edges.equalToSuperview().inset(Jetfire.standard.snap.buttonStyle.titleInsets)
+			make.edges.equalToSuperview().inset(self.style.titleInsets)
 		}
 
 		content.addSubview(self.titleAndImage) { make in

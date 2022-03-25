@@ -10,7 +10,8 @@ public class Jetfire {
 	public var cover: CoverStyle = .delo()
 	public var toast: ToastStyle = .delo()
 	public var snap: SnapStyle = .delo()
-	public var toastVisualStyle: ToastVisualStyle = .dark
+	/// Визуальный стиль — какая подложка (для адаптации к светлой/тёмной теме на лету, например)
+	public var toastVisualStyle: ToastVisualStyle = .blur(.systemChromeMaterialDark)
 
 	private var isStarted = false
 

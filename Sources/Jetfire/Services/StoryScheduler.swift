@@ -7,19 +7,22 @@ final class StoryScheduler {
 	private let pushService: FeaturingPushService
 	private let ud: IUserSettings
 	private let toasterFactory: ToasterFactory
+	private let jetfireAnalytics: IStoriesAnalytics
 
 	init(
 		router: FeaturingRouter,
 		storiesService: IStoriesService,
 		pushService: FeaturingPushService,
 		ud: IUserSettings,
-		toasterFactory: ToasterFactory
+		toasterFactory: ToasterFactory,
+		jetfireAnalytics: IStoriesAnalytics
 	) {
 		self.router = router
 		self.storiesService = storiesService
 		self.pushService = pushService
 		self.ud = ud
 		self.toasterFactory = toasterFactory
+		self.jetfireAnalytics = jetfireAnalytics
 	}
 
 	func scheduleShow(campaign: FeaturingCampaignAndStory, featuringType: FeaturingType) {
@@ -44,6 +47,7 @@ final class StoryScheduler {
 
 		DispatchQueue.main.asyncAfter(deadline: .now() + after) {
 			let toast = self.toasterFactory.makeToaster(toaster: campaign.campaign.toaster, campaign: campaign.campaign)
+			self.jetfireAnalytics.trackToastDidShow(campaignId: campaign.campaign.id)
 			toast.show()
 			self.rememberShow(campaign: campaign.campaign, featuringType: .toaster)
 		}

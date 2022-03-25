@@ -5,15 +5,24 @@ public struct CoverStyle: IPopulatable {
 
 	public typealias T = CoverStyle
 
+	/// Размер ячейки кавера, учитывается при расчёте высоты карусели
 	public var size: CGSize
+	/// Инсеты от левого и правого края в карусели
 	public var sectionInset: UIEdgeInsets
+	/// Оффест между ячейками в карусели
 	public var interItemOffset: CGFloat
+	/// Цвет фона ячеек
 	public var bgColor: UIColor
 
+	/// Настройки цветной подложки — ободка вокруг кавера
 	public var substrate: CoverSubstrate
+	/// Настройки цветной подложки — ободка вокруг прочитанного каваре
 	public var readSubstrate: CoverSubstrate
+	/// Настройки картинки кавера
 	public var image: CoverImage
+	/// Настройки заголовка кавера
 	public var title: CoverTitle
+	/// Настройки градиента на кавере (используется под текстом на картинке)
 	public var gradient: CoverGradient?
 
 	public init(
@@ -89,7 +98,7 @@ public struct CoverStyle: IPopulatable {
 
 	static func delo() -> CoverStyle {
 		let substrate = CoverSubstrate(
-			size: CGSize(width: 102, height: 102),
+			size: CGSize(width: 104, height: 104),
 			cornerRadius: 15,
 			width: 2,
 			centerInset: CGPoint(x: 0, y: 0),
@@ -100,7 +109,7 @@ public struct CoverStyle: IPopulatable {
 		)
 
 		let readSubstrate =  CoverSubstrate(
-			size: CGSize(width: 102, height: 102),
+			size: CGSize(width: 104, height: 104),
 			cornerRadius: 10,
 			width: 0,
 			centerInset: CGPoint(x: 0, y: 0),
@@ -129,13 +138,13 @@ public struct CoverStyle: IPopulatable {
 			cornerRadius: 12,
 			centerInset: CGPoint(x: 0, y: 16),
 			startColor: UIColor.black.withAlphaComponent(0),
-			endColor: UIColor.black.withAlphaComponent(0.7),
+			endColor: UIColor.black.withAlphaComponent(0.9),
 			startPoint: CGPoint(x: 0.5, y: 0),
 			endPoint: CGPoint(x: 0.5, y: 1)
 		)
 
 		return CoverStyle(
-		   size: CGSize(width: 104, height: 104),
+		   size: CGSize(width: 106, height: 106),
 		   sectionInset: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16),
 		   interItemOffset: 8,
 		   bgColor: .black,
@@ -153,9 +162,13 @@ public struct CoverImage: IPopulatable {
 
 	public typealias T = CoverImage
 
+	/// Размер картинки
 	public var size: CGSize
+	/// Радиус скругления картинки
 	public var cornerRadius: CGFloat
+	/// Отступы от центра картинки, например, чтобы разместить не по центру ячейки в инстаграм-стиле
 	public var centerInset: CGPoint
+	/// Прозрачность картинки в прочитанном состоянии
 	public var readAlpha: CGFloat
 
 	public init(
@@ -176,9 +189,13 @@ public struct CoverTitle: IPopulatable {
 
 	public typealias T = CoverTitle
 
+	/// Стиль текста заголовка
 	public var textStyle: TextStyle = .system13GraffitBlack
+	/// Без комментариев
 	public var textAlignment: NSTextAlignment
+	/// Максимальное количество строк заголовка
 	public var linesNumber: Int
+	/// Инсеты текста от левого, нижнего и правого краёв ячейки
 	public var bottomInset: UIEdgeInsets
 
 	public init(
@@ -199,13 +216,21 @@ public struct CoverSubstrate: IPopulatable {
 
 	public typealias T = CoverSubstrate
 
+	/// Размер подложки
 	public var size: CGSize
+	/// Радиус скругления
 	public var cornerRadius: CGFloat
+	/// Ширина обрисовки
 	public var width: CGFloat
+	/// Сдвиг подложки относительно центра
 	public var centerInset: CGPoint
+	/// Стартовый цвет градиента закраски подложки
 	public var startColor: UIColor
+	/// Конечный цвет градиенты
 	public var endColor: UIColor
+	/// Стартовая точка градиента
 	public var startPoint: CGPoint
+	/// Конечная точка градиента
 	public var endPoint: CGPoint
 
 	init(
@@ -234,12 +259,19 @@ public struct CoverGradient: IPopulatable {
 
 	public typealias T = CoverSubstrate
 
+	/// Размер градиента
 	public var size: CGSize
+	/// Радиус скругления
 	public var cornerRadius: CGFloat
+	/// Отступ от центра
 	public var centerInset: CGPoint
+	/// Стартовый цвет
 	public var startColor: UIColor
+	/// Конечный цвет
 	public var endColor: UIColor
+	/// Стартовая точка
 	public var startPoint: CGPoint
+	/// Конечная точка
 	public var endPoint: CGPoint
 
 	init(
