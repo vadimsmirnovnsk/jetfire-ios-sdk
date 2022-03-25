@@ -5,20 +5,30 @@ public struct ToastStyle: IPopulatable {
 
 	public typealias T = ToastStyle
 
+	/// Инсет всего тоста относительно краёв экрана
 	public var styleInset: UIEdgeInsets
+	/// Радиус скругления углов тоста
 	public var cornerRadius: CGFloat
+	/// Стиль текста
 	public var textStyle: TextStyle
+	/// Инсет текста относительно краёв тоста
 	public var textInset: UIEdgeInsets
+	/// Максимальное количество строк в тосте
 	public var numberOfLines: Int
+	/// Без комментариев)
 	public var textAlignment: NSTextAlignment
+	/// Есть ли тень от тоста на экране
 	public var hasShadow: Bool
+	/// Параметры анимации, с которой тост выпадывает на экран
 	public var animation: ToastAnimation
+	/// Параметры положения картинки справа сверху на тосте
 	public var image: ToastImage
+	/// Количество времени перед скрытием тоста, если выбран стиль dissmissable
 	public var autoHideTime: TimeInterval
 
 	static func delo() -> ToastStyle {
 		ToastStyle(
-			styleInset: UIEdgeInsets(top: 8, left: 20, bottom: 0, right: 20),
+			styleInset: UIEdgeInsets(top: 8, left: 12, bottom: 0, right: 12),
 			cornerRadius: 16,
 			textStyle: .system16White,
 			textInset: UIEdgeInsets(top: 12, left: 16, bottom: 14, right: 16),
@@ -44,7 +54,7 @@ public struct ToastAnimation: IPopulatable {
 
 	static func delo() -> ToastAnimation {
 		ToastAnimation(
-			duration: 0.37,
+			duration: 0.4,
 			delay: 0.0,
 			usingSpringWithDamping: 0.7,
 			initialSpringVelocity: 0.3

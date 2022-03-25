@@ -4,17 +4,22 @@ import UIKit
 import SwiftProtobuf
 import SDWebImage
 
-/// Визуальный стиль — какая подложка (для адаптации к светлой/тёмной теме)
+/// Визуальный стиль — какая подложка (для адаптации к светлой/тёмной теме на лету, например)
 public enum ToastVisualStyle {
-	case light
-	case dark
+	case blur(UIBlurEffect.Style)
 	case color(UIColor)
 
 	var bgColor: UIColor {
 		switch self {
-			case .light: return .clear
-			case .dark: return .clear
+			case .blur: return .clear
 			case .color(let c): return c
+		}
+	}
+
+	var effect: UIBlurEffect.Style {
+		switch self {
+			case .blur(let b): return b
+			case .color: return .regular
 		}
 	}
 
@@ -98,10 +103,8 @@ class ToasterView: UIView {
 					colors: [c, c],
 					points: .horisontal
 				)
-			case .dark:
-				bg = UIVisualEffectView(effect: UIBlurEffect(style: .systemThinMaterialDark))
-			case .light:
-				bg = UIVisualEffectView(effect: UIBlurEffect(style: .systemThinMaterialLight))
+			case .blur(let s):
+				bg = UIVisualEffectView(effect: UIBlurEffect(style: s))
 		}
 
 		self.toaster.addSubview(bg) {

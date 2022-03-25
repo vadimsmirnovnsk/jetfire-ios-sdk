@@ -11,7 +11,7 @@ final class InfoSnapView: BaseSnapView<InfoSnapVM> {
 	private let messageSpacing = UIView.stackSpacing(with: Jetfire.standard.snap.messageSpacing)
 	private let message = MultilineLabel()
 	private let buttonSpacing = UIView.stackSpacing(with: Jetfire.standard.snap.buttonSpacing)
-	private let button = InfoStoryButton()
+	private let button = InfoStoryButton(style: Jetfire.standard.snap.buttonStyle)
 
 	override init() {
 		super.init()
@@ -39,6 +39,14 @@ final class InfoSnapView: BaseSnapView<InfoSnapVM> {
 			self.buttonSpacing,
 			self.button
 		])
+
+		/// va.smirnov: это нехорошо, делаю на бегу
+		self.button.snp.makeConstraints { make in
+			switch Jetfire.standard.snap.buttonStyle.behavior {
+				case .fullscreen: make.width.equalToSuperview()
+				case .part: break
+			}
+		}
 
 		self.button.onTap = { [weak self] _ in self?.viewModel?.didTapButton() }
 		self.button.onTouch = { [weak self] in self?.viewModel?.didTouchButton() }

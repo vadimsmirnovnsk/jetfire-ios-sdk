@@ -23,7 +23,7 @@ final class StorySubstrate: UIView {
 		let rectCenter = CGPoint(x: size.width / 2, y: size.height / 2)
 		let path = UIBezierPath(roundedRect: CGRect(center: rectCenter, size: size), cornerRadius: cornerRadius)
 		let innerSize: CGSize = width >= 0
-			? CGSize(width: size.width - width, height: size.height - width)
+			? CGSize(width: size.width - (width * 2), height: size.height - (width * 2))
 			: .zero
 
 		let sizeRadiusRatio = min(size.width, size.height) == 0 || cornerRadius == 0
