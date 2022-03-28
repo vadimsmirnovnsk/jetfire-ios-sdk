@@ -27,7 +27,7 @@ def create_parser():
 
 def create_protos():
 	subprocess.check_call(["rm", "-rf", "Sources/jetfire-sdk/Model/protocol.pb.swift"])
-	subprocess.check_call(["protoc", "--swift_out=./", "./Sources/jetfire-sdk/Model/protocol.proto", "--swift_opt=Visibility=Internal"])
+	subprocess.check_call(["protoc", "--swift_out=./", "./Sources/Jetfire/Model/protocol.proto", "--swift_opt=Visibility=Internal"])
 
 if __name__ == "__main__":
     main()
