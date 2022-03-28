@@ -240,6 +240,7 @@ extension DBEvent: CustomDebugStringConvertible {
         ]
         let description = params
             .reduce(into: [:]) { result, item in result[item.key] = item.value }
+            .sorted { $0.key < $1.key }
             .map { "\($0.key):\($0.value)" }
             .joined(separator: ", ")
         return "DBEvent '\(eventType.stringValue)' [\(description)]"
