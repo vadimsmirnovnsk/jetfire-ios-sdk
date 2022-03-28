@@ -6,7 +6,7 @@ protocol IStoryBrowserDelegate: AnyObject {
 	// Return true if possible
 	func rewind(cellVM: StoryBrowserCellVM) -> Bool
 	func pause()
-	func close()
+	func dismiss(completion: VoidBlock?)
 }
 
 final class StoryBrowserVM: BaseViewControllerVM {

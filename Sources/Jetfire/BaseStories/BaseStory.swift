@@ -71,6 +71,10 @@ open class BaseStory: Equatable {
 		}
 	}
 
+	public func willCloseSnap(with index: Int) {
+		self.analytics.trackStoryDidClose(storyId: self.content.story.id, index: index, campaignId: self.content.story.campaignId)
+	}
+
 	/// MARK: Equatable
 
 	public static func == (lhs: BaseStory, rhs: BaseStory) -> Bool {

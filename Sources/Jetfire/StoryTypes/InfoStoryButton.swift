@@ -34,7 +34,6 @@ final class InfoStoryButton: BlockButton {
 		self.style = style
 		self.bgView = UIView.colored(style.bgColor)
 
-
 		super.init(block: block)
 
 		self.title.isUserInteractionEnabled = false
@@ -54,7 +53,7 @@ final class InfoStoryButton: BlockButton {
 		let content = UIView()
 		content.isUserInteractionEnabled = false
 		content.setCornerRadius(self.style.cornerRadius)
-		self.shadow.addSubview(content) { make in
+		self.addSubview(content) { make in
 			make.edges.equalToSuperview()
 			make.height.equalTo(self.style.height)
 			make.width.greaterThanOrEqualTo(self.style.preferredWidth).dgs_priority749()
@@ -78,7 +77,7 @@ final class InfoStoryButton: BlockButton {
 		let alpha: CGFloat = highlighted ? 0.6 : 1
 		self.title.alpha = alpha
 		self.shadow.alpha = alpha
-		self.bgView.alpha = alpha
+		self.bgView.backgroundColor = highlighted ? self.style.highlightedBgColor : self.style.bgColor
 	}
 
 	@objc private func didTouch() {

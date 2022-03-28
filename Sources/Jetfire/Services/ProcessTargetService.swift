@@ -15,7 +15,8 @@ internal class ProcessTargetService {
 		if let urlString = button.urlString, let url = URL(string: urlString), self.application.canOpenURL(url) {
 			self.application.open(url, options: [:], completionHandler: nil)
 		} else if let deeplink = button.deeplinkString, let url = URL(string: deeplink) {
-			_ = self.deeplinkService.application(self.application, open: url, options: [:])
+			self.application.open(url, options: [:], completionHandler: nil)
+//			_ = self.deeplinkService.application(self.application, open: url, options: [:])
 		}
 	}
 

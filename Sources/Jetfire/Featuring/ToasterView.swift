@@ -81,11 +81,21 @@ class ToasterView: UIView {
 	private var completion: VoidBlock?
 	private let behavior: Behavior
 	private let visualStyle: ToastVisualStyle
+	private let analytics: IStoriesAnalytics
+	private let campaignId: Int64
 
-	init(config: ToastStyle, behavior: Behavior, visualStyle: ToastVisualStyle) {
+	init(
+		config: ToastStyle,
+		behavior: Behavior,
+		visualStyle: ToastVisualStyle,
+		analytics: IStoriesAnalytics,
+		campaignId: Int64
+	) {
 		self.config = config
 		self.behavior = behavior
 		self.visualStyle = visualStyle
+		self.analytics = analytics
+		self.campaignId = campaignId
 
 		super.init(frame: .zero)
 		self.isUserInteractionEnabled = true
@@ -178,6 +188,8 @@ class ToasterView: UIView {
 			case .dismissable:
 				self.dismiss()
 		}
+
+		self.analytics.trackToastDidHide(campaignId: self.campaignId)
 	}
 
 	@objc private func didTap() {
@@ -190,6 +202,8 @@ class ToasterView: UIView {
 				self.completion?()
 				self.dismiss()
 		}
+
+		self.analytics.trackToastDidTap(campaignId: self.campaignId)
 	}
 
 	func show() {
@@ -200,8 +214,11 @@ class ToasterView: UIView {
 			make.edges.equalTo(window)
 		}
 
+		let campaignId = self.campaignId
+		let timeout = self.config.autoHideTime
 		if case .dismissable = self.behavior {
-			DispatchQueue.main.asyncAfter(deadline: .now() + self.config.autoHideTime) { [weak self] in
+			DispatchQueue.main.asyncAfter(deadline: .now() + timeout) { [weak self] in
+				self?.analytics.trackToastDidAutohide(campaignId: campaignId, time: timeout)
 				self?.dismiss()
 			}
 		}

@@ -13,7 +13,7 @@ class StoryBrowserCollectionVM: BaseCollectionViewVM {
 
 }
 
-final class StoryBrowserVC: BaseVC<StoryBrowserVM>, IStoryBrowserDelegate, UIGestureRecognizerDelegate {
+final class StoryBrowserVC: BaseVC<StoryBrowserVM>, UIGestureRecognizerDelegate {
 
 	override var navigationBarStyle: NavigationBarStyle? { .lightTransparent }
 
@@ -76,15 +76,12 @@ final class StoryBrowserVC: BaseVC<StoryBrowserVM>, IStoryBrowserDelegate, UIGes
 
 	@objc private func didSwipeDown() {
 		let vm = self.viewModel
-		self.dismiss { vm.didWatchStories() }
+		self.close { vm.didWatchStories() }
 	}
 
-	func close() {
-		self.dismiss()
-	}
-
-	func dismiss(completion: VoidBlock? = nil) {
-		self.dismiss(animated: true, completion: completion)
+	/// ВАЖНО! Единая верная точка для выхода из сториз!
+	func close(completion: VoidBlock?) {
+		self.currentItem()?.exit(completion: completion)
 	}
 
 	override func viewDidLayoutSubviews() {
@@ -122,7 +119,7 @@ final class StoryBrowserVC: BaseVC<StoryBrowserVM>, IStoryBrowserDelegate, UIGes
 
 	private func didScrollToEdge(with offset: CGFloat) {
 		if abs(offset) > 100 {
-			self.dismiss()
+			self.close(completion: nil)
 		}
 	}
 
@@ -146,6 +143,22 @@ final class StoryBrowserVC: BaseVC<StoryBrowserVM>, IStoryBrowserDelegate, UIGes
 		}
 	}
 
+	private func move(to index: Int, animated: Bool) {
+		if self.viewModel.rows.item(at: index) != nil {
+			self.collection.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredHorizontally, animated: animated)
+		} else {
+			self.close(completion: nil)
+		}
+	}
+
+	func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+		return true
+	}
+
+}
+
+extension StoryBrowserVC: IStoryBrowserDelegate {
+
 	func rewind(cellVM: StoryBrowserCellVM) -> Bool {
 		if let index = self.viewModel.rows.indexes(of: cellVM).first, index - 1 >= 0 {
 			self.move(to: index - 1, animated: true)
@@ -155,53 +168,13 @@ final class StoryBrowserVC: BaseVC<StoryBrowserVM>, IStoryBrowserDelegate, UIGes
 		return false
 	}
 
-	private func move(to index: Int, animated: Bool) {
-		if self.viewModel.rows.item(at: index) != nil {
-			self.collection.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredHorizontally, animated: animated)
-		} else {
-			self.dismiss()
-		}
-	}
 
 	func pause() {
 		self.viewModel.pause()
 	}
 
-	func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-		return true
-	}
-
-}
-
-final class GhostRecognizer: UIGestureRecognizer {
-
-	private let gestureBlock: BoolBlock
-
-	init(gestureBlock: @escaping BoolBlock) {
-		self.gestureBlock = gestureBlock
-
-		super.init(target: nil, action: nil)
-
-		self.state = .possible
-		self.cancelsTouchesInView = false
-	}
-
-	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
-		super.touchesBegan(touches, with: event)
-
-		self.gestureBlock(true)
-		self.state = .began
-	}
-
-	override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
-		super.touchesEnded(touches, with: event)
-
-		self.gestureBlock(false)
-		self.state = .ended
-	}
-
-	override func reset() {
-		self.state = .possible
+	func dismiss(completion: VoidBlock?) {
+		self.dismiss(animated: true, completion: completion)
 	}
 
 }
