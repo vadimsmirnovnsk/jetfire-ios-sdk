@@ -25,6 +25,8 @@ public struct SnapStyle: IPopulatable {
 	public var buttonStyle: SnapButtonStyle
 	/// Стиль прогресс бара
 	public var barStyle: SnapProgressBarStyle
+	/// Стиль кнопки закрыть
+	public var closeButtonStyle: SnapCloseButtonStyle
 
 	public static func delo() -> SnapStyle {
 		return SnapStyle(
@@ -35,7 +37,8 @@ public struct SnapStyle: IPopulatable {
 			messageSpacing: 16,
 			buttonSpacing: 24,
 			buttonStyle: .delo(),
-			barStyle: .delo()
+			barStyle: .delo(),
+			closeButtonStyle: .delo()
 		)
 	}
 
@@ -52,6 +55,8 @@ public struct SnapButtonStyle: IPopulatable {
 
 	/// Цвет кнопки
 	public var bgColor: UIColor
+	/// Цвет кнопки в нажатом состоянии
+	public var highlightedBgColor: UIColor
 	/// Цвет заголовка кнопки
 	public var titleStyle: TextStyle
 	/// Инсеты заголовка относительно краёв кнопки
@@ -70,6 +75,7 @@ public struct SnapButtonStyle: IPopulatable {
 	public static func delo() -> SnapButtonStyle {
 		return SnapButtonStyle(
 			bgColor: .deloButtonBlue,
+			highlightedBgColor: .deloButtonHighlightedBlue,
 			titleStyle: TextStyle.systemSemiBold16White,
 			titleInsets: UIEdgeInsets(top: 2, left: 12, bottom: 0, right: 12),
 			height: 50,
@@ -104,6 +110,27 @@ public struct SnapProgressBarStyle: IPopulatable {
 			padding: 4,
 			height: 4,
 			insets: UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 16)
+		)
+	}
+
+}
+
+public struct SnapCloseButtonStyle: IPopulatable {
+
+	public typealias T = SnapCloseButtonStyle
+
+	/// Картинка кнопки
+	public var image: UIImage?
+	/// Картинка кнопки в нажатом состоянии
+	public var highlightedImage: UIImage?
+	/// Инсеты кнопки от верхнего и правого края
+	public var insets: UIEdgeInsets
+
+	public static func delo() -> SnapCloseButtonStyle {
+		return SnapCloseButtonStyle(
+			image: nil, // UIImage.rectImage(colored: .red, size: CGSize(width: 48, height: 48)),
+			highlightedImage: nil, // UIImage.rectImage(colored: .blue, size: CGSize(width: 48, height: 48)),
+			insets: UIEdgeInsets(top: 32, left: 0, bottom: 0, right: 16)
 		)
 	}
 

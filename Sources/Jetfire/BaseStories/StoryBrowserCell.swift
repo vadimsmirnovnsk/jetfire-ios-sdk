@@ -11,6 +11,7 @@ final class StoryBrowserCell: BaseCollectionViewCell<StoryBrowserCellVM>, Segmen
 	private let nextButton = BlockButton()
 	private let backButton = BlockButton()
 	private let closeButton = BlockButton()
+	private var style: SnapStyle { Jetfire.standard.snap }
 
 	public override class func size(with viewModel: StoryBrowserCellVM, size: CGSize) -> CGSize {
 		return size
@@ -43,15 +44,15 @@ final class StoryBrowserCell: BaseCollectionViewCell<StoryBrowserCellVM>, Segmen
 			make.width.equalToSuperview().multipliedBy(0.25)
 		}
 
-		self.closeButton.setImage(UIImage(named: "closeButton")?.colorized(with: .white),
-								  for: .normal)
+		self.closeButton.setImage(self.style.closeButtonStyle.image, for: .normal)
+		self.closeButton.setImage(self.style.closeButtonStyle.highlightedImage, for: .highlighted)
 		self.contentView.addSubview(self.closeButton) { make in
-			make.right.top.equalToSuperview().inset(UIEdgeInsets(top: 24, left: 0, bottom: 0, right: 8))
+			make.right.top.equalToSuperview().inset(self.style.closeButtonStyle.insets)
 		}
 
 		self.nextButton.onTap = { [weak self] _ in self?.switchToNextSnap() }
 		self.backButton.onTap = { [weak self] _ in self?.switchToPreviousSnap() }
-		self.closeButton.onTap = { [weak self] _ in self?.viewModel?.exit()}
+		self.closeButton.onTap = { [weak self] _ in self?.viewModel?.exit(completion: nil) }
 	}
 
 	override func viewModelChanged() {
@@ -199,8 +200,10 @@ final class StoryBrowserCellVM: BaseCellVM {
 		self.story.willAppearSnap(with: index)
 	}
 
-	func exit() {
-		self.delegate?.close()
+	func exit(completion: VoidBlock?) {
+		let index = self.currentIndex ?? self.index
+		self.story.willCloseSnap(with: index)
+		self.delegate?.dismiss(completion: completion)
 	}
 
 }

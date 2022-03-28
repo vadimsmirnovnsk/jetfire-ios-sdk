@@ -51,7 +51,9 @@ final class ToasterFactory {
 		return ToasterView(
 			config: Jetfire.standard.toast,
 			behavior: behavior,
-			visualStyle: Jetfire.standard.toastVisualStyle
+			visualStyle: Jetfire.standard.toastVisualStyle,
+			analytics: self.jetfireAnalytics,
+			campaignId: campaign.id
 		)
     }
 }

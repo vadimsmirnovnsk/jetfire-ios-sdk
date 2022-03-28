@@ -34,7 +34,18 @@ final class JetfireAnalytics: IStoriesAnalytics {
 			.jetfire_story_id : storyId,
 			.jetfire_campaign_id : campaignId,
 		])
-		self.trackStoryClose(campaignId: campaignId, entityId: storyId)
+		// Во внутреннюю базу ничего не трекаем — это событие уходит только во внешнюю базу
+		// Мы внутри трекаем событие trackStoryOpen со значением снапа
+	}
+
+	func trackStoryDidClose(storyId: String, index: Int, campaignId: Int64) {
+		self.onLogEvent?(.jetfire_story_close, [
+			.jetfire_story_id : storyId,
+			.jetfire_campaign_id : campaignId,
+			.jetfire_snap_index : index,
+		])
+
+		self.trackStoryClose(campaignId: campaignId, entityId: "\(storyId):\(index)")
 	}
 
 	func trackStoryDidTapButton(storyId: String, index: Int, buttonTitle: String, campaignId: Int64) {
@@ -44,6 +55,7 @@ final class JetfireAnalytics: IStoriesAnalytics {
 			.jetfire_snap_index : index,
 			.jetfire_button_title : buttonTitle,
 		])
+
 		self.trackStoryTap(campaignId: campaignId, entityId: "\(storyId):\(index)")
 	}
 
@@ -77,6 +89,23 @@ final class JetfireAnalytics: IStoriesAnalytics {
 		])
 
 		self.trackPushTap(campaignId: campaignId)
+	}
+
+	func trackToastDidHide(campaignId: Int64) {
+		self.onLogEvent?(.jetfire_toast_close, [
+			.jetfire_campaign_id : campaignId
+		])
+
+		self.trackToasterClose(campaignId: campaignId)
+	}
+
+	func trackToastDidAutohide(campaignId: Int64, time: TimeInterval) {
+		self.onLogEvent?(.jetfire_toast_autoclose, [
+			.jetfire_campaign_id : campaignId,
+			.jetfire_timeout : time
+		])
+
+		self.trackToasterClose(campaignId: campaignId)
 	}
 
 	/// DB

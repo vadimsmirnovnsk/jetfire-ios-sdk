@@ -13,8 +13,11 @@ internal protocol IStoriesAnalytics: AnyObject {
 	func trackStoryDidFinishShow(storyId: String, campaignId: Int64)
 	func trackStorySnapDidShow(storyId: String, index: Int, campaignId: Int64)
 	func trackStoryDidTapButton(storyId: String, index: Int, buttonTitle: String, campaignId: Int64)
+	func trackStoryDidClose(storyId: String, index: Int, campaignId: Int64)
 
 	func trackToastDidShow(campaignId: Int64)
+	func trackToastDidHide(campaignId: Int64)
+	func trackToastDidAutohide(campaignId: Int64, time: TimeInterval)
 	func trackToastDidTap(campaignId: Int64)
 
 	func trackPushDidShow(campaignId: Int64)

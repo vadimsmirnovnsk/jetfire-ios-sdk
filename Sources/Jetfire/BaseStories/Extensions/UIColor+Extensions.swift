@@ -25,5 +25,7 @@ public extension UIColor {
 
 	/// #0168F9
 	static let deloButtonBlue = #colorLiteral(red: 0.003921568627, green: 0.4078431373, blue: 0.9764705882, alpha: 1)
+	/// #092E73
+	static let deloButtonHighlightedBlue = #colorLiteral(red: 0.03529411765, green: 0.1803921569, blue: 0.4509803922, alpha: 1)
 
 }
