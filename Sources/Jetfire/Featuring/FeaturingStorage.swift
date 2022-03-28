@@ -66,7 +66,7 @@ final class FeaturingStorage  {
 			campaignId: campaign.id,
 			type: .firebaseInfo,
 			title: campaignStory.cover.title,
-			duration: 15,
+			duration: campaignStory.frames.first?.duration ?? 15,
 			priority: Int(campaignStory.priority),
 			image: campaignStory.cover.image.url,
 			bgColorString: nil,
@@ -87,6 +87,7 @@ final class FeaturingStorage  {
 				bgColorString: fr.background.color,
 				bgImageString: fr.image.url,
 				textColorString: fr.font.color,
+				duration: fr.duration,
 				button: fr.storyButton()
 			)
 		}
