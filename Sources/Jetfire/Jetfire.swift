@@ -13,6 +13,11 @@ public class Jetfire {
 	/// Визуальный стиль — какая подложка (для адаптации к светлой/тёмной теме на лету, например)
 	public var toastVisualStyle: ToastVisualStyle = .blur(.systemChromeMaterialDark)
 
+    public var onLogEvent: ((_ name: EventId, _ params: [ParameterId: Any]) -> Void)? {
+        get { self.container.analytics.onLogEvent }
+        set { self.container.analytics.onLogEvent = newValue }
+    }
+
 	private var isStarted = false
 
 	private(set) lazy var router = FeaturingRouter(container: self)
