@@ -4,6 +4,8 @@ import SDWebImage
 
 final class InfoSnapView: BaseSnapView<InfoSnapVM> {
 
+	private let cornered = UIView()
+	private let content = UIView()
 	private let backgroundImage = UIImageView()
 	private let stack = UIStackView.stack(spacing: 0, alignment: .leading)
 	private let title = MultilineLabel()
@@ -13,16 +15,40 @@ final class InfoSnapView: BaseSnapView<InfoSnapVM> {
 	private let buttonSpacing = UIView.stackSpacing(with: Jetfire.standard.snap.buttonSpacing)
 	private let button = InfoStoryButton(style: Jetfire.standard.snap.buttonStyle)
 
+	private var style: SnapStyle { Jetfire.standard.snap }
+
 	override init() {
 		super.init()
 
-		self.backgroundImage.contentMode = .scaleAspectFill
-		self.backgroundImage.sd_imageTransition = .fade
-		self.addSubview(self.backgroundImage) { make in
+		self.cornered.backgroundColor = .black
+		self.cornered.layer.cornerRadius = self.style.cornerRadius
+		self.cornered.layer.masksToBounds = true
+
+		let topOffset = 0 // UIApplication.hasTopNotch ? UIApplication.topNotchHeight : 0
+		self.addSubview(self.cornered) { make in
+			make.top.equalToSuperview().offset(topOffset)
+			make.left.right.equalToSuperview()
+
+			switch self.style.contentSize {
+				case .fullScreen, .safeArea:
+					make.bottom.equalToSuperview()
+				case .instaSize:
+					make.height.equalTo(self.snp.width).multipliedBy(SnapStyle.kFixedStoryAspect)
+			}
+		}
+
+		self.content.backgroundColor = .black
+		self.cornered.addSubview(self.content) { make in
 			make.edges.equalToSuperview()
 		}
 
-		self.addSubview(self.stack) { make in
+		self.backgroundImage.contentMode = .scaleAspectFill
+		self.backgroundImage.sd_imageTransition = .fade
+		self.content.addSubview(self.backgroundImage) { make in
+			make.edges.equalToSuperview()
+		}
+
+		self.content.addSubview(self.stack) { make in
 			make.left.bottom.right.equalToSuperview().inset(Jetfire.standard.snap.containerInsets)
 			make.top.greaterThanOrEqualToSuperview().offset(Jetfire.standard.snap.containerInsets.top)
 		}

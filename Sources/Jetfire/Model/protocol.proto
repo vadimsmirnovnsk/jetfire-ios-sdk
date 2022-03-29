@@ -235,7 +235,7 @@ message FeatureStoryFrame {
     optional FeatureStoryFrameFont font = 7;
     optional FeatureButton action_button = 8;
     optional FeatureButton hide_button = 9;
-    required double duration = 10;
+    required int32 duration = 10;
 }
 
 message FeatureStory {

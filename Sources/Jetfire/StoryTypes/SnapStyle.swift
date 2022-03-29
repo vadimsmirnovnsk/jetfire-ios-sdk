@@ -7,8 +7,20 @@ import VNHandlers
 
 public struct SnapStyle: IPopulatable {
 
+	internal static let kFixedStoryAspect: CGFloat = 568/320
+
 	public typealias T = SnapStyle
 
+	public enum ContentSize {
+		case safeArea 	// Контент занимает всю safe area телефона
+		case instaSize	// Контент со фиксированным соотношением сторон 568/320
+		case fullScreen	// Контент занимает весь экран
+	}
+
+	/// Размер контента снапа:
+	public var contentSize: SnapStyle.ContentSize
+	/// Радиус скругления углов кадров сториз
+	public var cornerRadius: CGFloat
 	/// Стиль Title (к нему будет применяться цвет из данных снапа)
 	public var titleStyle: TextStyle
 	/// Стиль Subtitle (но к нему будет применяться 50% альфа и цвет из снапа)
@@ -30,6 +42,8 @@ public struct SnapStyle: IPopulatable {
 
 	public static func delo() -> SnapStyle {
 		return SnapStyle(
+			contentSize: .instaSize,
+			cornerRadius: 8,
 			titleStyle: TextStyle.storyTitleBlack(),
 			subtitleStyle: TextStyle.system17White,
 			messageStyle: TextStyle.system17White,

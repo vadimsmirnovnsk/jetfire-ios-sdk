@@ -1264,7 +1264,7 @@ struct JetFireFeatureStoryFrame {
   /// Clears the value of `hideButton`. Subsequent reads from it will return its default value.
   mutating func clearHideButton() {_uniqueStorage()._hideButton = nil}
 
-  var duration: Double {
+  var duration: Int32 {
     get {return _storage._duration ?? 0}
     set {_uniqueStorage()._duration = newValue}
   }
@@ -3926,7 +3926,7 @@ extension JetFireFeatureStoryFrame: SwiftProtobuf.Message, SwiftProtobuf._Messag
     var _font: JetFireFeatureStoryFrameFont? = nil
     var _actionButton: JetFireFeatureButton? = nil
     var _hideButton: JetFireFeatureButton? = nil
-    var _duration: Double? = nil
+    var _duration: Int32? = nil
 
     static let defaultInstance = _StorageClass()
 
@@ -3978,7 +3978,7 @@ extension JetFireFeatureStoryFrame: SwiftProtobuf.Message, SwiftProtobuf._Messag
         case 7: try decoder.decodeSingularMessageField(value: &_storage._font)
         case 8: try decoder.decodeSingularMessageField(value: &_storage._actionButton)
         case 9: try decoder.decodeSingularMessageField(value: &_storage._hideButton)
-        case 10: try decoder.decodeSingularDoubleField(value: &_storage._duration)
+        case 10: try decoder.decodeSingularInt32Field(value: &_storage._duration)
         default: break
         }
       }
@@ -4015,7 +4015,7 @@ extension JetFireFeatureStoryFrame: SwiftProtobuf.Message, SwiftProtobuf._Messag
         try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
       }
       if let v = _storage._duration {
-        try visitor.visitSingularDoubleField(value: v, fieldNumber: 10)
+        try visitor.visitSingularInt32Field(value: v, fieldNumber: 10)
       }
     }
     try unknownFields.traverse(visitor: &visitor)
