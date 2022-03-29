@@ -48,6 +48,7 @@ final class StoriesFactory {
                 bgColorString: fr.background.color,
                 bgImageString: fr.image.url,
                 textColorString: fr.font.color,
+				duration: TimeInterval(fr.duration),
                 button: fr.storyButton()
             )
         }

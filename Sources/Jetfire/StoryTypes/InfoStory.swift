@@ -71,6 +71,7 @@ struct InfoSnap: Codable, ISnap {
 	let bgColorString: String?
 	let bgImageString: String?
 	let textColorString: String?
+	let duration: Double
 	let button: StoryButton?
 
 	var bgColor: UIColor {
@@ -101,5 +102,6 @@ struct InfoSnap: Codable, ISnap {
 		case button
 		case bgImageString = "bg_image"
 		case textColorString = "text_color"
+		case duration
     }
 }

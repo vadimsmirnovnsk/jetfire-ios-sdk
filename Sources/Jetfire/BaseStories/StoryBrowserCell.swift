@@ -22,7 +22,7 @@ final class StoryBrowserCell: BaseCollectionViewCell<StoryBrowserCellVM>, Segmen
 
 		self.backgroundColor = .black
 		self.contentView.backgroundColor = .black
-		self.contentView.layer.cornerRadius = 8
+		self.contentView.layer.cornerRadius = self.style.cornerRadius
 		self.contentView.layer.masksToBounds = true
 
 		self.contentView.addSubview(self.snapsContainer) { make in
@@ -47,7 +47,13 @@ final class StoryBrowserCell: BaseCollectionViewCell<StoryBrowserCellVM>, Segmen
 		self.closeButton.setImage(self.style.closeButtonStyle.image, for: .normal)
 		self.closeButton.setImage(self.style.closeButtonStyle.highlightedImage, for: .highlighted)
 		self.contentView.addSubview(self.closeButton) { make in
-			make.right.top.equalToSuperview().inset(self.style.closeButtonStyle.insets)
+			make.right.equalToSuperview().inset(self.style.closeButtonStyle.insets)
+			switch self.style.contentSize {
+				case .fullScreen:
+					make.top.equalTo(self.snp.topMargin).inset(self.style.closeButtonStyle.insets.top)
+				case .instaSize, .safeArea:
+					make.top.equalToSuperview().inset(self.style.closeButtonStyle.insets)
+			}
 		}
 
 		self.nextButton.onTap = { [weak self] _ in self?.switchToNextSnap() }
@@ -72,7 +78,13 @@ final class StoryBrowserCell: BaseCollectionViewCell<StoryBrowserCellVM>, Segmen
 		progress.padding = Jetfire.standard.snap.barStyle.padding
 		progress.delegate = self
 		self.topGradient.addSubview(progress) { make in
-			make.left.top.right.equalToSuperview().inset(Jetfire.standard.snap.barStyle.insets)
+			switch self.style.contentSize {
+				case .fullScreen:
+					make.top.equalTo(self.snp.topMargin).inset(Jetfire.standard.snap.barStyle.insets.top)
+				case .instaSize, .safeArea:
+					make.top.equalToSuperview().inset(Jetfire.standard.snap.barStyle.insets)
+			}
+			make.left.right.equalToSuperview().inset(Jetfire.standard.snap.barStyle.insets)
 			make.height.equalTo(Jetfire.standard.snap.barStyle.height)
 		}
 

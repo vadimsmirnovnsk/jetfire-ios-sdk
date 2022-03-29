@@ -22,6 +22,7 @@ final class StoryBrowserVC: BaseVC<StoryBrowserVM>, UIGestureRecognizerDelegate 
 	private let collection = StoryBrowserCollectionView(viewModel: StoryBrowserCollectionVM())
 
 	private var didLayoutFirstTime: Bool = true
+	private var style: SnapStyle { Jetfire.standard.snap }
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -44,10 +45,11 @@ final class StoryBrowserVC: BaseVC<StoryBrowserVM>, UIGestureRecognizerDelegate 
 		self.collection.registerClasses([ StoryBrowserCell.self ])
 
 		self.view.addSubview(self.collection) { make in
-			if #available(iOS 11.0, *) {
-				make.edges.equalTo(self.view.safeAreaLayoutGuide.snp.edges)
-			} else {
-				make.edges.equalToSuperview()
+			switch self.style.contentSize {
+				case .fullScreen:
+					make.edges.equalToSuperview()
+				case .instaSize, .safeArea:
+					make.edges.equalTo(self.view.safeAreaLayoutGuide.snp.edges)
 			}
 		}
 
