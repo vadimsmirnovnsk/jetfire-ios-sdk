@@ -71,7 +71,7 @@ public struct SnapButtonStyle: IPopulatable {
 	public var bgColor: UIColor
 	/// Цвет кнопки в нажатом состоянии
 	public var highlightedBgColor: UIColor
-	/// Цвет заголовка кнопки
+	/// Стиль заголовка кнопки
 	public var titleStyle: TextStyle
 	/// Инсеты заголовка относительно краёв кнопки
 	public var titleInsets: UIEdgeInsets
