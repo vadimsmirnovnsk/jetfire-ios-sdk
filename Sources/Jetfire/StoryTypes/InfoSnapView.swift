@@ -20,21 +20,14 @@ final class InfoSnapView: BaseSnapView<InfoSnapVM> {
 	override init() {
 		super.init()
 
+		self.backgroundColor = .black
+
 		self.cornered.backgroundColor = .black
 		self.cornered.layer.cornerRadius = self.style.cornerRadius
 		self.cornered.layer.masksToBounds = true
 
-		let topOffset = 0 // UIApplication.hasTopNotch ? UIApplication.topNotchHeight : 0
 		self.addSubview(self.cornered) { make in
-			make.top.equalToSuperview().offset(topOffset)
-			make.left.right.equalToSuperview()
-
-			switch self.style.contentSize {
-				case .fullScreen, .safeArea:
-					make.bottom.equalToSuperview()
-				case .instaSize:
-					make.height.equalTo(self.snp.width).multipliedBy(SnapStyle.kFixedStoryAspect)
-			}
+			make.edges.equalToSuperview()
 		}
 
 		self.content.backgroundColor = .black
@@ -84,7 +77,7 @@ final class InfoSnapView: BaseSnapView<InfoSnapVM> {
 
 		guard let vm = self.viewModel else { return }
 
-		self.backgroundColor = vm.snap.bgColor
+		self.content.backgroundColor = vm.snap.bgColor
 		self.backgroundImage.sd_setImage(with: vm.snap.bgImageURL,
 										 placeholderImage: nil,
 										 options: [.transformAnimatedImage]) { _,_,_,_ in }

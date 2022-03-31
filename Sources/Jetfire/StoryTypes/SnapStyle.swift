@@ -137,7 +137,7 @@ public struct SnapCloseButtonStyle: IPopulatable {
 	public var image: UIImage?
 	/// Картинка кнопки в нажатом состоянии
 	public var highlightedImage: UIImage?
-	/// Инсеты кнопки от верхнего и правого края
+	/// Инсеты кнопки от верхнего и правого края, а если right < 0, то от левого края
 	public var insets: UIEdgeInsets
 
 	public static func delo() -> SnapCloseButtonStyle {

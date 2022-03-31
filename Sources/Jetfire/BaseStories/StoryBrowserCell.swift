@@ -26,28 +26,42 @@ final class StoryBrowserCell: BaseCollectionViewCell<StoryBrowserCellVM>, Segmen
 		self.contentView.layer.masksToBounds = true
 
 		self.contentView.addSubview(self.snapsContainer) { make in
-			make.edges.equalToSuperview()
+			make.left.top.right.equalToSuperview()
+
+			switch self.style.contentSize {
+				case .fullScreen, .safeArea:
+					make.bottom.equalToSuperview()
+				case .instaSize:
+					make.height.equalTo(self.snp.width).multipliedBy(SnapStyle.kFixedStoryAspect)
+			}
 		}
 
 		self.contentView.addSubview(self.topGradient) { make in
 			make.left.top.right.equalToSuperview()
-			make.height.equalTo(64)
+			make.height.equalTo(UIApplication.topNotchHeight + 64)
 		}
 
+		/// 123: переделать на вьюху с HitTest и поиском видимой кнопки внутри
 		self.contentView.addSubview(self.nextButton) { make in
-			make.top.right.bottom.equalToSuperview().inset(UIEdgeInsets(top: 0, left: 0, bottom: 70, right: 0))
-			make.width.equalToSuperview().multipliedBy(0.75)
+			make.top.right.bottom.equalTo(self.snapsContainer).inset(UIEdgeInsets(top: 0, left: 0, bottom: 70, right: 0))
+			make.width.equalTo(self.snapsContainer).multipliedBy(0.75)
 		}
 
+		/// 123: переделать на вьюху с HitTest и поиском видимой кнопки внутри
 		self.contentView.addSubview(self.backButton) { make in
-			make.top.left.bottom.equalToSuperview().inset(UIEdgeInsets(top: 0, left: 0, bottom: 70, right: 0))
+			make.top.left.bottom.equalTo(self.snapsContainer).inset(UIEdgeInsets(top: 0, left: 0, bottom: 70, right: 0))
 			make.width.equalToSuperview().multipliedBy(0.25)
 		}
 
 		self.closeButton.setImage(self.style.closeButtonStyle.image, for: .normal)
 		self.closeButton.setImage(self.style.closeButtonStyle.highlightedImage, for: .highlighted)
 		self.contentView.addSubview(self.closeButton) { make in
-			make.right.equalToSuperview().inset(self.style.closeButtonStyle.insets)
+			if self.style.closeButtonStyle.insets.right >= 0 {
+				make.right.equalToSuperview().inset(self.style.closeButtonStyle.insets)
+			} else {
+				make.left.equalToSuperview().inset(self.style.closeButtonStyle.insets)
+			}
+
 			switch self.style.contentSize {
 				case .fullScreen:
 					make.top.equalTo(self.snp.topMargin).inset(self.style.closeButtonStyle.insets.top)
@@ -80,7 +94,7 @@ final class StoryBrowserCell: BaseCollectionViewCell<StoryBrowserCellVM>, Segmen
 		self.topGradient.addSubview(progress) { make in
 			switch self.style.contentSize {
 				case .fullScreen:
-					make.top.equalTo(self.snp.topMargin).inset(Jetfire.standard.snap.barStyle.insets.top)
+					make.top.equalToSuperview().offset(Jetfire.standard.snap.barStyle.insets.top + UIApplication.topNotchHeight)
 				case .instaSize, .safeArea:
 					make.top.equalToSuperview().inset(Jetfire.standard.snap.barStyle.insets)
 			}
