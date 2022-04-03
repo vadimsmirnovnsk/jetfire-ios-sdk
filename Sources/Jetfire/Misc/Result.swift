@@ -7,13 +7,6 @@ extension Result {
 		return try? self.get()
 	}
 
-	var isSuccess: Bool {
-		switch self {
-			case .success: return true
-			default: return false
-		}
-	}
-
 }
 
 extension Result where Success == Data {

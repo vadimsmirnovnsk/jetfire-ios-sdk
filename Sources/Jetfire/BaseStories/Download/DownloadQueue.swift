@@ -1,5 +1,3 @@
-import Alamofire
-
 import Foundation
 
 @objc final class DownloadQueue: NSObject {
