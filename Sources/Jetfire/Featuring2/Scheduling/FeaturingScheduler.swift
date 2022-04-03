@@ -1,5 +1,4 @@
 import Foundation
-import OrderedCollections
 
 /// Планировщик сторис, тостеров, пушей
 protocol IFeaturingScheduler {

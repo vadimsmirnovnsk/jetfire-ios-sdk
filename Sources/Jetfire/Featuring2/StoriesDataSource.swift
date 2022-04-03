@@ -1,5 +1,3 @@
-
-import OrderedCollections
 import UIKit
 
 /// Источник данных для карусели сторис
