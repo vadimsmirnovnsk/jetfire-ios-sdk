@@ -1,4 +1,4 @@
-import VNEssential
+
 
 /// Источник данных для карусели сторис
 protocol IStoriesDataSource {

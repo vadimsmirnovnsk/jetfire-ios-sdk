@@ -1,7 +1,4 @@
-import VNEssential
 import UIKit
-import UIColorHexSwift
-import VNBase
 
 /// Объект получает и хранит сториз и кампании для пользователя из нашего бэкенда
 /// Здесь лежат вообще все сториз, которые мы получили с бэка

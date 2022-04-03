@@ -1,4 +1,3 @@
-import VNBase
 import UIKit
 
 extension GradientView {

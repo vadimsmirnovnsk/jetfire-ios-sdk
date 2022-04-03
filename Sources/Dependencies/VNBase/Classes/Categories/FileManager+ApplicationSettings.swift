@@ -1,20 +1,20 @@
-import UIKit
+import Foundation
 
 public extension FileManager { // ApplicationSettings
 
 	static func documentsDirectory() -> String {
 		let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as [String]
-		return paths[0]
+		return paths.safeObject(at: 0) ?? ""
 	}
 
 	static func libraryDirectory() -> String {
 		let paths = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true) as [String]
-		return paths[0]
+		return paths.safeObject(at: 0) ?? ""
 	}
 
 	static func cachesDirectory() -> String {
 		let paths = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true) as [String]
-		return paths[0]
+		return paths.safeObject(at: 0) ?? ""
 	}
 
 	static func cacheDirectoryURL() -> URL {
@@ -34,7 +34,7 @@ public extension FileManager { // ApplicationSettings
 
 }
 
-extension FileManager { // Private
+public extension FileManager { // Private
 
 	fileprivate static func filePath(withDirectoryPath directoryPath: String, fileName: String) -> URL? {
 		let directoryURL = URL(fileURLWithPath: directoryPath)

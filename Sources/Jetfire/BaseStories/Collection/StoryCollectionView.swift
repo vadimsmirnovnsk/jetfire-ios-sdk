@@ -1,4 +1,3 @@
-import VNBase
 import UIKit
 
 // Базовый класс коллекшен вьюхи с кругляшами

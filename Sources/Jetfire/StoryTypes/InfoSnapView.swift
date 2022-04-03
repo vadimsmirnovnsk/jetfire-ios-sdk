@@ -1,4 +1,3 @@
-import VNBase
 import UIKit
 import SDWebImage
 

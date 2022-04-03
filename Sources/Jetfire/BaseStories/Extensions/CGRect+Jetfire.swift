@@ -14,10 +14,6 @@ public extension CGRect {
 		return CGRect(origin: .zero, size: self.size)
 	}
 
-	var center: CGPoint {
-		return CGPoint(x: self.midX, y: self.midY)
-	}
-
 	// Используется в частности после вызова метода boundingRect.
 	//
 	// This method returns fractional sizes (in the size component of the returned CGRect);

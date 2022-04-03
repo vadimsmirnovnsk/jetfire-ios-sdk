@@ -1,4 +1,4 @@
-import VNBase
+import UIKit
 
 protocol IStoryBrowserDelegate: AnyObject {
 	func skip(cellVM: StoryBrowserCellVM)

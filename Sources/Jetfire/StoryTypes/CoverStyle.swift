@@ -1,5 +1,5 @@
 import UIKit
-import VNEssential
+
 
 public struct CoverStyle: IPopulatable {
 

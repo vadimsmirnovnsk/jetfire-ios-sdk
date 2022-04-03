@@ -1,5 +1,3 @@
-import VNBase
-import VNEssential
 import UIKit
 
 class StoryBrowserCollectionView: BaseCollectionView<StoryBrowserCollectionVM> {

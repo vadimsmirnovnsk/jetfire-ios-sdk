@@ -1,5 +1,5 @@
 import Foundation
-import VNEssential
+
 
 /// Раздает тригернутые кампании
 protocol ITriggeredCampaignsProvider {

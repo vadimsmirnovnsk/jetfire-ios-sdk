@@ -1,5 +1,5 @@
 import Foundation
-import VNEssential
+
 
 /// Раздает кампании для карусели сторис
 protocol IStoriesCampaignsProvider {

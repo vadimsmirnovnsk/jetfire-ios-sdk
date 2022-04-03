@@ -1,7 +1,7 @@
-import CommonCrypto
 import Foundation
+import CommonCrypto
 
-extension String {
+public extension String {
 
 	var MD5: Data {
 		let messageData = self.data(using:.utf8)!

@@ -1,6 +1,6 @@
 import Foundation
 import SQLite
-import VNEssential
+
 
 /// Доступ к локальной БД
 protocol IDatabaseService {

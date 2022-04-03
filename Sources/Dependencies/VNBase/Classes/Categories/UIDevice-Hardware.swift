@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 public struct UIDeviceHardware {
 	public static func platformModelString() -> String {

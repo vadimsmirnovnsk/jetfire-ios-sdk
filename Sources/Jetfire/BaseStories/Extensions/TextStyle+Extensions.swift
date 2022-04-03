@@ -1,5 +1,4 @@
 import UIKit
-import VNEssential
 
 extension TextStyle {
 

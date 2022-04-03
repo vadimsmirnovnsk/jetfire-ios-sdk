@@ -1,4 +1,3 @@
-import VNBase
 import Foundation
 import UIKit
 

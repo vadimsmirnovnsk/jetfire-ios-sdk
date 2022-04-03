@@ -1,7 +1,4 @@
 import UIKit
-import VNBase
-import VNEssential
-import VNHandlers
 
 /// Класс, который конфигурирует доступные типы снапов и сториз — пока здесь только InfoSnap.
 

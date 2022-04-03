@@ -1,5 +1,5 @@
 import Alamofire
-import VNEssential
+
 import Foundation
 
 @objc final class DownloadQueue: NSObject {
