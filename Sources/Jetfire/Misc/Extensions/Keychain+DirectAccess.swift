@@ -1,4 +1,3 @@
-import KeychainAccess
 import Foundation
 
 extension Keychain {
