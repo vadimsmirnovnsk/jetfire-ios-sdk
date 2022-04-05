@@ -26,7 +26,7 @@ public enum ToastVisualStyle {
 	var feedbackType: UINotificationFeedbackGenerator.FeedbackType { .success }
 }
 
-class ToasterView: UIView {
+class ToasterView: PassOverTouchesView {
 
 	/// Поведение тостера — исчезающий или ждущий обязательного действия (будет с кнопками, но пока нет)
 	enum Behavior {

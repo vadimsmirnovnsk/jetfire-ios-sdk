@@ -40,10 +40,10 @@ struct FeaturingRules: Codable {
 			isFeaturingEnabled: true,
 			isTest: true,
 			featuringApplicationStartShowStyle: .modal,
-			retryApplicationStartShowTimeout: 60,
-			retryPushShowTimeout: 60,
-			retryToasterShowTimeout: 60,
-			retryFeatureShowTimeout: 120
+			retryApplicationStartShowTimeout: 5,
+			retryPushShowTimeout: 5,
+			retryToasterShowTimeout: 5,
+			retryFeatureShowTimeout: 5
 		)
 	}
 	#else
