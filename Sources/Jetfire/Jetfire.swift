@@ -5,6 +5,7 @@ import VNBase
 
 public class Jetfire {
 
+	public static var mode: JetfireMode = .production
 	public static let standard = Jetfire()
 
 	public var cover: CoverStyle = .delo()
@@ -22,7 +23,7 @@ public class Jetfire {
 
 	private(set) lazy var router = FeaturingRouter(container: self)
     private lazy var container: JetfireContainer = {
-        JetfireContainer(router: router)
+		JetfireContainer(router: router, mode: Jetfire.mode)
     }()
 
     private init() {}

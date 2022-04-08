@@ -8,20 +8,26 @@ protocol IPlistSettingsService {
 
 class PlistSettingsService: IPlistSettingsService {
     lazy var current: PlistSettings = {
-        readAppSettings()
+		readAppSettings(mode: self.mode)
     }()
+
+	private let mode: JetfireMode
+
+	init(mode: JetfireMode) {
+		self.mode = mode
+	}
 }
 
 // MARK: - Private
 
 extension PlistSettingsService {
 
-    private func readAppSettings() -> PlistSettings {
+	private func readAppSettings(mode: JetfireMode) -> PlistSettings {
         do {
             let decoder = PropertyListDecoder()
-            let data = readDataFromMainBundle(name: "JetfireService-Info")
+			let data = readDataFromMainBundle(name: mode.plistFilename)
             let settings = try decoder.decode(PlistSettings.self, from: data)
-            Log.info("JetfireService-Info.plist loaded")
+			Log.info("\(mode.plistFilename).plist loaded")
             return settings
         } catch let error {
             Log.error(error)

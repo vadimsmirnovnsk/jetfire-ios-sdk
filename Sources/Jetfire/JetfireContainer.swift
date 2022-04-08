@@ -6,6 +6,7 @@ final class JetfireContainer {
 
     private let application = UIApplication.shared
     private let router: FeaturingRouter
+	private let mode: JetfireMode
 
     lazy private(set) var contentPresenter: ContentPresenter = {
         ContentPresenter()
@@ -16,7 +17,7 @@ final class JetfireContainer {
     }()
 
     lazy private(set) var plistSettingsService: IPlistSettingsService = {
-        PlistSettingsService()
+		PlistSettingsService(mode: self.mode)
     }()
 
     lazy private(set) var logger: ILoggerService = {
@@ -206,8 +207,9 @@ final class JetfireContainer {
         )
     }()
 
-    init(router: FeaturingRouter) {
+	init(router: FeaturingRouter, mode: JetfireMode) {
         self.router = router
+		self.mode = mode
         LoggerContainer.logger = self.logger
         self.storiesFactory.storiesService = self.storiesService
     }
