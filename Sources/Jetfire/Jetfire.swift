@@ -5,7 +5,6 @@ import VNBase
 
 public class Jetfire {
 
-	public static var mode: JetfireMode = .production
 	public static let standard = Jetfire()
 
 	public var cover: CoverStyle = .delo()
@@ -20,16 +19,17 @@ public class Jetfire {
     }
 
 	private var isStarted = false
+	private var mode: JetfireMode = .production
 
 	private(set) lazy var router = FeaturingRouter(container: self)
-    private lazy var container: JetfireContainer = {
-		JetfireContainer(router: router, mode: Jetfire.mode)
-    }()
+    private var container: JetfireContainer!
 
     private init() {}
 
-	public func start() {
+	public func start(mode: JetfireMode = .production) {
 		self.isStarted = true
+		self.mode = mode
+		self.container = JetfireContainer(router: router, mode: self.mode)
         self.container.jetfireMain.start()
 	}
 
@@ -39,10 +39,12 @@ public class Jetfire {
     }
 
     public func reset() {
+		self.checkStarted()
         self.container.jetfireMain.reset()
     }
 
     public func appendLogTracker(_ tracker: IJetfireLogTracker) {
+		self.checkStarted()
         self.container.logger.appendTracker(tracker)
     }
 
