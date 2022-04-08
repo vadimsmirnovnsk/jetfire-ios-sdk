@@ -63,6 +63,7 @@ class DatabaseService: IDatabaseService {
             try events.reset(db: db)
             try sessionProperties.reset(db: db)
             try userProperties.reset(db: db)
+			self.onChanged.raise(())
         } catch let error {
             Log.error(error)
         }
@@ -71,6 +72,7 @@ class DatabaseService: IDatabaseService {
     func setUserProperty(_ property: DBUserProperty) {
         do {
             try userProperties.insertOrReplace(property: property, db: db)
+			self.onChanged.raise(())
         } catch let error {
             Log.error(error)
             assertionFailure(String(describing: error))
@@ -100,6 +102,7 @@ class DatabaseService: IDatabaseService {
     func removeUserProperty(for key: String) {
         do {
             try userProperties.delete(for: key, db: db)
+			self.onChanged.raise(())
         } catch let error {
             Log.error(error)
             assertionFailure(String(describing: error))
@@ -109,6 +112,7 @@ class DatabaseService: IDatabaseService {
     func setSessionProperty(_ property: DBSessionProperty) {
         do {
             try sessionProperties.insertOrReplace(property: property, db: db)
+			self.onChanged.raise(())
         } catch let error {
             Log.error(error)
             assertionFailure(String(describing: error))
@@ -138,6 +142,7 @@ class DatabaseService: IDatabaseService {
     func removeSessionProperty(for key: String) {
         do {
             try sessionProperties.delete(for: key, db: db)
+			self.onChanged.raise(())
         } catch let error {
             Log.error(error)
             assertionFailure(String(describing: error))
