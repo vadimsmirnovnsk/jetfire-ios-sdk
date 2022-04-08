@@ -70,38 +70,50 @@ extension FeaturingScheduler {
     }
 
     private func scheduleTasks() {
-        var triggeredTasks: [SchedulerStorableTask] = []
+        var triggeredTasks: OrderedSet<SchedulerStorableTask> = []
         for campaign in self.storiesCampaignsProvider.campaigns {
             let stories = campaign.stories.map {
                 self.factory.makeStorableTask(story: $0, campaignId: campaign.id)
             }
-            triggeredTasks.append(stories)
+			triggeredTasks.append(contentsOf: stories)
         }
         for campaign in self.triggeredCampaignsProvider.campaigns {
             let toasters = campaign.hasToaster ? [campaign.toaster].map {
                 self.factory.makeStorableTask(toaster: $0, campaignId: campaign.id)
             } : []
-            triggeredTasks.append(toasters)
+			triggeredTasks.append(contentsOf: toasters)
         }
         self.sync(newTasks: triggeredTasks)
     }
 
-    private func sync(newTasks: [SchedulerStorableTask]) {
-        var result: OrderedSet<SchedulerStorableTask> = []
-        for newItem in newTasks {
-            if let index = self.storableTasks.firstIndex(of: newItem) {
-                let existingItem = self.storableTasks[index]
-                result.append(existingItem)
-            } else {
-                result.append(newItem)
-            }
-        }
-        if self.storableTasks != result {
-            self.storableTasks = result
-            self.tasks = self.makeTasks()
-            Log.info("Sheduler tasks: \(self.tasks.debugDescription)")
-        }
+    private func sync(newTasks: OrderedSet<SchedulerStorableTask>) {
+		deactivateOldTasks(newTasks)
+		addNewTasks(newTasks)
     }
+
+	private func deactivateOldTasks(_ newTasks: OrderedSet<SchedulerStorableTask>) {
+		for taks in self.tasks {
+			if !newTasks.contains(taks.storable) {
+				taks.deactivate()
+			}
+		}
+	}
+
+	private func addNewTasks(_ newTasks: OrderedSet<SchedulerStorableTask>) {
+		var result: OrderedSet<SchedulerStorableTask> = []
+		for newItem in newTasks {
+			if let index = self.storableTasks.firstIndex(of: newItem) {
+				let existingItem = self.storableTasks[index]
+				result.append(existingItem)
+			} else {
+				result.append(newItem)
+			}
+		}
+		if self.storableTasks != result {
+			self.storableTasks = result
+			self.tasks = self.makeTasks()
+		}
+	}
 
     private func makeTasks() -> [SchedulerTask] {
         self.storableTasks.compactMap { self.factory.makeTask(storableTask: $0) }
