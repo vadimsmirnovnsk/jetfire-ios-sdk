@@ -1,33 +1,39 @@
 import UIKit
 
-protocol IPlistSettingsService {
+protocol IPlistSettingsService: AnyObject {
+    var mode: JetfireMode { get set }
     var current: PlistSettings { get }
 }
 
 // MARK: - PlistSettingsService
 
 class PlistSettingsService: IPlistSettingsService {
-    lazy var current: PlistSettings = {
-		readAppSettings(mode: self.mode)
+
+    private lazy var prod: PlistSettings = {
+        readAppSettings(mode: .production)
     }()
 
-	private let mode: JetfireMode
+    private lazy var stage: PlistSettings = {
+        readAppSettings(mode: .staging)
+    }()
 
-	init(mode: JetfireMode) {
-		self.mode = mode
-	}
+    var current: PlistSettings {
+        mode == .production ? prod : stage
+    }
+
+    var mode: JetfireMode = .production
 }
 
 // MARK: - Private
 
 extension PlistSettingsService {
 
-	private func readAppSettings(mode: JetfireMode) -> PlistSettings {
+    private func readAppSettings(mode: JetfireMode) -> PlistSettings {
         do {
             let decoder = PropertyListDecoder()
-			let data = readDataFromMainBundle(name: mode.plistFilename)
+            let data = readDataFromMainBundle(name: mode.plistFilename)
             let settings = try decoder.decode(PlistSettings.self, from: data)
-			Log.info("\(mode.plistFilename).plist loaded")
+            Log.info("\(mode.plistFilename).plist loaded")
             return settings
         } catch let error {
             Log.error(error)
