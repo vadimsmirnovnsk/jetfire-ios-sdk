@@ -6,6 +6,7 @@ final class SchedulerTask {
 
     private let task: SchedulerStorableTask
     private let taskActivator: ISchedulerTaskActivator
+	var storable: SchedulerStorableTask { task }
 
     init(
         task: SchedulerStorableTask,
@@ -17,11 +18,19 @@ final class SchedulerTask {
 
     func tick() {
         if self.task.isExpired {
-            self.taskActivator.deactivate()
+            self.deactivate()
         } else if self.task.canBeActivated {
-            self.taskActivator.activate()
+            self.activate()
         }
     }
+
+	func activate() {
+		self.taskActivator.activate()
+	}
+
+	func deactivate() {
+		self.taskActivator.deactivate()
+	}
 }
 
 // MARK: - CustomDebugStringConvertible
