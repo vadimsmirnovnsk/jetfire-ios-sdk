@@ -5,32 +5,33 @@ import VNBase
 
 public class Jetfire {
 
-	public static let standard = Jetfire()
+    public static let standard = Jetfire()
 
-	public var cover: CoverStyle = .delo()
-	public var toast: ToastStyle = .delo()
-	public var snap: SnapStyle = .delo()
-	/// Визуальный стиль — какая подложка (для адаптации к светлой/тёмной теме на лету, например)
-	public var toastVisualStyle: ToastVisualStyle = .blur(.systemChromeMaterialDark)
+    public var cover: CoverStyle = .delo()
+    public var toast: ToastStyle = .delo()
+    public var snap: SnapStyle = .delo()
+    /// Визуальный стиль — какая подложка (для адаптации к светлой/тёмной теме на лету, например)
+    public var toastVisualStyle: ToastVisualStyle = .blur(.systemChromeMaterialDark)
 
     public var onLogEvent: ((_ name: EventId, _ params: [ParameterId: Any]) -> Void)? {
         get { self.container.analytics.onLogEvent }
         set { self.container.analytics.onLogEvent = newValue }
     }
 
-	private var isStarted = false
+    private var isStarted = false
 
-	private(set) lazy var router = FeaturingRouter(container: self)
+    private(set) lazy var router = FeaturingRouter(container: self)
     private lazy var container: JetfireContainer = {
         JetfireContainer(router: router)
     }()
 
     private init() {}
 
-	public func start() {
-		self.isStarted = true
+    public func start(mode: JetfireMode = .production) {
+        self.isStarted = true
+        self.container.plistSettingsService.mode = mode
         self.container.jetfireMain.start()
-	}
+    }
 
     public func enableFeaturing() {
         self.checkStarted()
@@ -45,12 +46,12 @@ public class Jetfire {
         self.container.logger.appendTracker(tracker)
     }
 
-	public func storiesView() -> UIView {
+    public func storiesView() -> UIView {
         let vm = ContentStoriesVM(storiesService: self.container.storiesService)
-		let view = ContentStoriesView()
-		view.viewModel = vm
-		return view
-	}
+        let view = ContentStoriesView()
+        view.viewModel = vm
+        return view
+    }
 
 }
 

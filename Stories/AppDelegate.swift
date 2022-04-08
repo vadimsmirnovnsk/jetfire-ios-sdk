@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         Jetfire.standard.appendLogTracker(ConsoleLogTracker())
 
-		Jetfire.standard.start()
+		Jetfire.standard.start(mode: .staging)
         Jetfire.standard.enableFeaturing()
 
 //		let text = NegativeReviewCommentGenerator().generate(for: "John")

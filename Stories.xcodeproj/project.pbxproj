@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		300868222714F0D5003B4335 /* TextStyle+Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300868212714F0D5003B4335 /* TextStyle+Demo.swift */; };
-		3008683827208EB5003B4335 /* JetfireService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3008683727208EB5003B4335 /* JetfireService-Info.plist */; };
+		3008683827208EB5003B4335 /* JetfireService-Info-Production.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3008683727208EB5003B4335 /* JetfireService-Info-Production.plist */; };
 		301F88D726ADECB600BAE24D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301F88D626ADECB600BAE24D /* AppDelegate.swift */; };
 		301F88DB26ADECB600BAE24D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301F88DA26ADECB600BAE24D /* ViewController.swift */; };
 		301F88E026ADECB900BAE24D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 301F88DF26ADECB900BAE24D /* Assets.xcassets */; };
@@ -16,6 +16,7 @@
 		3090F73C26B6E7DD002F2B9D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3090F73B26B6E7DD002F2B9D /* GoogleService-Info.plist */; };
 		3090F73E26B6EC28002F2B9D /* FeatureAVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3090F73D26B6EC28002F2B9D /* FeatureAVC.swift */; };
 		30B2C3C826B198410072EB9E /* ReviewCommentGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2C3C726B198400072EB9E /* ReviewCommentGenerator.swift */; };
+		30B535C128002FEC007B2068 /* JetfireService-Info-Staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30B535C028002FEC007B2068 /* JetfireService-Info-Staging.plist */; };
 		73FB8BDE27216816001705FC /* VNBase in Frameworks */ = {isa = PBXBuildFile; productRef = 73FB8BDD27216816001705FC /* VNBase */; };
 		9794FB7E27C65191000D3761 /* ConsoleLogTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9794FB7D27C65191000D3761 /* ConsoleLogTracker.swift */; };
 		9794FB8027C69E3A000D3761 /* Jetfire in Frameworks */ = {isa = PBXBuildFile; productRef = 9794FB7F27C69E3A000D3761 /* Jetfire */; };
@@ -23,7 +24,7 @@
 
 /* Begin PBXFileReference section */
 		300868212714F0D5003B4335 /* TextStyle+Demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextStyle+Demo.swift"; sourceTree = "<group>"; };
-		3008683727208EB5003B4335 /* JetfireService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "JetfireService-Info.plist"; sourceTree = "<group>"; };
+		3008683727208EB5003B4335 /* JetfireService-Info-Production.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "JetfireService-Info-Production.plist"; sourceTree = "<group>"; };
 		301F88D326ADECB600BAE24D /* Stories.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stories.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		301F88D626ADECB600BAE24D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		301F88DA26ADECB600BAE24D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -34,6 +35,7 @@
 		3090F73D26B6EC28002F2B9D /* FeatureAVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureAVC.swift; sourceTree = "<group>"; };
 		30B2C38226ADFBC20072EB9E /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		30B2C3C726B198400072EB9E /* ReviewCommentGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCommentGenerator.swift; sourceTree = "<group>"; };
+		30B535C028002FEC007B2068 /* JetfireService-Info-Staging.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JetfireService-Info-Staging.plist"; sourceTree = "<group>"; };
 		9794FB7D27C65191000D3761 /* ConsoleLogTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleLogTracker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,8 +80,9 @@
 				301F88DF26ADECB900BAE24D /* Assets.xcassets */,
 				301F88E126ADECB900BAE24D /* LaunchScreen.storyboard */,
 				30B2C38226ADFBC20072EB9E /* Bridging-Header.h */,
-				3008683727208EB5003B4335 /* JetfireService-Info.plist */,
+				3008683727208EB5003B4335 /* JetfireService-Info-Production.plist */,
 				3090F73B26B6E7DD002F2B9D /* GoogleService-Info.plist */,
+				30B535C028002FEC007B2068 /* JetfireService-Info-Staging.plist */,
 				301F88E426ADECB900BAE24D /* Info.plist */,
 				9794FB7D27C65191000D3761 /* ConsoleLogTracker.swift */,
 			);
@@ -159,8 +162,9 @@
 			files = (
 				301F88E326ADECB900BAE24D /* LaunchScreen.storyboard in Resources */,
 				301F88E026ADECB900BAE24D /* Assets.xcassets in Resources */,
-				3008683827208EB5003B4335 /* JetfireService-Info.plist in Resources */,
+				3008683827208EB5003B4335 /* JetfireService-Info-Production.plist in Resources */,
 				3090F73C26B6E7DD002F2B9D /* GoogleService-Info.plist in Resources */,
+				30B535C128002FEC007B2068 /* JetfireService-Info-Staging.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
