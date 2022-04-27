@@ -18,7 +18,7 @@ public class Jetfire {
         set { self.container.analytics.onLogEvent = newValue }
     }
 
-    private var isStarted = false
+    public private(set) var isStarted = false
 
     private(set) lazy var router = FeaturingRouter(container: self)
     private lazy var container: JetfireContainer = {
