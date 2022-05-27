@@ -1,4 +1,4 @@
-import VNBase
+import JetfireVNBase
 import UIKit
 
 extension NavigationBarStyle {

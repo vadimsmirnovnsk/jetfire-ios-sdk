@@ -1,4 +1,4 @@
-import UIColorHexSwift
+import JetfireUIColorHexSwift
 import UIKit
 
 struct InfoStoryModel: Codable, IStory {

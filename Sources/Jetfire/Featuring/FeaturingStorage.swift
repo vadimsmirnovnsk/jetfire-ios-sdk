@@ -1,7 +1,6 @@
-import VNEssential
+import JetfireVNEssential
 import UIKit
-import UIColorHexSwift
-import VNBase
+import JetfireVNBase
 
 /// Объект получает и хранит сториз и кампании для пользователя из нашего бэкенда
 /// Здесь лежат вообще все сториз, которые мы получили с бэка

@@ -1,5 +1,5 @@
 import Foundation
-import SQLite
+import JetfireSQLite
 
 //    CREATE TABLE "events"
 //    (

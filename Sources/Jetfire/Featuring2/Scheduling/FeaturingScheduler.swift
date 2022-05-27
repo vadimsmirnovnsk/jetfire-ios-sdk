@@ -1,5 +1,5 @@
 import Foundation
-import OrderedCollections
+import JetfireOrderedCollections
 
 /// Планировщик сторис, тостеров, пушей
 protocol IFeaturingScheduler {

@@ -1,7 +1,7 @@
 import UIKit
-import VNBase
-import VNEssential
-import VNHandlers
+import JetfireVNBase
+import JetfireVNEssential
+import JetfireVNHandlers
 
 /// Класс, который конфигурирует доступные типы снапов и сториз — пока здесь только InfoSnap.
 

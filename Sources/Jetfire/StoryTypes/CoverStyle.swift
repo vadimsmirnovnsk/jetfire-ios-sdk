@@ -1,5 +1,5 @@
 import UIKit
-import VNEssential
+import JetfireVNEssential
 
 public struct CoverStyle: IPopulatable {
 

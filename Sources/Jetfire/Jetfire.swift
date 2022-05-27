@@ -1,7 +1,7 @@
 import Foundation
 import UserNotifications
 import UIKit
-import VNBase
+import JetfireVNBase
 
 public class Jetfire {
 

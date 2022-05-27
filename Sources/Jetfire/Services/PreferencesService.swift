@@ -1,4 +1,4 @@
-import KeychainAccess
+import JetfireKeychainAccess
 import Foundation
 
 final class PreferencesService {

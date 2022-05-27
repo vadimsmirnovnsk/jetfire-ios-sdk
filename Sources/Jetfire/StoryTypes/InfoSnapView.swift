@@ -1,6 +1,6 @@
-import VNBase
+import JetfireVNBase
 import UIKit
-import SDWebImage
+import JetfireSDWebImage
 
 final class InfoSnapView: BaseSnapView<InfoSnapVM> {
 

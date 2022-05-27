@@ -1,4 +1,4 @@
-import VNBase
+import JetfireVNBase
 import UIKit
 
 // Базовый класс кругляша, управляет прочтением сториз, открывает сториз по тапу

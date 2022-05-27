@@ -1,5 +1,5 @@
 import Foundation
-import SwiftProtobuf
+import JetfireProtobuf
 
 extension Result {
 
@@ -36,7 +36,7 @@ extension Result where Success == Data {
 	}
 
 	// Только в этом месте делаем do-catch
-	func unwrapProto<Proto>(to protoClass: Proto.Type) -> Result<Proto, Error> where Proto: SwiftProtobuf.Message {
+	func unwrapProto<Proto>(to protoClass: Proto.Type) -> Result<Proto, Error> where Proto: JetfireProtobuf.Message {
         Log.info("Will try to unpack protobuf response: \(self) for class: \(Proto.self)")
 		switch self {
 			case .success(let data):
@@ -47,7 +47,7 @@ extension Result where Success == Data {
 				} catch {
                     Log.info("Couldn't unwrap protobuf data: \(data) to class: \(Proto.self)")
 
-                    let cls: SwiftProtobuf.Message.Type = JetFireErrorResponse.self
+                    let cls: JetfireProtobuf.Message.Type = JetFireErrorResponse.self
                     if let errorResponse = try? cls.init(serializedData: data) {
                         Log.info("Unwrap error: \(errorResponse)")
                     }

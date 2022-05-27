@@ -1,8 +1,8 @@
-import VNBase
-import VNEssential
+import JetfireVNBase
+import JetfireVNEssential
 import UIKit
-import SwiftProtobuf
-import SDWebImage
+import JetfireProtobuf
+import JetfireSDWebImage
 
 /// Визуальный стиль — какая подложка (для адаптации к светлой/тёмной теме на лету, например)
 public enum ToastVisualStyle {
