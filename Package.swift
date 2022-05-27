@@ -9,34 +9,94 @@ let package = Package(
 		.iOS(.v13),
 	],
     products: [
-        .library(
-            name: "Jetfire",
-            targets: ["Jetfire"]),
+        .library(name: "Jetfire", targets: ["Jetfire"])
     ],
-	dependencies: [
-		.package(url: "https://github.com/teanet/VNBase.git", .branch("master")),
-        .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.4.4")),
-		.package(url: "https://github.com/SDWebImage/SDWebImage.git", from: "5.10.0"),
-        .package(name: "UIColorHexSwift", url: "https://github.com/yeahdongcn/UIColor-Hex-Swift", from: "5.1.7"),
-		.package(name: "SwiftProtobuf", url: "https://github.com/apple/swift-protobuf.git", from: "1.17.0"),
-		.package(name: "KeychainAccess", url: "https://github.com/kishikawakatsumi/KeychainAccess", from: "4.2.2"),
-		.package(url: "https://github.com/stephencelis/SQLite.swift.git", from: "0.12.0"),
-        .package(url: "https://github.com/apple/swift-collections.git", .upToNextMajor(from: "1.0.2"))
-	],
+	dependencies: [],
     targets: [
+        .target(
+            name: "UIColorHexSwift",
+            dependencies: [],
+            path: "Thirdparty/UIColor-Hex-Swift/HEXColor"
+        ),
+        .target(
+            name: "KeychainAccess",
+            path: "Thirdparty/KeychainAccess/Lib/KeychainAccess"
+        ),
+        .target(
+            name: "SDWebImage",
+            path: "Thirdparty/SDWebImage/SDWebImage",
+            sources: ["Core", "Private"],
+            cSettings: [
+                .headerSearchPath("Core"),
+                .headerSearchPath("Private")
+            ]
+        ),
+        .target(
+            name: "OrderedCollections",
+            path: "Thirdparty/swift-collections/Sources/OrderedCollections",
+            exclude: ["CMakeLists.txt"],
+            swiftSettings: nil
+        ),
+        .target(
+            name: "Alamofire",
+            path: "Thirdparty/Alamofire/Source",
+            exclude: ["Info.plist"],
+            linkerSettings: [
+                .linkedFramework("CFNetwork", .when(platforms: [
+                    .iOS, .macOS, .tvOS, .watchOS
+                ]))
+            ]),
+        .target(
+            name: "SwiftProtobuf",
+            path: "Thirdparty/swift-protobuf/Sources/SwiftProtobuf"
+        ),
+        .target(
+            name: "SQLiteObjc",
+            path: "Thirdparty/SQLite.swift/Sources/SQLiteObjc",
+            exclude: [
+                "fts3_tokenizer.h"
+            ]
+        ),
+        .target(
+            name: "SQLite",
+            dependencies: ["SQLiteObjc"],
+            path: "Thirdparty/SQLite.swift/Sources/SQLite",
+            exclude: [
+                "Info.plist"
+            ]
+        ),
+        .target(
+            name: "SnapKit",
+            path: "Thirdparty/SnapKit/Sources"
+        ),
+        .target(
+            name: "VNEssential",
+            path: "Thirdparty/VNBase/VNBase/Essential"
+        ),
+        .target(
+            name: "VNHandlers",
+            path: "Thirdparty/VNBase/VNBase/Handlers"
+        ),
+        .target(
+            name: "VNBase",
+            dependencies: [
+                "VNEssential",
+                "SnapKit",
+                "VNHandlers"
+            ],
+            path: "Thirdparty/VNBase/VNBase/Classes"
+        ),
         .target(
             name: "Jetfire",
             dependencies: [
-				.product(name: "VNHandlers", package: "VNBase"),
-				.product(name: "VNEssential", package: "VNBase"),
-				.product(name: "VNBase", package: "VNBase"),
-				.product(name: "Alamofire", package: "Alamofire"),
-				.product(name: "SDWebImage", package: "SDWebImage"),
-				.product(name: "UIColorHexSwift", package: "UIColorHexSwift"),
-				.product(name: "SwiftProtobuf", package: "SwiftProtobuf"),
-				.product(name: "KeychainAccess", package: "KeychainAccess"),
-				.product(name: "SQLite", package: "SQLite.swift"),
-                .product(name: "OrderedCollections", package: "swift-collections")
+                "UIColorHexSwift",
+                "KeychainAccess",
+                "SDWebImage",
+                "OrderedCollections",
+                "Alamofire",
+                "SwiftProtobuf",
+                "SQLite",
+                "VNBase"
 			],
 			exclude: ["Model/protocol.proto"]
 		),

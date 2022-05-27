@@ -17,7 +17,6 @@
 		3090F73E26B6EC28002F2B9D /* FeatureAVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3090F73D26B6EC28002F2B9D /* FeatureAVC.swift */; };
 		30B2C3C826B198410072EB9E /* ReviewCommentGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2C3C726B198400072EB9E /* ReviewCommentGenerator.swift */; };
 		30B535C128002FEC007B2068 /* JetfireService-Info-Staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30B535C028002FEC007B2068 /* JetfireService-Info-Staging.plist */; };
-		73FB8BDE27216816001705FC /* VNBase in Frameworks */ = {isa = PBXBuildFile; productRef = 73FB8BDD27216816001705FC /* VNBase */; };
 		9794FB7E27C65191000D3761 /* ConsoleLogTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9794FB7D27C65191000D3761 /* ConsoleLogTracker.swift */; };
 		9794FB8027C69E3A000D3761 /* Jetfire in Frameworks */ = {isa = PBXBuildFile; productRef = 9794FB7F27C69E3A000D3761 /* Jetfire */; };
 /* End PBXBuildFile section */
@@ -45,7 +44,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9794FB8027C69E3A000D3761 /* Jetfire in Frameworks */,
-				73FB8BDE27216816001705FC /* VNBase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,7 +111,6 @@
 			);
 			name = Stories;
 			packageProductDependencies = (
-				73FB8BDD27216816001705FC /* VNBase */,
 				9794FB7F27C69E3A000D3761 /* Jetfire */,
 			);
 			productName = Stories;
@@ -144,7 +141,6 @@
 			);
 			mainGroup = 301F88CA26ADECB600BAE24D;
 			packageReferences = (
-				73FB8BD9272167A5001705FC /* XCRemoteSwiftPackageReference "VNBase" */,
 			);
 			productRefGroup = 301F88D426ADECB600BAE24D /* Products */;
 			projectDirPath = "";
@@ -377,23 +373,7 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		73FB8BD9272167A5001705FC /* XCRemoteSwiftPackageReference "VNBase" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/teanet/VNBase.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		73FB8BDD27216816001705FC /* VNBase */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 73FB8BD9272167A5001705FC /* XCRemoteSwiftPackageReference "VNBase" */;
-			productName = VNBase;
-		};
 		9794FB7F27C69E3A000D3761 /* Jetfire */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Jetfire;
