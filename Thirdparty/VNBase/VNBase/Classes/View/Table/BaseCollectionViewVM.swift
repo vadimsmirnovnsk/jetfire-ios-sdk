@@ -1,5 +1,5 @@
 import UIKit
-import VNEssential
+import JetfireVNEssential
 
 open class BaseCollectionViewVM: BaseVM {
 

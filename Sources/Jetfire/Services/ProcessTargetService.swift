@@ -1,5 +1,5 @@
 import UIKit
-import VNHandlers
+import JetfireVNHandlers
 
 internal class ProcessTargetService {
 

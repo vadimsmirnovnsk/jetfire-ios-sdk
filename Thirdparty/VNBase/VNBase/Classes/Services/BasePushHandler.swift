@@ -1,6 +1,6 @@
 import UIKit
-import VNEssential
-import VNHandlers
+import JetfireVNEssential
+import JetfireVNHandlers
 
 open class BasePushHandler: NSObject {
 

@@ -1,6 +1,6 @@
 import UIKit
-@_exported import VNEssential
-@_exported import VNHandlers
+@_exported import JetfireVNEssential
+@_exported import JetfireVNHandlers
 
 @objc protocol IHaveNavigationBarStyle {
 

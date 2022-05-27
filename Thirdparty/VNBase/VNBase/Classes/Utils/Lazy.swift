@@ -1,5 +1,5 @@
 import Foundation
-import VNEssential
+import JetfireVNEssential
 
 public final class Lazy<T>: IInvalidating {
 

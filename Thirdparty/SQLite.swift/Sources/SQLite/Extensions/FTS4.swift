@@ -23,7 +23,7 @@
 //
 
 #if SWIFT_PACKAGE
-import SQLiteObjc
+import JetfireSQLiteObjc
 #endif
 
 extension Module {

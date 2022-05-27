@@ -1,4 +1,4 @@
-import VNEssential
+import JetfireVNEssential
 import Foundation
 
 /// Здесь логика выбора фичеринга по указанным в data.rules правилам

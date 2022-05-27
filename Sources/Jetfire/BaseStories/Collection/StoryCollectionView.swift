@@ -1,4 +1,4 @@
-import VNBase
+import JetfireVNBase
 import UIKit
 
 // Базовый класс коллекшен вьюхи с кругляшами

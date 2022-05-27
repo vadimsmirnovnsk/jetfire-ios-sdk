@@ -1,4 +1,4 @@
-import VNEssential
+import JetfireVNEssential
 
 /// Источник данных для карусели сторис
 protocol IStoriesDataSource {

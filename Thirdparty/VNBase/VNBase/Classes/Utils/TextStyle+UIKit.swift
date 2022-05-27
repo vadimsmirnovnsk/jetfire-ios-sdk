@@ -1,5 +1,5 @@
 import UIKit
-import VNEssential
+import JetfireVNEssential
 
 public extension NSMutableAttributedString {
 	@discardableResult func imagified(with image: UIImage?, bounds: CGRect) -> NSAttributedString {

@@ -1,5 +1,5 @@
 import UIKit
-import SnapKit
+import JetfireSnapKit
 
 public extension UIView {
 	class func make(color: UIColor = .clear) -> UIView {

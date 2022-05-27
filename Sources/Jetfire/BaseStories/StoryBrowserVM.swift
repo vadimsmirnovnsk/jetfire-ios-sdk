@@ -1,4 +1,4 @@
-import VNBase
+import JetfireVNBase
 
 protocol IStoryBrowserDelegate: AnyObject {
 	func skip(cellVM: StoryBrowserCellVM)

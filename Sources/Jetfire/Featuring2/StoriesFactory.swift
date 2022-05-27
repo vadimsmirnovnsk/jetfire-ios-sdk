@@ -1,7 +1,6 @@
-import VNEssential
+import JetfireVNEssential
 import UIKit
-import UIColorHexSwift
-import VNBase
+import JetfireVNBase
 
 /// Делает `BaseStory` из `JetFireFeatureStory`
 final class StoriesFactory {

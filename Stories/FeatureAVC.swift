@@ -1,6 +1,6 @@
 import UIKit
-import VNBase
-import SnapKit
+import JetfireVNBase
+import JetfireSnapKit
 import Jetfire
 
 class FeatureAVC: UIViewController {

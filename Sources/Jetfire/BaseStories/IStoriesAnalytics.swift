@@ -1,6 +1,6 @@
-import VNBase
-import VNEssential
-import VNHandlers
+import JetfireVNBase
+import JetfireVNEssential
+import JetfireVNHandlers
 import UIKit
 
 /// BaseStories — это базовая логика сториз: карусель кругляшей и открывающиеся по тапу в них сториз с пустыми снапами.

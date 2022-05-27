@@ -1,5 +1,5 @@
 import Foundation
-import VNEssential
+import JetfireVNEssential
 
 /// Отдает все кампании с бэка
 protocol ICampaignsProvider {

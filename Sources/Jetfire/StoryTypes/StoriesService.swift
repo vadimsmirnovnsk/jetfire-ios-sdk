@@ -1,6 +1,6 @@
-import VNBase
-import VNEssential
-import VNHandlers
+import JetfireVNBase
+import JetfireVNEssential
+import JetfireVNHandlers
 import UIKit
 
 /// Сервис, управляющий показом кругляшей, их загрузкой и сортировкой. 

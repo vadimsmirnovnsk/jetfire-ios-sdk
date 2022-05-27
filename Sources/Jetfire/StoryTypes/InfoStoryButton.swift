@@ -1,5 +1,5 @@
-import VNEssential
-import VNBase
+import JetfireVNEssential
+import JetfireVNBase
 import UIKit
 
 final class InfoStoryButton: BlockButton {

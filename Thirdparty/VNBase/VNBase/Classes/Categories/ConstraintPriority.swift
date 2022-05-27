@@ -1,4 +1,4 @@
-import SnapKit
+import JetfireSnapKit
 import UIKit
 
 public extension ConstraintMakerPriortizable {

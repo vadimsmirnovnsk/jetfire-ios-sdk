@@ -1,6 +1,6 @@
-import Alamofire
+import JetfireAlamofire
 import Foundation
-import SwiftProtobuf
+import JetfireProtobuf
 
 final class TimeoutRequestInterceptor: RequestInterceptor {
 
@@ -57,7 +57,7 @@ class APIService: IAPIService {
 	fileprivate func unwrappedProtoRequest<T: Message>(
 		httpMethod: HTTPMethod,
 		method: String,
-		protoObject: SwiftProtobuf.Message?,
+		protoObject: JetfireProtobuf.Message?,
 		queue: DispatchQueue = .main,
 		timeoutInterval: TimeInterval = Constants.timeoutIntervalForRequest,
 		shouldLog: Bool = true,
@@ -83,7 +83,7 @@ class APIService: IAPIService {
 	fileprivate func protoRequest(
 		httpMethod: HTTPMethod,
 		method: String,
-		protoObject: SwiftProtobuf.Message?,
+		protoObject: JetfireProtobuf.Message?,
 		queue: DispatchQueue = .main,
 		timeoutInterval: TimeInterval = Constants.timeoutIntervalForRequest,
 		shouldLog: Bool = true,
@@ -161,7 +161,7 @@ class APIService: IAPIService {
 		params: [String : Any]?,
 		body: Data? = nil,
 		queue: DispatchQueue = .main,
-        protoObject: SwiftProtobuf.Message?,
+        protoObject: JetfireProtobuf.Message?,
 		timeoutInterval: TimeInterval = Constants.timeoutIntervalForRequest,
 		shouldLog: Bool = true,
 		callback: @escaping ((Result<Data, Error>) -> Void)

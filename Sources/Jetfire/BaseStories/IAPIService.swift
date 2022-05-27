@@ -1,4 +1,4 @@
-import Alamofire
+import JetfireAlamofire
 import Foundation
 
 public protocol IAPIService: AnyObject {

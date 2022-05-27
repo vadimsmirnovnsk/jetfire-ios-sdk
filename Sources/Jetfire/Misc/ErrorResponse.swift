@@ -1,4 +1,4 @@
-import SwiftProtobuf
+import JetfireProtobuf
 import Foundation
 
 extension JetFireErrorResponse: LocalizedError {

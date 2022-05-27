@@ -1,6 +1,6 @@
 import Foundation
-import SQLite
-import VNEssential
+import JetfireSQLite
+import JetfireVNEssential
 
 /// Доступ к локальной БД
 protocol IDatabaseService {

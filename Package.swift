@@ -14,16 +14,16 @@ let package = Package(
 	dependencies: [],
     targets: [
         .target(
-            name: "UIColorHexSwift",
+            name: "JetfireUIColorHexSwift",
             dependencies: [],
             path: "Thirdparty/UIColor-Hex-Swift/HEXColor"
         ),
         .target(
-            name: "KeychainAccess",
+            name: "JetfireKeychainAccess",
             path: "Thirdparty/KeychainAccess/Lib/KeychainAccess"
         ),
         .target(
-            name: "SDWebImage",
+            name: "JetfireSDWebImage",
             path: "Thirdparty/SDWebImage/SDWebImage",
             sources: ["Core", "Private"],
             cSettings: [
@@ -32,13 +32,13 @@ let package = Package(
             ]
         ),
         .target(
-            name: "OrderedCollections",
+            name: "JetfireOrderedCollections",
             path: "Thirdparty/swift-collections/Sources/OrderedCollections",
             exclude: ["CMakeLists.txt"],
             swiftSettings: nil
         ),
         .target(
-            name: "Alamofire",
+            name: "JetfireAlamofire",
             path: "Thirdparty/Alamofire/Source",
             exclude: ["Info.plist"],
             linkerSettings: [
@@ -47,56 +47,56 @@ let package = Package(
                 ]))
             ]),
         .target(
-            name: "SwiftProtobuf",
+            name: "JetfireProtobuf",
             path: "Thirdparty/swift-protobuf/Sources/SwiftProtobuf"
         ),
         .target(
-            name: "SQLiteObjc",
+            name: "JetfireSQLiteObjc",
             path: "Thirdparty/SQLite.swift/Sources/SQLiteObjc",
             exclude: [
                 "fts3_tokenizer.h"
             ]
         ),
         .target(
-            name: "SQLite",
-            dependencies: ["SQLiteObjc"],
+            name: "JetfireSQLite",
+            dependencies: ["JetfireSQLiteObjc"],
             path: "Thirdparty/SQLite.swift/Sources/SQLite",
             exclude: [
                 "Info.plist"
             ]
         ),
         .target(
-            name: "SnapKit",
+            name: "JetfireSnapKit",
             path: "Thirdparty/SnapKit/Sources"
         ),
         .target(
-            name: "VNEssential",
+            name: "JetfireVNEssential",
             path: "Thirdparty/VNBase/VNBase/Essential"
         ),
         .target(
-            name: "VNHandlers",
+            name: "JetfireVNHandlers",
             path: "Thirdparty/VNBase/VNBase/Handlers"
         ),
         .target(
-            name: "VNBase",
+            name: "JetfireVNBase",
             dependencies: [
-                "VNEssential",
-                "SnapKit",
-                "VNHandlers"
+                "JetfireVNEssential",
+                "JetfireSnapKit",
+                "JetfireVNHandlers"
             ],
             path: "Thirdparty/VNBase/VNBase/Classes"
         ),
         .target(
             name: "Jetfire",
             dependencies: [
-                "UIColorHexSwift",
-                "KeychainAccess",
-                "SDWebImage",
-                "OrderedCollections",
-                "Alamofire",
-                "SwiftProtobuf",
-                "SQLite",
-                "VNBase"
+                "JetfireUIColorHexSwift",
+                "JetfireKeychainAccess",
+                "JetfireSDWebImage",
+                "JetfireOrderedCollections",
+                "JetfireAlamofire",
+                "JetfireProtobuf",
+                "JetfireSQLite",
+                "JetfireVNBase"
 			],
 			exclude: ["Model/protocol.proto"]
 		),

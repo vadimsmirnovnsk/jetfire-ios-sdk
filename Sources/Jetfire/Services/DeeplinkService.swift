@@ -1,5 +1,5 @@
 import UIKit
-import VNHandlers
+import JetfireVNHandlers
 
 // Класс для обработки всех диплинков, поддерживаемых Jetfire
 protocol ICanShowContent: AnyObject {

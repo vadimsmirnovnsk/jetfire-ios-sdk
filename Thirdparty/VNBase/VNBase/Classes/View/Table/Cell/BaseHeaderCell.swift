@@ -1,6 +1,6 @@
-import SnapKit
+import JetfireSnapKit
 import UIKit
-import VNEssential
+import JetfireVNEssential
 
 open class BaseHeaderCell<TVM: BaseHeaderCellVM>: BaseCell<TVM> {
 

@@ -1,4 +1,4 @@
-import VNEssential
+import JetfireVNEssential
 import Foundation
 
 class APIUserId: Id<String> {}

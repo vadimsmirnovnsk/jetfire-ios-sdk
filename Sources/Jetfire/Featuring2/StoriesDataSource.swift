@@ -1,5 +1,5 @@
-import VNEssential
-import OrderedCollections
+import JetfireVNEssential
+import JetfireOrderedCollections
 import UIKit
 
 /// Источник данных для карусели сторис

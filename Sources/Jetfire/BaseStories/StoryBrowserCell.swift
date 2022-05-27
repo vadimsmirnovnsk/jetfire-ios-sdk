@@ -1,5 +1,5 @@
-import VNBase
-import VNEssential
+import JetfireVNBase
+import JetfireVNEssential
 import UIKit
 
 final class StoryBrowserCell: BaseCollectionViewCell<StoryBrowserCellVM>, SegmentedProgressBarDelegate {
